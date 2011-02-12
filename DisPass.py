@@ -72,8 +72,38 @@ class GUI:
         self.passwordout = StringVar()
         self.passwordout.set('- No password generated yet -')
 
+        # List allowed characters
+        allowedchars = [
+                'a-z, A-Z, 0-9, special',
+                'a-z, A-Z, 0-9',
+                'a-z, A-Z',
+                'a-z, 0-9',
+                'A-Z, 0-9'
+                ]
+
         # Create widgets
         ttitle = Label(master, text=self.dp.versionStr, font=(f, 14))
+
+        tchartypes = Label(master, text='Char types', font=(f, 12))
+        wchartypes = Listbox(master, height=5, exportselection=0)
+        for item in allowedchars:
+            wchartypes.insert(END, item)
+        wchartypes.select_set(0) # default is 'a-z, A-Z, 0-9, special'
+
+        tnchars = Label(master, text='# Chars', font=(f, 12))
+        nCharsFrame = Frame(master)
+        scrollbar = Scrollbar(nCharsFrame, orient=VERTICAL)
+        wnchars = Listbox(nCharsFrame, width=5, height=3, 
+                exportselection=0, yscrollcommand=scrollbar.set)
+        scrollbar.config(command=wnchars.yview)
+        for n in range(8, 50):
+            wnchars.insert(END, n)
+        wnchars.select_set(7) # default is 15 chars
+        wnchars.see(7)
+        # Pack wnchars and scrollbar together in a frame, apply grid later
+        scrollbar.pack(side=RIGHT, fill=Y)
+        wnchars.pack()
+
         tlabel = Label(master, text='Label', font=(f, 12))
         tsalt = Label(master, text='Salt', font=(f, 12))
         tpasswordin = Label(master, text='Password', font=(f, 12))
@@ -84,16 +114,20 @@ class GUI:
                 command=self.gen)
         resultw = Entry(master, width=63, textvariable=self.passwordout)
 
-        # Layout widgets
-        ttitle.grid(row=0, sticky=N, columnspan=3)
-        tlabel.grid(row=1, column=0, sticky=NW)
-        tsalt.grid(row=1, column=1, sticky=NW)
-        tpasswordin.grid(row=1, column=2, sticky=NW)
-        self.label.grid(row=2, column=0, sticky=NW)
-        self.salt.grid(row=2, column=1, sticky=NW)
-        self.passwordin.grid(row=2, column=2, sticky=NW)
-        button.grid(row=3, column=0, sticky=NW, columnspan=3)
-        resultw.grid(row=4, column=0, sticky=N, columnspan=3)
+        # Layout widgets in a grid
+        ttitle.grid(row=0, column=0, sticky=N, columnspan=3)
+        tchartypes.grid(row=6, column=1, sticky=N)
+        wchartypes.grid(row=7, column=1, sticky=NW)
+        tnchars.grid(row=9, column=1, sticky=N)
+        nCharsFrame.grid(row=10, column=1)
+        tlabel.grid(row=14, column=0, sticky=N)
+        tsalt.grid(row=14, column=1, sticky=N)
+        tpasswordin.grid(row=14, column=2, sticky=N)
+        self.label.grid(row=15, column=0, sticky=NW)
+        self.salt.grid(row=15, column=1, sticky=NW)
+        self.passwordin.grid(row=15, column=2, sticky=NW)
+        button.grid(row=17, column=0, sticky=NW, columnspan=3)
+        resultw.grid(row=19, column=0, sticky=N, columnspan=3)
 
 if __name__ == '__main__':
     app = DisPass()
