@@ -54,9 +54,9 @@ class GUI:
         passwordin = self.passwordin.get()
 
         if len(label) == 0:
-            r = '- Label field is empty -'
+            r = '- No password generated, label field is empty -'
         elif len(passwordin) == 0:
-            r = '- Password field is empty -'
+            r = '- No password generated, password field is empty -'
         else:
             r = self.label.get() + '+' + self.salt.get() + '+' \
                     + self.passwordin.get()
@@ -72,10 +72,11 @@ class GUI:
         self.passwordout = StringVar()
         self.passwordout.set('- No password generated yet -')
 
-        t = Label(master, text=self.dp.versionStr, font=(f, 14))
-        t1 = Label(master, text='Label', font=(f, 12))
-        t2 = Label(master, text='Salt', font=(f, 12))
-        t3 = Label(master, text='Password', font=(f, 12))
+        # Create widgets
+        ttitle = Label(master, text=self.dp.versionStr, font=(f, 14))
+        tlabel = Label(master, text='Label', font=(f, 12))
+        tsalt = Label(master, text='Salt', font=(f, 12))
+        tpasswordin = Label(master, text='Password', font=(f, 12))
         self.label = Entry(master, width=20)
         self.salt = Entry(master, width=20)
         self.passwordin = Entry(master, width=20, show="*")
@@ -83,10 +84,11 @@ class GUI:
                 command=self.gen)
         resultw = Entry(master, width=63, textvariable=self.passwordout)
 
-        t.grid(row=0, sticky=N, columnspan=3)
-        t1.grid(row=1, column=0, sticky=NW)
-        t2.grid(row=1, column=1, sticky=NW)
-        t3.grid(row=1, column=2, sticky=NW)
+        # Layout widgets
+        ttitle.grid(row=0, sticky=N, columnspan=3)
+        tlabel.grid(row=1, column=0, sticky=NW)
+        tsalt.grid(row=1, column=1, sticky=NW)
+        tpasswordin.grid(row=1, column=2, sticky=NW)
         self.label.grid(row=2, column=0, sticky=NW)
         self.salt.grid(row=2, column=1, sticky=NW)
         self.passwordin.grid(row=2, column=2, sticky=NW)
