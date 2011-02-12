@@ -34,16 +34,64 @@ class DisPass:
         root.mainloop()
 
 class GUI:
+    label = None
+    salt = None
+    passwordin = None
+    passwordout = None
+
     def __init__(self, master, dp):
+        '''Initialize frame'''
         self.dp = dp
         frame = Frame(master)
         frame.master.title(dp.versionStr)
-        frame.pack()
+        frame.grid()
+
+    def gen(self):
+        '''Generate password (temporily placed in GUI class)'''
+
+        label = self.label.get()
+        salt = self.label.get()
+        passwordin = self.passwordin.get()
+
+        if len(label) == 0:
+            r = '- Label field is empty -'
+        elif len(passwordin) == 0:
+            r = '- Password field is empty -'
+        else:
+            r = self.label.get() + '+' + self.salt.get() + '+' \
+                    + self.passwordin.get()
+        self.passwordout.set(r)
+
+        if len(salt) == 0:
+            print 'salt is empty'
 
     def main(self, master):
-        # title
-        w = Label(master, text=self.dp.versionStr, font=("Verdana", 14))
-        w.pack()
+        '''Set and align widgets'''
+
+        f = "Verdana" # font
+        self.passwordout = StringVar()
+        self.passwordout.set('- No password generated yet -')
+
+        t = Label(master, text=self.dp.versionStr, font=(f, 14))
+        t1 = Label(master, text='Label', font=(f, 12))
+        t2 = Label(master, text='Salt', font=(f, 12))
+        t3 = Label(master, text='Password', font=(f, 12))
+        self.label = Entry(master, width=20)
+        self.salt = Entry(master, width=20)
+        self.passwordin = Entry(master, width=20, show="*")
+        button = Button(master, text="Generate password", width=60, 
+                command=self.gen)
+        resultw = Entry(master, width=63, textvariable=self.passwordout)
+
+        t.grid(row=0, sticky=N, columnspan=3)
+        t1.grid(row=1, column=0, sticky=NW)
+        t2.grid(row=1, column=1, sticky=NW)
+        t3.grid(row=1, column=2, sticky=NW)
+        self.label.grid(row=2, column=0, sticky=NW)
+        self.salt.grid(row=2, column=1, sticky=NW)
+        self.passwordin.grid(row=2, column=2, sticky=NW)
+        button.grid(row=3, column=0, sticky=NW, columnspan=3)
+        resultw.grid(row=4, column=0, sticky=N, columnspan=3)
 
 if __name__ == '__main__':
     app = DisPass()
