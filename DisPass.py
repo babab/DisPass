@@ -40,7 +40,7 @@ class GUI:
     passwordout = None
 
     def __init__(self, master, dp):
-        '''Initialize frame'''
+        '''Initialize main frame'''
         self.dp = dp
         frame = Frame(master)
         frame.master.title(dp.versionStr)
@@ -99,7 +99,7 @@ class GUI:
         for n in range(8, 50):
             wnchars.insert(END, n)
         wnchars.select_set(7) # default is 15 chars
-        wnchars.see(7)
+        wnchars.see(6)
         # Pack wnchars and scrollbar together in a frame, apply grid later
         scrollbar.pack(side=RIGHT, fill=Y)
         wnchars.pack()
@@ -112,7 +112,7 @@ class GUI:
         self.passwordin = Entry(master, width=20, show="*")
         button = Button(master, text="Generate password", width=60, 
                 command=self.gen)
-        resultw = Entry(master, width=63, textvariable=self.passwordout)
+        wresult = Entry(master, width=63, textvariable=self.passwordout)
 
         # Layout widgets in a grid
         ttitle.grid(row=0, column=0, sticky=N, columnspan=3)
@@ -127,7 +127,7 @@ class GUI:
         self.salt.grid(row=15, column=1, sticky=NW)
         self.passwordin.grid(row=15, column=2, sticky=NW)
         button.grid(row=17, column=0, sticky=NW, columnspan=3)
-        resultw.grid(row=19, column=0, sticky=N, columnspan=3)
+        wresult.grid(row=19, column=0, sticky=N, columnspan=3)
 
 if __name__ == '__main__':
     app = DisPass()
