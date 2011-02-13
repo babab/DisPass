@@ -18,7 +18,9 @@ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 '''
 
+import base64
 import hashlib
+import string
 from Tkinter import *
 
 class DisPass:
@@ -38,9 +40,11 @@ class digest:
     '''Control message digest'''
     def hash(self, message):
         '''Construct and return secure hash from message'''
-        d = hashlib.md5()
+        d = hashlib.sha512()
         d.update(message)
-        r = d.hexdigest()
+        shastr = d.hexdigest()
+        r = base64.b64encode(shastr, '49') # replace +/ with 49
+        r = r.replace('=','') # filter '='
         return str(r)
 
 class GUI:
@@ -48,6 +52,8 @@ class GUI:
     salt = None
     passwordin = None
     passwordout = None
+    chartypes = None
+    nchars = None
 
     def __init__(self, master, dp):
         '''Draw main window'''
@@ -62,6 +68,10 @@ class GUI:
         label = self.label.get()
         salt = self.label.get()
         passwordin = self.passwordin.get()
+        mchartypes = map(int, self.chartypes.curselection())
+        chartypes = mchartypes[0]
+        mnchars = map(int, self.nchars.curselection())
+        nchars = mnchars[0]
 
         if len(label) == 0:
             r = '- No password generated, label field is empty -'
@@ -71,7 +81,22 @@ class GUI:
             s = self.label.get() + '+' + self.salt.get() + '+' \
                     + self.passwordin.get()
             o = digest()
-            r = o.hash(s)
+            h = o.hash(s)
+
+            # optionally strip chars according to chartypes
+            if chartypes == 0:
+                r = h
+                print 'all'
+            elif chartypes == 1:
+                r = h
+                print 'strip 0123456789'
+            elif chartypes == 2:
+                r = h
+                print 'strip ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+            elif chartypes == 3:
+                r = h
+                print 'strip abcdefghijklmnopqrstuvwxyz'
+
         self.passwordout.set(r)
 
         if len(salt) == 0:
@@ -86,7 +111,6 @@ class GUI:
 
         # List allowed characters
         allowedchars = [
-                'a-z, A-Z, 0-9, special',
                 'a-z, A-Z, 0-9',
                 'a-z, A-Z',
                 'a-z, 0-9',
@@ -97,24 +121,24 @@ class GUI:
         ttitle = Label(master, text=self.dp.versionStr, font=(f, 14))
 
         tchartypes = Label(master, text='Char types', font=(f, 12))
-        wchartypes = Listbox(master, height=5, exportselection=0)
+        self.chartypes = Listbox(master, height=4, exportselection=0)
         for item in allowedchars:
-            wchartypes.insert(END, item)
-        wchartypes.select_set(0) # default is 'a-z, A-Z, 0-9, special'
+            self.chartypes.insert(END, item)
+        self.chartypes.select_set(0) # default is 'a-z, A-Z, 0-9, special'
 
         tnchars = Label(master, text='# Chars', font=(f, 12))
         nCharsFrame = Frame(master)
         scrollbar = Scrollbar(nCharsFrame, orient=VERTICAL)
-        wnchars = Listbox(nCharsFrame, width=5, height=3, 
+        self.nchars = Listbox(nCharsFrame, width=5, height=3, 
                 exportselection=0, yscrollcommand=scrollbar.set)
-        scrollbar.config(command=wnchars.yview)
-        for n in range(8, 50):
-            wnchars.insert(END, n)
-        wnchars.select_set(7) # default is 15 chars
-        wnchars.see(6)
-        # Pack wnchars and scrollbar together in a frame, apply grid later
+        scrollbar.config(command=self.nchars.yview)
+        for n in range(8, 31):
+            self.nchars.insert(END, n)
+        self.nchars.select_set(7) # default is 15 chars
+        self.nchars.see(6)
+        # Pack self.nchars and scrollbar together in a frame, apply grid later
         scrollbar.pack(side=RIGHT, fill=Y)
-        wnchars.pack()
+        self.nchars.pack()
 
         tlabel = Label(master, text='Label', font=(f, 12))
         tsalt = Label(master, text='Salt', font=(f, 12))
@@ -129,7 +153,7 @@ class GUI:
         # Layout widgets in a grid
         ttitle.grid(row=0, column=0, sticky=N, columnspan=3)
         tchartypes.grid(row=6, column=1, sticky=N)
-        wchartypes.grid(row=7, column=1, sticky=NW)
+        self.chartypes.grid(row=7, column=1, sticky=NW)
         tnchars.grid(row=9, column=1, sticky=N)
         nCharsFrame.grid(row=10, column=1)
         tlabel.grid(row=14, column=0, sticky=N)
