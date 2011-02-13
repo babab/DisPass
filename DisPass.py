@@ -18,7 +18,7 @@ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 '''
 
-import sys
+import hashlib
 from Tkinter import *
 
 class DisPass:
@@ -27,11 +27,21 @@ class DisPass:
     versionStr = 'DisPass v0.1-alpha'
 
     def main(self):
+        '''Create apporopiate object depending on command arguments'''
         # No command line option parsing atm
         root = Tk()
         gui = GUI(root, self)
-        gui.main(root)
+        gui.draw(root)
         root.mainloop()
+
+class digest:
+    '''Control message digest'''
+    def hash(self, message):
+        '''Construct and return secure hash from message'''
+        d = hashlib.md5()
+        d.update(message)
+        r = d.hexdigest()
+        return str(r)
 
 class GUI:
     label = None
@@ -40,14 +50,14 @@ class GUI:
     passwordout = None
 
     def __init__(self, master, dp):
-        '''Initialize main frame'''
+        '''Draw main window'''
         self.dp = dp
         frame = Frame(master)
         frame.master.title(dp.versionStr)
         frame.grid()
 
     def gen(self):
-        '''Generate password (temporily placed in GUI class)'''
+        '''Handle and draw digest or message if input is insufficient'''
 
         label = self.label.get()
         salt = self.label.get()
@@ -58,15 +68,17 @@ class GUI:
         elif len(passwordin) == 0:
             r = '- No password generated, password field is empty -'
         else:
-            r = self.label.get() + '+' + self.salt.get() + '+' \
+            s = self.label.get() + '+' + self.salt.get() + '+' \
                     + self.passwordin.get()
+            o = digest()
+            r = o.hash(s)
         self.passwordout.set(r)
 
         if len(salt) == 0:
             print 'salt is empty'
 
-    def main(self, master):
-        '''Set and align widgets'''
+    def draw(self, master):
+        '''Draw and align widgets'''
 
         f = "Verdana" # font
         self.passwordout = StringVar()
