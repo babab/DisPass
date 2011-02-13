@@ -20,7 +20,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 import base64
 import hashlib
-import string
+import re
 from Tkinter import *
 
 class DisPass:
@@ -78,24 +78,22 @@ class GUI:
         elif len(passwordin) == 0:
             r = '- No password generated, password field is empty -'
         else:
-            s = self.label.get() + '+' + self.salt.get() + '+' \
-                    + self.passwordin.get()
+            s = self.label.get() + self.salt.get() + self.passwordin.get()
             o = digest()
             h = o.hash(s)
 
             # optionally strip chars according to chartypes
             if chartypes == 0:
                 r = h
-                print 'all'
             elif chartypes == 1:
-                r = h
-                print 'strip 0123456789'
+                r = re.sub("[0-9]", "", h)
             elif chartypes == 2:
-                r = h
-                print 'strip ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+                r = re.sub("[A-Z]", "", h)
             elif chartypes == 3:
-                r = h
-                print 'strip abcdefghijklmnopqrstuvwxyz'
+                r = re.sub("[a-z]", "", h)
+
+            # Set length of string returned
+            r = r[0:nchars+8]
 
         self.passwordout.set(r)
 
