@@ -52,8 +52,6 @@ class GUI:
     salt = None
     passwordin = None
     passwordout = None
-    chartypes = None
-    nchars = None
 
     def __init__(self, master, dp):
         '''Draw main window'''
@@ -68,10 +66,6 @@ class GUI:
         label = self.label.get()
         salt = self.label.get()
         passwordin = self.passwordin.get()
-        mchartypes = map(int, self.chartypes.curselection())
-        chartypes = mchartypes[0]
-        mnchars = map(int, self.nchars.curselection())
-        nchars = mnchars[0]
 
         if len(label) == 0:
             r = '- No password generated, label field is empty -'
@@ -82,23 +76,10 @@ class GUI:
             o = digest()
             h = o.hash(s)
 
-            # optionally strip chars according to chartypes
-            if chartypes == 0:
-                r = h
-            elif chartypes == 1:
-                r = re.sub("[0-9]", "", h)
-            elif chartypes == 2:
-                r = re.sub("[A-Z]", "", h)
-            elif chartypes == 3:
-                r = re.sub("[a-z]", "", h)
-
             # Set length of string returned
-            r = r[0:nchars+8]
+            r = h[0:30]
 
         self.passwordout.set(r)
-
-        if len(salt) == 0:
-            print 'salt is empty'
 
     def draw(self, master):
         '''Draw and align widgets'''
@@ -107,37 +88,8 @@ class GUI:
         self.passwordout = StringVar()
         self.passwordout.set('- No password generated yet -')
 
-        # List allowed characters
-        allowedchars = [
-                'a-z, A-Z, 0-9',
-                'a-z, A-Z',
-                'a-z, 0-9',
-                'A-Z, 0-9'
-                ]
-
         # Create widgets
         ttitle = Label(master, text=self.dp.versionStr, font=(f, 14))
-
-        tchartypes = Label(master, text='Char types', font=(f, 12))
-        self.chartypes = Listbox(master, height=4, exportselection=0)
-        for item in allowedchars:
-            self.chartypes.insert(END, item)
-        self.chartypes.select_set(0) # default is 'a-z, A-Z, 0-9, special'
-
-        tnchars = Label(master, text='# Chars', font=(f, 12))
-        nCharsFrame = Frame(master)
-        scrollbar = Scrollbar(nCharsFrame, orient=VERTICAL)
-        self.nchars = Listbox(nCharsFrame, width=5, height=3, 
-                exportselection=0, yscrollcommand=scrollbar.set)
-        scrollbar.config(command=self.nchars.yview)
-        for n in range(8, 31):
-            self.nchars.insert(END, n)
-        self.nchars.select_set(7) # default is 15 chars
-        self.nchars.see(6)
-        # Pack self.nchars and scrollbar together in a frame, apply grid later
-        scrollbar.pack(side=RIGHT, fill=Y)
-        self.nchars.pack()
-
         tlabel = Label(master, text='Label', font=(f, 12))
         tsalt = Label(master, text='Salt', font=(f, 12))
         tpasswordin = Label(master, text='Password', font=(f, 12))
@@ -150,10 +102,6 @@ class GUI:
 
         # Layout widgets in a grid
         ttitle.grid(row=0, column=0, sticky=N, columnspan=3)
-        tchartypes.grid(row=6, column=1, sticky=N)
-        self.chartypes.grid(row=7, column=1, sticky=NW)
-        tnchars.grid(row=9, column=1, sticky=N)
-        nCharsFrame.grid(row=10, column=1)
         tlabel.grid(row=14, column=0, sticky=N)
         tsalt.grid(row=14, column=1, sticky=N)
         tpasswordin.grid(row=14, column=2, sticky=N)
