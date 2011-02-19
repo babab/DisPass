@@ -33,13 +33,13 @@ class DisPass:
         # No command line option parsing atm
         root = Tk()
         gui = GUI(root, self)
-        gui.draw(root)
+        gui.createWidgets(root)
         root.mainloop()
 
-class digest:
+class Digest:
     '''Control message digest'''
-    def hash(self, message):
-        '''Construct and return secure hash from message'''
+    def create(self, message):
+        '''Create and return secure hash of message'''
         d = hashlib.sha512()
         d.update(message)
         shastr = d.hexdigest()
@@ -48,11 +48,7 @@ class digest:
         return str(r)
 
 class GUI:
-    label = None
-    salt = None
-    passwordin = None
-    passwordout = None
-
+    '''Here the interaction of Tkinters widgets is done'''
     def __init__(self, master, dp):
         '''Draw main window'''
         self.dp = dp
@@ -73,16 +69,16 @@ class GUI:
             r = '- No password generated, password field is empty -'
         else:
             s = self.label.get() + self.salt.get() + self.passwordin.get()
-            o = digest()
-            h = o.hash(s)
+            digest = Digest()
+            h = digest.create(s)
 
             # Set length of string returned
-            r = h[0:30]
+            r = h[:30]
 
         self.passwordout.set(r)
 
-    def draw(self, master):
-        '''Draw and align widgets'''
+    def createWidgets(self, master):
+        '''Create and align widgets'''
 
         f = "Verdana" # font
         self.passwordout = StringVar()
