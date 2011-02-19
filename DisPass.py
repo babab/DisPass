@@ -32,8 +32,8 @@ class DisPass:
         '''Create apporopiate object depending on command arguments'''
         # No command line option parsing atm
         root = Tk()
+        root.title(self.versionStr)
         gui = GUI(root, self)
-        gui.createWidgets(root)
         root.mainloop()
 
 class Digest:
@@ -52,9 +52,7 @@ class GUI:
     def __init__(self, master, dp):
         '''Draw main window'''
         self.dp = dp
-        frame = Frame(master)
-        frame.master.title(dp.versionStr)
-        frame.grid()
+        self.createWidgets(master)
 
     def gen(self):
         '''Handle and draw digest or message if input is insufficient'''
@@ -104,7 +102,7 @@ class GUI:
         self.label.grid(row=15, column=0, sticky=NW)
         self.salt.grid(row=15, column=1, sticky=NW)
         self.passwordin.grid(row=15, column=2, sticky=NW)
-        button.grid(row=17, column=0, sticky=NW, columnspan=3)
+        button.grid(row=17, column=0, sticky=N, columnspan=3)
         wresult.grid(row=19, column=0, sticky=N, columnspan=3)
 
 if __name__ == '__main__':
