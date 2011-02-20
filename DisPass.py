@@ -55,6 +55,18 @@ class GUI:
         self.dp = dp
         self.createWidgets(master)
 
+# GUI # Setters and getters
+    def setFont(self):
+        '''Set font and fontsize'''
+        pass
+
+    def getFont(self, sizediff=0):
+        '''Get font and fontsize, option to differ from default fontsize'''
+        self.font = "Verdana"
+        self.fontsize = 10
+        return (self.font, self.fontsize + sizediff)
+
+# GUI # Prototypes
     def warn(self, message, warning_type='soft', box_title=''):
         '''Prototype for warning user'''
 
@@ -67,6 +79,7 @@ class GUI:
             self.passwordin2.delete(0, END)
             tkMessageBox.showwarning(box_title, message)
 
+# GUI # Event actions
     def OnGen(self):
         '''Handle and draw digest or message if input is insufficient'''
 
@@ -118,25 +131,14 @@ class GUI:
         self.passwordout.set('- No password generated -')
         self.result.config(fg="black", readonlybackground="gray")
 
-    def setFont(self):
-        '''Set font and fontsize'''
-        pass
-
-    def getFont(self, sizediff=0):
-        '''Get font and fontsize, option to differ from default fontsize'''
-        self.font = "Verdana"
-        self.fontsize = 10
-        return (self.font, self.fontsize + sizediff)
-
+# GUI # Create Widgets
     def createWidgets(self, master):
         '''Create and align widgets'''
 
-        f = "Verdana"
         self.passwordout = StringVar()
         self.passwordout.set('- No password generated -')
         self.isnew = IntVar()
 
-        # Create widgets
         ttitle = Label(master, text=self.dp.versionStr, font=self.getFont(4))
         wisnew = Checkbutton(master, height=2, font=self.getFont(),
                 text="This is a new password, that I have not used before", 
