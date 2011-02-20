@@ -78,14 +78,17 @@ class GUI:
         self.passwordout.set(r)
 
     def OnNew(self):
-        s = self.isnew.get()
-        if s == 0:
+        '''Toggle double checking of input password'''
+        if self.isnew.get() == 0:
+            # Disable double check (default)
             self.passwordin2.delete(0, END)
             self.passwordin2.config(state=DISABLED)
         else:
+            # Password is new, allow for double checking passwordin
             self.passwordin2.config(state=NORMAL)
 
     def OnClear(self):
+        '''Clear all fields'''
         self.label.delete(0, END)
         self.salt.delete(0, END)
         self.passwordin1.delete(0, END)
@@ -94,9 +97,11 @@ class GUI:
         self.result.config(fg="black", readonlybackground="gray")
 
     def setFont(self):
+        '''Set font and fontsize'''
         pass
 
     def getFont(self, sizediff=0):
+        '''Get font and fontsize, option to differ from default fontsize'''
         self.font = "Verdana"
         self.fontsize = 10
         return (self.font, self.fontsize + sizediff)
