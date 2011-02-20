@@ -22,6 +22,7 @@ import base64
 import hashlib
 import re
 from Tkinter import *
+import tkMessageBox
 
 class DisPass:
     '''This controls the main program and arguments'''
@@ -61,21 +62,49 @@ class GUI:
         salt = self.label.get()
         passwordin1 = self.passwordin1.get()
         passwordin2 = self.passwordin2.get()
+        isnew = self.isnew.get()
 
         if len(label) == 0:
+            # Check if label is empty
             self.result.config(fg="black", readonlybackground="red")
             r = '- No password generated, label field is empty -'
+            self.passwordout.set(r)
+            return
         elif len(passwordin1) == 0:
+            # Check if password field 1 is empty
             self.result.config(fg="black", readonlybackground="red")
             r = '- No password generated, password field is empty -'
-        else:
-            self.result.config(fg="black", readonlybackground="green")
-            digest = Digest()
-            s = label + salt + passwordin1
-            h = digest.create(s)
-            r = h[:30]
+            self.passwordout.set(r)
+            return
+        elif len(passwordin1) < 8:
+            # Check if password has sufficient chars
+            # If not, reset fields and warn user
+            r = 'Password must contain at least 8 characters' 
+            self.passwordout.set('- ' + r + ' -')
+            self.result.config(fg="black", readonlybackground="red")
+            self.passwordin1.delete(0, END)
+            self.passwordin2.delete(0, END)
+            tkMessageBox.showwarning("Password is too short", r)
+            return
+        elif isnew and passwordin1 != passwordin2:
+            # Check to see if passwords match when it is a new password
+            # If not, reset fields and warn user
+            r = 'Passwords are not identical, please try again'
+            self.passwordout.set('- ' + r + ' -')
+            self.result.config(fg="black", readonlybackground="red")
+            self.passwordin1.delete(0, END)
+            self.passwordin2.delete(0, END)
+            tkMessageBox.showwarning("Password mismatch", r)
+            return
 
+        # All checks passed, create digest
+        digest = Digest()
+        s = label + salt + passwordin1
+        h = digest.create(s)
+        r = h[:30]
+        self.result.config(fg="black", readonlybackground="green")
         self.passwordout.set(r)
+
 
     def OnNew(self):
         '''Toggle double checking of input password'''
