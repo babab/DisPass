@@ -1,5 +1,6 @@
 v0.1
 * check and warn when (trailing) whitespace is found in label
+* check and warn if password1 != password2
 * do not allow passwordin with a length of < 8
 * add application icon
 

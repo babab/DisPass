@@ -54,56 +54,91 @@ class GUI:
         self.dp = dp
         self.createWidgets(master)
 
-    def gen(self):
+    def OnGen(self):
         '''Handle and draw digest or message if input is insufficient'''
 
         label = self.label.get()
         salt = self.label.get()
-        passwordin = self.passwordin.get()
+        passwordin1 = self.passwordin1.get()
+        passwordin2 = self.passwordin2.get()
 
         if len(label) == 0:
+            self.result.config(fg="black", readonlybackground="red")
             r = '- No password generated, label field is empty -'
-        elif len(passwordin) == 0:
+        elif len(passwordin1) == 0:
+            self.result.config(fg="black", readonlybackground="red")
             r = '- No password generated, password field is empty -'
         else:
-            s = self.label.get() + self.salt.get() + self.passwordin.get()
+            self.result.config(fg="black", readonlybackground="green")
             digest = Digest()
+            s = label + salt + passwordin1
             h = digest.create(s)
-
-            # Set length of string returned
             r = h[:30]
 
         self.passwordout.set(r)
+
+    def OnNew(self):
+        s = self.isnew.get()
+        if s == 0:
+            self.passwordin2.delete(0, END)
+            self.passwordin2.config(state=DISABLED)
+        else:
+            self.passwordin2.config(state=NORMAL)
+
+    def OnClear(self):
+        self.label.delete(0, END)
+        self.salt.delete(0, END)
+        self.passwordin1.delete(0, END)
+        self.passwordin2.delete(0, END)
+        self.passwordout.set('- No password generated -')
+        self.result.config(fg="black", readonlybackground="gray")
+
 
     def createWidgets(self, master):
         '''Create and align widgets'''
 
         f = "Verdana" # font
         self.passwordout = StringVar()
-        self.passwordout.set('- No password generated yet -')
+        self.passwordout.set('- No password generated -')
+        self.isnew = IntVar()
 
         # Create widgets
         ttitle = Label(master, text=self.dp.versionStr, font=(f, 14))
+        wisnew = Checkbutton(master, height=2,
+                text="This is a new password, that I have not used before", 
+                variable=self.isnew, command=self.OnNew)
         tlabel = Label(master, text='Label', font=(f, 12))
         tsalt = Label(master, text='Salt', font=(f, 12))
-        tpasswordin = Label(master, text='Password', font=(f, 12))
+        tpasswordin1 = Label(master, text='Password', font=(f, 12))
+        tpasswordin2 = Label(master, text='Password (again)', font=(f, 12))
         self.label = Entry(master, width=20)
         self.salt = Entry(master, width=20)
-        self.passwordin = Entry(master, width=20, show="*")
-        button = Button(master, text="Generate password", width=60, 
-                command=self.gen)
-        wresult = Entry(master, width=63, textvariable=self.passwordout)
+        self.passwordin1 = Entry(master, width=20, show="*")
+        self.passwordin2 = Entry(master, width=20, show="*", state=DISABLED)
+        genbutton = Button(master, text="Generate password", width=59, 
+                command=self.OnGen)
+        clrbutton = Button(master, text="Clear fields", width=17, 
+                command=self.OnClear)
+        self.result = Entry(master, width=83, textvariable=self.passwordout,
+                state="readonly", fg="black", readonlybackground="gray")
 
         # Layout widgets in a grid
-        ttitle.grid(row=0, column=0, sticky=N, columnspan=3)
+        ttitle.grid(row=0, column=0, sticky=N, columnspan=4)
+        wisnew.grid(row=1, column=0, sticky=N, columnspan=4)
         tlabel.grid(row=14, column=0, sticky=N)
         tsalt.grid(row=14, column=1, sticky=N)
-        tpasswordin.grid(row=14, column=2, sticky=N)
+        tpasswordin1.grid(row=14, column=2, sticky=N)
+        tpasswordin2.grid(row=14, column=3, sticky=N)
         self.label.grid(row=15, column=0, sticky=NW)
         self.salt.grid(row=15, column=1, sticky=NW)
-        self.passwordin.grid(row=15, column=2, sticky=NW)
-        button.grid(row=17, column=0, sticky=N, columnspan=3)
-        wresult.grid(row=19, column=0, sticky=N, columnspan=3)
+        self.passwordin1.grid(row=15, column=2, sticky=NW)
+        self.passwordin2.grid(row=15, column=3, sticky=NW)
+        genbutton.grid(row=17, column=0, sticky=N, columnspan=3)
+        clrbutton.grid(row=17, column=3, sticky=N)
+        self.result.grid(row=19, column=0, sticky=N, columnspan=4)
+
+        # Initially, set focus on self.label
+        self.label.focus_set()
 
 if __name__ == '__main__':
     app = DisPass()
