@@ -93,49 +93,60 @@ class GUI:
         self.passwordout.set('- No password generated -')
         self.result.config(fg="black", readonlybackground="gray")
 
+    def setFont(self):
+        pass
+
+    def getFont(self, sizediff=0):
+        self.font = "Verdana"
+        self.fontsize = 10
+        return (self.font, self.fontsize + sizediff)
 
     def createWidgets(self, master):
         '''Create and align widgets'''
 
-        f = "Verdana" # font
+        f = "Verdana"
         self.passwordout = StringVar()
         self.passwordout.set('- No password generated -')
         self.isnew = IntVar()
 
         # Create widgets
-        ttitle = Label(master, text=self.dp.versionStr, font=(f, 14))
-        wisnew = Checkbutton(master, height=2,
+        ttitle = Label(master, text=self.dp.versionStr, font=self.getFont(4))
+        wisnew = Checkbutton(master, height=2, font=self.getFont(),
                 text="This is a new password, that I have not used before", 
                 variable=self.isnew, command=self.OnNew)
-        tlabel = Label(master, text='Label', font=(f, 12))
-        tsalt = Label(master, text='Salt', font=(f, 12))
-        tpasswordin1 = Label(master, text='Password', font=(f, 12))
-        tpasswordin2 = Label(master, text='Password (again)', font=(f, 12))
-        self.label = Entry(master, width=20)
-        self.salt = Entry(master, width=20)
-        self.passwordin1 = Entry(master, width=20, show="*")
-        self.passwordin2 = Entry(master, width=20, show="*", state=DISABLED)
-        genbutton = Button(master, text="Generate password", width=59, 
-                command=self.OnGen)
-        clrbutton = Button(master, text="Clear fields", width=17, 
+        tlabel = Label(master, text='Label', font=self.getFont(2))
+        tsalt = Label(master, text='Salt', font=self.getFont(2))
+        tpasswordin1 = Label(master, text='Password', font=self.getFont(2))
+        tpasswordin2 = Label(master, text='Password (again)', 
+                font=self.getFont(2))
+        self.label = Entry(master, width=20, font=self.getFont())
+        self.salt = Entry(master, width=20, font=self.getFont())
+        self.passwordin1 = Entry(master, width=20, font=self.getFont(), 
+                show="*")
+        self.passwordin2 = Entry(master, width=20, font=self.getFont(), 
+                show="*", state=DISABLED)
+        genbutton = Button(master, text="Generate password", 
+                font=self.getFont(), command=self.OnGen)
+        clrbutton = Button(master, text="Clear fields", font=self.getFont(), 
                 command=self.OnClear)
-        self.result = Entry(master, width=83, textvariable=self.passwordout,
-                state="readonly", fg="black", readonlybackground="gray")
+        self.result = Entry(master, font=self.getFont(4),
+                textvariable=self.passwordout, state="readonly", fg="black", 
+                readonlybackground="gray")
 
         # Layout widgets in a grid
-        ttitle.grid(row=0, column=0, sticky=N, columnspan=4)
-        wisnew.grid(row=1, column=0, sticky=N, columnspan=4)
-        tlabel.grid(row=14, column=0, sticky=N)
-        tsalt.grid(row=14, column=1, sticky=N)
-        tpasswordin1.grid(row=14, column=2, sticky=N)
-        tpasswordin2.grid(row=14, column=3, sticky=N)
-        self.label.grid(row=15, column=0, sticky=NW)
-        self.salt.grid(row=15, column=1, sticky=NW)
-        self.passwordin1.grid(row=15, column=2, sticky=NW)
-        self.passwordin2.grid(row=15, column=3, sticky=NW)
-        genbutton.grid(row=17, column=0, sticky=N, columnspan=3)
-        clrbutton.grid(row=17, column=3, sticky=N)
-        self.result.grid(row=19, column=0, sticky=N, columnspan=4)
+        ttitle.grid(row=0, column=0, sticky=N+S+E+W, columnspan=4)
+        wisnew.grid(row=1, column=0, sticky=N+S+E+W, columnspan=4)
+        tlabel.grid(row=14, column=0, sticky=N+S+E+W)
+        tsalt.grid(row=14, column=1, sticky=N+S+E+W)
+        tpasswordin1.grid(row=14, column=2, sticky=N+S+E+W)
+        tpasswordin2.grid(row=14, column=3, sticky=N+S+E+W)
+        self.label.grid(row=15, column=0, sticky=N+S+E+W)
+        self.salt.grid(row=15, column=1, sticky=N+S+E+W)
+        self.passwordin1.grid(row=15, column=2, sticky=N+S+E+W)
+        self.passwordin2.grid(row=15, column=3, sticky=N+S+E+W)
+        genbutton.grid(row=17, column=0, sticky=N+S+E+W, columnspan=3)
+        clrbutton.grid(row=17, column=3, sticky=N+S+E+W, rowspan=2)
+        self.result.grid(row=18, column=0, sticky=N+S+E+W, columnspan=3)
 
         # Initially, set focus on self.label
         self.label.focus_set()
