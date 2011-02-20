@@ -51,9 +51,21 @@ class Digest:
 class GUI:
     '''Here the interaction of Tkinters widgets is done'''
     def __init__(self, master, dp):
-        '''Draw main window'''
+        '''Allow access to DisPass object, create widgets'''
         self.dp = dp
         self.createWidgets(master)
+
+    def warn(self, message, warning_type='soft', box_title=''):
+        '''Prototype for warning user'''
+
+        if warning_type == 'soft' or warning_type == 'hard':
+            self.result.config(fg="black", readonlybackground="red")
+            self.passwordout.set('- ' + message + ' -')
+
+        if warning_type == 'hard':
+            self.passwordin1.delete(0, END)
+            self.passwordin2.delete(0, END)
+            tkMessageBox.showwarning(box_title, message)
 
     def OnGen(self):
         '''Handle and draw digest or message if input is insufficient'''
@@ -65,36 +77,18 @@ class GUI:
         isnew = self.isnew.get()
 
         if len(label) == 0:
-            # Check if label is empty
-            self.result.config(fg="black", readonlybackground="red")
-            r = '- No password generated, label field is empty -'
-            self.passwordout.set(r)
+            self.warn('No password generated, label field is empty')
             return
         elif len(passwordin1) == 0:
-            # Check if password field 1 is empty
-            self.result.config(fg="black", readonlybackground="red")
-            r = '- No password generated, password field is empty -'
-            self.passwordout.set(r)
+            self.warn('No password generated, password field is empty')
             return
         elif len(passwordin1) < 8:
-            # Check if password has sufficient chars
-            # If not, reset fields and warn user
-            r = 'Password must contain at least 8 characters' 
-            self.passwordout.set('- ' + r + ' -')
-            self.result.config(fg="black", readonlybackground="red")
-            self.passwordin1.delete(0, END)
-            self.passwordin2.delete(0, END)
-            tkMessageBox.showwarning("Password is too short", r)
+            self.warn('Password must contain at least 8 characters', 'hard',
+                    box_title='Password is too short')
             return
         elif isnew and passwordin1 != passwordin2:
-            # Check to see if passwords match when it is a new password
-            # If not, reset fields and warn user
-            r = 'Passwords are not identical, please try again'
-            self.passwordout.set('- ' + r + ' -')
-            self.result.config(fg="black", readonlybackground="red")
-            self.passwordin1.delete(0, END)
-            self.passwordin2.delete(0, END)
-            tkMessageBox.showwarning("Password mismatch", r)
+            self.warn('Passwords are not identical, please try again', 'hard',
+                    box_title='Password mismatch')
             return
 
         # All checks passed, create digest
@@ -104,7 +98,6 @@ class GUI:
         r = h[:30]
         self.result.config(fg="black", readonlybackground="green")
         self.passwordout.set(r)
-
 
     def OnNew(self):
         '''Toggle double checking of input password'''
