@@ -31,10 +31,10 @@ class DisPass:
     def main(self):
         '''Create apporopiate object depending on command arguments'''
         # No command line option parsing atm
-        root = Tk()
-        root.title(self.versionStr)
-        gui = GUI(root, self)
-        root.mainloop()
+        self.root = Tk()
+        self.root.title(self.versionStr)
+        gui = GUI(self.root, self)
+        self.root.mainloop()
 
 class Digest:
     '''Control message digest'''
