@@ -1,8 +1,60 @@
 #!/usr/bin/env python
 # vim: set et ts=4 sw=4 sts=4:
 
-'''Generate and disperse/dispell passwords
+'''
+Generate and disperse/dispell passwords
 
+What is it?
+-----------
+DisPass is a cross-platform password generator that comes with both
+a Command Line Interface and a Guided User Interface.
+You can use it to create unique passwords for logging in to websites, servers
+or any other kind of thing that requires login.
+
+It doesn't keep your passwords in a database but rather lets you generate
+the same password formed from parameters that are more easily remembered
+by people.
+
+These parameters are:
+ * The label
+
+   The label is a string that you use to identify the password.
+   i.e. this can be a domainname of the service the password is used for
+   like 'google.com'.
+
+ * The salt (optional)
+
+   The salt can be a string or file that you can optionally use to add as a 
+   parameter for the generation of the password.
+
+ * The master password
+
+   This is a master password you use to generate the password valid for the
+   setted label.
+
+Status
+------
+DisPass is in an early development stage, there are still many ideas
+that are in development.
+
+The current version 0.1 is in pre-alpha state, meaning features are still
+getting added and all code is still subject to change. Version 0.1 will be 
+released when it's ready.
+
+TODO
+----
+v0.1
+ * check and warn when (trailing) whitespace is found in label
+ * add application icon
+
+v0.2 and up
+ * add option to keep/load a list of labels in a textfile
+ * add option to use a (binary) file for the salt
+ * add option to export passwordout to the clipboard 
+ * create CLI
+
+License
+-------
 Copyright (c) 2011 Benjamin Althues <benjamin@babab.nl>
 
 Permission to use, copy, modify, and distribute this software for any
@@ -16,7 +68,11 @@ ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
 WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
 ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+API documentation
+-----------------
 '''
+__docformat__ = 'restructuredtext'
 
 import base64
 import hashlib
@@ -27,7 +83,8 @@ import tkMessageBox
 class DisPass:
     '''This controls the main program and arguments'''
 
-    versionStr = 'DisPass v0.1-alpha'
+    versionStr = 'DisPass v0.1a3'
+    '''A string for holding version information'''
 
     def main(self):
         '''Create apporopiate object depending on command arguments'''
@@ -40,7 +97,18 @@ class DisPass:
 class Digest:
     '''Control message digest'''
     def create(self, message):
-        '''Create and return secure hash of message'''
+        '''Create and return secure hash of message
+        
+        A secure hash/message digest formed by hashing the `message` with
+        the sha512 algorithm, then encode this hash with the use of base64
+        and strip it down to the first 30 characters.
+
+        :Parameters:
+            - `message`: The string from which to form the digest
+
+        :Return:
+            - The secure hash of `message`
+        '''
         d = hashlib.sha512()
         d.update(message)
         shastr = d.hexdigest()
