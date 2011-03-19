@@ -32,8 +32,11 @@ class DisPass:
     '''A string for holding version information'''
 
     def main(self):
-        '''Create apporopiate object depending on command arguments'''
-        # No command line option parsing atm
+        '''Create apporopiate object depending on command arguments
+        
+        Only GUI mode is available atm so this will create the main
+        Tk() object, call GUI object and start the mainloop()
+        '''
         self.root = Tk()
         self.root.title(self.versionStr)
         gui = GUI(self.root, self)
@@ -45,8 +48,8 @@ class Digest:
         '''Create and return secure hash of message
         
         A secure hash/message digest formed by hashing the `message` with
-        the sha512 algorithm, then encode this hash with the use of base64
-        and strip it down to the first 30 characters.
+        the sha512 algorithm, encoding this hash with base64 and stripping 
+        it down to the first 30 characters.
 
         :Parameters:
             - `message`: The string from which to form the digest
@@ -62,9 +65,21 @@ class Digest:
         return str(r)
 
 class GUI:
-    '''Here the interaction of Tkinters widgets is done'''
+    '''Houses all GUI related objects and interactions'''
+
+    font = "Verdana"
+    '''Default font (Verdana)'''
+
+    fontsize = 10
+    '''Default fontsize (10 pt.)'''
+
     def __init__(self, master, dp):
-        '''Allow access to DisPass object, create widgets'''
+        '''Initialize GUI object and call createWidgets
+        
+        :Parameters:
+            - `master`: The master Tk() object
+            - `dp`: The main application object DisPass
+        '''
         self.dp = dp
         self.createWidgets(master)
 
@@ -74,15 +89,28 @@ class GUI:
         pass
 
     def getFont(self, sizediff=0):
-        '''Get font and fontsize, option to differ from default fontsize'''
-        self.font = "Verdana"
-        self.fontsize = 10
+        '''Get `font` and `fontsize`, optionally differ from default `fontsize`
+        
+        :Parameters:
+            - `sizediff`: The difference in pt. from the default `fontsize`
+
+        :Return:
+            - Tuple of (`font`, `fontsize`) to be used when creating widgets
+        '''
         return (self.font, self.fontsize + sizediff)
 
 # GUI # Prototypes
     def warn(self, message, warning_type='soft', box_title=''):
-        '''Prototype for warning user'''
+        '''Prototype for warning user
 
+         * soft warnings display a message in the passwordout field
+         * hard warnings do the same and also display a messagebox
+        
+        :Parameters:
+            - `message`: The message string for warning the user
+            - `warning_type`: Either 'soft' (default value) or 'hard'
+            - `box_title`: Optional title for tkMessageBox on hard warnings
+        '''
         if warning_type == 'soft' or warning_type == 'hard':
             self.result.config(fg="black", readonlybackground="red")
             self.passwordout.set('- ' + message + ' -')
@@ -94,7 +122,11 @@ class GUI:
 
 # GUI # Event actions
     def OnGen(self):
-        '''Handle and draw digest or message if input is insufficient'''
+        '''Check user input 
+        
+        Warn when user input is insufficient or wrong. Create digest and 
+        display the generated password if user input is OK.
+        '''
 
         label = self.label.get()
         salt = self.label.get()
@@ -136,7 +168,7 @@ class GUI:
             self.passwordin2.config(state=NORMAL)
 
     def OnClear(self):
-        '''Clear all fields'''
+        '''Clear all input fields'''
         self.label.delete(0, END)
         self.salt.delete(0, END)
         self.passwordin1.delete(0, END)
