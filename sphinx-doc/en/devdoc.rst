@@ -8,7 +8,7 @@ Developer documentation
 
 Reference
 ---------
-.. automodule:: DisPass
+.. automodule:: dispass
    :members:
 
 Software license

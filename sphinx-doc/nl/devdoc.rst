@@ -11,7 +11,7 @@ Documentatie voor ontwikkelaars
 
 Referentie
 ----------
-.. automodule:: DisPass
+.. automodule:: dispass
    :members:
 
 Softwarelicentie
