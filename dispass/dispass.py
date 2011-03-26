@@ -27,20 +27,6 @@ import re
 from Tkinter import *
 import tkMessageBox
 
-class DisPass:
-    '''This controls the main program and arguments'''
-
-    def main(self):
-        '''Create apporopiate object depending on command arguments
-        
-        Only GUI mode is available atm so this will create the main
-        Tk() object, call GUI object and start the mainloop()
-        '''
-        self.root = Tk()
-        self.root.title(versionStr)
-        gui = GUI(self.root)
-        self.root.mainloop()
-
 class Digest:
     '''Control message digest'''
     def create(self, message):
@@ -72,13 +58,12 @@ class GUI:
     fontsize = 10
     '''Default fontsize (10 pt.)'''
 
-    def __init__(self, master):
-        '''Initialize GUI object and call createWidgets
-        
-        :Parameters:
-            - `master`: The master Tk() object
-        '''
-        self.createWidgets(master)
+    def __init__(self):
+        '''Initialize GUI object, create the widgets and start mainloop'''
+        self.root = Tk()
+        self.root.title(versionStr)
+        self.createWidgets(self.root)
+        self.root.mainloop()
 
 # GUI # Setters and getters
     def setFont(self):
@@ -223,5 +208,4 @@ class GUI:
         self.label.focus_set()
 
 if __name__ == '__main__':
-    app = DisPass()
-    app.main()
+    GUI()
