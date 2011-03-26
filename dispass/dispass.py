@@ -18,6 +18,8 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 __docformat__ = 'restructuredtext'
+__version__ = '0.1.0-dev'
+versionStr = 'DisPass ' + __version__
 
 import base64
 import hashlib
@@ -28,9 +30,6 @@ import tkMessageBox
 class DisPass:
     '''This controls the main program and arguments'''
 
-    versionStr = 'DisPass v0.1a3'
-    '''A string for holding version information'''
-
     def main(self):
         '''Create apporopiate object depending on command arguments
         
@@ -38,8 +37,8 @@ class DisPass:
         Tk() object, call GUI object and start the mainloop()
         '''
         self.root = Tk()
-        self.root.title(self.versionStr)
-        gui = GUI(self.root, self)
+        self.root.title(versionStr)
+        gui = GUI(self.root)
         self.root.mainloop()
 
 class Digest:
@@ -73,14 +72,12 @@ class GUI:
     fontsize = 10
     '''Default fontsize (10 pt.)'''
 
-    def __init__(self, master, dp):
+    def __init__(self, master):
         '''Initialize GUI object and call createWidgets
         
         :Parameters:
             - `master`: The master Tk() object
-            - `dp`: The main application object DisPass
         '''
-        self.dp = dp
         self.createWidgets(master)
 
 # GUI # Setters and getters
@@ -184,7 +181,7 @@ class GUI:
         self.passwordout.set('- No password generated -')
         self.isnew = IntVar()
 
-        ttitle = Label(master, text=self.dp.versionStr, font=self.getFont(4))
+        ttitle = Label(master, text=versionStr, font=self.getFont(4))
         wisnew = Checkbutton(master, height=2, font=self.getFont(),
                 text="This is a new password, that I have not used before", 
                 variable=self.isnew, command=self.OnNew)

@@ -14,7 +14,7 @@ a unique password formed from a label, an optional salt and a master password.
 
 setup(
     name='DisPass',
-    version='0.1a3',
+    version='0.1.0-dev',
     description='Generate and disperse/dispell passwords',
     author='Benjamin Althues',
     author_email='benjamin@babab.nl',
