@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # vim: set et ts=4 sw=4 sts=4:
 
 '''Generate and disperse/dispell passwords'''
@@ -21,33 +20,10 @@ __docformat__ = 'restructuredtext'
 __version__ = '0.1.0-dev'
 versionStr = 'DisPass ' + __version__
 
-import base64
-import hashlib
-import re
 from Tkinter import *
 import tkMessageBox
 
-class Digest:
-    '''Control message digest'''
-    def create(self, message):
-        '''Create and return secure hash of message
-        
-        A secure hash/message digest formed by hashing the `message` with
-        the sha512 algorithm, encoding this hash with base64 and stripping 
-        it down to the first 30 characters.
-
-        :Parameters:
-            - `message`: The string from which to form the digest
-
-        :Return:
-            - The secure hash of `message`
-        '''
-        d = hashlib.sha512()
-        d.update(message)
-        shastr = d.hexdigest()
-        r = base64.b64encode(shastr, '49') # replace +/ with 49
-        r = r.replace('=','') # filter '='
-        return str(r)
+import digest
 
 class GUI:
     '''Houses all GUI related objects and interactions'''
@@ -132,12 +108,10 @@ class GUI:
             return
 
         # All checks passed, create digest
-        digest = Digest()
         s = label + salt + passwordin1
         h = digest.create(s)
-        r = h[:30]
         self.result.config(fg="black", readonlybackground="green")
-        self.passwordout.set(r)
+        self.passwordout.set(h)
 
     def OnNew(self):
         '''Toggle double checking of input password'''

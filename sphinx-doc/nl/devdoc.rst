@@ -14,8 +14,14 @@ Referentie
 .. automodule:: dispass
    :members:
 
+.. automodule:: digest
+   :members:
+
 Softwarelicentie
 ----------------
 .. include:: ../../LICENSE
 
 .. vim: set et ts=3 sw=3 sts=3 ai:
+
+
+

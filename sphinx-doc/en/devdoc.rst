@@ -11,6 +11,9 @@ Reference
 .. automodule:: dispass
    :members:
 
+.. automodule:: digest
+   :members:
+
 Software license
 ----------------
 .. include:: ../../LICENSE
