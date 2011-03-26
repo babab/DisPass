@@ -17,7 +17,12 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 __docformat__ = 'restructuredtext'
-__version__ = '0.1.0-dev'
+
+__author__ = "Benjamin Althues"
+__copyright__ = "Copyright (C) 2011 Benjamin Althues"
+__version_info__ = (0, 1, 0, 'alpha', 3)
+__version__ = '0.1a3'
+
 versionStr = 'DisPass ' + __version__
 
 from Tkinter import *

@@ -17,7 +17,8 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 __docformat__ = 'restructuredtext'
-__version__ = '0.1.0-dev'
+
+from dispass import __author__, __copyright__, __version_info__, __version__
 
 import base64
 import hashlib

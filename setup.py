@@ -1,7 +1,8 @@
-#!/usr/bin/env python
 # vim: set et ts=4 sw=4 sts=4 ai:
 
 from distutils.core import setup
+
+from dispass import __version__
 
 long_desc = '''
 DisPass is a cross-platform password generator you can use to create 
@@ -14,7 +15,7 @@ a unique password formed from a label, an optional salt and a master password.
 
 setup(
     name='DisPass',
-    version='0.1.0-dev',
+    version=__version__,
     description='Generate and disperse/dispell passwords',
     author='Benjamin Althues',
     author_email='benjamin@babab.nl',
