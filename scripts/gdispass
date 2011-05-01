@@ -20,4 +20,4 @@ import sys
 import dispass.dispass
 
 if __name__ == '__main__':
-    dispass.dispass.main(sys.argv)
+    dispass.dispass.GUI()

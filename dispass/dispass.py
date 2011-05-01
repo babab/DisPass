@@ -20,14 +20,19 @@ __docformat__ = 'restructuredtext'
 
 __author__ = "Benjamin Althues"
 __copyright__ = "Copyright (C) 2011 Benjamin Althues"
-__version_info__ = (0, 1, 0, 'alpha', 3)
-__version__ = '0.1a3'
+__version_info__ = (0, 1, 0, 'alpha', 4)
+__version__ = '0.1a4'
 
 versionStr = 'DisPass ' + __version__
 
+# Python stdlib
+import getopt
+import getpass
+import sys
 from Tkinter import *
 import tkMessageBox
 
+# DisPass modules
 import digest
 
 class GUI:
@@ -92,7 +97,6 @@ class GUI:
         '''
 
         label = self.label.get()
-        salt = self.label.get()
         passwordin1 = self.passwordin1.get()
         passwordin2 = self.passwordin2.get()
         isnew = self.isnew.get()
@@ -113,8 +117,7 @@ class GUI:
             return
 
         # All checks passed, create digest
-        s = label + salt + passwordin1
-        h = digest.create(s)
+        h = digest.create(label + passwordin1)
         self.result.config(fg="black", readonlybackground="green")
         self.passwordout.set(h)
 
@@ -131,7 +134,6 @@ class GUI:
     def OnClear(self):
         '''Clear all input fields'''
         self.label.delete(0, END)
-        self.salt.delete(0, END)
         self.passwordin1.delete(0, END)
         self.passwordin2.delete(0, END)
         self.passwordout.set('- No password generated -')
@@ -150,15 +152,13 @@ class GUI:
                 text="This is a new password, that I have not used before", 
                 variable=self.isnew, command=self.OnNew)
         tlabel = Label(master, text='Label', font=self.getFont(2))
-        tsalt = Label(master, text='Salt', font=self.getFont(2))
         tpasswordin1 = Label(master, text='Password', font=self.getFont(2))
         tpasswordin2 = Label(master, text='Password (again)', 
                 font=self.getFont(2))
-        self.label = Entry(master, width=20, font=self.getFont())
-        self.salt = Entry(master, width=20, font=self.getFont())
-        self.passwordin1 = Entry(master, width=20, font=self.getFont(), 
+        self.label = Entry(master, width=27, font=self.getFont())
+        self.passwordin1 = Entry(master, width=27, font=self.getFont(), 
                 show="*")
-        self.passwordin2 = Entry(master, width=20, font=self.getFont(), 
+        self.passwordin2 = Entry(master, width=27, font=self.getFont(), 
                 show="*", state=DISABLED)
         genbutton = Button(master, text="Generate password", 
                 font=self.getFont(), command=self.OnGen)
@@ -169,22 +169,69 @@ class GUI:
                 readonlybackground="gray")
 
         # Layout widgets in a grid
-        ttitle.grid(row=0, column=0, sticky=N+S+E+W, columnspan=4)
-        wisnew.grid(row=1, column=0, sticky=N+S+E+W, columnspan=4)
-        tlabel.grid(row=14, column=0, sticky=N+S+E+W)
-        tsalt.grid(row=14, column=1, sticky=N+S+E+W)
-        tpasswordin1.grid(row=14, column=2, sticky=N+S+E+W)
-        tpasswordin2.grid(row=14, column=3, sticky=N+S+E+W)
-        self.label.grid(row=15, column=0, sticky=N+S+E+W)
-        self.salt.grid(row=15, column=1, sticky=N+S+E+W)
-        self.passwordin1.grid(row=15, column=2, sticky=N+S+E+W)
-        self.passwordin2.grid(row=15, column=3, sticky=N+S+E+W)
-        genbutton.grid(row=17, column=0, sticky=N+S+E+W, columnspan=3)
-        clrbutton.grid(row=17, column=3, sticky=N+S+E+W, rowspan=2)
-        self.result.grid(row=18, column=0, sticky=N+S+E+W, columnspan=3)
+        ttitle.grid(row=0, column=0, sticky=N+S+E+W, columnspan=3)
+        wisnew.grid(row=1, column=0, sticky=N+S+E+W, columnspan=3)
+        tlabel.grid(row=2, column=0, sticky=N+S+E+W)
+        tpasswordin1.grid(row=2, column=1, sticky=N+S+E+W)
+        tpasswordin2.grid(row=2, column=2, sticky=N+S+E+W)
+        self.label.grid(row=3, column=0, sticky=N+S+E+W)
+        self.passwordin1.grid(row=3, column=1, sticky=N+S+E+W)
+        self.passwordin2.grid(row=3, column=2, sticky=N+S+E+W)
+        genbutton.grid(row=4, column=0, sticky=N+S+E+W, columnspan=2)
+        clrbutton.grid(row=4, column=2, sticky=N+S+E+W)
+        self.result.grid(row=5, column=0, sticky=N+S+E+W, columnspan=3)
 
         # Initially, set focus on self.label
         self.label.focus_set()
 
+def usage():
+    print versionStr, ' - http://babab.nl/p/dispass'
+    print
+    print 'USAGE: dispass [-ghV] label'
+    print 
+    print '-g, --gui       start guided version of DisPass'
+    print '-h, --help      show this help and exit'
+    print '-V, --version   show full version information and exit'
+
+def CLI(label):
+    inp = getpass.getpass()
+    h = digest.create(label + inp)
+    del inp
+    print 'Generated passhrase is:'
+    print h
+    del h
+
+def main(argv):
+    try:
+        opts, args = getopt.getopt(argv[1:], "ghV", 
+                ["gui", "help", "version"])
+    except getopt.GetoptError, err:
+        print str(err), "\n"
+        usage()
+        sys.exit(2)
+
+    if args:
+        label = args[0]
+    else:
+        label = False
+
+    for o, a in opts:
+        if o in ("-g", "--gui"):
+            GUI()
+            return 
+        elif o in ("-h", "--help"):
+            usage()
+            sys.exit()
+        elif o in ("-V", "--version"):
+            print versionStr, ' - ', __version_info__
+            sys.exit()
+        else:
+            assert False, "unhandled option"
+
+    if label:
+        CLI(label)
+    else:
+        usage()
+
 if __name__ == '__main__':
-    GUI()
+    main(sys.argv)
