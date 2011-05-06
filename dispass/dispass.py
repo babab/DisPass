@@ -184,22 +184,20 @@ class GUI:
         # Initially, set focus on self.label
         self.label.focus_set()
 
+def CLI(labels):
+    inp = getpass.getpass()
+    for i in labels:
+        print "%25s %s" % (i, digest.create(i + inp))
+    del inp
+
 def usage():
     print versionStr, ' - http://babab.nl/p/dispass'
     print
-    print 'USAGE: dispass [-ghV] label'
+    print 'USAGE: dispass [-ghV] label [label2] [label3] [...]'
     print 
     print '-g, --gui       start guided version of DisPass'
     print '-h, --help      show this help and exit'
     print '-V, --version   show full version information and exit'
-
-def CLI(label):
-    inp = getpass.getpass()
-    h = digest.create(label + inp)
-    del inp
-    print 'Generated passhrase is:'
-    print h
-    del h
 
 def main(argv):
     try:
@@ -211,9 +209,9 @@ def main(argv):
         sys.exit(2)
 
     if args:
-        label = args[0]
+        labels = args
     else:
-        label = False
+        labels = False
 
     for o, a in opts:
         if o in ("-g", "--gui"):
@@ -228,8 +226,8 @@ def main(argv):
         else:
             assert False, "unhandled option"
 
-    if label:
-        CLI(label)
+    if labels:
+        CLI(labels)
     else:
         usage()
 
