@@ -29,8 +29,11 @@ versionStr = 'DisPass ' + __version__
 import getopt
 import getpass
 import sys
-from Tkinter import *
-import tkMessageBox
+try:
+    from Tkinter import *
+    import tkMessageBox
+except ImportError:
+    gb_noTk = True
 
 # DisPass modules
 import digest
@@ -46,6 +49,16 @@ class GUI:
 
     def __init__(self):
         '''Initialize GUI object, create the widgets and start mainloop'''
+
+        # Check if Tkinter has been loaded succesfully; else exit
+        if gb_noTk:
+            print 'Could not find Tkinter, this is a package needed '\
+                    'for using\nthe graphical version of dispass.'
+            print 'To install, search for a python-tk package for your OS.\n'
+            print 'Debian / Ubuntu\t\t$ sudo apt-get install python-tk'
+            print 'OpenBSD        \t\t# pkg_add -i python-tk'
+            return
+        
         self.root = Tk()
         self.root.title(versionStr)
         self.createWidgets(self.root)
