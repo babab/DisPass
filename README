@@ -3,30 +3,23 @@ User documentation
 
 What is it?
 -----------
-DisPass is a cross-platform password generator that comes with both
+DisPass is a cross-platform passphrase generator that comes with both
 a Command Line Interface and a Guided User Interface.
 You can use it to create unique passwords for logging in to websites, servers
 or any other kind of thing that requires login.
 
 It doesn't keep your passwords in a database but rather lets you generate
-the same password formed from parameters that are more easily remembered
-by people.
+a unique passphrase formed from a master password and a label.
 
-These parameters are:
- * The label
+ * label
 
    The label is a string that you use to identify the password.
    i.e. this can be a domainname of the service the password is used for
    like 'google.com'.
 
- * The salt (optional)
+ * password
 
-   The salt can be a string or file that you can optionally use to add as a 
-   parameter for the generation of the password.
-
- * The master password
-
-   This is a master password you use to generate the password valid for the
-   setted label.
+   This is a master password that, together with the label is used to generate 
+   the passphrase.
 
 .. vim: set et ts=3 sw=3 sts=3 ai:
