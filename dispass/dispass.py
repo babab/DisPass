@@ -32,8 +32,9 @@ import sys
 try:
     from Tkinter import *
     import tkMessageBox
+    gb_hasTk = True
 except ImportError:
-    gb_noTk = True
+    gb_hasTk = False
 
 # DisPass modules
 import digest
@@ -51,7 +52,7 @@ class GUI:
         '''Initialize GUI object, create the widgets and start mainloop'''
 
         # Check if Tkinter has been loaded succesfully; else exit
-        if gb_noTk:
+        if not gb_hasTk:
             print 'Could not find Tkinter, this is a package needed '\
                     'for using\nthe graphical version of dispass.'
             print 'To install, search for a python-tk package for your OS.\n'
