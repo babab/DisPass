@@ -20,8 +20,8 @@ __docformat__ = 'restructuredtext'
 
 __author__ = "Benjamin Althues"
 __copyright__ = "Copyright (C) 2011 Benjamin Althues"
-__version_info__ = (0, 1, 0, 'alpha', 4)
-__version__ = '0.1a4'
+__version_info__ = (0, 1, 0, 'alpha', 5)
+__version__ = '0.1a5'
 
 versionStr = 'DisPass ' + __version__
 
@@ -29,6 +29,11 @@ versionStr = 'DisPass ' + __version__
 import getopt
 import getpass
 import sys
+try:
+    import curses
+    gb_hasCurses = True
+except ImportError:
+    gb_hasCurses = False
 try:
     from Tkinter import *
     import tkMessageBox
@@ -200,9 +205,36 @@ class GUI:
 
 def CLI(labels):
     inp = getpass.getpass()
+
+    if not gb_hasCurses:
+        for i in labels:
+            print "%25s %s" % (i, digest.create(i + inp))
+        return
+
+    stdscr = curses.initscr()
+    curses.noecho()
+    curses.cbreak()
+
+    stdscr.addstr(0,  0, versionStr + " - press 'q' to quit", curses.A_BOLD)
+    stdscr.addstr(1,  0, "Your passphrase(s)", curses.A_BOLD)
+    div = len(max(labels, key=len)) + 2
+    j = 3
     for i in labels:
-        print "%25s %s" % (i, digest.create(i + inp))
+        stdscr.addstr(j,  0, i, curses.A_BOLD)
+        stdscr.addstr(j, div, digest.create(i + inp), curses.A_REVERSE)
+        j += 1
     del inp
+    stdscr.refresh()
+
+    while True:
+        c = stdscr.getch()
+        if c == ord('q'): 
+            break
+
+    curses.nocbreak()
+    curses.echo()
+    curses.endwin()
+
 
 def usage():
     print versionStr, ' - http://babab.nl/p/dispass'
