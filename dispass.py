@@ -20,8 +20,8 @@ __docformat__ = 'restructuredtext'
 
 __author__ = "Benjamin Althues"
 __copyright__ = "Copyright (C) 2011 Benjamin Althues"
-__version_info__ = (0, 1, 0, 'alpha', 5)
-__version__ = '0.1a5'
+__version_info__ = (0, 1, 0, 'alpha', 6)
+__version__ = '0.1a6'
 
 versionStr = 'DisPass ' + __version__
 

@@ -2,7 +2,7 @@ import sys
 import os
 
 # Import from DisPass for versionStr
-sys.path.insert(0, os.path.abspath('../../dispass/'))
+sys.path.insert(0, os.path.abspath('../../'))
 import dispass
 
 # language specific settings

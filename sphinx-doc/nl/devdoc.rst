@@ -14,9 +14,6 @@ Referentie
 .. automodule:: dispass
    :members:
 
-.. automodule:: digest
-   :members:
-
 Softwarelicentie
 ----------------
 .. include:: ../../LICENSE

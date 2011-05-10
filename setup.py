@@ -21,7 +21,7 @@ setup(
     author_email='benjamin@babab.nl',
     url='http://babab.nl/projects/dispass/',
     download_url='http://bitbucket.org/babab/dispass',
-    packages=['dispass'],
+    py_modules = ['dispass'],
     license='ISC',
     long_description=long_desc,
     platforms='any',

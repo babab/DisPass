@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.abspath('.'))
 import doclanguage
 
 # autodoc needs to be able to find modules in the dispass package
-sys.path.insert(0, os.path.abspath('../../dispass/'))
+sys.path.insert(0, os.path.abspath('../../'))
 
 # import dispass modules
 import dispass
