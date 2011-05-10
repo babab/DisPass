@@ -25,21 +25,33 @@ __version__ = '0.1a5'
 
 versionStr = 'DisPass ' + __version__
 
-# Python stdlib
+class globalSettings:
+    '''Global settings used in controlling program flow'''
+    useCurses = None
+    '''Switch passphrase output to stdout if not True'''
+
+    hasTk = None
+    '''False if Tkinter could not be imported'''
+
+settings = globalSettings()
+
+# Python stdlib - required
 import getopt
 import getpass
 import sys
+
+# Python stdlib - optional
 try:
     import curses
-    gb_hasCurses = True
+    settings.useCurses = True
 except ImportError:
-    gb_hasCurses = False
+    settings.useCurses = False
 try:
     from Tkinter import *
     import tkMessageBox
-    gb_hasTk = True
+    settings.hasTk = True
 except ImportError:
-    gb_hasTk = False
+    settings.hasTk = False
 
 # DisPass modules
 import digest
@@ -57,7 +69,7 @@ class GUI:
         '''Initialize GUI object, create the widgets and start mainloop'''
 
         # Check if Tkinter has been loaded succesfully; else exit
-        if not gb_hasTk:
+        if not settings.hasTk:
             print 'Could not find Tkinter, this is a package needed '\
                     'for using\nthe graphical version of dispass.'
             print 'To install, search for a python-tk package for your OS.\n'
@@ -203,38 +215,36 @@ class GUI:
         # Initially, set focus on self.label
         self.label.focus_set()
 
-def CLI(labels):
+def CLI(labels, useCurses=True):
     inp = getpass.getpass()
 
-    if not gb_hasCurses:
+    if useCurses:
+        stdscr = curses.initscr()
+        curses.noecho()
+        curses.cbreak()
+
+        stdscr.addstr(0, 0, versionStr + " - press 'q' to quit", curses.A_BOLD)
+        stdscr.addstr(1, 0, "Your passphrase(s)", curses.A_BOLD)
+        divlen = len(max(labels, key=len)) + 2
+        j = 3
+        for i in labels:
+            stdscr.addstr(j,  0, i, curses.A_BOLD)
+            stdscr.addstr(j, divlen, digest.create(i + inp), curses.A_REVERSE)
+            j += 1
+        del inp
+        stdscr.refresh()
+
+        while True:
+            c = stdscr.getch()
+            if c == ord('q'): 
+                break
+
+        curses.nocbreak()
+        curses.echo()
+        curses.endwin()
+    else:
         for i in labels:
             print "%25s %s" % (i, digest.create(i + inp))
-        return
-
-    stdscr = curses.initscr()
-    curses.noecho()
-    curses.cbreak()
-
-    stdscr.addstr(0,  0, versionStr + " - press 'q' to quit", curses.A_BOLD)
-    stdscr.addstr(1,  0, "Your passphrase(s)", curses.A_BOLD)
-    div = len(max(labels, key=len)) + 2
-    j = 3
-    for i in labels:
-        stdscr.addstr(j,  0, i, curses.A_BOLD)
-        stdscr.addstr(j, div, digest.create(i + inp), curses.A_REVERSE)
-        j += 1
-    del inp
-    stdscr.refresh()
-
-    while True:
-        c = stdscr.getch()
-        if c == ord('q'): 
-            break
-
-    curses.nocbreak()
-    curses.echo()
-    curses.endwin()
-
 
 def usage():
     print versionStr, ' - http://babab.nl/p/dispass'
@@ -243,12 +253,14 @@ def usage():
     print 
     print '-g, --gui       start guided version of DisPass'
     print '-h, --help      show this help and exit'
+    print '-o, --output    output passphrases to stdout (instead of the '
+    print '                more secure way of displaying via curses)'
     print '-V, --version   show full version information and exit'
 
 def main(argv):
     try:
-        opts, args = getopt.getopt(argv[1:], "ghV", 
-                ["gui", "help", "version"])
+        opts, args = getopt.getopt(argv[1:], "ghoV", 
+                ["gui", "help", "output", "version"])
     except getopt.GetoptError, err:
         print str(err), "\n"
         usage()
@@ -263,6 +275,8 @@ def main(argv):
         if o in ("-g", "--gui"):
             GUI()
             return 
+        elif o in ("-o", "--output"):
+            settings.useCurses = False
         elif o in ("-h", "--help"):
             usage()
             sys.exit()
@@ -273,7 +287,7 @@ def main(argv):
             assert False, "unhandled option"
 
     if labels:
-        CLI(labels)
+        CLI(labels, settings.useCurses)
     else:
         usage()
 
