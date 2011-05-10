@@ -215,8 +215,18 @@ class GUI:
         # Initially, set focus on self.label
         self.label.focus_set()
 
-def CLI(labels, useCurses=True):
-    inp = getpass.getpass()
+def CLI(labels, pwTypoCheck=False, useCurses=True):
+
+    while True:
+        inp = getpass.getpass()
+        if pwTypoCheck:
+            inp2 = getpass.getpass("Again:")
+            if inp == inp2:
+                break;
+            else:
+                print "Passwords do not match. Please try again."
+        else:
+            break
 
     if useCurses:
         stdscr = curses.initscr()
@@ -249,9 +259,12 @@ def CLI(labels, useCurses=True):
 def usage():
     print versionStr, ' - http://babab.nl/p/dispass'
     print
-    print 'USAGE: dispass [-ghV] label [label2] [label3] [...]'
+    print 'USAGE: dispass [-co] label [label2] [label3] [...]'
+    print '       dispass -g | -h | -V'
+    print '       gdispass'
     print 
-    print '-g, --gui       start guided version of DisPass'
+    print '-c, --create    use if this passphrase is new (2x password check)'
+    print '-g, --gui       start guided graphical version of DisPass'
     print '-h, --help      show this help and exit'
     print '-o, --output    output passphrases to stdout (instead of the '
     print '                more secure way of displaying via curses)'
@@ -259,8 +272,8 @@ def usage():
 
 def main(argv):
     try:
-        opts, args = getopt.getopt(argv[1:], "ghoV", 
-                ["gui", "help", "output", "version"])
+        opts, args = getopt.getopt(argv[1:], "cghoV", 
+                ["create", "gui", "help", "output", "version"])
     except getopt.GetoptError, err:
         print str(err), "\n"
         usage()
@@ -271,10 +284,13 @@ def main(argv):
     else:
         labels = False
 
+    pwTypoCheck = False
     for o, a in opts:
         if o in ("-g", "--gui"):
             GUI()
             return 
+        elif o in ("-c", "--create"):
+            pwTypoCheck = True
         elif o in ("-o", "--output"):
             settings.useCurses = False
         elif o in ("-h", "--help"):
@@ -287,7 +303,7 @@ def main(argv):
             assert False, "unhandled option"
 
     if labels:
-        CLI(labels, settings.useCurses)
+        CLI(labels, pwTypoCheck, settings.useCurses)
     else:
         usage()
 
