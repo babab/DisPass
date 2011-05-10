@@ -36,8 +36,11 @@ class globalSettings:
 settings = globalSettings()
 
 # Python stdlib - required
+import base64
 import getopt
 import getpass
+import hashlib
+import re
 import sys
 
 # Python stdlib - optional
@@ -52,9 +55,6 @@ try:
     settings.hasTk = True
 except ImportError:
     settings.hasTk = False
-
-# DisPass modules
-import digest
 
 class GUI:
     '''Houses all GUI related objects and interactions'''
@@ -148,7 +148,7 @@ class GUI:
             return
 
         # All checks passed, create digest
-        h = digest.create(label + passwordin1)
+        h = digest(label + passwordin1)
         self.result.config(fg="black", readonlybackground="green")
         self.passwordout.set(h)
 
@@ -239,7 +239,7 @@ def CLI(labels, pwTypoCheck=False, useCurses=True):
         j = 3
         for i in labels:
             stdscr.addstr(j,  0, i, curses.A_BOLD)
-            stdscr.addstr(j, divlen, digest.create(i + inp), curses.A_REVERSE)
+            stdscr.addstr(j, divlen, digest(i + inp), curses.A_REVERSE)
             j += 1
         del inp
         stdscr.refresh()
@@ -254,7 +254,30 @@ def CLI(labels, pwTypoCheck=False, useCurses=True):
         curses.endwin()
     else:
         for i in labels:
-            print "%25s %s" % (i, digest.create(i + inp))
+            print "%25s %s" % (i, digest(i + inp))
+
+def digest(message):
+    '''Create and return secure hash of message
+    
+    A secure hash/message digest formed by hashing the `message` with
+    the sha512 algorithm, encoding this hash with base64 and stripping 
+    it down to the first 30 characters.
+
+    :Parameters:
+        - `message`: The string from which to form the digest
+
+    :Return:
+        - The secure hash of `message`
+    '''
+    d = hashlib.sha512()
+    d.update(message)
+    shastr = d.hexdigest()
+
+    # replace + and / with 4 and 9 respectively
+    r = base64.b64encode(shastr, '49')
+    r = r.replace('=','') # remove '=' if it's there
+    r = r[:30]
+    return str(r)
 
 def usage():
     print versionStr, ' - http://babab.nl/p/dispass'
