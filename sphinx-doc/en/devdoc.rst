@@ -1,6 +1,5 @@
 Developer documentation
 =======================
-.. include:: ../../NOTE
 
 * :ref:`genindex`
 * :ref:`modindex`
@@ -10,9 +9,5 @@ Reference
 ---------
 .. automodule:: dispass
    :members:
-
-Software license
-----------------
-.. include:: ../../LICENSE
 
 .. vim: set et ts=3 sw=3 sts=3 ai:

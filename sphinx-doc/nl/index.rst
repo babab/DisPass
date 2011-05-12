@@ -2,11 +2,6 @@
    No dutch documentation available yet
 
 .. include:: ../../README
-.. include:: ../../TODO
-
-Softwarelicentie
-----------------
-.. include:: ../../LICENSE
 
 .. toctree::
    :maxdepth: 2

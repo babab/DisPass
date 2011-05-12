@@ -1,13 +1,5 @@
 .. include:: ../../README
 
-To-do list
-----------
-.. include:: ../../TODO
-
-Software license
-----------------
-.. include:: ../../LICENSE
-
 .. toctree::
    :maxdepth: 2
 

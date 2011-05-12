@@ -1,8 +1,5 @@
 User documentation
 ==================
-
-What is it?
------------
 DisPass is a cross-platform passphrase generator that comes with both
 a Command Line Interface and a Guided User Interface.
 You can use it to create unique passwords for logging in to websites, servers
@@ -21,5 +18,79 @@ a unique passphrase formed from a master password and a label.
 
    This is a master password that, together with the label is used to generate 
    the passphrase.
+
+Downloading
+-----------
+DisPass is distributed in a three flavors:
+
+ 1. The complete package with the DisPass python module, setup and 
+    runner scripts and files needed for building the 
+    (multilingual) documentation
+
+ 2. Single python module (dispass.py)
+
+ 3. Freezed application
+
+    DisPass, the Python interpreter and all dependencies freezed into 
+    one executable file. Bigger filesize, but useful on systems without 
+    a supported version of Python.
+
+You can download the files from this page::
+
+   https://bitbucket.org/babab/dispass/downloads
+
+For the latest development version of DisPass, download::
+
+   https://bitbucket.org/babab/dispass/get/tip.zip
+   https://bitbucket.org/babab/dispass/get/tip.tar.gz
+   https://bitbucket.org/babab/dispass/get/tip.tar.bz2
+
+
+Installing (Unix/Linux)
+-----------------------
+There are multiple ways of using dispass and also several options on how
+and where to place the files of dispass on your system.
+
+ * If Python 2.5 or higher is installed on your system
+
+   1. Installing with the use of Python's distutils
+      
+      Download the latest version from 
+      https://bitbucket.org/babab/dispass/downloads
+      Extract the archive and cd to the dispass folder.
+      Now run 'python setup.py install'
+      This will install the dispass module in python's dist-packages folder.
+      You can now run dispass using the 'dispass' and 'gdispass' scripts
+      placed under '/usr/local/bin/' or '/usr/bin/'.
+
+   2. Manual install to /usr/local/bin or a different directory
+
+      The file 'dispass.py' is a single python module and it is the only file
+      you really need to use dispass. You can manually copy it to /home/bin/ or 
+      /usr/local/bin/ and give it exec rights with chmod.
+
+ * If Python is not installed on your system / Freezed application
+
+   No info yet.
+
+Software license
+----------------
+Copyright (c) 2011 Benjamin Althues <benjamin@babab.nl>
+
+Permission to use, copy, modify, and distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+
+
+
 
 .. vim: set et ts=3 sw=3 sts=3 ai:
