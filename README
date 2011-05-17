@@ -1,12 +1,14 @@
+.. -*- restructuredtext -*-
+
+==================
 User documentation
 ==================
-DisPass is a cross-platform passphrase generator that comes with both
-a Command Line Interface and a Guided User Interface.
+DisPass is a passphrase generator for Windows and Unix / Linux.
 You can use it to create unique passwords for logging in to websites, servers
-or any other kind of thing that requires login.
-
-It doesn't keep your passwords in a database but rather lets you generate
-a unique passphrase formed from a master password and a label.
+or any other kind of thing that requires login. 
+DisPass does not keep your passwords in a database but rather lets you 
+generate a unique passphrase formed from a master password and a label.
+It is a command line app, but also has a simple graphical interface.
 
  * label
 
@@ -19,9 +21,10 @@ a unique passphrase formed from a master password and a label.
    This is a master password that, together with the label is used to generate 
    the passphrase.
 
+-----------
 Downloading
 -----------
-DisPass is distributed in a three flavors:
+DisPass is distributed in three flavors:
 
  1. The complete package with the DisPass python module, setup and 
     runner scripts and files needed for building the 
@@ -35,17 +38,18 @@ DisPass is distributed in a three flavors:
     one executable file. Bigger filesize, but useful on systems without 
     a supported version of Python.
 
-You can download the files from this page::
+You can download the files from this page:
 
-   https://bitbucket.org/babab/dispass/downloads
+ * https://bitbucket.org/babab/dispass/downloads
 
-For the latest development version of DisPass, download::
+For the latest development version of DisPass, download:
 
-   https://bitbucket.org/babab/dispass/get/tip.zip
-   https://bitbucket.org/babab/dispass/get/tip.tar.gz
-   https://bitbucket.org/babab/dispass/get/tip.tar.bz2
+ * https://bitbucket.org/babab/dispass/get/tip.zip (zip)
+ * https://bitbucket.org/babab/dispass/get/tip.tar.gz (gz)
+ * https://bitbucket.org/babab/dispass/get/tip.tar.bz2 (bz2)
 
 
+-----------------------
 Installing (Unix/Linux)
 -----------------------
 There are multiple ways of using dispass and also several options on how
@@ -73,8 +77,43 @@ and where to place the files of dispass on your system.
 
    No info yet.
 
+--------------------
+Installing (Windows)
+--------------------
+No info yet.
+
+---------------------------------------
+Using the command line app (Unix/Linux)
+---------------------------------------
+Usage::
+
+   DisPass 0.1a6  - http://babab.nl/p/dispass
+
+   USAGE: dispass [-co] label [label2] [label3] [...]
+          dispass -g | -h | -V
+          gdispass
+
+   -c, --create    use if this passphrase is new (2x password check)
+   -g, --gui       start guided graphical version of DisPass
+   -h, --help      show this help and exit
+   -o, --output    output passphrases to stdout (instead of the 
+                   more secure way of displaying via curses)
+   -V, --version   show full version information and exit
+
+------------------------------------
+Using the command line app (Windows)
+------------------------------------
+No info yet.
+
+---------------------------
+Using the graphical version
+---------------------------
+No info yet.
+
+
+================
 Software license
-----------------
+================
 Copyright (c) 2011 Benjamin Althues <benjamin@babab.nl>
 
 Permission to use, copy, modify, and distribute this software for any
