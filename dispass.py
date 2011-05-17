@@ -40,6 +40,7 @@ import base64
 import getopt
 import getpass
 import hashlib
+import os
 import re
 import sys
 
@@ -280,18 +281,36 @@ def digest(message):
     return str(r)
 
 def usage():
-    print versionStr, ' - http://babab.nl/p/dispass'
-    print
-    print 'USAGE: dispass [-co] label [label2] [label3] [...]'
-    print '       dispass -g | -h | -V'
-    print '       gdispass'
-    print 
-    print '-c, --create    use if this passphrase is new (2x password check)'
-    print '-g, --gui       start guided graphical version of DisPass'
-    print '-h, --help      show this help and exit'
-    print '-o, --output    output passphrases to stdout (instead of the '
-    print '                more secure way of displaying via curses)'
-    print '-V, --version   show full version information and exit'
+    if os.name == 'nt':
+        print "%s(nt) - http://babab.nl/p/dispass" % versionStr
+        print
+        print 'When DisPass is started without arguments, the graphical'
+        print 'version will be started. To use the command line,'
+        print 'submit one or more labels.'
+        print 
+        print 'USAGE: dispass [options] [label] [label2] [label3] [...]'
+        print 
+        print 'Options:'
+        print '-c, --create    use if this passphrase is new (check input PW)'
+        print '-h, --help      show this help and exit'
+        print '-V, --version   show full version information and exit'
+    else:
+        print "%s(%s) - http://babab.nl/p/dispass" % (versionStr, os.name)
+        print 
+        print "When DisPass is executed as 'gdispass' or 'dispass -g',"
+        print 'the graphical version will be started.'
+        print
+        print 'USAGE: dispass [-co] label [label2] [label3] [...]'
+        print '       dispass -g | -h | -V'
+        print '       gdispass'
+        print 
+        print 'Options:'
+        print '-c, --create    use if this passphrase is new (check input PW)'
+        print '-g, --gui       start guided graphical version of DisPass'
+        print '-h, --help      show this help and exit'
+        print '-o, --output    output passphrases to stdout (instead of the '
+        print '                more secure way of displaying via curses)'
+        print '-V, --version   show full version information and exit'
 
 def main(argv):
     try:
@@ -320,7 +339,7 @@ def main(argv):
             usage()
             sys.exit()
         elif o in ("-V", "--version"):
-            print versionStr, ' - ', __version_info__
+            print versionStr, '-', __version_info__, 'running on', os.name
             sys.exit()
         else:
             assert False, "unhandled option"
@@ -328,7 +347,13 @@ def main(argv):
     if labels:
         CLI(labels, pwTypoCheck, settings.useCurses)
     else:
-        usage()
+        if os.name == 'nt':
+            usage()
+            print '-' * 78
+            print 'Starting GUI...'
+            GUI()
+        else:
+            usage()
 
 if __name__ == '__main__':
     main(sys.argv)

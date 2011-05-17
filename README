@@ -1,8 +1,13 @@
 .. -*- restructuredtext -*-
 
-==================
-User documentation
-==================
+==============
+DisPass README
+==============
+:Author: Benjamin Althues
+:Copyright: Copyright 2011, Benjamin Althues.
+:Revision: 2
+:Date: 2011/05/17
+
 DisPass is a passphrase generator for Windows and Unix / Linux.
 You can use it to create unique passwords for logging in to websites, servers
 or any other kind of thing that requires login. 
@@ -21,9 +26,10 @@ It is a command line app, but also has a simple graphical interface.
    This is a master password that, together with the label is used to generate 
    the passphrase.
 
------------
-Downloading
------------
+
+-------------------
+Downloading DisPass
+-------------------
 DisPass is distributed in three flavors:
 
  1. The complete package with the DisPass python module, setup and 
@@ -77,33 +83,54 @@ and where to place the files of dispass on your system.
 
    No info yet.
 
+
 --------------------
 Installing (Windows)
 --------------------
 No info yet.
+
 
 ---------------------------------------
 Using the command line app (Unix/Linux)
 ---------------------------------------
 Usage::
 
-   DisPass 0.1a6  - http://babab.nl/p/dispass
+   DisPass 0.1a6(posix) - http://babab.nl/p/dispass
+
+   When DisPass is executed as 'gdispass' or 'dispass -g',
+   the graphical version will be started.
 
    USAGE: dispass [-co] label [label2] [label3] [...]
           dispass -g | -h | -V
           gdispass
 
-   -c, --create    use if this passphrase is new (2x password check)
+   Options:
+   -c, --create    use if this passphrase is new (check input PW)
    -g, --gui       start guided graphical version of DisPass
    -h, --help      show this help and exit
    -o, --output    output passphrases to stdout (instead of the 
                    more secure way of displaying via curses)
    -V, --version   show full version information and exit
 
+
 ------------------------------------
 Using the command line app (Windows)
 ------------------------------------
-No info yet.
+Usage::
+
+   DisPass 0.1a6(nt) - http://babab.nl/p/dispass
+
+   When DisPass is started without arguments, the graphical
+   version will be started. To use the command line,
+   submit one or more labels.
+
+   USAGE: dispass [options] [label] [label2] [label3] [...]
+
+   Options:
+   -c, --create    use if this passphrase is new (check input PW)
+   -h, --help      show this help and exit
+   -V, --version   show full version information and exit
+
 
 ---------------------------
 Using the graphical version
