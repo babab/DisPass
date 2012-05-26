@@ -1,5 +1,2 @@
-syntax: glob
-
 *.pyc
-snap*
 sphinx-doc/*/_build/*
