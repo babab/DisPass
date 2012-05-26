@@ -3,11 +3,11 @@
 '''Generate and disperse/dispell passwords'''
 
 # Copyright (c) 2011 Benjamin Althues <benjamin@babab.nl>
-# 
+#
 # Permission to use, copy, modify, and distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
 # copyright notice and this permission notice appear in all copies.
-# 
+#
 # THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
 # WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
 # MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
@@ -77,7 +77,7 @@ class GUI:
             print 'Debian / Ubuntu\t\t$ sudo apt-get install python-tk'
             print 'OpenBSD        \t\t# pkg_add -i python-tk'
             return
-        
+
         self.root = Tk()
         self.root.title(versionStr)
         self.createWidgets(self.root)
@@ -90,7 +90,7 @@ class GUI:
 
     def getFont(self, sizediff=0):
         '''Get `font` and `fontsize`, optionally differ from default `fontsize`
-        
+
         :Parameters:
             - `sizediff`: The difference in pt. from the default `fontsize`
 
@@ -105,7 +105,7 @@ class GUI:
 
          * soft warnings display a message in the passwordout field
          * hard warnings do the same and also display a messagebox
-        
+
         :Parameters:
             - `message`: The message string for warning the user
             - `warning_type`: Either 'soft' (default value) or 'hard'
@@ -122,9 +122,9 @@ class GUI:
 
 # GUI # Event actions
     def OnGen(self):
-        '''Check user input 
-        
-        Warn when user input is insufficient or wrong. Create digest and 
+        '''Check user input
+
+        Warn when user input is insufficient or wrong. Create digest and
         display the generated password if user input is OK.
         '''
 
@@ -181,23 +181,23 @@ class GUI:
 
         ttitle = Label(master, text=versionStr, font=self.getFont(4))
         wisnew = Checkbutton(master, height=2, font=self.getFont(),
-                text="This is a new password, that I have not used before", 
+                text="This is a new password, that I have not used before",
                 variable=self.isnew, command=self.OnNew)
         tlabel = Label(master, text='Label', font=self.getFont(2))
         tpasswordin1 = Label(master, text='Password', font=self.getFont(2))
-        tpasswordin2 = Label(master, text='Password (again)', 
+        tpasswordin2 = Label(master, text='Password (again)',
                 font=self.getFont(2))
         self.label = Entry(master, width=27, font=self.getFont())
-        self.passwordin1 = Entry(master, width=27, font=self.getFont(), 
+        self.passwordin1 = Entry(master, width=27, font=self.getFont(),
                 show="*")
-        self.passwordin2 = Entry(master, width=27, font=self.getFont(), 
+        self.passwordin2 = Entry(master, width=27, font=self.getFont(),
                 show="*", state=DISABLED)
-        genbutton = Button(master, text="Generate password", 
+        genbutton = Button(master, text="Generate password",
                 font=self.getFont(), command=self.OnGen)
-        clrbutton = Button(master, text="Clear fields", font=self.getFont(), 
+        clrbutton = Button(master, text="Clear fields", font=self.getFont(),
                 command=self.OnClear)
         self.result = Entry(master, font=self.getFont(4),
-                textvariable=self.passwordout, state="readonly", fg="black", 
+                textvariable=self.passwordout, state="readonly", fg="black",
                 readonlybackground="gray")
 
         # Layout widgets in a grid
@@ -247,7 +247,7 @@ def CLI(labels, pwTypoCheck=False, useCurses=True):
 
         while True:
             c = stdscr.getch()
-            if c == ord('q'): 
+            if c == ord('q'):
                 break
 
         curses.nocbreak()
@@ -259,9 +259,9 @@ def CLI(labels, pwTypoCheck=False, useCurses=True):
 
 def digest(message):
     '''Create and return secure hash of message
-    
+
     A secure hash/message digest formed by hashing the `message` with
-    the sha512 algorithm, encoding this hash with base64 and stripping 
+    the sha512 algorithm, encoding this hash with base64 and stripping
     it down to the first 30 characters.
 
     :Parameters:
@@ -287,23 +287,23 @@ def usage():
         print 'When DisPass is started without arguments, the graphical'
         print 'version will be started. To use the command line,'
         print 'submit one or more labels.'
-        print 
+        print
         print 'USAGE: dispass [options] [label] [label2] [label3] [...]'
-        print 
+        print
         print 'Options:'
         print '-c, --create    use if this passphrase is new (check input PW)'
         print '-h, --help      show this help and exit'
         print '-V, --version   show full version information and exit'
     else:
         print "%s(%s) - http://babab.nl/p/dispass" % (versionStr, os.name)
-        print 
+        print
         print "When DisPass is executed as 'gdispass' or 'dispass -g',"
         print 'the graphical version will be started.'
         print
         print 'USAGE: dispass [-co] label [label2] [label3] [...]'
         print '       dispass -g | -h | -V'
         print '       gdispass'
-        print 
+        print
         print 'Options:'
         print '-c, --create    use if this passphrase is new (check input PW)'
         print '-g, --gui       start guided graphical version of DisPass'
@@ -314,7 +314,7 @@ def usage():
 
 def main(argv):
     try:
-        opts, args = getopt.getopt(argv[1:], "cghoV", 
+        opts, args = getopt.getopt(argv[1:], "cghoV",
                 ["create", "gui", "help", "output", "version"])
     except getopt.GetoptError, err:
         print str(err), "\n"
@@ -330,7 +330,7 @@ def main(argv):
     for o, a in opts:
         if o in ("-g", "--gui"):
             GUI()
-            return 
+            return
         elif o in ("-c", "--create"):
             pwTypoCheck = True
         elif o in ("-o", "--output"):

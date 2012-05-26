@@ -5,7 +5,7 @@ from distutils.core import setup
 from dispass import __version__
 
 long_desc = '''
-DisPass is a cross-platform password generator you can use to create 
+DisPass is a cross-platform password generator you can use to create
 unique passwords for logging in to websites, servers
 or any other kind of thing that requires login.
 

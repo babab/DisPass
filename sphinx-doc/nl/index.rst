@@ -1,4 +1,4 @@
-.. note:: 
+.. note::
    No dutch documentation available yet
 
 .. include:: ../../README

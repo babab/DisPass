@@ -14,7 +14,7 @@
 import sys
 import os
 
-# load language from doclanguage.py 
+# load language from doclanguage.py
 sys.path.insert(0, os.path.abspath('.'))
 import doclanguage
 

@@ -10,8 +10,8 @@ DisPass README
 
 DisPass is a passphrase generator for Windows and Unix / Linux.
 You can use it to create unique passwords for logging in to websites, servers
-or any other kind of thing that requires login. 
-DisPass does not keep your passwords in a database but rather lets you 
+or any other kind of thing that requires login.
+DisPass does not keep your passwords in a database but rather lets you
 generate a unique passphrase formed from a master password and a label.
 It is a command line app, but also has a simple graphical interface.
 
@@ -23,7 +23,7 @@ It is a command line app, but also has a simple graphical interface.
 
  * password
 
-   This is a master password that, together with the label is used to generate 
+   This is a master password that, together with the label is used to generate
    the passphrase.
 
 
@@ -32,16 +32,16 @@ Downloading DisPass
 -------------------
 DisPass is distributed in three flavors:
 
- 1. The complete package with the DisPass python module, setup and 
-    runner scripts and files needed for building the 
+ 1. The complete package with the DisPass python module, setup and
+    runner scripts and files needed for building the
     (multilingual) documentation
 
  2. Single python module (dispass.py)
 
  3. Freezed application
 
-    DisPass, the Python interpreter and all dependencies freezed into 
-    one executable file. Bigger filesize, but useful on systems without 
+    DisPass, the Python interpreter and all dependencies freezed into
+    one executable file. Bigger filesize, but useful on systems without
     a supported version of Python.
 
 You can download the files from this page:
@@ -64,8 +64,8 @@ and where to place the files of dispass on your system.
  * If Python 2.5 or higher is installed on your system
 
    1. Installing with the use of Python's distutils
-      
-      Download the latest version from 
+
+      Download the latest version from
       https://bitbucket.org/babab/dispass/downloads
       Extract the archive and cd to the dispass folder.
       Now run 'python setup.py install'
@@ -76,7 +76,7 @@ and where to place the files of dispass on your system.
    2. Manual install to /usr/local/bin or a different directory
 
       The file 'dispass.py' is a single python module and it is the only file
-      you really need to use dispass. You can manually copy it to /home/bin/ or 
+      you really need to use dispass. You can manually copy it to /home/bin/ or
       /usr/local/bin/ and give it exec rights with chmod.
 
  * If Python is not installed on your system / Freezed application
@@ -108,7 +108,7 @@ Usage::
    -c, --create    use if this passphrase is new (check input PW)
    -g, --gui       start guided graphical version of DisPass
    -h, --help      show this help and exit
-   -o, --output    output passphrases to stdout (instead of the 
+   -o, --output    output passphrases to stdout (instead of the
                    more secure way of displaying via curses)
    -V, --version   show full version information and exit
 
