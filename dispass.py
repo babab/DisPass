@@ -2,7 +2,7 @@
 
 '''Generate and disperse/dispell passwords'''
 
-# Copyright (c) 2011 Benjamin Althues <benjamin@babab.nl>
+# Copyright (c) 2011-2012 Benjamin Althues <benjamin@babab.nl>
 #
 # Permission to use, copy, modify, and distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -19,7 +19,7 @@
 __docformat__ = 'restructuredtext'
 
 __author__ = "Benjamin Althues"
-__copyright__ = "Copyright (C) 2011 Benjamin Althues"
+__copyright__ = "Copyright (C) 2011-2012 Benjamin Althues"
 __version_info__ = (0, 1, 0, 'alpha', 6)
 __version__ = '0.1a6'
 
