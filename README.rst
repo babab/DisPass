@@ -1,9 +1,9 @@
 DisPass
 *******
 :Author: Benjamin Althues
-:Copyright: Copyright 2011, Benjamin Althues.
-:Revision: 2
-:Date: 2011/05/17
+:Copyright: Copyright 2011-2012, Benjamin Althues.
+:Revision: 3
+:Date: 2012/05/28
 
 DisPass is a passphrase generator for Windows and Unix / Linux.
 You can use it to create unique passwords for logging in to websites, servers
@@ -13,68 +13,43 @@ generate a unique passphrase formed from a master password and a label.
 It is a command line app, but also has a simple graphical interface.
 
 
-
-Downloading DisPass
-===================
-DisPass is distributed in three flavors:
-
- 1. The complete package with the DisPass python module, setup and
-    runner scripts and files needed for building the
-    (multilingual) documentation
-
- 2. Single python module (dispass.py)
-
- 3. Freezed application
-
-    DisPass, the Python interpreter and all dependencies freezed into
-    one executable file. Bigger filesize, but useful on systems without
-    a supported version of Python.
-
-You can download the files from this page:
-
- * https://bitbucket.org/babab/dispass/downloads
-
-For the latest development version of DisPass, download:
-
- * https://bitbucket.org/babab/dispass/get/tip.zip (zip)
- * https://bitbucket.org/babab/dispass/get/tip.tar.gz (gz)
- * https://bitbucket.org/babab/dispass/get/tip.tar.bz2 (bz2)
-
-Installing
-==========
-
-Unix/Linux/Mac
---------------
-There are multiple ways of using dispass and also several options on how
-and where to place the files of dispass on your system.
-
- * If Python 2.5 or higher is installed on your system
-
-   1. Installing with the use of Python's distutils
-
-      Download the latest version from
-      https://bitbucket.org/babab/dispass/downloads
-      Extract the archive and cd to the dispass folder.
-      Now run 'python setup.py install'
-      This will install the dispass module in python's dist-packages folder.
-      You can now run dispass using the 'dispass' and 'gdispass' scripts
-      placed under '/usr/local/bin/' or '/usr/bin/'.
-
-   2. Manual install to /usr/local/bin or a different directory
-
-      The file 'dispass.py' is a single python module and it is the only file
-      you really need to use dispass. You can manually copy it to /home/bin/ or
-      /usr/local/bin/ and give it exec rights with chmod.
-
- * If Python is not installed on your system / Freezed application
-
-   No info yet.
+Downloading/Installing
+======================
 
 
-Windows
--------
+Using pip
+---------
 
-No info yet.
+The recommended way is to download and install directly from the PyPI
+repository using pip.
+
+::
+
+   $ sudo pip install dispass
+
+You must have python's docutils installed in able to do so.
+This will install the dispass module in python's dist-packages folder.
+You can now run dispass using the 'dispass' and 'gdispass' scripts
+placed under '/usr/local/bin/' or '/usr/bin/'.
+
+PyPI project page - http://pypi.python.org/pypi/DisPass/
+
+
+Clone git repo and use setup.py
+-------------------------------
+
+::
+
+   $ git clone git://github.com/babab/dispass.git
+   $ cd dispass
+   $ sudo python setup.py install
+
+
+Single module
+-------------
+The file 'dispass.py' is a single python module and it is the only file
+you really need to use dispass. You can manually copy it to /home/bin/ or
+/usr/local/bin/ and give it exec rights with chmod.
 
 
 Using the command line app
@@ -97,7 +72,7 @@ Unix/Linux/Mac
 
 ::
 
-   DisPass 0.1a6(posix) - http://babab.nl/p/dispass
+   DisPass 0.1(posix) - http://dispass.babab.nl/
 
    When DisPass is executed as 'gdispass' or 'dispass -g',
    the graphical version will be started.
@@ -120,7 +95,7 @@ Windows
 
 ::
 
-   DisPass 0.1a6(nt) - http://babab.nl/p/dispass
+   DisPass 0.1(nt) - http://dispass.babab.nl/
 
    When DisPass is started without arguments, the graphical
    version will be started. To use the command line,
@@ -143,7 +118,7 @@ No info yet.
 Software license
 ****************
 
-Copyright (c) 2011 Benjamin Althues <benjamin@babab.nl>
+Copyright (c) 2011-2012 Benjamin Althues <benjamin@babab.nl>
 
 Permission to use, copy, modify, and distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
