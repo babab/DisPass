@@ -1,5 +1,3 @@
-.. -*- restructuredtext -*-
-
 DisPass
 *******
 :Author: Benjamin Althues

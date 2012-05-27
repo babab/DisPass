@@ -1,7 +1,7 @@
 .. note::
    No dutch documentation available yet
 
-.. include:: ../../README
+.. include:: ../../README.rst
 
 .. toctree::
    :maxdepth: 2
