@@ -1,8 +1,7 @@
 .. -*- restructuredtext -*-
 
-==============
-DisPass README
-==============
+DisPass
+*******
 :Author: Benjamin Althues
 :Copyright: Copyright 2011, Benjamin Althues.
 :Revision: 2
@@ -15,21 +14,10 @@ DisPass does not keep your passwords in a database but rather lets you
 generate a unique passphrase formed from a master password and a label.
 It is a command line app, but also has a simple graphical interface.
 
- * label
-
-   The label is a string that you use to identify the password.
-   i.e. this can be a domainname of the service the password is used for
-   like 'google.com'.
-
- * password
-
-   This is a master password that, together with the label is used to generate
-   the passphrase.
 
 
--------------------
 Downloading DisPass
--------------------
+===================
 DisPass is distributed in three flavors:
 
  1. The complete package with the DisPass python module, setup and
@@ -54,10 +42,11 @@ For the latest development version of DisPass, download:
  * https://bitbucket.org/babab/dispass/get/tip.tar.gz (gz)
  * https://bitbucket.org/babab/dispass/get/tip.tar.bz2 (bz2)
 
+Installing
+==========
 
------------------------
-Installing (Unix/Linux)
------------------------
+Unix/Linux/Mac
+--------------
 There are multiple ways of using dispass and also several options on how
 and where to place the files of dispass on your system.
 
@@ -84,16 +73,31 @@ and where to place the files of dispass on your system.
    No info yet.
 
 
---------------------
-Installing (Windows)
---------------------
+Windows
+-------
+
 No info yet.
 
 
----------------------------------------
-Using the command line app (Unix/Linux)
----------------------------------------
-Usage::
+Using the command line app
+==========================
+
+**label**
+
+The label is a string that you use to identify the password.
+i.e. this can be a domainname of the service the password is used for
+like 'google.com'.
+
+**password**
+
+This is a master password that, together with the label is used to generate
+the passphrase.
+
+
+Unix/Linux/Mac
+--------------
+
+::
 
    DisPass 0.1a6(posix) - http://babab.nl/p/dispass
 
@@ -113,10 +117,10 @@ Usage::
    -V, --version   show full version information and exit
 
 
-------------------------------------
-Using the command line app (Windows)
-------------------------------------
-Usage::
+Windows
+-------
+
+::
 
    DisPass 0.1a6(nt) - http://babab.nl/p/dispass
 
@@ -132,15 +136,15 @@ Usage::
    -V, --version   show full version information and exit
 
 
----------------------------
 Using the graphical version
 ---------------------------
+
 No info yet.
 
 
-================
 Software license
-================
+****************
+
 Copyright (c) 2011 Benjamin Althues <benjamin@babab.nl>
 
 Permission to use, copy, modify, and distribute this software for any
