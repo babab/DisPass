@@ -41,7 +41,6 @@ import getopt
 import getpass
 import hashlib
 import os
-import re
 import sys
 
 # Python stdlib - optional
