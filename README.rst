@@ -2,7 +2,6 @@ DisPass
 *******
 :Author: Benjamin Althues
 :Copyright: Copyright 2011-2012, Benjamin Althues.
-:Revision: 3
 :Date: 2012/05/28
 
 DisPass is a passphrase generator for Windows and Unix / Linux.
@@ -17,8 +16,8 @@ Downloading/Installing
 ======================
 
 
-Using pip
----------
+Using pip to download from the Python Package Index
+---------------------------------------------------
 
 The recommended way is to download and install directly from the PyPI
 repository using pip.
@@ -32,24 +31,41 @@ This will install the dispass module in python's dist-packages folder.
 You can now run dispass using the 'dispass' and 'gdispass' scripts
 placed under '/usr/local/bin/' or '/usr/bin/'.
 
-PyPI project page - http://pypi.python.org/pypi/DisPass/
+The PyPI project page is at http://pypi.python.org/pypi/DisPass/
 
 
-Clone git repo and use setup.py
--------------------------------
+Latest (development) version
+----------------------------
 
-::
+Clone git repo::
 
-   $ git clone git://github.com/babab/dispass.git
+   $ git clone git://github.com/babab/DisPass.git
    $ cd dispass
+
+Then you can either
+
+1. Install through pip::
+
+   $ python setup.py sdist
+   $ sudo pip install doc/
+
+
+2. Install manually::
+
    $ sudo python setup.py install
 
 
-Single module
--------------
-The file 'dispass.py' is a single python module and it is the only file
-you really need to use dispass. You can manually copy it to /home/bin/ or
-/usr/local/bin/ and give it exec rights with chmod.
+Update or uninstall
+===================
+
+You can easily upgrade to newer versions using pip::
+
+   $ sudo pip install dispass --upgrade
+
+If you have installed dispass using pip with,
+you can easily uninstall at any moment::
+
+   $ sudo pip uninstall dispass
 
 
 Using the command line app
@@ -110,13 +126,13 @@ Windows
 
 
 Using the graphical version
----------------------------
+===========================
 
 No info yet.
 
 
 Software license
-****************
+================
 
 Copyright (c) 2011-2012 Benjamin Althues <benjamin@babab.nl>
 
