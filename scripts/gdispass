@@ -17,7 +17,7 @@
 
 import sys
 
-import dispass
+from dispass import dispass
 
 if __name__ == '__main__':
     dispass.GUI()

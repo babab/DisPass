@@ -2,7 +2,7 @@
 
 from distutils.core import setup
 
-from dispass import __version__
+from dispass.dispass import __version__
 
 long_desc = '''
 DisPass is a cross-platform password generator you can use to create
@@ -21,7 +21,7 @@ setup(
     author_email='benjamin@babab.nl',
     url='http://pypi.python.org/pypi/DisPass/',
     download_url='http://bitbucket.org/babab/dispass',
-    py_modules = ['dispass'],
+    packages = ['dispass'],
     license='ISC',
     long_description=long_desc,
     platforms='any',
