@@ -20,8 +20,8 @@ __docformat__ = 'restructuredtext'
 
 __author__ = "Benjamin Althues"
 __copyright__ = "Copyright (C) 2011-2012 Benjamin Althues"
-__version_info__ = (0, 1, 0, 'alpha', 6)
-__version__ = '0.1a6'
+__version_info__ = (0, 1, 0, 'alpha', 7)
+__version__ = '0.1a7'
 
 versionStr = 'DisPass ' + __version__
 
@@ -281,7 +281,7 @@ def digest(message):
 
 def usage():
     if os.name == 'nt':
-        print "%s(nt) - http://babab.nl/p/dispass" % versionStr
+        print "%s(nt) - http://dispass.babab.nl/" % versionStr
         print
         print 'When DisPass is started without arguments, the graphical'
         print 'version will be started. To use the command line,'
@@ -294,7 +294,7 @@ def usage():
         print '-h, --help      show this help and exit'
         print '-V, --version   show full version information and exit'
     else:
-        print "%s(%s) - http://babab.nl/p/dispass" % (versionStr, os.name)
+        print "%s(%s) - http://dispass.babab.nl/" % (versionStr, os.name)
         print
         print "When DisPass is executed as 'gdispass' or 'dispass -g',"
         print 'the graphical version will be started.'
