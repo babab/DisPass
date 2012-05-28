@@ -47,7 +47,7 @@ Then you can either
 1. Install through pip::
 
    $ python setup.py sdist
-   $ sudo pip install doc/
+   $ sudo pip install dist/DisPass-0.1a7.tar.gz
 
 
 2. Install manually::
