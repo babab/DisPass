@@ -19,7 +19,7 @@ setup(
     description='Generate and disperse/dispell passwords',
     author='Benjamin Althues',
     author_email='benjamin@babab.nl',
-    url='http://babab.nl/projects/dispass/',
+    url='http://pypi.python.org/pypi/DisPass/',
     download_url='http://bitbucket.org/babab/dispass',
     py_modules = ['dispass'],
     license='ISC',
