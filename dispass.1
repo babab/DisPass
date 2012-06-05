@@ -1,0 +1,311 @@
+.TH "DISPASS" "1" "June 05, 2012" "0.1" "DisPass"
+.SH NAME
+dispass \- DisPass Documentation
+.
+.nr rst2man-indent-level 0
+.
+.de1 rstReportMargin
+\\$1 \\n[an-margin]
+level \\n[rst2man-indent-level]
+level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
+-
+\\n[rst2man-indent0]
+\\n[rst2man-indent1]
+\\n[rst2man-indent2]
+..
+.de1 INDENT
+.\" .rstReportMargin pre:
+. RS \\$1
+. nr rst2man-indent\\n[rst2man-indent-level] \\n[an-margin]
+. nr rst2man-indent-level +1
+.\" .rstReportMargin post:
+..
+.de UNINDENT
+. RE
+.\" indent \\n[an-margin]
+.\" old: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.nr rst2man-indent-level -1
+.\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.in \\n[rst2man-indent\\n[rst2man-indent-level]]u
+..
+.
+.sp
+DisPass is a passphrase generator for Windows and Unix / Linux.
+You can use it to create unique passwords for logging in to websites, servers
+or any other kind of thing that requires login.
+DisPass does not keep your passwords in a database but rather lets you
+generate a unique passphrase formed from a master password and a label.
+It is a command line app, but also has a simple graphical interface.
+.SH DOWNLOADING/INSTALLING
+.SS Using pip to download from the Python Package Index
+.sp
+The recommended way is to download and install directly from the PyPI
+repository using pip.
+.sp
+.nf
+.ft C
+$ sudo pip install dispass
+.ft P
+.fi
+.sp
+You must have python\(aqs docutils installed in able to do so.
+This will install the dispass module in python\(aqs dist\-packages folder.
+You can now run dispass using the \(aqdispass\(aq and \(aqgdispass\(aq scripts
+placed under \(aq/usr/local/bin/\(aq or \(aq/usr/bin/\(aq.
+.sp
+The PyPI project page is at \fI\%http://pypi.python.org/pypi/DisPass/\fP
+.SS Latest (development) version
+.sp
+Clone git repo:
+.sp
+.nf
+.ft C
+$ git clone git://github.com/babab/DisPass.git
+$ cd dispass
+.ft P
+.fi
+.sp
+Then you can either
+.INDENT 0.0
+.IP 1. 3
+Install through pip:
+.sp
+.nf
+.ft C
+$ python setup.py sdist
+$ sudo pip install dist/DisPass\-0.1a7.tar.gz
+.ft P
+.fi
+.IP 2. 3
+Install manually:
+.sp
+.nf
+.ft C
+$ sudo python setup.py install
+.ft P
+.fi
+.UNINDENT
+.SH UPDATE OR UNINSTALL
+.sp
+You can easily upgrade to newer versions using pip:
+.sp
+.nf
+.ft C
+$ sudo pip install dispass \-\-upgrade
+.ft P
+.fi
+.sp
+If you have installed dispass using pip with,
+you can easily uninstall at any moment:
+.sp
+.nf
+.ft C
+$ sudo pip uninstall dispass
+.ft P
+.fi
+.SH USING THE COMMAND LINE APP
+.sp
+\fBlabel\fP
+.sp
+The label is a string that you use to identify the password.
+i.e. this can be a domainname of the service the password is used for
+like \(aqgoogle.com\(aq.
+.sp
+\fBpassword\fP
+.sp
+This is a master password that, together with the label is used to generate
+the passphrase.
+.SS Unix/Linux/Mac
+.sp
+.nf
+.ft C
+DisPass 0.1(posix) \- http://dispass.babab.nl/
+
+When DisPass is executed as \(aqgdispass\(aq or \(aqdispass \-g\(aq,
+the graphical version will be started.
+
+USAGE: dispass [\-co] label [label2] [label3] [...]
+       dispass \-g | \-h | \-V
+       gdispass
+
+Options:
+\-c, \-\-create    use if this passphrase is new (check input PW)
+\-g, \-\-gui       start guided graphical version of DisPass
+\-h, \-\-help      show this help and exit
+\-o, \-\-output    output passphrases to stdout (instead of the
+                more secure way of displaying via curses)
+\-V, \-\-version   show full version information and exit
+.ft P
+.fi
+.SS Windows
+.sp
+.nf
+.ft C
+DisPass 0.1(nt) \- http://dispass.babab.nl/
+
+When DisPass is started without arguments, the graphical
+version will be started. To use the command line,
+submit one or more labels.
+
+USAGE: dispass [options] [label] [label2] [label3] [...]
+
+Options:
+\-c, \-\-create    use if this passphrase is new (check input PW)
+\-h, \-\-help      show this help and exit
+\-V, \-\-version   show full version information and exit
+.ft P
+.fi
+.SH USING THE GRAPHICAL VERSION
+.sp
+No info yet.
+.SH SOFTWARE LICENSE
+.sp
+Copyright (c) 2011\-2012 Benjamin Althues <\fI\%benjamin@babab.nl\fP>
+.sp
+Permission to use, copy, modify, and distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+.sp
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+.SS Developer documentation
+.SS Reference
+.sp
+Generate and disperse/dispell passwords
+.INDENT 0.0
+.TP
+.B class dispass.dispass.GUI
+Houses all GUI related objects and interactions
+.INDENT 7.0
+.TP
+.B OnClear()
+Clear all input fields
+.UNINDENT
+.INDENT 7.0
+.TP
+.B OnGen()
+Check user input
+.sp
+Warn when user input is insufficient or wrong. Create digest and
+display the generated password if user input is OK.
+.UNINDENT
+.INDENT 7.0
+.TP
+.B OnNew()
+Toggle double checking of input password
+.UNINDENT
+.INDENT 7.0
+.TP
+.B createWidgets(master)
+Create and align widgets
+.UNINDENT
+.INDENT 7.0
+.TP
+.B font = \(aqVerdana\(aq
+Default font (Verdana)
+.UNINDENT
+.INDENT 7.0
+.TP
+.B fontsize = 10
+Default fontsize (10 pt.)
+.UNINDENT
+.INDENT 7.0
+.TP
+.B getFont(sizediff=0)
+Get \fIfont\fP and \fIfontsize\fP, optionally differ from default \fIfontsize\fP
+.INDENT 7.0
+.TP
+.B Parameters
+.INDENT 7.0
+.IP \(bu 2
+\fIsizediff\fP: The difference in pt. from the default \fIfontsize\fP
+.UNINDENT
+.TP
+.B Return
+.INDENT 7.0
+.IP \(bu 2
+Tuple of (\fIfont\fP, \fIfontsize\fP) to be used when creating widgets
+.UNINDENT
+.UNINDENT
+.UNINDENT
+.INDENT 7.0
+.TP
+.B setFont()
+Set font and fontsize
+.UNINDENT
+.INDENT 7.0
+.TP
+.B warn(message, warning_type=\(aqsoft\(aq, box_title=\(aq\(aq)
+Prototype for warning user
+.INDENT 7.0
+.INDENT 3.5
+.INDENT 0.0
+.IP \(bu 2
+soft warnings display a message in the passwordout field
+.IP \(bu 2
+hard warnings do the same and also display a messagebox
+.UNINDENT
+.UNINDENT
+.UNINDENT
+.INDENT 7.0
+.TP
+.B Parameters
+.INDENT 7.0
+.IP \(bu 2
+\fImessage\fP: The message string for warning the user
+.IP \(bu 2
+\fIwarning_type\fP: Either \(aqsoft\(aq (default value) or \(aqhard\(aq
+.IP \(bu 2
+\fIbox_title\fP: Optional title for tkMessageBox on hard warnings
+.UNINDENT
+.UNINDENT
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.TP
+.B dispass.dispass.digest(message)
+Create and return secure hash of message
+.sp
+A secure hash/message digest formed by hashing the \fImessage\fP with
+the sha512 algorithm, encoding this hash with base64 and stripping
+it down to the first 30 characters.
+.INDENT 7.0
+.TP
+.B Parameters
+.INDENT 7.0
+.IP \(bu 2
+\fImessage\fP: The string from which to form the digest
+.UNINDENT
+.TP
+.B Return
+.INDENT 7.0
+.IP \(bu 2
+The secure hash of \fImessage\fP
+.UNINDENT
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.TP
+.B class dispass.dispass.globalSettings
+Global settings used in controlling program flow
+.INDENT 7.0
+.TP
+.B hasTk = None
+False if Tkinter could not be imported
+.UNINDENT
+.INDENT 7.0
+.TP
+.B useCurses = None
+Switch passphrase output to stdout if not True
+.UNINDENT
+.UNINDENT
+.SH AUTHOR
+Benjamin Althues
+.SH COPYRIGHT
+2011-2012, Benjamin Althues
+.
