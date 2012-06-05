@@ -7,7 +7,7 @@ Developer documentation
 
 Reference
 ---------
-.. automodule:: dispass
+.. automodule:: dispass.dispass
    :members:
 
 .. vim: set et ts=3 sw=3 sts=3 ai:
