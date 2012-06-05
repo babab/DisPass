@@ -1,8 +1,5 @@
 DisPass
-*******
-:Author: Benjamin Althues
-:Copyright: Copyright 2011-2012, Benjamin Althues.
-:Date: 2012/05/28
+******************************************************************************
 
 DisPass is a passphrase generator for Windows and Unix / Linux.
 You can use it to create unique passwords for logging in to websites, servers
@@ -13,7 +10,7 @@ It is a command line app, but also has a simple graphical interface.
 
 
 Downloading/Installing
-======================
+==============================================================================
 
 
 Using pip to download from the Python Package Index
@@ -56,7 +53,7 @@ Then you can either
 
 
 Update or uninstall
-===================
+==============================================================================
 
 You can easily upgrade to newer versions using pip::
 
@@ -69,7 +66,7 @@ you can easily uninstall at any moment::
 
 
 Using the command line app
-==========================
+==============================================================================
 
 **label**
 
@@ -126,13 +123,13 @@ Windows
 
 
 Using the graphical version
-===========================
+==============================================================================
 
 No info yet.
 
 
 Software license
-================
+==============================================================================
 
 Copyright (c) 2011-2012 Benjamin Althues <benjamin@babab.nl>
 
