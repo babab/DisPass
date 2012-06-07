@@ -114,20 +114,6 @@ def digest(message):
     return str(r)
 
 def usage():
-    if os.name == 'nt':
-        print "%s(nt) - http://dispass.babab.nl/" % versionStr
-        print
-        print 'When DisPass is started without arguments, the graphical'
-        print 'version will be started. To use the command line,'
-        print 'submit one or more labels.'
-        print
-        print 'USAGE: dispass [options] [label] [label2] [label3] [...]'
-        print
-        print 'Options:'
-        print '-c, --create    use if this passphrase is new (check input PW)'
-        print '-h, --help      show this help and exit'
-        print '-V, --version   show full version information and exit'
-    else:
         print "%s(%s) - http://dispass.babab.nl/" % (versionStr, os.name)
         print
         print "When DisPass is executed as 'gdispass' or 'dispass -g',"
@@ -180,13 +166,7 @@ def main(argv):
     if labels:
         CLI(labels, pwTypoCheck, settings.useCurses)
     else:
-        if os.name == 'nt':
-            usage()
-            print '-' * 78
-            print 'Starting GUI...'
-            GUI()
-        else:
-            usage()
+        usage()
 
 if __name__ == '__main__':
     main(sys.argv)
