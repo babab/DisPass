@@ -1,4 +1,4 @@
-.TH "DISPASS" "1" "June 05, 2012" "0.1" "DisPass"
+.TH "DISPASS" "1" "June 07, 2012" "0.1" "DisPass"
 .SH NAME
 dispass \- DisPass Documentation
 .
@@ -37,6 +37,8 @@ DisPass does not keep your passwords in a database but rather lets you
 generate a unique passphrase formed from a master password and a label.
 It is a command line app, but also has a simple graphical interface.
 .SH DOWNLOADING/INSTALLING
+.sp
+A recent version of Python 2 is required for running dispass.
 .SS Using pip to download from the Python Package Index
 .sp
 The recommended way is to download and install directly from the PyPI
@@ -115,7 +117,6 @@ like \(aqgoogle.com\(aq.
 .sp
 This is a master password that, together with the label is used to generate
 the passphrase.
-.SS Unix/Linux/Mac
 .sp
 .nf
 .ft C
@@ -134,24 +135,6 @@ Options:
 \-h, \-\-help      show this help and exit
 \-o, \-\-output    output passphrases to stdout (instead of the
                 more secure way of displaying via curses)
-\-V, \-\-version   show full version information and exit
-.ft P
-.fi
-.SS Windows
-.sp
-.nf
-.ft C
-DisPass 0.1(nt) \- http://dispass.babab.nl/
-
-When DisPass is started without arguments, the graphical
-version will be started. To use the command line,
-submit one or more labels.
-
-USAGE: dispass [options] [label] [label2] [label3] [...]
-
-Options:
-\-c, \-\-create    use if this passphrase is new (check input PW)
-\-h, \-\-help      show this help and exit
 \-V, \-\-version   show full version information and exit
 .ft P
 .fi
@@ -174,12 +157,49 @@ WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
 ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 .SS Developer documentation
-.SS Reference
 .sp
 Generate and disperse/dispell passwords
 .INDENT 0.0
 .TP
-.B class dispass.dispass.GUI
+.B dispass.dispass.digest(message)
+Create and return secure hash of message
+.sp
+A secure hash/message digest formed by hashing the \fImessage\fP with
+the sha512 algorithm, encoding this hash with base64 and stripping
+it down to the first 30 characters.
+.INDENT 7.0
+.TP
+.B Parameters
+.INDENT 7.0
+.IP \(bu 2
+\fImessage\fP: The string from which to form the digest
+.UNINDENT
+.TP
+.B Return
+.INDENT 7.0
+.IP \(bu 2
+The secure hash of \fImessage\fP
+.UNINDENT
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.TP
+.B class dispass.dispass.globalSettings
+Global settings used in controlling program flow
+.INDENT 7.0
+.TP
+.B hasTk = None
+False if Tkinter could not be imported
+.UNINDENT
+.INDENT 7.0
+.TP
+.B useCurses = None
+Switch passphrase output to stdout if not True
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.TP
+.B class dispass.gui.GUI
 Houses all GUI related objects and interactions
 .INDENT 7.0
 .TP
@@ -264,44 +284,6 @@ hard warnings do the same and also display a messagebox
 \fIbox_title\fP: Optional title for tkMessageBox on hard warnings
 .UNINDENT
 .UNINDENT
-.UNINDENT
-.UNINDENT
-.INDENT 0.0
-.TP
-.B dispass.dispass.digest(message)
-Create and return secure hash of message
-.sp
-A secure hash/message digest formed by hashing the \fImessage\fP with
-the sha512 algorithm, encoding this hash with base64 and stripping
-it down to the first 30 characters.
-.INDENT 7.0
-.TP
-.B Parameters
-.INDENT 7.0
-.IP \(bu 2
-\fImessage\fP: The string from which to form the digest
-.UNINDENT
-.TP
-.B Return
-.INDENT 7.0
-.IP \(bu 2
-The secure hash of \fImessage\fP
-.UNINDENT
-.UNINDENT
-.UNINDENT
-.INDENT 0.0
-.TP
-.B class dispass.dispass.globalSettings
-Global settings used in controlling program flow
-.INDENT 7.0
-.TP
-.B hasTk = None
-False if Tkinter could not be imported
-.UNINDENT
-.INDENT 7.0
-.TP
-.B useCurses = None
-Switch passphrase output to stdout if not True
 .UNINDENT
 .UNINDENT
 .SH AUTHOR
