@@ -1,4 +1,4 @@
-DisPass
+User Documentation
 ******************************************************************************
 
 DisPass is a passphrase generator for Windows and Unix / Linux.
@@ -11,6 +11,8 @@ It is a command line app, but also has a simple graphical interface.
 
 Downloading/Installing
 ==============================================================================
+
+A recent version of Python 2 is required for running dispass.
 
 
 Using pip to download from the Python Package Index
@@ -79,10 +81,6 @@ like 'google.com'.
 This is a master password that, together with the label is used to generate
 the passphrase.
 
-
-Unix/Linux/Mac
---------------
-
 ::
 
    DisPass 0.1(posix) - http://dispass.babab.nl/
@@ -102,24 +100,6 @@ Unix/Linux/Mac
                    more secure way of displaying via curses)
    -V, --version   show full version information and exit
 
-
-Windows
--------
-
-::
-
-   DisPass 0.1(nt) - http://dispass.babab.nl/
-
-   When DisPass is started without arguments, the graphical
-   version will be started. To use the command line,
-   submit one or more labels.
-
-   USAGE: dispass [options] [label] [label2] [label3] [...]
-
-   Options:
-   -c, --create    use if this passphrase is new (check input PW)
-   -h, --help      show this help and exit
-   -V, --version   show full version information and exit
 
 
 Using the graphical version
