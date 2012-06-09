@@ -21,69 +21,12 @@ __version_info__ = (0, 1, 0, 'alpha', 7)
 __version__ = '0.1a7'
 versionStr = 'DisPass ' + __version__
 
-class globalSettings:
-    '''Global settings used in controlling program flow'''
-    useCurses = None
-    '''Switch passphrase output to stdout if not True'''
-
-    hasTk = None
-    '''False if Tkinter could not be imported'''
-
-settings = globalSettings()
-
 import getopt
-import getpass
 import os
 import sys
 
-try:
-    import curses
-    settings.useCurses = True
-except ImportError:
-    settings.useCurses = False
-
-import digest
+import cli
 import gui
-
-def CLI(labels, pwTypoCheck=False, useCurses=True):
-    while True:
-        inp = getpass.getpass()
-        if pwTypoCheck:
-            inp2 = getpass.getpass("Again:")
-            if inp == inp2:
-                break;
-            else:
-                print "Passwords do not match. Please try again."
-        else:
-            break
-
-    if useCurses:
-        stdscr = curses.initscr()
-        curses.noecho()
-        curses.cbreak()
-
-        stdscr.addstr(0, 0, versionStr + " - press 'q' to quit", curses.A_BOLD)
-        stdscr.addstr(1, 0, "Your passphrase(s)", curses.A_BOLD)
-        divlen = len(max(labels, key=len)) + 2
-        j = 3
-        for i in labels:
-            stdscr.addstr(j,  0, i, curses.A_BOLD)
-            stdscr.addstr(j, divlen, digest.digest(i + inp), curses.A_REVERSE)
-            j += 1
-        del inp
-        stdscr.refresh()
-
-        while True:
-            c = stdscr.getch()
-            if c == ord('q'):
-                break
-
-        curses.nocbreak()
-        curses.echo()
-        curses.endwin()
-    else:
-        for i in labels:
-            print "%25s %s" % (i, digest.digest(i + inp))
 
 def usage():
         print "%s(%s) - http://dispass.babab.nl/" % (versionStr, os.name)
@@ -104,6 +47,8 @@ def usage():
         print '-V, --version   show full version information and exit'
 
 def main(argv):
+    commandLineIf = cli.CLI()
+
     try:
         opts, args = getopt.getopt(argv[1:], "cghoV",
                 ["create", "gui", "help", "output", "version"])
@@ -125,7 +70,7 @@ def main(argv):
         elif o in ("-c", "--create"):
             pwTypoCheck = True
         elif o in ("-o", "--output"):
-            settings.useCurses = False
+            commandLineIf.setCurses(False)
         elif o in ("-h", "--help"):
             usage()
             sys.exit()
@@ -136,7 +81,7 @@ def main(argv):
             assert False, "unhandled option"
 
     if labels:
-        CLI(labels, pwTypoCheck, settings.useCurses)
+        commandLineIf.interactive(labels, pwTypoCheck)
     else:
         usage()
 
