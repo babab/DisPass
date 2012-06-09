@@ -29,7 +29,7 @@ import cli
 import gui
 
 def usage():
-        print "%s(%s) - http://dispass.babab.nl/" % (versionStr, os.name)
+        print "%s - http://dispass.babab.nl/" % (versionStr)
         print
         print "When DisPass is executed as 'gdispass' or 'dispass -g',"
         print 'the graphical version will be started.'
