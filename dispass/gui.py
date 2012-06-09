@@ -54,7 +54,7 @@ class GUI:
 
 # GUI # Setters and getters
     def setFont(self):
-        '''Set font and fontsize'''
+        '''Set font and fontsize; not used at this moment'''
         pass
 
     def getFont(self, sizediff=0):
@@ -64,8 +64,9 @@ class GUI:
             - `sizediff`: The difference in pt. from the default `fontsize`
 
         :Return:
-            - Tuple of (`font`, `fontsize`) to be used when creating widgets
+            - Tuple of `(font, fontsize)` to be used when creating widgets
         '''
+
         return (self.font, self.fontsize + sizediff)
 
 # GUI # Prototypes
@@ -80,6 +81,7 @@ class GUI:
             - `warning_type`: Either 'soft' (default value) or 'hard'
             - `box_title`: Optional title for tkMessageBox on hard warnings
         '''
+
         if warning_type == 'soft' or warning_type == 'hard':
             self.result.config(fg="black", readonlybackground="red")
             self.passwordout.set('- ' + message + ' -')
@@ -90,7 +92,7 @@ class GUI:
             tkMessageBox.showwarning(box_title, message)
 
 # GUI # Event actions
-    def OnGen(self):
+    def validateAndShow(self):
         '''Check user input
 
         Warn when user input is insufficient or wrong. Create digest and
@@ -122,8 +124,9 @@ class GUI:
         self.result.config(fg="black", readonlybackground="green")
         self.passwordout.set(h)
 
-    def OnNew(self):
-        '''Toggle double checking of input password'''
+    def toggleCheck(self):
+        '''Toggle checking of input password'''
+
         if self.isnew.get() == 0:
             # Disable double check (default)
             self.passwordin2.delete(0, END)
@@ -132,8 +135,9 @@ class GUI:
             # Password is new, allow for double checking passwordin
             self.passwordin2.config(state=NORMAL)
 
-    def OnClear(self):
+    def clearInput(self):
         '''Clear all input fields'''
+
         self.label.delete(0, END)
         self.passwordin1.delete(0, END)
         self.passwordin2.delete(0, END)
@@ -151,7 +155,7 @@ class GUI:
         ttitle = Label(master, text=versionStr, font=self.getFont(4))
         wisnew = Checkbutton(master, height=2, font=self.getFont(),
                 text="This is a new password, that I have not used before",
-                variable=self.isnew, command=self.OnNew)
+                variable=self.isnew, command=self.toggleCheck)
         tlabel = Label(master, text='Label', font=self.getFont(2))
         tpasswordin1 = Label(master, text='Password', font=self.getFont(2))
         tpasswordin2 = Label(master, text='Password (again)',
@@ -162,9 +166,9 @@ class GUI:
         self.passwordin2 = Entry(master, width=27, font=self.getFont(),
                 show="*", state=DISABLED)
         genbutton = Button(master, text="Generate password",
-                font=self.getFont(), command=self.OnGen)
+                font=self.getFont(), command=self.validateAndShow)
         clrbutton = Button(master, text="Clear fields", font=self.getFont(),
-                command=self.OnClear)
+                command=self.clearInput)
         self.result = Entry(master, font=self.getFont(4),
                 textvariable=self.passwordout, state="readonly", fg="black",
                 readonlybackground="gray")
