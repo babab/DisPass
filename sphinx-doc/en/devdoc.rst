@@ -1,12 +1,30 @@
 Developer documentation
-=======================
+******************************************************************************
 
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
 
+dispass.dispass
+==============================================================================
+
 .. automodule:: dispass.dispass
    :members:
+
+dispass.cli
+==============================================================================
+
+.. automodule:: dispass.cli
+   :members:
+
+dispass.digest
+==============================================================================
+
+.. automodule:: dispass.digest
+   :members:
+
+dispass.gui
+==============================================================================
 
 .. automodule:: dispass.gui
    :members:

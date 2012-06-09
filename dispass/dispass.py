@@ -29,6 +29,8 @@ import cli
 import gui
 
 def usage():
+        '''Print help / usage information'''
+
         print "%s - http://dispass.babab.nl/" % (versionStr)
         print
         print "When DisPass is executed as 'gdispass' or 'dispass -g',"
@@ -47,6 +49,12 @@ def usage():
         print '-V, --version   show full version information and exit'
 
 def main(argv):
+    '''Entry point and handler of command options and arguments
+
+    :Parameters:
+        - `argv`: List of command arguments
+    '''
+
     commandLineIf = cli.CLI()
 
     try:

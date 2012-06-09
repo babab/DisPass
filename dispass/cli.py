@@ -24,16 +24,36 @@ except ImportError:
     hasCurses = False
 
 class CLI:
+    '''Command Line Interface handling'''
+
     def __init__(self):
+        '''Set `useCurses` to True or False.
+
+        Depending on the availability of curses
+        '''
+
         self.useCurses = hasCurses
 
     def setCurses(self, useCurses):
+        '''Optionally override `self.useCurses`
+
+        :Parameters:
+            - `useCurses`: Boolean
+        '''
+
         if useCurses and not hasCurses:
             self.useCurses = False
         else:
             self.useCurses = useCurses
 
     def interactive(self, labels, pwTypoCheck=False):
+        '''Start interactive prompt, generating and showing the passprase(s)
+
+        :Parameters:
+            - `labels`: List of labels to use for passprase generation
+            - `pwTypoCheck`: Boolean. Prompt 2x and compare passwords
+        '''
+
         while True:
             inp = getpass.getpass()
             if pwTypoCheck:
