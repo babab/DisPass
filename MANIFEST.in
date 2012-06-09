@@ -1,2 +1,3 @@
 include dispass.1 LICENSE README.rst
 recursive-include scripts dispass
+include emacs/dispass.el
