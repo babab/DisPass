@@ -21,6 +21,8 @@ except ImportError:
 
 import dispass
 
+versionStr = 'g%s' % dispass.versionStr
+
 class GUI:
     '''Houses all GUI related objects and interactions'''
 
@@ -46,7 +48,7 @@ class GUI:
             return
 
         self.root = Tk()
-        self.root.title(dispass.versionStr)
+        self.root.title(versionStr)
         self.createWidgets(self.root)
         self.root.mainloop()
 
@@ -146,7 +148,7 @@ class GUI:
         self.passwordout.set('- No password generated -')
         self.isnew = IntVar()
 
-        ttitle = Label(master, text=dispass.versionStr, font=self.getFont(4))
+        ttitle = Label(master, text=versionStr, font=self.getFont(4))
         wisnew = Checkbutton(master, height=2, font=self.getFont(),
                 text="This is a new password, that I have not used before",
                 variable=self.isnew, command=self.OnNew)
