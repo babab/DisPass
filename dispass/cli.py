@@ -26,6 +26,10 @@ except ImportError:
 class CLI:
     '''Command Line Interface handling'''
 
+    passphraseLength = 30
+    '''Length of output passphrase, default is 30'''
+
+
     def __init__(self):
         '''Set `useCurses` to True or False.
 
@@ -46,11 +50,21 @@ class CLI:
         else:
             self.useCurses = useCurses
 
+    def setLength(self, length):
+        '''Optionally override length of output passphrase
+
+        :Parameters:
+            - `length`: Integer. Length of output passphrase
+        '''
+
+        self.passphraseLength = length
+
     def interactive(self, labels, pwTypoCheck=False):
         '''Start interactive prompt, generating and showing the passprase(s)
 
         :Parameters:
             - `labels`: List of labels to use for passprase generation
+            - `length`: Integer. The length of output passphrase
             - `pwTypoCheck`: Boolean. Prompt 2x and compare passwords
         '''
 
@@ -77,7 +91,8 @@ class CLI:
             j = 3
             for i in labels:
                 stdscr.addstr(j,  0, i, curses.A_BOLD)
-                stdscr.addstr(j, divlen, digest.digest(i + inp),
+                stdscr.addstr(j, divlen,
+                        digest.digest(i + inp, self.passphraseLength),
                         curses.A_REVERSE)
                 j += 1
             del inp
@@ -93,4 +108,5 @@ class CLI:
             curses.endwin()
         else:
             for i in labels:
-                print "%25s %s" % (i, digest.digest(i + inp))
+                print "%25s %s" % (i,
+                        digest.digest(i + inp, self.passphraseLength))

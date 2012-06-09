@@ -15,25 +15,23 @@
 import base64
 import hashlib
 
-def digest(message):
+def digest(message, length=30):
     '''Create and return secure hash of message
 
     A secure hash/message digest formed by hashing the `message` with
     the sha512 algorithm, encoding this hash with base64 and stripping
-    it down to the first 30 characters.
+    it down to the first `length` characters.
 
     :Parameters:
         - `message`: The string from which to form the digest
+        - `length`: Length of output hash (optional)
 
     :Return:
         - The secure hash of `message`
     '''
-    d = hashlib.sha512()
-    d.update(message)
-    shastr = d.hexdigest()
 
-    # replace + and / with 4 and 9 respectively
-    r = base64.b64encode(shastr, '49')
-    r = r.replace('=','') # remove '=' if it's there
-    r = r[:30]
-    return str(r)
+    sha = hashlib.sha512()
+    sha.update(message)
+    r = base64.b64encode(sha.hexdigest(), '49').replace('=','')
+
+    return str(r[:length])

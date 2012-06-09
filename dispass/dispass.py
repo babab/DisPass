@@ -29,24 +29,27 @@ import cli
 import gui
 
 def usage():
-        '''Print help / usage information'''
+    '''Print help / usage information'''
 
-        print "%s - http://dispass.babab.nl/" % (versionStr)
-        print
-        print "When DisPass is executed as 'gdispass' or 'dispass -g',"
-        print 'the graphical version will be started.'
-        print
-        print 'USAGE: dispass [-co] label [label2] [label3] [...]'
-        print '       dispass -g | -h | -V'
-        print '       gdispass'
-        print
-        print 'Options:'
-        print '-c, --create    use if this passphrase is new (check input PW)'
-        print '-g, --gui       start guided graphical version of DisPass'
-        print '-h, --help      show this help and exit'
-        print '-o, --output    output passphrases to stdout (instead of the '
-        print '                more secure way of displaying via curses)'
-        print '-V, --version   show full version information and exit'
+    print "%s - http://dispass.babab.nl/" % (versionStr)
+    print
+    print "When DisPass is executed as 'gdispass' or 'dispass -g',"
+    print 'the graphical version will be started.'
+    print
+    print 'USAGE: dispass [-co] [-l length] label [label2] [label3] [...]'
+    print '       dispass -g | -h | -V'
+    print '       gdispass'
+    print
+    print 'Options:'
+    print '-c, --create    use if this passphrase is new (check input PW)'
+    print '-g, --gui       start guided graphical version of DisPass'
+    print '-h, --help      show this help and exit'
+    print '-l <length>, --length=<length>'
+    print '                set length of passphrase (default: 30, max: 171)'
+    print '-o, --output    output passphrases to stdout (instead of the '
+    print '                more secure way of displaying via curses)'
+    print '-V, --version   show full version information and exit'
+
 
 def main(argv):
     '''Entry point and handler of command options and arguments
@@ -55,11 +58,11 @@ def main(argv):
         - `argv`: List of command arguments
     '''
 
-    commandLineIf = cli.CLI()
+    console = cli.CLI()
 
     try:
-        opts, args = getopt.getopt(argv[1:], "cghoV",
-                ["create", "gui", "help", "output", "version"])
+        opts, args = getopt.getopt(argv[1:], "cghl:oV",
+                ["create", "gui", "help", "length=", "output", "version"])
     except getopt.GetoptError, err:
         print str(err), "\n"
         usage()
@@ -77,8 +80,15 @@ def main(argv):
             return
         elif o in ("-c", "--create"):
             pwTypoCheck = True
+        elif o in ("-l", "--length"):
+            try:
+                length = int(a)
+            except ValueError:
+                print 'error: length must be a number'
+                sys.exit(1)
+            console.setLength(length)
         elif o in ("-o", "--output"):
-            commandLineIf.setCurses(False)
+            console.setCurses(False)
         elif o in ("-h", "--help"):
             usage()
             sys.exit()
@@ -89,7 +99,7 @@ def main(argv):
             assert False, "unhandled option"
 
     if labels:
-        commandLineIf.interactive(labels, pwTypoCheck)
+        console.interactive(labels, pwTypoCheck)
     else:
         usage()
 
