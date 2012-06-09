@@ -7,7 +7,6 @@ make:
 	@echo make uninstall
 	@echo
 	@echo make doc
-	@echo make mandoc
 	@echo make dist
 	@echo make clean
 
@@ -31,9 +30,11 @@ doc: doc_clean
 	mv sphinx-doc/nl/_build/html doc/html/$(VERSION)/nl
 	make doc_clean
 
-mandoc: doc_clean
-	cd sphinx-doc/en/; make man
-	mv sphinx-doc/en/_build/man/dispass.1 .
+man: rm_pyc
+	cd sphinx-doc/man-en/; make clean
+	cd sphinx-doc/man-en/; make man
+	mv sphinx-doc/man-en/_build/man/dispass.1 .
+	cd sphinx-doc/man-en/; make clean
 
 dist: rm_pyc
 	python setup.py sdist
