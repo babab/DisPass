@@ -81,14 +81,16 @@ like 'google.com'.
 This is a master password that, together with the label is used to generate
 the passphrase.
 
+------------------------------------------------------------------------------
+
 ::
 
-   DisPass 0.1(posix) - http://dispass.babab.nl/
+   DisPass 0.1a7 - http://dispass.babab.nl/
 
    When DisPass is executed as 'gdispass' or 'dispass -g',
    the graphical version will be started.
 
-   USAGE: dispass [-co] label [label2] [label3] [...]
+   USAGE: dispass [-co] [-l length] label [label2] [label3] [...]
           dispass -g | -h | -V
           gdispass
 
@@ -96,6 +98,8 @@ the passphrase.
    -c, --create    use if this passphrase is new (check input PW)
    -g, --gui       start guided graphical version of DisPass
    -h, --help      show this help and exit
+   -l <length>, --length=<length>
+                   set length of passphrase (default: 30, max: 171)
    -o, --output    output passphrases to stdout (instead of the
                    more secure way of displaying via curses)
    -V, --version   show full version information and exit
