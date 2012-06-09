@@ -1,5 +1,3 @@
-# vim: set et ts=4 sw=4 sts=4:
-
 '''Generate and disperse/dispell passwords'''
 
 # Copyright (c) 2011-2012 Benjamin Althues <benjamin@babab.nl>
@@ -33,22 +31,19 @@ class globalSettings:
 
 settings = globalSettings()
 
-# Python stdlib - required
-import base64
 import getopt
 import getpass
-import hashlib
 import os
 import sys
 
-# Python stdlib - optional
 try:
     import curses
     settings.useCurses = True
 except ImportError:
     settings.useCurses = False
 
-from gui import GUI
+import digest
+import gui
 
 def CLI(labels, pwTypoCheck=False, useCurses=True):
     while True:
@@ -73,7 +68,7 @@ def CLI(labels, pwTypoCheck=False, useCurses=True):
         j = 3
         for i in labels:
             stdscr.addstr(j,  0, i, curses.A_BOLD)
-            stdscr.addstr(j, divlen, digest(i + inp), curses.A_REVERSE)
+            stdscr.addstr(j, divlen, digest.digest(i + inp), curses.A_REVERSE)
             j += 1
         del inp
         stdscr.refresh()
@@ -88,30 +83,7 @@ def CLI(labels, pwTypoCheck=False, useCurses=True):
         curses.endwin()
     else:
         for i in labels:
-            print "%25s %s" % (i, digest(i + inp))
-
-def digest(message):
-    '''Create and return secure hash of message
-
-    A secure hash/message digest formed by hashing the `message` with
-    the sha512 algorithm, encoding this hash with base64 and stripping
-    it down to the first 30 characters.
-
-    :Parameters:
-        - `message`: The string from which to form the digest
-
-    :Return:
-        - The secure hash of `message`
-    '''
-    d = hashlib.sha512()
-    d.update(message)
-    shastr = d.hexdigest()
-
-    # replace + and / with 4 and 9 respectively
-    r = base64.b64encode(shastr, '49')
-    r = r.replace('=','') # remove '=' if it's there
-    r = r[:30]
-    return str(r)
+            print "%25s %s" % (i, digest.digest(i + inp))
 
 def usage():
         print "%s(%s) - http://dispass.babab.nl/" % (versionStr, os.name)
@@ -148,7 +120,7 @@ def main(argv):
     pwTypoCheck = False
     for o, a in opts:
         if o in ("-g", "--gui"):
-            GUI()
+            gui.GUI()
             return
         elif o in ("-c", "--create"):
             pwTypoCheck = True
