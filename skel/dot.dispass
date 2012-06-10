@@ -1,0 +1,14 @@
+# DisPass labels file
+# Test example
+#
+# Copy this file to ~/.dispass
+
+google                      length=20       hash=dispass1
+google-2                    length=18
+jabber                      hash=dispass1
+#irc-account-1               length=12
+irc-account-2
+ssh-server-1                length=15
+ssh-server-2
+ssh-server-3
+

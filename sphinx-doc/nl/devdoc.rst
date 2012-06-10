@@ -32,4 +32,11 @@ dispass.gui
 .. automodule:: dispass.gui
    :members:
 
+dispass.labelfile
+==============================================================================
+
+.. automodule:: dispass.labelfile
+   :members:
+
+
 .. vim: set et ts=3 sw=3 sts=3 ai:
