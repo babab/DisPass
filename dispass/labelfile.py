@@ -21,7 +21,13 @@ class Parse:
     '''Labelfile stripped for parsing'''
 
     labels = []
-    '''List of labels (+options)'''
+    '''List of 3-tuples `(label, length, hashname)`'''
+
+    default_length = 30
+    '''Default passphrase length'''
+
+    default_hashname = 'dispass1'
+    '''Name of hash to use as default'''
 
     def __init__(self, file_location='~/.dispass'):
         '''Open file and strip empty lines and comments'''
@@ -37,7 +43,9 @@ class Parse:
                 self.file_stripped.append(i)
 
     def parse(self):
-        '''Strip spaces and create lists of labels with their options'''
+        '''Strip spaces and create list of labels with their options'''
+
+        labels = []
 
         for i in self.file_stripped:
             wordlist = []
@@ -45,7 +53,23 @@ class Parse:
             for word in line:
                 if word != '':
                     wordlist.append(word.strip('\n'))
-            self.labels.append(wordlist)
+            labels.append(wordlist)
+
+        for label in labels:
+            labelname = label.pop(0)
+            length = self.default_length
+            hashname = self.default_hashname
+
+            for i in label:
+                if 'length=' in i:
+                    length = int(i.strip('length='))
+                elif 'hash=' in i:
+                    hashname = i.strip('hash=')
+
+            self.labels.append((labelname, length, hashname))
+
+        return self
+
 
 class Write:
     '''Labelfile editor'''
@@ -53,6 +77,5 @@ class Write:
 
 if __name__ == '__main__':
     p = Parse()
-    p.parse()
-    for i in p.labels:
+    for i in p.parse().labels:
         print i
