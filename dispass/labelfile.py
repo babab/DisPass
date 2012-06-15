@@ -17,11 +17,17 @@ from os.path import expanduser
 class Parse:
     '''Labelfile parser'''
 
+    file_found = False
+    '''Boolean value set on init'''
+
+    file_location = None
+    '''Sting set on init'''
+
     file_stripped = []
     '''Labelfile stripped for parsing'''
 
-    labels = []
-    '''List of 3-tuples `(label, length, hashname)`'''
+    labels = None
+    '''Dict of `{label: length}`'''
 
     default_length = 30
     '''Default passphrase length'''
@@ -34,18 +40,24 @@ class Parse:
 
         try:
             filehandle = open(expanduser(file_location), 'r')
+            self.file_found = True
         except IOError:
-            print 'error: could not load labelfile'
+            self.file_found = False
+            self.file_location = file_location
             return
 
         for i in filehandle:
             if i[0] != '\n' and i[0] != '#':
                 self.file_stripped.append(i)
 
+        if self.file_found:
+            self.parse()
+
     def parse(self):
         '''Strip spaces and create list of labels with their options'''
 
         labels = []
+        labels_dispass1 = []
 
         for i in self.file_stripped:
             wordlist = []
@@ -58,18 +70,19 @@ class Parse:
         for label in labels:
             labelname = label.pop(0)
             length = self.default_length
-            hashname = self.default_hashname
+            # hashname = self.default_hashname
 
             for i in label:
                 if 'length=' in i:
                     length = int(i.strip('length='))
-                elif 'hash=' in i:
-                    hashname = i.strip('hash=')
+                # elif 'hash=' in i:
+                #     hashname = i.strip('hash=')
 
-            self.labels.append((labelname, length, hashname))
+            labels_dispass1.append((labelname, length))
+
+        self.labels = dict(labels_dispass1)
 
         return self
-
 
 class Write:
     '''Labelfile editor'''
@@ -77,5 +90,4 @@ class Write:
 
 if __name__ == '__main__':
     p = Parse()
-    for i in p.parse().labels:
-        print i
+    print p.labels

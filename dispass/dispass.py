@@ -27,6 +27,7 @@ import sys
 
 import cli
 import gui
+import labelfile
 
 def usage():
     '''Print help / usage information'''
@@ -36,8 +37,8 @@ def usage():
     print "When DisPass is executed as 'gdispass' or 'dispass -g',"
     print 'the graphical version will be started.'
     print
-    print 'USAGE: dispass [-co] [-l length] label [label2] [label3] [...]'
-    print '       dispass -g | -h | -V'
+    print 'USAGE: dispass [-cghoV]'
+    print '       dispass [-co] [-l length] label [label2] [label3] [...]'
     print '       gdispass'
     print
     print 'Options:'
@@ -83,7 +84,8 @@ def main(argv):
             try:
                 length = int(a)
             except ValueError:
-                print 'error: length must be a number'
+                print 'error: length must be a number\n'
+                usage()
                 sys.exit(1)
             console.setLength(length)
         elif o in ("-o", "--output"):
@@ -100,7 +102,13 @@ def main(argv):
     if labels:
         console.interactive(labels)
     else:
-        usage()
+        lf = labelfile.Parse()
+        if lf.file_found:
+            console.interactive(lf.labels)
+        else:
+            print 'error: could not load labelfile at %s\n' % lf.file_location
+            usage()
+            sys.exit(1)
 
 if __name__ == '__main__':
     main(sys.argv)

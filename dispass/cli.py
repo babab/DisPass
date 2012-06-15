@@ -89,19 +89,26 @@ class CLI:
         '''Start interactive prompt, generating and showing the passprase(s)
 
         :Parameters:
-            - `labels`: List of labels to use for passprase generation
+            - `labels`: List or dict of labels to use for passprase generation
         '''
 
         password = self.passwordPrompt()
 
-        labelmap = []
-        for i in labels:
-            labelmap.append( (i, self.passphraseLength) )
+        if isinstance(labels, list):
+            labelmap = []
+            for i in labels:
+                labelmap.append((i, self.passphraseLength))
 
-        hashedLabels = digest.digestPasswordDict(dict(labelmap), password)
+            hashedLabels = digest.digestPasswordDict(dict(labelmap), password)
+            divlen = len(max(labels, key=len)) + 2
+        elif isinstance(labels, dict):
+            hashedLabels = digest.digestPasswordDict(labels, password)
+            label_list = []
+            for label, length in hashedLabels.iteritems():
+                label_list.append(label)
+            divlen = len(max(label_list, key=len)) + 2
+
         del password
-
-        divlen = len(max(labels, key=len)) + 2
 
         if self.useCurses:
             stdscr = curses.initscr()
