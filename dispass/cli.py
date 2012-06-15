@@ -32,7 +32,6 @@ class CLI:
     promptDouble = False
     '''Boolean. Prompt for password twice'''
 
-
     def __init__(self):
         '''Set `useCurses` to True or False.
 
@@ -95,6 +94,13 @@ class CLI:
 
         password = self.passwordPrompt()
 
+        labelmap = []
+        for i in labels:
+            labelmap.append( (i, self.passphraseLength) )
+
+        hashedLabels = digest.digestPasswordDict(dict(labelmap), password)
+        del password
+
         if self.useCurses:
             stdscr = curses.initscr()
             curses.noecho()
@@ -104,12 +110,11 @@ class CLI:
                     curses.A_BOLD)
             stdscr.addstr(1, 0, "Your passphrase(s)", curses.A_BOLD)
             divlen = len(max(labels, key=len)) + 2
+
             j = 3
-            for i in labels:
-                stdscr.addstr(j,  0, i, curses.A_BOLD)
-                stdscr.addstr(j, divlen,
-                        digest.digest(i + password, self.passphraseLength),
-                        curses.A_REVERSE)
+            for label, passphrase in hashedLabels.iteritems():
+                stdscr.addstr(j,  0, label, curses.A_BOLD)
+                stdscr.addstr(j, divlen, passphrase, curses.A_REVERSE)
                 j += 1
             stdscr.refresh()
 
@@ -122,7 +127,5 @@ class CLI:
             curses.echo()
             curses.endwin()
         else:
-            for i in labels:
-                print "%25s %s" % (i,
-                        digest.digest(i + password, self.passphraseLength))
-        del password
+            for label, passphrase in hashedLabels.iteritems():
+                print "%25s %s" % (label, passphrase)

@@ -35,3 +35,28 @@ def digest(message, length=30):
     r = base64.b64encode(sha.hexdigest(), '49').replace('=','')
 
     return str(r[:length])
+
+def digestPasswordDict(indentifierDict, password):
+    '''Creat secure hashes of a dict of `identifier:length` and a password
+
+    A secure hash/message digest formed by hashing the `message` with
+    the sha512 algorithm, encoding this hash with base64 and stripping
+    it down to the first `length` characters.
+
+    :Parameters:
+        - `indentifierDict`: A dict of `{identifier: length,}` entries
+        - `password`: The password to use for hashing entries
+
+    :Return:
+        - The secure hash of `message`
+    '''
+
+    hashed = []
+
+    for identifier, length in indentifierDict.iteritems():
+        sha = hashlib.sha512()
+        sha.update(identifier + password)
+        r = base64.b64encode(sha.hexdigest(), '49').replace('=','')
+        hashed.append( (identifier, str(r[:length])) )
+
+    return dict(hashed)
