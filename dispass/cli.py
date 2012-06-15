@@ -29,6 +29,9 @@ class CLI:
     passphraseLength = 30
     '''Length of output passphrase, default is 30'''
 
+    promptDouble = False
+    '''Boolean. Prompt for password twice'''
+
 
     def __init__(self):
         '''Set `useCurses` to True or False.
@@ -59,18 +62,20 @@ class CLI:
 
         self.passphraseLength = length
 
-    def interactive(self, labels, pwTypoCheck=False):
-        '''Start interactive prompt, generating and showing the passprase(s)
+    def setPrompt(self, promptDouble=False):
+        '''Set options for the passwordPrompt)
 
         :Parameters:
-            - `labels`: List of labels to use for passprase generation
-            - `length`: Integer. The length of output passphrase
-            - `pwTypoCheck`: Boolean. Prompt 2x and compare passwords
+            - `promptDouble`: Boolean. Prompt 2x and compare passwords
         '''
+        self.promptDouble = promptDouble
+
+    def passwordPrompt(self):
+        '''Prompt for password. Returns password'''
 
         while True:
             inp = getpass.getpass()
-            if pwTypoCheck:
+            if self.promptDouble:
                 inp2 = getpass.getpass("Again:")
                 if inp == inp2:
                     break;
@@ -78,6 +83,17 @@ class CLI:
                     print "Passwords do not match. Please try again."
             else:
                 break
+
+        return inp
+
+    def interactive(self, labels):
+        '''Start interactive prompt, generating and showing the passprase(s)
+
+        :Parameters:
+            - `labels`: List of labels to use for passprase generation
+        '''
+
+        password = self.passwordPrompt()
 
         if self.useCurses:
             stdscr = curses.initscr()
@@ -92,10 +108,9 @@ class CLI:
             for i in labels:
                 stdscr.addstr(j,  0, i, curses.A_BOLD)
                 stdscr.addstr(j, divlen,
-                        digest.digest(i + inp, self.passphraseLength),
+                        digest.digest(i + password, self.passphraseLength),
                         curses.A_REVERSE)
                 j += 1
-            del inp
             stdscr.refresh()
 
             while True:
@@ -109,4 +124,5 @@ class CLI:
         else:
             for i in labels:
                 print "%25s %s" % (i,
-                        digest.digest(i + inp, self.passphraseLength))
+                        digest.digest(i + password, self.passphraseLength))
+        del password

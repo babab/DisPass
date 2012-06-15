@@ -73,13 +73,12 @@ def main(argv):
     else:
         labels = False
 
-    pwTypoCheck = False
     for o, a in opts:
         if o in ("-g", "--gui"):
             gui.GUI()
             return
         elif o in ("-c", "--create"):
-            pwTypoCheck = True
+            console.setPrompt(promptDouble=True)
         elif o in ("-l", "--length"):
             try:
                 length = int(a)
@@ -99,7 +98,7 @@ def main(argv):
             assert False, "unhandled option"
 
     if labels:
-        console.interactive(labels, pwTypoCheck)
+        console.interactive(labels)
     else:
         usage()
 
