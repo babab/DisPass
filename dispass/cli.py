@@ -101,6 +101,8 @@ class CLI:
         hashedLabels = digest.digestPasswordDict(dict(labelmap), password)
         del password
 
+        divlen = len(max(labels, key=len)) + 2
+
         if self.useCurses:
             stdscr = curses.initscr()
             curses.noecho()
@@ -109,7 +111,6 @@ class CLI:
             stdscr.addstr(0, 0, versionStr + " - press 'q' to quit",
                     curses.A_BOLD)
             stdscr.addstr(1, 0, "Your passphrase(s)", curses.A_BOLD)
-            divlen = len(max(labels, key=len)) + 2
 
             j = 3
             for label, passphrase in hashedLabels.iteritems():
@@ -128,4 +129,4 @@ class CLI:
             curses.endwin()
         else:
             for label, passphrase in hashedLabels.iteritems():
-                print "%25s %s" % (label, passphrase)
+                print "{:{fill}} {}".format(label, passphrase, fill=divlen)
