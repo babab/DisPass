@@ -19,9 +19,7 @@ Using pip to download from the Python Package Index
 ---------------------------------------------------
 
 The recommended way is to download and install directly from the PyPI
-repository using pip.
-
-::
+repository using pip::
 
    $ sudo pip install dispass
 
@@ -41,13 +39,12 @@ Clone git repo::
    $ git clone git://github.com/babab/DisPass.git
    $ cd dispass
 
-Then you can either
+Then you can either:
 
 1. Install through pip::
 
    $ python setup.py sdist
    $ sudo pip install dist/DisPass-0.1a7.tar.gz
-
 
 2. Install manually::
 
@@ -70,17 +67,17 @@ you can easily uninstall at any moment::
 Using the command line app
 ==============================================================================
 
-**label**
-
-A label is a string that you use to identify the password.
-This can be a domainname of the service the password is used for
-like e.g. 'google.com'.
+label
+   A label is a string that you use to identify the password.
+   This can be a domainname of the service the password is used for
+   like e.g. 'google.com'.
 
 You can use dispass by entering your labels after the dispass command and/or
 you can store your labels in a textfile called a labelfile.
 
-Using dispass to create one or more labels
-------------------------------------------
+
+Using dispass to create one or more passphrases
+-----------------------------------------------
 
 You can start using dispass for e.g. google.com like this::
 
@@ -93,13 +90,13 @@ It can be created everytime you need it by running::
 
    $ dispass google.com
 
-The `-c` argument before was just a way to make sure you do not make typos
-when creating passphrases for the first time. It is advised you use this
-everytime you create a passphrase for a new label.
+The ``-c`` argument we used before was just a way to make sure to not make
+typos when creating passphrases for the first time. It is advised you use
+this everytime you create a passphrase for a new label.
 
 The passphrases created are 30 characters long by default, but some website's
 may not validate such a long password or you might want to make it even
-longer. You can easily set a desired passphrase length using the `-l` flag.
+longer. You can easily set a desired passphrase length using the ``-l`` flag.
 If you wanted to make your google.com 18 chars you can run::
 
    $ dispass -c -l 18 google.com
@@ -115,8 +112,9 @@ Using a labelfile
 When dispass is run without arguments it will try to find a labelfile.
 The location of this file varies and depends on the platform type you use:
 
- * `GNU/Linux`: ~/.dispass
- * `*BSD`:      ~/.dispass
+ * **GNU/Linux and Mac OS X**: ``~/.dispass``
+ * **\*BSD and other Unixen**: ``~/.dispass``
+ * **Windows**:   ``C:\Users\<username>\.dispass``
 
 You can start by copying the labelfile from skel/dot.dispass to this location
 and editing it by adding your own labels. Or you can just start writing the
@@ -130,36 +128,45 @@ A typical labelfile might look like this::
 
 Dispass will now create two passphrases with varying lengths.
 
-You can override the location of the labelfile using the `-f` flag.
+You can override the location of the labelfile using the ``-f`` flag.
 This can be a way for you to use different sets of labels/passphrases
 with a different 'master' password for each set.
+
 
 All options
 -----------
 
-::
+When DisPass is executed as 'gdispass' or 'dispass -g',
+the graphical version will be started.
 
-   DisPass 0.1a7 - http://dispass.babab.nl/
+:USAGE: dispass [-cghoV] [-f labelfile]
 
-   When DisPass is executed as 'gdispass' or 'dispass -g',
-   the graphical version will be started.
+        dispass [-co] [-l length] label [label2] [label3] [...]
 
-   USAGE: dispass [-cghoV] [-f labelfile]
-          dispass [-co] [-l length] label [label2] [label3] [...]
-          gdispass
+        gdispass
 
-   Options:
-   -c, --create    use if this passphrase is new (check input PW)
-   -g, --gui       start guided graphical version of DisPass
-   -h, --help      show this help and exit
-   -o, --output    output passphrases to stdout (instead of the
-                   more secure way of displaying via curses)
-   -V, --version   show full version information and exit
+Short options:
 
-   -f <labelfile>, --file=<labelfile>
-                   set location of labelfile (default: ~/.dispass)
-   -l <length>, --length=<length>
-                   set length of passphrase (default: 30, max: 171)
+-c                  use if this passphrase is new (check input PW)
+-g                  start guided graphical version of DisPass
+-h                  show this help and exit
+-o                  output passphrases to stdout
+                    (instead of the more secure way of displaying via curses)
+-V                  show full version information and exit
+-f <labelfile>      set location of labelfile (default: ~/.dispass)
+-l <length>         set length of passphrase (default: 30, max: 171)
+
+Long options:
+
+--create            use if this passphrase is new (check input PW)
+--gui               start guided graphical version of DisPass
+--help              show this help and exit
+--output            output passphrases to stdout
+                    (instead of the more secure way of displaying via curses)
+--version           show full version information and exit
+--file <labelfile>  set location of labelfile (default: ~/.dispass)
+--length <length>   set length of passphrase (default: 30, max: 171)
+
 
 Using the graphical version
 ==============================================================================
