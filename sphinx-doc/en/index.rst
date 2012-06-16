@@ -1,3 +1,7 @@
+Show all versions_ | Language: **English**
+
+.. _`versions`: ../../index.html
+
 .. include:: ../../README.rst
 
 .. toctree::

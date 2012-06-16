@@ -1,11 +1,20 @@
 DisPass
-*******
+******************************************************************************
 
-Version 0.1-alpha
+`Click here for the latest stable release`__
 
- * English_ documentation
- * Dutch documentation (not available yet)
+Releases
+==============================================================================
 
-.. _English: 0.1/en/index.html
+`DisPass 0.1-alpha-7`_ - released May 28th, 2012
+
+`DisPass 0.1-alpha-6`_ - released May 24th, 2012
+
+.. _`DisPass 0.1-alpha-6`: 0.1/en/index.html
+.. _`DisPass 0.1-alpha-7`: 0.1/en/index.html
+
+__ `DisPass 0.1-alpha-7`_
+
+.. include:: ../../ChangeLog
 
 .. vim: set et ts=3 sw=3 sts=3 ai:
