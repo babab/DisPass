@@ -1,6 +1,0 @@
-v0.1
- * check and warn when (trailing) whitespace is found in label
-
-v0.2 and up
- * add option to keep/load a list of labels in a textfile
- * add option to export passwordout to the clipboard
