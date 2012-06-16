@@ -1,3 +1,7 @@
-include dispass.1 LICENSE README.rst
+include ChangeLog
+include dispass.1
+include LICENSE
+include README.rst
+recursive-include emacs dispass.el
 recursive-include scripts dispass
-include emacs/dispass.el
+recursive-include skel dot.dispass
