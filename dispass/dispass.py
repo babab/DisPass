@@ -37,7 +37,7 @@ def usage():
     print "When DisPass is executed as 'gdispass' or 'dispass -g',"
     print 'the graphical version will be started.'
     print
-    print 'USAGE: dispass [-cghoV]'
+    print 'USAGE: dispass [-cghoV] [-f labelfile]'
     print '       dispass [-co] [-l length] label [label2] [label3] [...]'
     print '       gdispass'
     print
@@ -45,11 +45,14 @@ def usage():
     print '-c, --create    use if this passphrase is new (check input PW)'
     print '-g, --gui       start guided graphical version of DisPass'
     print '-h, --help      show this help and exit'
-    print '-l <length>, --length=<length>'
-    print '                set length of passphrase (default: 30, max: 171)'
     print '-o, --output    output passphrases to stdout (instead of the '
     print '                more secure way of displaying via curses)'
     print '-V, --version   show full version information and exit'
+    print
+    print '-f <labelfile>, --file=<labelfile>'
+    print '                set location of labelfile (default: ~/.dispass)'
+    print '-l <length>, --length=<length>'
+    print '                set length of passphrase (default: 30, max: 171)'
 
 
 def main(argv):
@@ -62,8 +65,9 @@ def main(argv):
     console = cli.CLI()
 
     try:
-        opts, args = getopt.getopt(argv[1:], "cghl:oV",
-                ["create", "gui", "help", "length=", "output", "version"])
+        opts, args = getopt.getopt(argv[1:], "cf:ghl:oV",
+                ["create", "file=", "gui", "help", "length=", "output",
+                    "version"])
     except getopt.GetoptError, err:
         print str(err), "\n"
         usage()
@@ -88,6 +92,15 @@ def main(argv):
                 usage()
                 sys.exit(1)
             console.setLength(length)
+        elif o in ("-f", "--file"):
+            lf = labelfile.Parse(a)
+            if lf.file_found:
+                console.interactive(lf.labels)
+            else:
+                print 'error: could not load labelfile at "%s"\n' \
+                        % lf.file_location
+                usage()
+            sys.exit(1)
         elif o in ("-o", "--output"):
             console.setCurses(False)
         elif o in ("-h", "--help"):
