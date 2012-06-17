@@ -1,4 +1,4 @@
-'''Generate and disperse/dispell passwords'''
+'''Multi-platform console/gui passphrase generator'''
 
 # Copyright (c) 2011-2012 Benjamin Althues <benjamin@babab.nl>
 #

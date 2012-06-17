@@ -1,12 +1,48 @@
 User Documentation
 ******************************************************************************
 
-DisPass is a passphrase generator for Windows and Unix / Linux.
-You can use it to create unique passwords for logging in to websites, servers
-or any other kind of thing that requires login.
-DisPass does not keep your passwords in a database but rather lets you
-generate a unique passphrase formed from a master password and a label.
-It is a command line app, but also has a simple graphical interface.
+DisPass is a passphrase generator for GNU/Linux, \*BSD, MacOS X and Windows.
+It enables you to generate unique passphrases formed from a master password
+and a label, helping you get rid of the bad habit of using a single password
+for multiple websites. When using a different passphrase for every website,
+the chance of abuse of your password on other sites (when a website leaks it)
+is eliminated.
+Dispass is a console application, but also has a simple graphical interface.
+
+DisPass has several homes on the Internet:
+
+Main website
+   http://dispass.babab.nl
+
+The cheeseshop (PyPI) project page
+   http://pypi.python.org/pypi/DisPass/
+
+Github repository and Issue tracker
+   https://github.com/babab/DisPass/
+
+Bitbucket repository
+   https://bitbucket.org/babab/dispass/
+
+Here are some definitions which may help you understand the rest of the
+documentation better.
+
+label
+   A label is a string that you use to identify the password.
+   This can be a domainname of the service the password is used for
+   like e.g. 'google.com'.
+
+Since this program asks for a password/passphrase to generate another
+password/passphrase, things may get a bit confusing. I've dediced to use the
+words 'password' and 'passphrase' diffently and consistent.
+
+password
+   Use of the word 'password' is dedicated to the input password, i.e. the
+   password you are asked to enter and only you know. Whenever you read
+   password, this is the one I mean.
+
+passphrase
+   With 'passphrase' I always mean the output passphrase, i.e. the passphrase
+   that is unique and generated from a label and password
 
 
 Downloading/Installing
@@ -44,22 +80,22 @@ Then you can either:
 1. Install through pip::
 
    $ python setup.py sdist
-   $ sudo pip install dist/DisPass-0.1a7.tar.gz
+   $ sudo pip install dist/DisPass-<version>.tar.gz
 
 2. Install manually::
 
    $ sudo python setup.py install
 
 
-Update or uninstall
+Upgrade or uninstall
 ==============================================================================
 
 You can easily upgrade to newer versions using pip::
 
    $ sudo pip install dispass --upgrade
 
-If you have installed dispass using pip with,
-you can easily uninstall at any moment::
+If you have installed dispass using pip, you can easily uninstall at
+any moment::
 
    $ sudo pip uninstall dispass
 
@@ -67,77 +103,11 @@ you can easily uninstall at any moment::
 Using the command line app
 ==============================================================================
 
-label
-   A label is a string that you use to identify the password.
-   This can be a domainname of the service the password is used for
-   like e.g. 'google.com'.
+When DisPass is executed as 'gdispass' or 'dispass -g',
+the graphical version will be started.
 
 You can use dispass by entering your labels after the dispass command and/or
 you can store your labels in a textfile called a labelfile.
-
-
-Using dispass to create one or more passphrases
------------------------------------------------
-
-You can start using dispass for e.g. google.com like this::
-
-   $ dispass -c google.com
-
-Now you will be asked to enter a password twice and after that your
-passphrase will be shown on the screen. This will now be the passphrase you
-will use for logging in to google.com
-It can be created everytime you need it by running::
-
-   $ dispass google.com
-
-The ``-c`` argument we used before was just a way to make sure to not make
-typos when creating passphrases for the first time. It is advised you use
-this everytime you create a passphrase for a new label.
-
-The passphrases created are 30 characters long by default, but some website's
-may not validate such a long password or you might want to make it even
-longer. You can easily set a desired passphrase length using the ``-l`` flag.
-If you wanted to make your google.com 18 chars you can run::
-
-   $ dispass -c -l 18 google.com
-
-Generating passwords for multiple labels is just as easy::
-
-   $ dispass google.com yahoo.com
-
-
-Using a labelfile
------------------
-
-When dispass is run without arguments it will try to find a labelfile.
-The location of this file varies and depends on the platform type you use:
-
- * **GNU/Linux and Mac OS X**: ``~/.dispass``
- * **\*BSD and other Unixen**: ``~/.dispass``
- * **Windows**:   ``C:\Users\<username>\.dispass``
-
-You can start by copying the labelfile from skel/dot.dispass to this location
-and editing it by adding your own labels. Or you can just start writing the
-file from scratch which really isn't a hard thing to do.
-
-The labels need to be specified on a single line with optional arguments.
-A typical labelfile might look like this::
-
-   google.com length=18
-   yahoo.com
-
-Dispass will now create two passphrases with varying lengths.
-
-You can override the location of the labelfile using the ``-f`` flag.
-This can be a way for you to use different sets of labels/passphrases
-with a different 'master' password for each set.
-
-
-All options
------------
-
-When DisPass is executed as 'gdispass' or 'dispass -g',
-the graphical version will be started.
 
 :USAGE: dispass [-cghoV] [-f labelfile]
 
@@ -168,10 +138,79 @@ Long options:
 --length <length>   set length of passphrase (default: 30, max: 171)
 
 
-Using the graphical version
+Using dispass to create one or more passphrases
+-----------------------------------------------
+
+You can start using dispass for e.g. google.com like this::
+
+   $ dispass -c google.com
+
+Now you will be asked to enter a password twice and after that your
+passphrase will be shown on the screen. This will now be the passphrase you
+will use for logging in to google.com
+It can be created everytime you need it by running::
+
+   $ dispass google.com
+
+The ``-c`` argument we used before was just a way to make sure to not make
+typos when creating passphrases for the first time. It is advised you use
+this everytime you create a passphrase for a new label.
+
+The passphrases created are 30 characters long by default, but some website's
+may not validate such a long passphrase or you might want to make it even
+longer. You can easily set a desired passphrase length using the ``-l`` flag.
+If you wanted to make your google.com 18 chars you can run::
+
+   $ dispass -c -l 18 google.com
+
+Generating passphrases for multiple labels is just as easy::
+
+   $ dispass google.com yahoo.com
+
+
+Using a labelfile
+-----------------
+
+When dispass is run without arguments it will try to find a labelfile.
+The location of this file varies and depends on the platform type you use:
+
+ * **GNU/Linux and Mac OS X**: ``~/.dispass``
+ * **\*BSD and other Unixen**: ``~/.dispass``
+ * **Windows**:   ``C:\Users\<username>\.dispass``
+
+You can start by copying the labelfile from skel/dot.dispass to this location
+and editing it by adding your own labels. Or you can just start writing the
+file from scratch which really isn't a hard thing to do.
+
+The labels need to be specified on a single line with optional arguments.
+A typical labelfile might look like this::
+
+   google.com length=18
+   yahoo.com
+
+Now, when running ``dispass`` without arguments it will create two
+passphrases with varying lengths.
+
+You can override the location of the labelfile using the ``-f`` flag.
+This can be a way for you to use different sets of labels/passphrases
+with a different 'master' password for each set.
+
+
+Got Emacs? You can use the Emacs wrapper
+========================================
+
+If you have Emacs you can use the Emacs wrapper written by Tom Willemsen
+(ryuslash). Read more about it in the README of the 'emacs/' folder.
+
+
+Support / ideas / questions / suggestions
 ==============================================================================
 
-No info yet.
+Please use the Issue tracker at github:
+https://github.com/babab/DisPass/issues
+
+You can also visit #dispass at OFTC (irc.oftc.net) with your favortie
+IRC client.
 
 
 Software license

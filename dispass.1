@@ -1,4 +1,4 @@
-.TH "DISPASS" "1" "June 16, 2012" "0.1" "DisPass"
+.TH "DISPASS" "1" "June 17, 2012" "0.1" "DisPass"
 .SH NAME
 dispass \- DisPass Documentation
 .
@@ -31,19 +31,61 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" Man page generated from reStructuredText.
 .
 .sp
-DisPass is a passphrase generator for Windows and Unix / Linux.
-You can use it to create unique passwords for logging in to websites, servers
-or any other kind of thing that requires login.
-DisPass does not keep your passwords in a database but rather lets you
-generate a unique passphrase formed from a master password and a label.
-It is a command line app, but also has a simple graphical interface.
+DisPass is a passphrase generator for GNU/Linux, *BSD, MacOS X and Windows.
+It enables you to generate unique passphrases formed from a master password
+and a label, helping you get rid of the bad habit of using a single password
+for multiple websites. When using a different passphrase for every website,
+the chance of abuse of your password on other sites (when a website leaks it)
+is eliminated.
+Dispass is a console application, but also has a simple graphical interface.
+.sp
+DisPass has several homes on the Internet:
+.INDENT 0.0
+.TP
+.B Main website
+\fI\%http://dispass.babab.nl\fP
+.TP
+.B The cheeseshop (PyPI) project page
+\fI\%http://pypi.python.org/pypi/DisPass/\fP
+.TP
+.B Github repository and Issue tracker
+\fI\%https://github.com/babab/DisPass/\fP
+.TP
+.B Bitbucket repository
+\fI\%https://bitbucket.org/babab/dispass/\fP
+.UNINDENT
+.sp
+Here are some definitions which may help you understand the rest of the
+documentation better.
+.INDENT 0.0
+.TP
+.B label
+A label is a string that you use to identify the password.
+This can be a domainname of the service the password is used for
+like e.g. \(aqgoogle.com\(aq.
+.UNINDENT
+.sp
+Since this program asks for a password/passphrase to generate another
+password/passphrase, things may get a bit confusing. I\(aqve dediced to use the
+words \(aqpassword\(aq and \(aqpassphrase\(aq diffently and consistent.
+.INDENT 0.0
+.TP
+.B password
+Use of the word \(aqpassword\(aq is dedicated to the input password, i.e. the
+password you are asked to enter and only you know. Whenever you read
+password, this is the one I mean.
+.TP
+.B passphrase
+With \(aqpassphrase\(aq I always mean the output passphrase, i.e. the passphrase
+that is unique and generated from a label and password
+.UNINDENT
 .SH DOWNLOADING/INSTALLING
 .sp
 A recent version of Python 2 is required for running dispass.
 .SS Using pip to download from the Python Package Index
 .sp
 The recommended way is to download and install directly from the PyPI
-repository using pip.
+repository using pip:
 .sp
 .nf
 .ft C
@@ -68,7 +110,7 @@ $ cd dispass
 .ft P
 .fi
 .sp
-Then you can either
+Then you can either:
 .INDENT 0.0
 .IP 1. 3
 Install through pip:
@@ -76,7 +118,7 @@ Install through pip:
 .nf
 .ft C
 $ python setup.py sdist
-$ sudo pip install dist/DisPass\-0.1a7.tar.gz
+$ sudo pip install dist/DisPass\-<version>.tar.gz
 .ft P
 .fi
 .IP 2. 3
@@ -88,7 +130,7 @@ $ sudo python setup.py install
 .ft P
 .fi
 .UNINDENT
-.SH UPDATE OR UNINSTALL
+.SH UPGRADE OR UNINSTALL
 .sp
 You can easily upgrade to newer versions using pip:
 .sp
@@ -98,8 +140,8 @@ $ sudo pip install dispass \-\-upgrade
 .ft P
 .fi
 .sp
-If you have installed dispass using pip with,
-you can easily uninstall at any moment:
+If you have installed dispass using pip, you can easily uninstall at
+any moment:
 .sp
 .nf
 .ft C
@@ -108,15 +150,73 @@ $ sudo pip uninstall dispass
 .fi
 .SH USING THE COMMAND LINE APP
 .sp
-\fBlabel\fP
-.sp
-A label is a string that you use to identify the password.
-This can be a domainname of the service the password is used for
-like e.g. \(aqgoogle.com\(aq.
+When DisPass is executed as \(aqgdispass\(aq or \(aqdispass \-g\(aq,
+the graphical version will be started.
 .sp
 You can use dispass by entering your labels after the dispass command and/or
 you can store your labels in a textfile called a labelfile.
-.SS Using dispass to create one or more labels
+.INDENT 0.0
+.TP
+.B USAGE
+dispass [\-cghoV] [\-f labelfile]
+.sp
+dispass [\-co] [\-l length] label [label2] [label3] [...]
+.sp
+gdispass
+.UNINDENT
+.sp
+Short options:
+.INDENT 0.0
+.TP
+.B \-c
+use if this passphrase is new (check input PW)
+.TP
+.B \-g
+start guided graphical version of DisPass
+.TP
+.B \-h
+show this help and exit
+.TP
+.B \-o
+output passphrases to stdout
+(instead of the more secure way of displaying via curses)
+.TP
+.B \-V
+show full version information and exit
+.TP
+.BI \-f \ <labelfile>
+set location of labelfile (default: ~/.dispass)
+.TP
+.BI \-l \ <length>
+set length of passphrase (default: 30, max: 171)
+.UNINDENT
+.sp
+Long options:
+.INDENT 0.0
+.TP
+.B \-\-create
+use if this passphrase is new (check input PW)
+.TP
+.B \-\-gui
+start guided graphical version of DisPass
+.TP
+.B \-\-help
+show this help and exit
+.TP
+.B \-\-output
+output passphrases to stdout
+(instead of the more secure way of displaying via curses)
+.TP
+.B \-\-version
+show full version information and exit
+.TP
+.BI \-\-file \ <labelfile>
+set location of labelfile (default: ~/.dispass)
+.TP
+.BI \-\-length \ <length>
+set length of passphrase (default: 30, max: 171)
+.UNINDENT
+.SS Using dispass to create one or more passphrases
 .sp
 You can start using dispass for e.g. google.com like this:
 .sp
@@ -137,13 +237,13 @@ $ dispass google.com
 .ft P
 .fi
 .sp
-The \fI\-c\fP argument before was just a way to make sure you do not make typos
-when creating passphrases for the first time. It is advised you use this
-everytime you create a passphrase for a new label.
+The \fB\-c\fP argument we used before was just a way to make sure to not make
+typos when creating passphrases for the first time. It is advised you use
+this everytime you create a passphrase for a new label.
 .sp
 The passphrases created are 30 characters long by default, but some website\(aqs
-may not validate such a long password or you might want to make it even
-longer. You can easily set a desired passphrase length using the \fI\-l\fP flag.
+may not validate such a long passphrase or you might want to make it even
+longer. You can easily set a desired passphrase length using the \fB\-l\fP flag.
 If you wanted to make your google.com 18 chars you can run:
 .sp
 .nf
@@ -152,7 +252,7 @@ $ dispass \-c \-l 18 google.com
 .ft P
 .fi
 .sp
-Generating passwords for multiple labels is just as easy:
+Generating passphrases for multiple labels is just as easy:
 .sp
 .nf
 .ft C
@@ -167,9 +267,11 @@ The location of this file varies and depends on the platform type you use:
 .INDENT 3.5
 .INDENT 0.0
 .IP \(bu 2
-\fIGNU/Linux\fP: ~/.dispass
+\fBGNU/Linux and Mac OS X\fP: \fB~/.dispass\fP
 .IP \(bu 2
-\fI*BSD\fP:      ~/.dispass
+\fB*BSD and other Unixen\fP: \fB~/.dispass\fP
+.IP \(bu 2
+\fBWindows\fP:   \fBC:\eUsers\e<username>\e.dispass\fP
 .UNINDENT
 .UNINDENT
 .UNINDENT
@@ -188,41 +290,23 @@ yahoo.com
 .ft P
 .fi
 .sp
-Dispass will now create two passphrases with varying lengths.
+Now, when running \fBdispass\fP without arguments it will create two
+passphrases with varying lengths.
 .sp
-You can override the location of the labelfile using the \fI\-f\fP flag.
+You can override the location of the labelfile using the \fB\-f\fP flag.
 This can be a way for you to use different sets of labels/passphrases
 with a different \(aqmaster\(aq password for each set.
-.SS All options
+.SH GOT EMACS? YOU CAN USE THE EMACS WRAPPER
 .sp
-.nf
-.ft C
-DisPass 0.1a7 \- http://dispass.babab.nl/
-
-When DisPass is executed as \(aqgdispass\(aq or \(aqdispass \-g\(aq,
-the graphical version will be started.
-
-USAGE: dispass [\-cghoV] [\-f labelfile]
-       dispass [\-co] [\-l length] label [label2] [label3] [...]
-       gdispass
-
-Options:
-\-c, \-\-create    use if this passphrase is new (check input PW)
-\-g, \-\-gui       start guided graphical version of DisPass
-\-h, \-\-help      show this help and exit
-\-o, \-\-output    output passphrases to stdout (instead of the
-                more secure way of displaying via curses)
-\-V, \-\-version   show full version information and exit
-
-\-f <labelfile>, \-\-file=<labelfile>
-                set location of labelfile (default: ~/.dispass)
-\-l <length>, \-\-length=<length>
-                set length of passphrase (default: 30, max: 171)
-.ft P
-.fi
-.SH USING THE GRAPHICAL VERSION
+If you have Emacs you can use the Emacs wrapper written by Tom Willemsen
+(ryuslash). Read more about it in the README of the \(aqemacs/\(aq folder.
+.SH SUPPORT / IDEAS / QUESTIONS / SUGGESTIONS
 .sp
-No info yet.
+Please use the Issue tracker at github:
+\fI\%https://github.com/babab/DisPass/issues\fP
+.sp
+You can also visit #dispass at OFTC (irc.oftc.net) with your favortie
+IRC client.
 .SH SOFTWARE LICENSE
 .sp
 Copyright (c) 2011\-2012 Benjamin Althues <\fI\%benjamin@babab.nl\fP>

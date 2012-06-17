@@ -1,26 +1,26 @@
 # vim: set et ts=4 sw=4 sts=4 ai:
 
 from distutils.core import setup
+import dispass.dispass
 
-from dispass.dispass import __version__
-
-long_desc = '''
-DisPass is a cross-platform password generator you can use to create
-unique passwords for logging in to websites, servers
-or any other kind of thing that requires login.
-
-It doesn't keep your passwords in a database but rather lets you generate
-a unique password formed from a label, an optional salt and a master password.
+long_desc = '''DisPass is a passphrase generator for GNU/Linux, \*BSD, MacOS X
+and Windows.
+It enables you to generate unique passphrases formed from a master password
+and a label, helping you get rid of the bad habit of using a single password
+for multiple websites. When using a different passphrase for every website,
+the chance of abuse of your password on other sites (when a website leaks it)
+is eliminated.
+Dispass is a console application, but also has a simple graphical interface.
 '''
 
 setup(
     name='DisPass',
-    version=__version__,
-    description='Generate and disperse/dispell passwords',
-    author='Benjamin Althues',
+    version=dispass.dispass.__version__,
+    description=dispass.dispass.__doc__,
+    author=dispass.dispass.__author__,
     author_email='benjamin@babab.nl',
-    url='http://pypi.python.org/pypi/DisPass/',
-    download_url='http://bitbucket.org/babab/dispass',
+    url='http://dispass.babab.nl/',
+    download_url='http://pypi.python.org/pypi/DisPass/',
     packages = ['dispass'],
     license='ISC',
     long_description=long_desc,
