@@ -75,7 +75,7 @@ class CLI:
         while True:
             inp = getpass.getpass()
             if self.promptDouble:
-                inp2 = getpass.getpass("Again:")
+                inp2 = getpass.getpass("Password (again): ")
                 if inp == inp2:
                     break;
                 else:
