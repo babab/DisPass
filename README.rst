@@ -27,9 +27,9 @@ Here are some definitions which may help you understand the rest of the
 documentation better.
 
 label
-   A label is a string that you use to identify the password.
-   This can be a domainname of the service the password is used for
-   like e.g. 'google.com'.
+   A label is a string that you use to identify the passphrase.
+   This can be a domainname of the service the passphrase is used for,
+   e.g. 'google.com'.
 
 Since this program asks for a password/passphrase to generate another
 password/passphrase, things may get a bit confusing. I've dediced to use the
@@ -209,7 +209,7 @@ Support / ideas / questions / suggestions
 Please use the Issue tracker at github:
 https://github.com/babab/DisPass/issues
 
-You can also visit #dispass at OFTC (irc.oftc.net) with your favortie
+You can also visit #dispass at OFTC (irc.oftc.net) with your favorite
 IRC client.
 
 
