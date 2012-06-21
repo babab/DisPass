@@ -93,7 +93,7 @@ def main(argv):
                 sys.exit(1)
             console.setLength(length)
         elif o in ("-f", "--file"):
-            lf = labelfile.FileHandler(a)
+            lf = labelfile.FileHandler(file_location=a)
             if lf.file_found:
                 console.interactive(lf.labels)
             else:
