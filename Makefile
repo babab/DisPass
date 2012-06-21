@@ -1,6 +1,5 @@
 MAN_PATH	= /usr/share/man/man1
-VERSION		= 0.1
-VERSION_FULL	= 0.1a7
+VERSION		= 0.1a7
 
 make:
 	@echo make install
@@ -16,18 +15,18 @@ rm_pyc:
 doc_clean: rm_pyc
 	cd sphinx-doc/root/; make clean
 	cd sphinx-doc/en/; make clean
-	cd sphinx-doc/nl/; make clean
+	#cd sphinx-doc/nl/; make clean
 
 doc: doc_clean
 	cd sphinx-doc/root/; make html
 	cd sphinx-doc/en/; make html
-	cd sphinx-doc/nl/; make html
+	#cd sphinx-doc/nl/; make html
 	rm -rf doc/html
 	mkdir -p doc
 	mv sphinx-doc/root/_build/html doc/html
 	mkdir -p doc/html/$(VERSION)
 	mv sphinx-doc/en/_build/html doc/html/$(VERSION)/en
-	mv sphinx-doc/nl/_build/html doc/html/$(VERSION)/nl
+	#mv sphinx-doc/nl/_build/html doc/html/$(VERSION)/nl
 	make doc_clean
 
 man: rm_pyc
@@ -40,7 +39,7 @@ dist: rm_pyc
 	python setup.py sdist
 
 install: dist
-	pip install --upgrade dist/DisPass-$(VERSION_FULL).tar.gz
+	pip install --upgrade dist/DisPass-$(VERSION).tar.gz
 	gzip -c dispass.1 > dispass.1.gz
 	mv dispass.1.gz $(MAN_PATH)/
 	make clean
