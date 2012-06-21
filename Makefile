@@ -26,6 +26,7 @@ doc: doc_clean
 	mv sphinx-doc/root/_build/html doc/html
 	mkdir -p doc/html/$(VERSION)
 	mv sphinx-doc/en/_build/html doc/html/$(VERSION)/en
+	mv doc/html/index.html doc/html/all.html
 	#mv sphinx-doc/nl/_build/html doc/html/$(VERSION)/nl
 	make doc_clean
 

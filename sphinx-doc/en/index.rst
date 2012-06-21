@@ -1,6 +1,6 @@
 Show all versions_ | Language: **English**
 
-.. _`versions`: ../../index.html
+.. _`versions`: ../../all.html
 
 .. include:: ../../README.rst
 
