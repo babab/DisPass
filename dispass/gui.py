@@ -20,6 +20,7 @@ except ImportError:
     hasTk = False
 
 import dispass
+import digest
 
 versionStr = 'g%s' % dispass.versionStr
 
@@ -120,7 +121,7 @@ class GUI:
             return
 
         # All checks passed, create digest
-        h = dispass.digest(label + passwordin1)
+        h = digest.digest(label + passwordin1)
         self.result.config(fg="black", readonlybackground="green")
         self.passwordout.set(h)
 
