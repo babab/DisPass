@@ -93,7 +93,7 @@ def main(argv):
                 sys.exit(1)
             console.setLength(length)
         elif o in ("-f", "--file"):
-            lf = labelfile.Parse(a)
+            lf = labelfile.FileHandler(a)
             if lf.file_found:
                 console.interactive(lf.labels)
             else:
@@ -115,7 +115,7 @@ def main(argv):
     if labels:
         console.interactive(labels)
     else:
-        lf = labelfile.Parse()
+        lf = labelfile.FileHandler()
         if lf.file_found:
             console.interactive(lf.labels)
         else:
