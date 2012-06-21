@@ -1,5 +1,5 @@
 MAN_PATH	= /usr/share/man/man1
-VERSION		= 0.1a7
+VERSION		= 0.1a8
 
 make:
 	@echo make install

@@ -1,7 +1,7 @@
 ChangeLog
 ==============================================================================
 
-**v0.1-beta**  to be released (currently in Github and Bitbucket)
+**v0.1-alpha-8**  released June 21st, 2012
 
  * Add dispass.el emacs wrapper, authored by Tom Willemsen (ryuslash)
  * Allow generating a list of passphrases with varying lengths

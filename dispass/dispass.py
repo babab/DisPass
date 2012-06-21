@@ -17,8 +17,8 @@
 __docformat__ = 'restructuredtext'
 __author__ = "Benjamin Althues"
 __copyright__ = "Copyright (C) 2011-2012 Benjamin Althues"
-__version_info__ = (0, 1, 0, 'alpha', 7)
-__version__ = '0.1a7'
+__version_info__ = (0, 1, 0, 'alpha', 8)
+__version__ = '0.1a8'
 versionStr = 'DisPass ' + __version__
 
 import getopt
