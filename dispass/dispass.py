@@ -71,7 +71,7 @@ def main(argv):
     except getopt.GetoptError, err:
         print str(err), "\n"
         usage()
-        sys.exit(2)
+        return 2
 
     if args:
         labels = args
@@ -90,7 +90,7 @@ def main(argv):
             except ValueError:
                 print 'error: length must be a number\n'
                 usage()
-                sys.exit(1)
+                return 1
             console.setLength(length)
         elif o in ("-f", "--file"):
             lf = labelfile.FileHandler(file_location=a)
@@ -105,10 +105,10 @@ def main(argv):
             console.setCurses(False)
         elif o in ("-h", "--help"):
             usage()
-            sys.exit()
+            return
         elif o in ("-V", "--version"):
             print versionStr, '-', __version_info__, 'running on', os.name
-            sys.exit()
+            return
         else:
             assert False, "unhandled option"
 
@@ -121,7 +121,7 @@ def main(argv):
         else:
             print 'error: could not load labelfile at %s\n' % lf.file_location
             usage()
-            sys.exit(1)
+            return 1
 
 if __name__ == '__main__':
-    main(sys.argv)
+    sys.exit(main(sys.argv))

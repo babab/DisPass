@@ -20,4 +20,4 @@ import sys
 from dispass import dispass
 
 if __name__ == '__main__':
-    dispass.main(sys.argv)
+    sys.exit(dispass.main(sys.argv))
