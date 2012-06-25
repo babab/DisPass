@@ -70,10 +70,19 @@ class CLI:
         self.promptDouble = promptDouble
 
     def passwordPrompt(self):
-        '''Prompt for password. Returns password'''
+        '''Prompt for password.
+
+        :Return: Password string.
+        '''
 
         while True:
             inp = getpass.getpass()
+
+            if len(inp) < 8:
+                print 'Password must contain at least 8 characters.',
+                print 'Please try again.'
+                continue
+
             if self.promptDouble:
                 inp2 = getpass.getpass("Password (again): ")
                 if inp == inp2:
