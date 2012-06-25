@@ -18,6 +18,6 @@ Releases
 
 __ `DisPass 0.1-alpha-8`_
 
-.. include:: ../../ChangeLog
+.. include:: ../../ChangeLog.rst
 
 .. vim: set et ts=3 sw=3 sts=3 ai:
