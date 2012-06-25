@@ -1,1 +1,0 @@
-.. include:: ../../emacs/README.rst

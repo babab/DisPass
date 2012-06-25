@@ -199,8 +199,10 @@ with a different 'master' password for each set.
 Got Emacs? You can use the Emacs wrapper
 ========================================
 
-If you have Emacs you can use the Emacs wrapper written by Tom Willemsen
-(ryuslash). Read more about it in the README of the 'emacs/' folder.
+If you have Emacs you can use the Emacs wrapper created and maintained by
+Tom Willemsen (ryuslash).
+
+You can find it at: https://github.com/ryuslash/dispass.el
 
 
 Support / ideas / questions / suggestions

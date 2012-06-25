@@ -1,6 +1,11 @@
 ChangeLog
 ==============================================================================
 
+**Development version** currently in Github / Bitbucket
+
+ * Make DisPass run from Python shell without exiting
+ * Remove dispass.el emacs wrapper, maintained separately by Tom Willemsen
+
 **v0.1-alpha-8**  released June 21st, 2012
 
  * Add dispass.el emacs wrapper, authored by Tom Willemsen (ryuslash)
