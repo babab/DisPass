@@ -213,7 +213,7 @@ Support / ideas / questions / suggestions
 Please use the Issue tracker at github:
 https://github.com/babab/DisPass/issues
 
-You can also visit #dispass at OFTC (irc.oftc.net) with your favorite
+You can also visit #dispass at Freenode and/or OFTC with your favorite
 IRC client.
 
 
