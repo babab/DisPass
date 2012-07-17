@@ -1,4 +1,4 @@
-.TH "DISPASS" "1" "June 25, 2012" "0.1" "DisPass"
+.TH "DISPASS" "1" "July 17, 2012" "0.1" "DisPass"
 .SH NAME
 dispass \- DisPass Documentation
 .
@@ -30,6 +30,14 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 ..
 .\" Man page generated from reStructuredText.
 .
+.SH SYNOPSIS
+.sp
+dispass [\-cghoV] [\-f <labelfile>] [\-s <string>]
+.sp
+dispass [\-co] [\-l length] <label> [<label2>] [<label3>] [...]
+.sp
+gdispass
+.SH SUMMARY
 .sp
 DisPass is a passphrase generator for GNU/Linux, *BSD, MacOS X and Windows.
 It enables you to generate unique passphrases formed from a master password
@@ -38,25 +46,7 @@ for multiple websites. When using a different passphrase for every website,
 the chance of abuse of your password on other sites (when a website leaks it)
 is eliminated.
 Dispass is a console application, but also has a simple graphical interface.
-.sp
-DisPass has several homes on the Internet:
-.INDENT 0.0
-.TP
-.B Main website
-\fI\%http://dispass.babab.nl\fP
-.TP
-.B The cheeseshop (PyPI) project page
-\fI\%http://pypi.python.org/pypi/DisPass/\fP
-.TP
-.B Github repository and Issue tracker
-\fI\%https://github.com/babab/DisPass/\fP
-.TP
-.B Bitbucket repository
-\fI\%https://bitbucket.org/babab/dispass/\fP
-.UNINDENT
-.sp
-Here are some definitions which may help you understand the rest of the
-documentation better.
+.SH DOCUMENTATION
 .INDENT 0.0
 .TP
 .B label
@@ -79,143 +69,12 @@ password, this is the one I mean.
 With \(aqpassphrase\(aq I always mean the output passphrase, i.e. the passphrase
 that is unique and generated from a label and password
 .UNINDENT
-.SH DOWNLOADING/INSTALLING
-.sp
-A recent version of Python 2 is required for running dispass.
-.SS Using pip to download from the Python Package Index
-.sp
-The recommended way is to download and install directly from the PyPI
-repository using pip:
-.sp
-.nf
-.ft C
-$ sudo pip install dispass
-.ft P
-.fi
-.sp
-You must have python\(aqs docutils installed in able to do so.
-This will install the dispass module in python\(aqs dist\-packages folder.
-You can now run dispass using the \(aqdispass\(aq and \(aqgdispass\(aq scripts
-placed under \(aq/usr/local/bin/\(aq or \(aq/usr/bin/\(aq.
-.sp
-The PyPI project page is at \fI\%http://pypi.python.org/pypi/DisPass/\fP
-.SS Latest (development) version
-.sp
-Clone git repo:
-.sp
-.nf
-.ft C
-$ git clone git://github.com/babab/DisPass.git
-$ cd dispass
-.ft P
-.fi
-.sp
-Then you can either:
-.INDENT 0.0
-.IP 1. 3
-Install through pip:
-.sp
-.nf
-.ft C
-$ python setup.py sdist
-$ sudo pip install dist/DisPass\-<version>.tar.gz
-.ft P
-.fi
-.IP 2. 3
-Install manually:
-.sp
-.nf
-.ft C
-$ sudo python setup.py install
-.ft P
-.fi
-.UNINDENT
-.SH UPGRADE OR UNINSTALL
-.sp
-You can easily upgrade to newer versions using pip:
-.sp
-.nf
-.ft C
-$ sudo pip install dispass \-\-upgrade
-.ft P
-.fi
-.sp
-If you have installed dispass using pip, you can easily uninstall at
-any moment:
-.sp
-.nf
-.ft C
-$ sudo pip uninstall dispass
-.ft P
-.fi
-.SH USING THE COMMAND LINE APP
 .sp
 When DisPass is executed as \(aqgdispass\(aq or \(aqdispass \-g\(aq,
 the graphical version will be started.
 .sp
 You can use dispass by entering your labels after the dispass command and/or
 you can store your labels in a textfile called a labelfile.
-.INDENT 0.0
-.TP
-.B USAGE
-dispass [\-cghoV] [\-f labelfile]
-.sp
-dispass [\-co] [\-l length] label [label2] [label3] [...]
-.sp
-gdispass
-.UNINDENT
-.sp
-Short options:
-.INDENT 0.0
-.TP
-.B \-c
-use if this passphrase is new (check input PW)
-.TP
-.B \-g
-start guided graphical version of DisPass
-.TP
-.B \-h
-show this help and exit
-.TP
-.B \-o
-output passphrases to stdout
-(instead of the more secure way of displaying via curses)
-.TP
-.B \-V
-show full version information and exit
-.TP
-.BI \-f \ <labelfile>
-set location of labelfile (default: ~/.dispass)
-.TP
-.BI \-l \ <length>
-set length of passphrase (default: 30, max: 171)
-.UNINDENT
-.sp
-Long options:
-.INDENT 0.0
-.TP
-.B \-\-create
-use if this passphrase is new (check input PW)
-.TP
-.B \-\-gui
-start guided graphical version of DisPass
-.TP
-.B \-\-help
-show this help and exit
-.TP
-.B \-\-output
-output passphrases to stdout
-(instead of the more secure way of displaying via curses)
-.TP
-.B \-\-version
-show full version information and exit
-.TP
-.BI \-\-file \ <labelfile>
-set location of labelfile (default: ~/.dispass)
-.TP
-.BI \-\-length \ <length>
-set length of passphrase (default: 30, max: 171)
-.UNINDENT
 .SS Using dispass to create one or more passphrases
 .sp
 You can start using dispass for e.g. google.com like this:
@@ -259,7 +118,7 @@ Generating passphrases for multiple labels is just as easy:
 $ dispass google.com yahoo.com
 .ft P
 .fi
-.SS Using a labelfile
+.SH USING A LABELFILE
 .sp
 When dispass is run without arguments it will try to find a labelfile.
 The location of this file varies and depends on the platform type you use:
@@ -296,34 +155,83 @@ passphrases with varying lengths.
 You can override the location of the labelfile using the \fB\-f\fP flag.
 This can be a way for you to use different sets of labels/passphrases
 with a different \(aqmaster\(aq password for each set.
-.SH GOT EMACS? YOU CAN USE THE EMACS WRAPPER
+.SH OPTIONS
+.SS Short options
+.INDENT 0.0
+.TP
+.B \-c
+use if this passphrase is new (check input PW)
+.TP
+.B \-g
+start guided graphical version of DisPass
+.TP
+.B \-h
+show this help and exit
+.TP
+.B \-o
+output passphrases to stdout
+(instead of the more secure way of displaying via curses)
+.TP
+.B \-V
+show full version information and exit
+.TP
+.BI \-l \ <length>
+set length of passphrase (default: 30, max: 171)
+.TP
+.BI \-s \ <string>
+dispass label from file that uniquely matches <string>
+.TP
+.BI \-f \ <labelfile>
+set location of labelfile (default: ~/.dispass)
+.UNINDENT
+.SS Long options
+.INDENT 0.0
+.TP
+.B \-\-create
+use if this passphrase is new (check input PW)
+.TP
+.B \-\-gui
+start guided graphical version of DisPass
+.TP
+.B \-\-help
+show this help and exit
+.TP
+.B \-\-output
+output passphrases to stdout
+(instead of the more secure way of displaying via curses)
+.TP
+.B \-\-version
+show full version information and exit
+.TP
+.BI \-\-length \ <length>
+set length of passphrase (default: 30, max: 171)
+.TP
+.BI \-\-search \ <string>
+dispass label from file that uniquely matches <string>
+.TP
+.BI \-\-file \ <labelfile>
+set location of labelfile (default: ~/.dispass)
+.UNINDENT
+.SH SEE ALSO
+.INDENT 0.0
+.TP
+.B Main website with full documentation
+\fI\%http://dispass.babab.nl\fP
+.TP
+.B The cheeseshop (PyPI) project page
+\fI\%http://pypi.python.org/pypi/DisPass/\fP
+.TP
+.B Github repository and Issue tracker
+\fI\%https://github.com/babab/DisPass/\fP
+.TP
+.B IRC
+#dispass at Freenode (chat.freenode.net)
 .sp
-If you have Emacs you can use the Emacs wrapper created and maintained by
-Tom Willemsen (ryuslash).
-.sp
-You can find it at: \fI\%https://github.com/ryuslash/dispass.el\fP
-.SH SUPPORT / IDEAS / QUESTIONS / SUGGESTIONS
-.sp
-Please use the Issue tracker at github:
-\fI\%https://github.com/babab/DisPass/issues\fP
-.sp
-You can also visit #dispass at OFTC (irc.oftc.net) with your favorite
-IRC client.
-.SH SOFTWARE LICENSE
-.sp
-Copyright (c) 2011\-2012 Benjamin Althues <\fI\%benjamin@babab.nl\fP>
-.sp
-Permission to use, copy, modify, and distribute this software for any
-purpose with or without fee is hereby granted, provided that the above
-copyright notice and this permission notice appear in all copies.
-.sp
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
-WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
-MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
-ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
-WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
-ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
-OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+#dispass at OFTC (irc.oftc.net)
+.TP
+.B Emacs wrapper
+\fI\%https://github.com/ryuslash/dispass.el\fP
+.UNINDENT
 .SH AUTHOR
 Benjamin Althues
 .SH COPYRIGHT
