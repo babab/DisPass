@@ -109,9 +109,9 @@ the graphical version will be started.
 You can use dispass by entering your labels after the dispass command and/or
 you can store your labels in a textfile called a labelfile.
 
-:USAGE: dispass [-cghoV] [-f labelfile]
+:USAGE: dispass [-cghoV] [-f <labelfile>] [-s <string>]
 
-        dispass [-co] [-l length] label [label2] [label3] [...]
+        dispass [-co] [-l length] <label> [<label2>] [<label3>] [...]
 
         gdispass
 
@@ -123,8 +123,9 @@ Short options:
 -o                  output passphrases to stdout
                     (instead of the more secure way of displaying via curses)
 -V                  show full version information and exit
--f <labelfile>      set location of labelfile (default: ~/.dispass)
 -l <length>         set length of passphrase (default: 30, max: 171)
+-s <string>         dispass label from file that uniquely matches <string>
+-f <labelfile>      set location of labelfile (default: ~/.dispass)
 
 Long options:
 
@@ -134,8 +135,9 @@ Long options:
 --output            output passphrases to stdout
                     (instead of the more secure way of displaying via curses)
 --version           show full version information and exit
---file <labelfile>  set location of labelfile (default: ~/.dispass)
 --length <length>   set length of passphrase (default: 30, max: 171)
+--search <string>   dispass label from file that uniquely matches <string>
+--file <labelfile>  set location of labelfile (default: ~/.dispass)
 
 
 Using dispass to create one or more passphrases

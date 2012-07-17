@@ -37,7 +37,7 @@ def usage():
     print "When DisPass is executed as 'gdispass' or 'dispass -g',"
     print 'the graphical version will be started.'
     print
-    print 'USAGE: dispass [-cghoV [-s <string>]] [-f <labelfile>]'
+    print 'USAGE: dispass [-cghoV [-f <labelfile>] [-s <string>]'
     print '       dispass [-co] [-l <length>] <label> [<label2>] [...]'
     print '       gdispass'
     print
