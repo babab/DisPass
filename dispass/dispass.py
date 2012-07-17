@@ -118,8 +118,8 @@ def main(argv):
                             % (execname, a)
                     return
                 elif isinstance(result, int):
-                    print '%s: multiple labels found, please be more specific' \
-                            % execname
+                    print '%s: %s labels found, please be more specific' \
+                            % (execname, result)
                     return
 
                 console.interactive(result)
