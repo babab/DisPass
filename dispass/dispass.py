@@ -37,8 +37,8 @@ def usage():
     print "When DisPass is executed as 'gdispass' or 'dispass -g',"
     print 'the graphical version will be started.'
     print
-    print 'USAGE: dispass [-cghoV] [-f labelfile]'
-    print '       dispass [-co] [-l length] label [label2] [label3] [...]'
+    print 'USAGE: dispass [-cghoV [-s <string>]] [-f <labelfile>]'
+    print '       dispass [-co] [-l <length>] <label> [<label2>] [...]'
     print '       gdispass'
     print
     print 'Options:'
@@ -49,10 +49,12 @@ def usage():
     print '                more secure way of displaying via curses)'
     print '-V, --version   show full version information and exit'
     print
-    print '-f <labelfile>, --file=<labelfile>'
-    print '                set location of labelfile (default: ~/.dispass)'
     print '-l <length>, --length=<length>'
     print '                set length of passphrase (default: 30, max: 171)'
+    print '-s <string>, --search=<string>'
+    print ' ' * 15, 'dispass label from file that uniquely matches <string>'
+    print '-f <labelfile>, --file=<labelfile>'
+    print '                set location of labelfile (default: ~/.dispass)'
 
 
 def main(argv):
@@ -62,12 +64,14 @@ def main(argv):
         - `argv`: List of command arguments
     '''
 
+    execname = argv[0].split('/').pop()
+    f_flag = None
     console = cli.CLI()
 
     try:
-        opts, args = getopt.getopt(argv[1:], "cf:ghl:oV",
+        opts, args = getopt.getopt(argv[1:], "cf:ghl:os:V",
                 ["create", "file=", "gui", "help", "length=", "output",
-                    "version"])
+                    "search=", "version"])
     except getopt.GetoptError, err:
         print str(err), "\n"
         usage()
@@ -95,12 +99,35 @@ def main(argv):
         elif o in ("-f", "--file"):
             lf = labelfile.FileHandler(file_location=a)
             if lf.file_found:
-                console.interactive(lf.labels)
+                f_flag = a
             else:
                 print 'error: could not load labelfile at "%s"\n' \
                         % lf.file_location
-                usage()
-            sys.exit(1)
+                return 1
+        elif o in ("-s", "--search"):
+            if f_flag:
+                lf = labelfile.FileHandler(file_location=f_flag)
+            else:
+                lf = labelfile.FileHandler()
+
+            if lf.file_found:
+                result = lf.search(a)
+
+                if not result:
+                    print '%s: could not find a label with "%s" in labelfile' \
+                            % (execname, a)
+                    return
+                elif isinstance(result, int):
+                    print '%s: multiple labels found, please be more specific' \
+                            % execname
+                    return
+
+                console.interactive(result)
+                return
+            else:
+                print 'error: could not load labelfile at "%s"\n' \
+                        % lf.file_location
+                return 1
         elif o in ("-o", "--output"):
             console.setCurses(False)
         elif o in ("-h", "--help"):
@@ -115,9 +142,14 @@ def main(argv):
     if labels:
         console.interactive(labels)
     else:
-        lf = labelfile.FileHandler()
+        if f_flag:
+            lf = labelfile.FileHandler(file_location=f_flag)
+        else:
+            lf = labelfile.FileHandler()
+
         if lf.file_found:
             console.interactive(lf.labels)
+            return
         else:
             print 'error: could not load labelfile at %s\n' % lf.file_location
             usage()

@@ -126,6 +126,28 @@ class FileHandler:
         if self.filehandle:
             self.filehandle.close()
 
+    def search(self, search_string):
+        if not self.labels:
+            self.parse()
+
+        found = []
+        count = 0
+
+        for label, length in self.labels.iteritems():
+            if search_string in label:
+                found.append(label)
+                found_length = length
+                count += 1
+
+        if not found:
+            return False
+
+        if count > 1:
+            return count
+
+        return {found.pop(): found_length}
+
+
 if __name__ == '__main__':
     fh = FileHandler(write=True)
 
