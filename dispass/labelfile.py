@@ -151,7 +151,8 @@ class FileHandler:
         label_list = []
         for label, length in self.labels.iteritems():
             label_list.append(label)
-            max_length = len(max(label_list, key=len))
+
+        max_length = len(max(label_list, key=len))
         return max_length
 
     def printLabels(self):
