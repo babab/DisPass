@@ -86,8 +86,7 @@ def main(argv):
         return 1
 
     if l_flag:
-        for i in sorted(lf.parse().labels):
-            print i
+        lf.printLabels()
 
 if __name__ == '__main__':
     sys.exit(main(sys.argv))
