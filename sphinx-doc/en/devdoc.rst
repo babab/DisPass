@@ -29,6 +29,12 @@ dispass.gui
 .. automodule:: dispass.gui
    :members:
 
+dispass.dispass_label
+==============================================================================
+
+.. automodule:: dispass.dispass_label
+   :members:
+
 dispass.labelfile
 ==============================================================================
 
