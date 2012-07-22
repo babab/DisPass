@@ -35,6 +35,7 @@ def usage():
     print '-V, --version   show full version information and exit'
     print '-f <labelfile>, --file=<labelfile>'
     print '                set location of labelfile (default: ~/.dispass)'
+    print "--script        optimize input/output for 'wrapping' dispass"
 
 def main(argv):
     '''Entry point and handler of command options and arguments
@@ -45,10 +46,11 @@ def main(argv):
 
     f_flag = None
     l_flag = None
+    script_flag = None
 
     try:
         opts, args = getopt.getopt(argv[1:], "f:hlV",
-                ["file", "help", "list", "version"])
+                ["file", "help", "list", "script", "version"])
     except getopt.GetoptError, err:
         print str(err), "\n"
         usage()
@@ -57,6 +59,9 @@ def main(argv):
     for o, a in opts:
         if o in ("-h", "--help"):
             usage()
+            return
+        elif o in ("-V", "--version"):
+            print versionStr, '-', __version_info__, 'running on', os.name
             return
         elif o in ("-f", "--file"):
             lf = labelfile.FileHandler(file_location=a)
@@ -68,10 +73,8 @@ def main(argv):
                 return 1
         elif o in ("-l", "--list"):
             l_flag = True
-
-        elif o in ("-V", "--version"):
-            print versionStr, '-', __version_info__, 'running on', os.name
-            return
+        elif o in "--script":
+            script_flag = True
         else:
             assert False, "unhandled option"
 
@@ -86,7 +89,7 @@ def main(argv):
         return 1
 
     if l_flag:
-        lf.printLabels()
+        lf.printLabels(script_flag)
 
 if __name__ == '__main__':
     sys.exit(main(sys.argv))

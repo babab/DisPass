@@ -1,3 +1,5 @@
+'''Dispass labelfile handler'''
+
 # Copyright (c) 2011-2012 Benjamin Althues <benjamin@babab.nl>
 #
 # Permission to use, copy, modify, and distribute this software for any
@@ -150,14 +152,41 @@ class FileHandler:
 
         return len(max(self.labels.keys(), key=len))
 
+    def printLabels(self, fixed_columns=False):
+        '''Print a formatted table of labelfile contents
 
-    def printLabels(self):
-        divlen = self.getLongestLabel() + 2
+        :Parameters:
+            - `fixed_columns`: Boolean.
 
-        print '{:{fill}} {}'.format('Label', 'Length', fill=divlen)
-        print '{:{fill}} {}'.format('-' * (divlen - 2), '------', fill=divlen)
-        for label, length in self.labels.iteritems():
-            print '{:{fill}} {}'.format(label, length, fill=divlen)
+        If fixed columns is true the output will be optimized for easy
+        parsing by other programs and scripts by not printing the header
+        and always printing one entry on a single line using the
+        following positions:
+
+        * Column 1-50: label (50 chars)
+        * Column 52-54: length (3 chars wide)
+        * Column 56-70: hash algo (15 chars wide)
+
+        If fixed columns is false an ascii table is printed with a variable
+        width depending on the length of the longest label. The table has
+        a header but does not display the hash algo until support for multiple
+        hashing algos is added.
+        '''
+        if fixed_columns:
+            for label, length in self.labels.iteritems():
+                print '{:50} {:3} {:15}'.format(label[:50], str(length)[:3],
+                                                 "dispass1")
+        else:
+            divlen = self.getLongestLabel()
+
+            print '+-{:{fill}}-+--------+'.format('-' * divlen, fill=divlen)
+            print '| {:{fill}} | Length |'.format('Label', fill=divlen)
+
+            print '+-{:{fill}}-+--------+'.format('-' * divlen, fill=divlen)
+            for label, length in self.labels.iteritems():
+                print '| {:{fill}} |    {:3} |'.format(label, length,
+                        fill=divlen)
+            print '+-{:{fill}}-+--------+'.format('-' * divlen, fill=divlen)
 
 
 if __name__ == '__main__':
