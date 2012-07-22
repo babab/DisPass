@@ -27,7 +27,7 @@ __version_info__ = dispass.__version_info__
 def usage():
     '''Print help / usage information'''
 
-    print 'USAGE: dispass-label [-hlV] [-f <labelfile>]'
+    print 'USAGE: dispass-label [-hlV] [-f <labelfile>] [--script]'
     print
     print 'Options:'
     print '-h, --help      show this help and exit'
@@ -35,7 +35,7 @@ def usage():
     print '-V, --version   show full version information and exit'
     print '-f <labelfile>, --file=<labelfile>'
     print '                set location of labelfile (default: ~/.dispass)'
-    print "--script        optimize input/output for 'wrapping' dispass"
+    print "--script        optimize input/output for 'wrapping' dispass-label"
 
 def main(argv):
     '''Entry point and handler of command options and arguments

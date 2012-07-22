@@ -32,6 +32,9 @@ class CLI:
     promptDouble = False
     '''Boolean. Prompt for password twice'''
 
+    scriptableIO = None
+    '''Boolean. Optimize input/output for wrapping dispass'''
+
     def __init__(self):
         '''Set `useCurses` to True or False.
 
@@ -51,6 +54,15 @@ class CLI:
             self.useCurses = False
         else:
             self.useCurses = useCurses
+
+    def setScriptableIO(self, scriptableIO=True):
+        '''Optimize input/output for wrapping dispass in a script or program
+
+        :Parameters:
+            - `sriptableIO`: Boolean
+        '''
+
+        self.scriptableIO = scriptableIO
 
     def setLength(self, length):
         '''Optionally override length of output passphrase
@@ -145,4 +157,7 @@ class CLI:
             curses.endwin()
         else:
             for label, passphrase in hashedLabels.iteritems():
-                print "{:{fill}} {}".format(label, passphrase, fill=divlen)
+                if self.scriptableIO:
+                    print '{:50} {}'.format(label[:50], passphrase)
+                else:
+                    print "{:{fill}} {}".format(label, passphrase, fill=divlen)
