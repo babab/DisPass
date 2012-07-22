@@ -34,7 +34,7 @@ def usage():
     print '-l, --list      print all labels and options found in labelfile'
     print '-V, --version   show full version information and exit'
     print '-f <labelfile>, --file=<labelfile>'
-    print '                set location of labelfile (default: ~/.dispass)'
+    print '                set location of labelfile'
     print "--script        optimize input/output for 'wrapping' dispass-label"
 
 def main(argv):

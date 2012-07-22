@@ -54,7 +54,7 @@ def usage():
     print '-s <string>, --search=<string>'
     print ' ' * 15, 'dispass label from file that uniquely matches <string>'
     print '-f <labelfile>, --file=<labelfile>'
-    print '                set location of labelfile (default: ~/.dispass)'
+    print '                set location of labelfile'
     print "--script        optimize input/output for 'wrapping' dispass"
 
 
@@ -68,8 +68,6 @@ def main(argv):
     execname = argv[0].split('/').pop()
     console = cli.CLI()
     f_flag = None
-    o_flag = None
-    script_flag = None
 
     try:
         opts, args = getopt.getopt(argv[1:], "cf:ghl:os:V",

@@ -1,4 +1,4 @@
-.TH "DISPASS" "1" "July 22, 2012" "0.1" "DisPass"
+.TH "DISPASS" "1" "July 23, 2012" "0.1" "DisPass"
 .SH NAME
 dispass \- DisPass Documentation
 .
@@ -125,17 +125,30 @@ $ dispass google.com yahoo.com
 .SH USING A LABELFILE
 .sp
 When dispass is run without arguments it will try to find a labelfile.
-The location of this file varies and depends on the platform type you use:
+The location of this file varies and depends on the platform type you use,
+the file flag and the environment variables that may be set:
+.sp
+You can override the location of the labelfile using the \fB\-f\fP flag.
+This can be a way for you to use different sets of labels/passphrases
+with a different \(aqmaster\(aq password for each set.
 .INDENT 0.0
-.INDENT 3.5
-.INDENT 0.0
+.IP 1. 3
+If \-f flag is given, that value is used.
+.IP 2. 3
+If environment var DISPASS_LABELFILE is set, that value is used.
+.IP 3. 3
+If environment var XDG_DATA_HOME is set, \fB$XDG_DATA_HOME/dispass/labels\fP
+is used.
+.IP 4. 3
+If none of the above applies, the labelfile will default to the following
+locations:
+.INDENT 3.0
 .IP \(bu 2
-\fBGNU/Linux and Mac OS X\fP: \fB~/.dispass\fP
+\fBGNU/Linux and Mac OS X\fP: \fB~/.local/share/dispass/labels\fP
 .IP \(bu 2
-\fB*BSD and other Unixen\fP: \fB~/.dispass\fP
+\fB*BSD and other Unixen\fP: \fB~/.local/share/dispass/labels\fP
 .IP \(bu 2
-\fBWindows\fP:   \fBC:\eUsers\e<username>\e.dispass\fP
-.UNINDENT
+\fBWindows\fP:   \fBC:\eUsers\e<username>\e.local\eshare\edispass\elabels\fP
 .UNINDENT
 .UNINDENT
 .sp
@@ -155,10 +168,6 @@ yahoo.com
 .sp
 Now, when running \fBdispass\fP without arguments it will create two
 passphrases with varying lengths.
-.sp
-You can override the location of the labelfile using the \fB\-f\fP flag.
-This can be a way for you to use different sets of labels/passphrases
-with a different \(aqmaster\(aq password for each set.
 .SH OPTIONS
 .SS dispass
 .sp
@@ -188,7 +197,7 @@ set length of passphrase (default: 30, max: 171)
 dispass label from file that uniquely matches <string>
 .TP
 .BI \-f \ <labelfile>
-set location of labelfile (default: ~/.dispass)
+set location of labelfile
 .UNINDENT
 .sp
 Long options:
@@ -217,7 +226,7 @@ set length of passphrase (default: 30, max: 171)
 dispass label from file that uniquely matches <string>
 .TP
 .BI \-\-file \ <labelfile>
-set location of labelfile (default: ~/.dispass)
+set location of labelfile
 .TP
 .B \-\-script
 optimize input/output for \(aqwrapping\(aq dispass
@@ -237,7 +246,7 @@ print all labels and options found in labelfile
 show full version information and exit
 .TP
 .BI \-f \ <labelfile>
-set location of labelfile (default: ~/.dispass)
+set location of labelfile
 .UNINDENT
 .sp
 Long options:
@@ -253,7 +262,7 @@ print all labels and options found in labelfile
 show full version information and exit
 .TP
 .BI \-\-file\fB= <labelfile>
-set location of labelfile (default: ~/.dispass)
+set location of labelfile
 .TP
 .B \-\-script
 optimize input/output for \(aqwrapping\(aq dispass\-label

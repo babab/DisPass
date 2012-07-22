@@ -93,11 +93,23 @@ Using a labelfile
 =================
 
 When dispass is run without arguments it will try to find a labelfile.
-The location of this file varies and depends on the platform type you use:
+The location of this file varies and depends on the platform type you use,
+the file flag and the environment variables that may be set:
 
- * **GNU/Linux and Mac OS X**: ``~/.dispass``
- * **\*BSD and other Unixen**: ``~/.dispass``
- * **Windows**:   ``C:\Users\<username>\.dispass``
+You can override the location of the labelfile using the ``-f`` flag.
+This can be a way for you to use different sets of labels/passphrases
+with a different 'master' password for each set.
+
+1. If -f flag is given, that value is used.
+2. If environment var DISPASS_LABELFILE is set, that value is used.
+3. If environment var XDG_DATA_HOME is set, ``$XDG_DATA_HOME/dispass/labels``
+   is used.
+4. If none of the above applies, the labelfile will default to the following
+   locations:
+
+   * **GNU/Linux and Mac OS X**: ``~/.local/share/dispass/labels``
+   * **\*BSD and other Unixen**: ``~/.local/share/dispass/labels``
+   * **Windows**:   ``C:\Users\<username>\.local\share\dispass\labels``
 
 You can start by copying the labelfile from skel/dot.dispass to this location
 and editing it by adding your own labels. Or you can just start writing the
@@ -111,10 +123,6 @@ A typical labelfile might look like this::
 
 Now, when running ``dispass`` without arguments it will create two
 passphrases with varying lengths.
-
-You can override the location of the labelfile using the ``-f`` flag.
-This can be a way for you to use different sets of labels/passphrases
-with a different 'master' password for each set.
 
 
 OPTIONS
@@ -133,7 +141,7 @@ Short options:
 -V                  show full version information and exit
 -l <length>         set length of passphrase (default: 30, max: 171)
 -s <string>         dispass label from file that uniquely matches <string>
--f <labelfile>      set location of labelfile (default: ~/.dispass)
+-f <labelfile>      set location of labelfile
 
 Long options:
 
@@ -145,7 +153,7 @@ Long options:
 --version           show full version information and exit
 --length <length>   set length of passphrase (default: 30, max: 171)
 --search <string>   dispass label from file that uniquely matches <string>
---file <labelfile>  set location of labelfile (default: ~/.dispass)
+--file <labelfile>  set location of labelfile
 --script            optimize input/output for 'wrapping' dispass
 
 dispass-labels
@@ -156,14 +164,14 @@ Short options:
 -h                  show this help and exit
 -l                  print all labels and options found in labelfile
 -V                  show full version information and exit
--f <labelfile>      set location of labelfile (default: ~/.dispass)
+-f <labelfile>      set location of labelfile
 
 Long options:
 
 --help              show this help and exit
 --list              print all labels and options found in labelfile
 --version           show full version information and exit
---file=<labelfile>  set location of labelfile (default: ~/.dispass)
+--file=<labelfile>  set location of labelfile
 --script            optimize input/output for 'wrapping' dispass-label
 
 

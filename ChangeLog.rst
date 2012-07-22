@@ -3,6 +3,18 @@ ChangeLog
 
 **Development version** currently in Github / Bitbucket
 
+.. warning::
+
+    The default location of labelfile has changed from:
+
+    * **\*nix**:   ``~/.dispass``
+    * **Windows**: ``C:\Users\<username>\.dispass``
+
+    To the following location:
+
+    * **\*nix**:   ``~/.local/share/dispass/labels``
+    * **Windows**: ``C:\Users\<username>\.local\share\dispass\labels``
+
  * Change default location of labelfile
  * Add dispass `--script` option
  * Add dispass-label for managing labelfiles
