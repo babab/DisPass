@@ -15,6 +15,7 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 import datetime
+import os
 from os.path import expanduser
 
 from dispass import versionStr
@@ -43,16 +44,25 @@ class FileHandler:
     labels = None
     '''Dict of `{label: length}`'''
 
-    def __init__(self, write=False, file_location='~/.dispass'):
+    def __init__(self, write=False, file_location=None):
         '''Open file; if file is found: strip comments and parse()'''
 
-        self.file_location = file_location
+        if file_location:
+            self.file_location = file_location
+        else:
+            if os.getenv('DISPASS_LABELFILE'):
+                self.file_location = os.getenv('DISPASS_LABELFILE')
+            elif os.getenv('XDG_DATA_HOME'):
+                self.file_location = os.getenv('XDG_DATA_HOME') + \
+                        '/dispass/labels'
+            else:
+                self.file_location = '~/.local/share/dispass/labels'
 
         try:
             if write:
-                self.filehandle = open(expanduser(file_location), 'r+')
+                self.filehandle = open(expanduser(self.file_location), 'r+')
             else:
-                self.filehandle = open(expanduser(file_location), 'r')
+                self.filehandle = open(expanduser(self.file_location), 'r')
             self.file_found = True
         except IOError:
             self.file_found = False
