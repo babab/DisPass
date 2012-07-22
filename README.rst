@@ -100,7 +100,7 @@ any moment::
    $ sudo pip uninstall dispass
 
 
-Using the command line app
+Using the *dispass* command line app
 ==============================================================================
 
 When DisPass is executed as 'gdispass' or 'dispass -g',
@@ -109,11 +109,12 @@ the graphical version will be started.
 You can use dispass by entering your labels after the dispass command and/or
 you can store your labels in a textfile called a labelfile.
 
-:USAGE: dispass [-cghoV] [-f <labelfile>] [-s <string>]
+:USAGE: dispass [-cghoV] [-f <labelfile>] [-s <string>] [--script]
 
-        dispass [-co] [-l length] <label> [<label2>] [<label3>] [...]
+        dispass [-co] [-l <length>] <label> [<label2>] [...] [--script]
 
         gdispass
+
 
 Short options:
 
@@ -138,6 +139,7 @@ Long options:
 --length <length>   set length of passphrase (default: 30, max: 171)
 --search <string>   dispass label from file that uniquely matches <string>
 --file <labelfile>  set location of labelfile (default: ~/.dispass)
+--script            optimize input/output for 'wrapping' dispass
 
 
 Using dispass to create one or more passphrases
@@ -196,6 +198,26 @@ passphrases with varying lengths.
 You can override the location of the labelfile using the ``-f`` flag.
 This can be a way for you to use different sets of labels/passphrases
 with a different 'master' password for each set.
+
+Using the *dispass-label* command line app
+==============================================================================
+
+:USAGE: dispass-label [-hlV] [-f <labelfile>] [--script]
+
+Short options:
+
+-h                  show this help and exit
+-l                  print all labels and options found in labelfile
+-V                  show full version information and exit
+-f <labelfile>      set location of labelfile (default: ~/.dispass)
+
+Long options:
+
+--help              show this help and exit
+--list              print all labels and options found in labelfile
+--version           show full version information and exit
+--file=<labelfile>  set location of labelfile (default: ~/.dispass)
+--script            optimize input/output for 'wrapping' dispass-label
 
 
 Got Emacs? You can use the Emacs wrapper

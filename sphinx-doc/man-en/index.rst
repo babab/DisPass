@@ -4,11 +4,19 @@ MANPAGE
 SYNOPSIS
 ==============================================================================
 
-dispass [-cghoV] [-f <labelfile>] [-s <string>]
+dispass
+-------
 
-dispass [-co] [-l length] <label> [<label2>] [<label3>] [...]
+dispass [-cghoV] [-f <labelfile>] [-s <string>] [--script]
+
+dispass [-co] [-l <length>] <label> [<label2>] [...] [--script]
 
 gdispass
+
+dispass-label
+-------------
+
+dispass-label [-hlV] [-f <labelfile>] [--script]
 
 
 SUMMARY
@@ -112,8 +120,10 @@ with a different 'master' password for each set.
 OPTIONS
 ==============================================================================
 
-Short options
--------------
+dispass
+-------
+
+Short options:
 
 -c                  use if this passphrase is new (check input PW)
 -g                  start guided graphical version of DisPass
@@ -125,8 +135,7 @@ Short options
 -s <string>         dispass label from file that uniquely matches <string>
 -f <labelfile>      set location of labelfile (default: ~/.dispass)
 
-Long options
-------------
+Long options:
 
 --create            use if this passphrase is new (check input PW)
 --gui               start guided graphical version of DisPass
@@ -137,6 +146,25 @@ Long options
 --length <length>   set length of passphrase (default: 30, max: 171)
 --search <string>   dispass label from file that uniquely matches <string>
 --file <labelfile>  set location of labelfile (default: ~/.dispass)
+--script            optimize input/output for 'wrapping' dispass
+
+dispass-labels
+--------------
+
+Short options:
+
+-h                  show this help and exit
+-l                  print all labels and options found in labelfile
+-V                  show full version information and exit
+-f <labelfile>      set location of labelfile (default: ~/.dispass)
+
+Long options:
+
+--help              show this help and exit
+--list              print all labels and options found in labelfile
+--version           show full version information and exit
+--file=<labelfile>  set location of labelfile (default: ~/.dispass)
+--script            optimize input/output for 'wrapping' dispass-label
 
 
 SEE ALSO

@@ -1,4 +1,4 @@
-.TH "DISPASS" "1" "July 17, 2012" "0.1" "DisPass"
+.TH "DISPASS" "1" "July 22, 2012" "0.1" "DisPass"
 .SH NAME
 dispass \- DisPass Documentation
 .
@@ -31,12 +31,16 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" Man page generated from reStructuredText.
 .
 .SH SYNOPSIS
+.SS dispass
 .sp
-dispass [\-cghoV] [\-f <labelfile>] [\-s <string>]
+dispass [\-cghoV] [\-f <labelfile>] [\-s <string>] [\-\-script]
 .sp
-dispass [\-co] [\-l length] <label> [<label2>] [<label3>] [...]
+dispass [\-co] [\-l <length>] <label> [<label2>] [...] [\-\-script]
 .sp
 gdispass
+.SS dispass\-label
+.sp
+dispass\-label [\-hlV] [\-f <labelfile>] [\-\-script]
 .SH SUMMARY
 .sp
 DisPass is a passphrase generator for GNU/Linux, *BSD, MacOS X and Windows.
@@ -156,7 +160,9 @@ You can override the location of the labelfile using the \fB\-f\fP flag.
 This can be a way for you to use different sets of labels/passphrases
 with a different \(aqmaster\(aq password for each set.
 .SH OPTIONS
-.SS Short options
+.SS dispass
+.sp
+Short options:
 .INDENT 0.0
 .TP
 .B \-c
@@ -184,7 +190,8 @@ dispass label from file that uniquely matches <string>
 .BI \-f \ <labelfile>
 set location of labelfile (default: ~/.dispass)
 .UNINDENT
-.SS Long options
+.sp
+Long options:
 .INDENT 0.0
 .TP
 .B \-\-create
@@ -211,6 +218,45 @@ dispass label from file that uniquely matches <string>
 .TP
 .BI \-\-file \ <labelfile>
 set location of labelfile (default: ~/.dispass)
+.TP
+.B \-\-script
+optimize input/output for \(aqwrapping\(aq dispass
+.UNINDENT
+.SS dispass\-labels
+.sp
+Short options:
+.INDENT 0.0
+.TP
+.B \-h
+show this help and exit
+.TP
+.B \-l
+print all labels and options found in labelfile
+.TP
+.B \-V
+show full version information and exit
+.TP
+.BI \-f \ <labelfile>
+set location of labelfile (default: ~/.dispass)
+.UNINDENT
+.sp
+Long options:
+.INDENT 0.0
+.TP
+.B \-\-help
+show this help and exit
+.TP
+.B \-\-list
+print all labels and options found in labelfile
+.TP
+.B \-\-version
+show full version information and exit
+.TP
+.BI \-\-file\fB= <labelfile>
+set location of labelfile (default: ~/.dispass)
+.TP
+.B \-\-script
+optimize input/output for \(aqwrapping\(aq dispass\-label
 .UNINDENT
 .SH SEE ALSO
 .INDENT 0.0

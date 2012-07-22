@@ -3,6 +3,13 @@ ChangeLog
 
 **Development version** currently in Github / Bitbucket
 
+ * Change default location of labelfile
+ * Add dispass `--script` option
+ * Add dispass-label for managing labelfiles
+ * Use separate text for manpage instead of README
+ * Add option to lookup a lable in with '-s' switch
+ * Require a min. password length of 8 chars in cli
+ * Rename ChangeLog -> ChangeLog.rst
  * Make DisPass run from Python shell without exiting
  * Remove dispass.el emacs wrapper, maintained separately by Tom Willemsen
 
