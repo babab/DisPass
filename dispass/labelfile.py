@@ -113,7 +113,6 @@ class FileHandler:
         return self
 
     def write(self, labels=None):
-
         if isinstance(labels, dict):
             self.labels = labels
 
@@ -132,13 +131,26 @@ class FileHandler:
             return False
 
     def close(self):
+        '''Explicitly close filehandle'''
         if self.filehandle:
             self.filehandle.close()
 
     def search(self, search_string):
-        if not self.labels:
-            self.parse()
+        '''Search for substring in labelfile
 
+        :Parameters:
+            - `search_string`: String to search for
+
+        :Returns: Boolean False, Integer or Dict
+
+        Searches all labels to find ``search_string`` as a substring of each
+        label.
+
+        If no matches are found, return False.
+        If multiple matches are found, return Integer of number of matches
+        If a unique match is found a dict of ``{label, passphrase_length}``
+        is returned.
+        '''
         found = []
         count = 0
 
@@ -157,9 +169,7 @@ class FileHandler:
         return {found.pop(): found_length}
 
     def getLongestLabel(self):
-        if not self.labels:
-            self.parse()
-
+        '''Return length of longest label name'''
         return len(max(self.labels.keys(), key=len))
 
     def printLabels(self, fixed_columns=False):
