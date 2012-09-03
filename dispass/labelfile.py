@@ -50,13 +50,7 @@ class FileHandler:
         if file_location:
             self.file_location = file_location
         else:
-            if os.getenv('DISPASS_LABELFILE'):
-                self.file_location = os.getenv('DISPASS_LABELFILE')
-            elif os.getenv('XDG_DATA_HOME'):
-                self.file_location = os.getenv('XDG_DATA_HOME') + \
-                        '/dispass/labels'
-            else:
-                self.file_location = '~/.local/share/dispass/labels'
+            self.file_location = self.getDefaultFileLocation()
 
         try:
             if write:
@@ -77,6 +71,16 @@ class FileHandler:
             if not write:
                 self.close()
             self.parse()
+
+    def getDefaultFileLocation(self):
+        """Scan default labelfile paths"""
+
+        if os.getenv('DISPASS_LABELFILE'):
+            return os.getenv('DISPASS_LABELFILE')
+        elif os.getenv('XDG_DATA_HOME'):
+            return os.getenv('XDG_DATA_HOME') + '/dispass/labels'
+        else:
+            return '~/.local/share/dispass/labels'
 
     def parse(self):
         '''Create dictionary of ``labels = {label: length, ...}``'''
