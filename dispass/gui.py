@@ -167,12 +167,16 @@ class GUI:
         self.passwordin2 = Entry(master, width=27, font=self.getFont(),
                 show="*", state=DISABLED)
         genbutton = Button(master, text="Generate password",
-                font=self.getFont(), command=self.validateAndShow)
+                font=self.getFont(), command=self.validateAndShow,
+                default="active")
         clrbutton = Button(master, text="Clear fields", font=self.getFont(),
                 command=self.clearInput)
         self.result = Entry(master, font=self.getFont(4),
                 textvariable=self.passwordout, state="readonly", fg="black",
                 readonlybackground="gray")
+
+        self.passwordin1.bind('<Return>', lambda e: genbutton.invoke())
+        self.passwordin2.bind('<Return>', lambda e: genbutton.invoke())
 
         # Layout widgets in a grid
         ttitle.grid(row=0, column=0, sticky=N+S+E+W, columnspan=3)
