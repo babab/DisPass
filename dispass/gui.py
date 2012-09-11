@@ -124,6 +124,7 @@ class GUI:
         h = digest.digest(label + passwordin1)
         self.result.config(fg="black", readonlybackground="green")
         self.passwordout.set(h)
+        self.result.select_range(0, END)
 
     def toggleCheck(self):
         '''Toggle checking of input password'''
