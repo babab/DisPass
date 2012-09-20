@@ -15,7 +15,13 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+import exceptions
+
 import dispass.gui
 
 if __name__ == '__main__':
-    dispass.gui.GUI()
+    try:
+        dispass.gui.GUI()
+    except exceptions.KeyboardInterrupt:
+        print
+        print 'Ok, bye'
