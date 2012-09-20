@@ -188,8 +188,10 @@ class GUI:
                 textvariable=self.passwordout, state="readonly", fg="black",
                 readonlybackground="gray")
 
+        # Keybindings
         self.passwordin1.bind('<Return>', lambda e: genbutton.invoke())
         self.passwordin2.bind('<Return>', lambda e: genbutton.invoke())
+        master.bind('<Control-q>', lambda e: master.quit())
 
         # Layout widgets in a grid
         ttitle.grid(row=0, column=0, sticky=N+S+E+W, columnspan=3)
