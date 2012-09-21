@@ -16,6 +16,12 @@ ChangeLog
     * **Windows**: ``C:\Users\<username>\.local\share\dispass\labels``
 
 
+* Reset all fields in gdispass by pressing <Escape>
+* Optionally quit gdispass with Ctrl-Q
+* Gracefully quit on (Ctrl-C) keyboard interrupt
+* Clear input fields after passphrase generation
+* Auto-select generated passphrase in gdispass
+* Generate passphrases in gdispass by pressing <Return>
 * Change default location of labelfile
 * Add dispass `--script` option
 * Add dispass-label for managing labelfiles

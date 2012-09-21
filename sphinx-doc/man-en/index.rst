@@ -46,11 +46,15 @@ words 'password' and 'passphrase' diffently and consistent.
 password
    Use of the word 'password' is dedicated to the input password, i.e. the
    password you are asked to enter and only you know. Whenever you read
-   password, this is the one I mean.
+   password, this is the one I mean. The password needs to be at least 8
+   characters long and does not have a maximum length.
 
 passphrase
    With 'passphrase' I always mean the output passphrase, i.e. the passphrase
-   that is unique and generated from a label and password
+   that is unique and generated from a label and password. Generated
+   passphrases are 30 characters long. The length can be optionally changed in
+   the command line version of DisPass. gDisPass currently does not have this
+   feature.
 
 When DisPass is executed as 'gdispass' or 'dispass -g',
 the graphical version will be started.
@@ -175,6 +179,33 @@ Long options:
 --script            optimize input/output for 'wrapping' dispass-label
 
 
+Using the graphical *gdispass* application
+==============================================================================
+
+You can start using gDisPass by running the ``gdispass`` executable.
+Fill in a name for the label that you can easily remember.
+
+To generate a passphrase for a new label, i.e. a label that you have never
+used before, check the appropiate checkbox. This will allow you to enter the
+(master) password twice. gDisPass will then compare the passwords to see if
+they are the same. This is needed to minimize the risk of typos. It is advised
+that you check the box everytime you create a passphrase for a new label.
+
+Subsequential generation of passphrases for the same label most probably do
+not need this check. You will likely be warned when/if you made a typo by
+the system or website you want to authenticate for.
+
+If you correctly entered a label and password, you can generate the passphrase
+by pressing <Return> or by clicking the appropiate button. The resulting
+passphrase will be focused and selected. On platforms that support it
+(e.g. \*BSD or GNU/Linux) the passphrase will be automatically placed into
+your copy/paste buffer.
+
+Resetting all fields when you are done or when you need to quickly cancel the
+generation (because someone is watching over your shoulders) can be done by
+pressing <Escape> or by clicking the appropiate button.
+
+
 SEE ALSO
 ==============================================================================
 
@@ -189,8 +220,6 @@ Github repository and Issue tracker
 
 IRC
    #dispass at Freenode (chat.freenode.net)
-
-   #dispass at OFTC (irc.oftc.net)
 
 Emacs wrapper
    https://github.com/ryuslash/dispass.el
