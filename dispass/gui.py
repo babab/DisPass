@@ -158,6 +158,12 @@ class GUI:
         self.clearInput()
         self.clearOutput()
 
+    def reset(self):
+        '''Clear all input and output and focus label entry'''
+
+        self.clearIO()
+        self.label.focus_set()
+
 # GUI # Create Widgets
     def createWidgets(self, master):
         '''Create and align widgets'''
@@ -192,6 +198,7 @@ class GUI:
         self.passwordin1.bind('<Return>', lambda e: genbutton.invoke())
         self.passwordin2.bind('<Return>', lambda e: genbutton.invoke())
         master.bind('<Control-q>', lambda e: master.quit())
+        master.bind('<Escape>', lambda e: self.reset())
 
         # Layout widgets in a grid
         ttitle.grid(row=0, column=0, sticky=N+S+E+W, columnspan=3)
