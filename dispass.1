@@ -1,4 +1,4 @@
-.TH "DISPASS" "1" "July 23, 2012" "0.1" "DisPass"
+.TH "DISPASS" "1" "September 21, 2012" "0.1" "DisPass"
 .SH NAME
 dispass \- DisPass Documentation
 .
@@ -67,11 +67,15 @@ words \(aqpassword\(aq and \(aqpassphrase\(aq diffently and consistent.
 .B password
 Use of the word \(aqpassword\(aq is dedicated to the input password, i.e. the
 password you are asked to enter and only you know. Whenever you read
-password, this is the one I mean.
+password, this is the one I mean. The password needs to be at least 8
+characters long and does not have a maximum length.
 .TP
 .B passphrase
 With \(aqpassphrase\(aq I always mean the output passphrase, i.e. the passphrase
-that is unique and generated from a label and password
+that is unique and generated from a label and password. Generated
+passphrases are 30 characters long. The length can be optionally changed in
+the command line version of DisPass. gDisPass currently does not have this
+feature.
 .UNINDENT
 .sp
 When DisPass is executed as \(aqgdispass\(aq or \(aqdispass \-g\(aq,
@@ -267,6 +271,30 @@ set location of labelfile
 .B \-\-script
 optimize input/output for \(aqwrapping\(aq dispass\-label
 .UNINDENT
+.SH USING THE GRAPHICAL GDISPASS APPLICATION
+.sp
+You can start using gDisPass by running the \fBgdispass\fP executable.
+Fill in a name for the label that you can easily remember.
+.sp
+To generate a passphrase for a new label, i.e. a label that you have never
+used before, check the appropiate checkbox. This will allow you to enter the
+(master) password twice. gDisPass will then compare the passwords to see if
+they are the same. This is needed to minimize the risk of typos. It is advised
+that you check the box everytime you create a passphrase for a new label.
+.sp
+Subsequential generation of passphrases for the same label most probably do
+not need this check. You will likely be warned when/if you made a typo by
+the system or website you want to authenticate for.
+.sp
+If you correctly entered a label and password, you can generate the passphrase
+by pressing <Return> or by clicking the appropiate button. The resulting
+passphrase will be focused and selected. On platforms that support it
+(e.g. *BSD or GNU/Linux) the passphrase will be automatically placed into
+your copy/paste buffer.
+.sp
+Resetting all fields when you are done or when you need to quickly cancel the
+generation (because someone is watching over your shoulders) can be done by
+pressing <Escape> or by clicking the appropiate button.
 .SH SEE ALSO
 .INDENT 0.0
 .TP
@@ -281,8 +309,6 @@ optimize input/output for \(aqwrapping\(aq dispass\-label
 .TP
 .B IRC
 #dispass at Freenode (chat.freenode.net)
-.sp
-#dispass at OFTC (irc.oftc.net)
 .TP
 .B Emacs wrapper
 \fI\%https://github.com/ryuslash/dispass.el\fP
