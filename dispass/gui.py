@@ -124,6 +124,8 @@ class GUI:
         h = digest.digest(label + passwordin1)
         self.result.config(fg="black", readonlybackground="green")
         self.passwordout.set(h)
+        self.clearInput()
+        self.result.focus_set()
         self.result.select_range(0, END)
 
     def toggleCheck(self):
@@ -143,8 +145,18 @@ class GUI:
         self.label.delete(0, END)
         self.passwordin1.delete(0, END)
         self.passwordin2.delete(0, END)
+
+    def clearOutput(self):
+        '''Clear all output fields'''
+
         self.passwordout.set('- No password generated -')
         self.result.config(fg="black", readonlybackground="gray")
+
+    def clearIO(self):
+        '''Clear all input and output fields'''
+
+        self.clearInput()
+        self.clearOutput()
 
 # GUI # Create Widgets
     def createWidgets(self, master):
@@ -171,13 +183,15 @@ class GUI:
                 font=self.getFont(), command=self.validateAndShow,
                 default="active")
         clrbutton = Button(master, text="Clear fields", font=self.getFont(),
-                command=self.clearInput)
+                command=self.clearIO)
         self.result = Entry(master, font=self.getFont(4),
                 textvariable=self.passwordout, state="readonly", fg="black",
                 readonlybackground="gray")
 
+        # Keybindings
         self.passwordin1.bind('<Return>', lambda e: genbutton.invoke())
         self.passwordin2.bind('<Return>', lambda e: genbutton.invoke())
+        master.bind('<Control-q>', lambda e: master.quit())
 
         # Layout widgets in a grid
         ttitle.grid(row=0, column=0, sticky=N+S+E+W, columnspan=3)

@@ -16,8 +16,14 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 import sys
+import exceptions
 
 from dispass import dispass_label
 
 if __name__ == '__main__':
-    sys.exit(dispass_label.main(sys.argv))
+    try:
+        sys.exit(dispass_label.main(sys.argv))
+    except exceptions.KeyboardInterrupt:
+        print
+        print 'Ok, bye'
+        sys.exit(1)
