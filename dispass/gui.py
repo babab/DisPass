@@ -12,19 +12,15 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-try:
-    from Tkinter import *
-    import tkMessageBox
-    hasTk = True
-except ImportError:
-    hasTk = False
+from Tkinter import *
+import tkMessageBox
 
 import dispass
 import digest
 
 versionStr = 'g%s' % dispass.versionStr
 
-class GUI:
+class GUI(Frame):
     '''Houses all GUI related objects and interactions'''
 
     font = "Verdana"
@@ -33,25 +29,17 @@ class GUI:
     fontsize = 10
     '''Default fontsize (10 pt.)'''
 
-    def __init__(self):
+    def __init__(self, master=None):
         '''Initialize GUI object, create the widgets and start mainloop
 
         Try to import Tkinter and tkMessageBox. If that fails, show a help
         message with quick instructions on installing Tkinter.
         '''
 
-        if not hasTk:
-            print 'Could not find Tkinter, this is a package needed '\
-                    'for using\nthe graphical version of dispass.'
-            print 'To install, search for a python-tk package for your OS.\n'
-            print 'Debian / Ubuntu\t\t$ sudo apt-get install python-tk'
-            print 'OpenBSD        \t\t# pkg_add -i python-tk'
-            return
-
-        self.root = Tk()
-        self.root.title(versionStr)
-        self.createWidgets(self.root)
-        self.root.mainloop()
+        Frame.__init__(self, master)
+        self.master.title(versionStr)
+        self.grid()
+        self.createWidgets()
 
 # GUI # Setters and getters
     def setFont(self):
@@ -165,40 +153,46 @@ class GUI:
         self.label.focus_set()
 
 # GUI # Create Widgets
-    def createWidgets(self, master):
+    def createWidgets(self):
         '''Create and align widgets'''
+
+        top = self.winfo_toplevel()
+        top.rowconfigure(0, weight=1)
+        top.columnconfigure(0, weight=1)
+        self.rowconfigure(0, weight=1)
+        self.columnconfigure(0, weight=1)
 
         self.passwordout = StringVar()
         self.passwordout.set('- No password generated -')
         self.isnew = IntVar()
 
-        ttitle = Label(master, text=versionStr, font=self.getFont(4))
-        wisnew = Checkbutton(master, height=2, font=self.getFont(),
+        ttitle = Label(self, text=versionStr, font=self.getFont(4))
+        wisnew = Checkbutton(self, height=2, font=self.getFont(),
                 text="This is a new password, that I have not used before",
                 variable=self.isnew, command=self.toggleCheck)
-        tlabel = Label(master, text='Label', font=self.getFont(2))
-        tpasswordin1 = Label(master, text='Password', font=self.getFont(2))
-        tpasswordin2 = Label(master, text='Password (again)',
+        tlabel = Label(self, text='Label', font=self.getFont(2))
+        tpasswordin1 = Label(self, text='Password', font=self.getFont(2))
+        tpasswordin2 = Label(self, text='Password (again)',
                 font=self.getFont(2))
-        self.label = Entry(master, width=27, font=self.getFont())
-        self.passwordin1 = Entry(master, width=27, font=self.getFont(),
+        self.label = Entry(self, width=27, font=self.getFont())
+        self.passwordin1 = Entry(self, width=27, font=self.getFont(),
                 show="*")
-        self.passwordin2 = Entry(master, width=27, font=self.getFont(),
+        self.passwordin2 = Entry(self, width=27, font=self.getFont(),
                 show="*", state=DISABLED)
-        genbutton = Button(master, text="Generate password",
+        genbutton = Button(self, text="Generate password",
                 font=self.getFont(), command=self.validateAndShow,
                 default="active")
-        clrbutton = Button(master, text="Clear fields", font=self.getFont(),
+        clrbutton = Button(self, text="Clear fields", font=self.getFont(),
                 command=self.clearIO)
-        self.result = Entry(master, font=self.getFont(4),
+        self.result = Entry(self, font=self.getFont(4),
                 textvariable=self.passwordout, state="readonly", fg="black",
                 readonlybackground="gray")
 
         # Keybindings
         self.passwordin1.bind('<Return>', lambda e: genbutton.invoke())
         self.passwordin2.bind('<Return>', lambda e: genbutton.invoke())
-        master.bind('<Control-q>', lambda e: master.quit())
-        master.bind('<Escape>', lambda e: self.reset())
+        self.master.bind('<Control-q>', lambda e: self.quit())
+        self.master.bind('<Escape>', lambda e: self.reset())
 
         # Layout widgets in a grid
         ttitle.grid(row=0, column=0, sticky=N+S+E+W, columnspan=3)

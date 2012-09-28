@@ -21,7 +21,14 @@ import dispass.gui
 
 if __name__ == '__main__':
     try:
-        dispass.gui.GUI()
+        gui = dispass.gui.GUI()
+        gui.mainloop()
+    except ImportError:
+        print ('Could not find Tkinter, this is a package needed for using\n'
+               'the graphical version of dispass.\n'
+               'To install, search for a python-tk package for your OS.\n'
+               'Debian / Ubuntu\t\t$ sudo apt-get install python-tk\n'
+               'OpenBSD        \t\t# pkg_add -i python-tk')
     except exceptions.KeyboardInterrupt:
         print
         print 'Ok, bye'
