@@ -270,6 +270,43 @@ Tom Willemsen (ryuslash).
 You can find it at: https://github.com/ryuslash/dispass.el
 
 
+Wrapping / scripting dispass
+============================
+
+You can use dispass entirely as you wish and create different interfaces
+by using the appropiate libraries as long as it is allowed by the ISC license.
+
+Dispass provides a way to make the behaviour and IO more suitable for
+scripting by passing the ``--script`` option.
+
+
+dispass
+-------
+If the ``--script`` flag is passed together with ``-o`` or ``--output``
+the output will be optimized for easy parsing by other programs
+and scripts by always printing one entry on a single line using
+the following positions::
+
+   Column  1-50 : label
+
+
+dispass-label
+-------------
+If the ``--script`` flag is passed together with ``-l`` or ``--list``
+the output will be optimized for easy parsing by other programs
+and scripts by not printing the header and always printing one
+entry on a single line using the following positions::
+
+   Column  1-50: label     (50 chars wide)
+   Column 52-54: length    ( 3 chars wide)
+   Column 56-70: hash algo (15 chars wide)
+
+Otherwise an ascii table is printed with a variable width depending
+on the length of the longest label. The table has a header but does
+not display the hash algo until support for multiple hashing algos
+is added.
+
+
 Support / ideas / questions / suggestions
 ==============================================================================
 

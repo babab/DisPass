@@ -16,6 +16,7 @@ ChangeLog
     * **Windows**: ``C:\Users\<username>\.local\share\dispass\labels``
 
 
+* Center the fields when the window gets bigger
 * Reset all fields in gdispass by pressing <Escape>
 * Optionally quit gdispass with Ctrl-Q
 * Gracefully quit on (Ctrl-C) keyboard interrupt

@@ -1,4 +1,4 @@
-.TH "DISPASS" "1" "September 21, 2012" "0.1" "DisPass"
+.TH "DISPASS" "1" "October 09, 2012" "0.1" "DisPass"
 .SH NAME
 dispass \- DisPass Documentation
 .
@@ -295,6 +295,44 @@ your copy/paste buffer.
 Resetting all fields when you are done or when you need to quickly cancel the
 generation (because someone is watching over your shoulders) can be done by
 pressing <Escape> or by clicking the appropiate button.
+.SH WRAPPING / SCRIPTING DISPASS
+.sp
+You can use dispass entirely as you wish and create different interfaces
+by using the appropiate libraries as long as it is allowed by the ISC license.
+.sp
+Dispass provides a way to make the behaviour and IO more suitable for
+scripting by passing the \fB\-\-script\fP option.
+.SS dispass
+.sp
+If the \fB\-\-script\fP flag is passed together with \fB\-o\fP or \fB\-\-output\fP
+the output will be optimized for easy parsing by other programs
+and scripts by always printing one entry on a single line using
+the following positions:
+.sp
+.nf
+.ft C
+Column  1\-50 : label
+.ft P
+.fi
+.SS dispass\-label
+.sp
+If the \fB\-\-script\fP flag is passed together with \fB\-l\fP or \fB\-\-list\fP
+the output will be optimized for easy parsing by other programs
+and scripts by not printing the header and always printing one
+entry on a single line using the following positions:
+.sp
+.nf
+.ft C
+Column  1\-50: label     (50 chars wide)
+Column 52\-54: length    ( 3 chars wide)
+Column 56\-70: hash algo (15 chars wide)
+.ft P
+.fi
+.sp
+Otherwise an ascii table is printed with a variable width depending
+on the length of the longest label. The table has a header but does
+not display the hash algo until support for multiple hashing algos
+is added.
 .SH SEE ALSO
 .INDENT 0.0
 .TP
