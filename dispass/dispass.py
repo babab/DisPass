@@ -21,6 +21,7 @@ __version_info__ = (0, 1, 0, 'alpha', 8)
 __version__ = '0.1a8'
 versionStr = 'DisPass ' + __version__
 
+import exceptions
 import getopt
 import os
 import sys
@@ -85,7 +86,19 @@ def main(argv):
 
     for o, a in opts:
         if o in ("-g", "--gui"):
-            gui.GUI()
+            try:
+                g = gui.GUI()
+                g.mainloop()
+            except ImportError:
+                print ('Could not find Tkinter, this is a package needed for'
+                       ' using\n' 'the graphical version of dispass.\n'
+                       'To install, search for a python-tk package for'
+                       ' your OS.\n'
+                       'Arch Linux     \t\t# pacman -S python-tk\n'
+                       'Debian / Ubuntu\t\t$ sudo apt-get install python-tk\n'
+                       'OpenBSD        \t\t# pkg_add -i python-tk')
+            except exceptions.KeyboardInterrupt:
+                print '\nOk, bye'
             return
         elif o in ("-c", "--create"):
             console.setPrompt(promptDouble=True)
