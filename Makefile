@@ -1,13 +1,17 @@
 MAN_PATH	= /usr/share/man/man1
+PYTHON_EXEC	= python
+PIP_EXEC	= pip
 VERSION		= 0.1a8
 
 make:
-	@echo make install
-	@echo make uninstall
+	@echo "make install   Build and then install via pip and move manpage"
+	@echo "make uninstall Clean build files and uninstall via pip"
 	@echo
-	@echo make doc
-	@echo make dist
-	@echo make clean
+	@echo "Developer commands"
+	@echo "make doc       Build html documentation with Sphinx"
+	@echo "make man       Build manpage with Sphinx"
+	@echo "make dist      Build python source archive file"
+	@echo "make clean     Clean program and doc build files"
 
 rm_pyc:
 	find . -name "*.pyc" | xargs /bin/rm -f
@@ -37,16 +41,16 @@ man: rm_pyc
 	cd sphinx-doc/man-en/; make clean
 
 dist: rm_pyc
-	python setup.py sdist
+	$(PYTHON_EXEC) setup.py sdist
 
 install: dist
-	pip install --upgrade dist/DisPass-$(VERSION).tar.gz
+	$(PIP_EXEC) install --upgrade dist/DisPass-$(VERSION).tar.gz
 	gzip -c dispass.1 > dispass.1.gz
 	mv dispass.1.gz $(MAN_PATH)/
 	make clean
 
 uninstall: clean
-	pip uninstall dispass
+	$(PIP_EXEC) uninstall dispass
 
 clean: doc_clean
 	rm -f MANIFEST dispass.1.gz
