@@ -24,6 +24,7 @@ import labelfile
 versionStr = dispass.versionStr
 __version_info__ = dispass.__version_info__
 
+
 def usage():
     '''Print help / usage information'''
 
@@ -36,6 +37,7 @@ def usage():
     print '-f <labelfile>, --file=<labelfile>'
     print '                set location of labelfile'
     print "--script        optimize input/output for 'wrapping' dispass-label"
+
 
 def main(argv):
     '''Entry point and handler of command options and arguments
@@ -50,7 +52,8 @@ def main(argv):
 
     try:
         opts, args = getopt.getopt(argv[1:], "f:hlV",
-                ["file", "help", "list", "script", "version"])
+                                   ["file", "help", "list",
+                                    "script", "version"])
     except getopt.GetoptError, err:
         print str(err), "\n"
         usage()
@@ -68,8 +71,8 @@ def main(argv):
             if lf.file_found:
                 f_flag = a
             else:
-                print 'error: could not load labelfile at "%s"\n' \
-                        % lf.file_location
+                print ('error: could not load labelfile at '
+                       '"{loc}"\n').format(loc=lf.file_location)
                 return 1
         elif o in ("-l", "--list"):
             l_flag = True

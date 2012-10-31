@@ -30,6 +30,7 @@ import cli
 import gui
 import labelfile
 
+
 def usage():
     '''Print help / usage information'''
 
@@ -72,8 +73,9 @@ def main(argv):
 
     try:
         opts, args = getopt.getopt(argv[1:], "cf:ghl:os:V",
-                ["create", "file=", "gui", "help", "length=", "output",
-                    "script", "search=", "version"])
+                                   ["create", "file=", "gui", "help",
+                                    "length=", "output", "script", "search=",
+                                    "version"])
     except getopt.GetoptError, err:
         print str(err), "\n"
         usage()
@@ -115,8 +117,8 @@ def main(argv):
             if lf.file_found:
                 f_flag = a
             else:
-                print 'error: could not load labelfile at "%s"\n' \
-                        % lf.file_location
+                print ('error: could not load labelfile at '
+                       '"{loc}"\n').format(loc=lf.file_location)
                 return 1
         elif o in ("-s", "--search"):
             if f_flag:
@@ -128,19 +130,19 @@ def main(argv):
                 result = lf.search(a)
 
                 if not result:
-                    print '%s: could not find a label with "%s" in labelfile' \
-                            % (execname, a)
+                    print ('{execname}: could not find a label with "{label}" '
+                           'in labelfile').format(execname=execname, label=a)
                     return
                 elif isinstance(result, int):
-                    print '%s: %s labels found, please be more specific' \
-                            % (execname, result)
+                    print ('{execname}: {qty} labels found, please be more '
+                           'specific').format(execname=execname, qty=result)
                     return
 
                 console.interactive(result)
                 return
             else:
-                print 'error: could not load labelfile at "%s"\n' \
-                        % lf.file_location
+                print ('error: could not load labelfile at '
+                       '"{loc}"\n').format(loc=lf.file_location)
                 return 1
         elif o in ("-o", "--output"):
             console.setCurses(False)

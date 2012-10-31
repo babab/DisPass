@@ -15,6 +15,7 @@
 import base64
 import hashlib
 
+
 def digest(message, length=30):
     '''Create and return secure hash of message
 
@@ -32,9 +33,10 @@ def digest(message, length=30):
 
     sha = hashlib.sha512()
     sha.update(message)
-    r = base64.b64encode(sha.hexdigest(), '49').replace('=','')
+    r = base64.b64encode(sha.hexdigest(), '49').replace('=', '')
 
     return str(r[:length])
+
 
 def digestPasswordDict(indentifierDict, password):
     '''Creat secure hashes of a dict of `identifier:length` and a password
@@ -56,7 +58,7 @@ def digestPasswordDict(indentifierDict, password):
     for identifier, length in indentifierDict.iteritems():
         sha = hashlib.sha512()
         sha.update(identifier + password)
-        r = base64.b64encode(sha.hexdigest(), '49').replace('=','')
-        hashed.append( (identifier, str(r[:length])) )
+        r = base64.b64encode(sha.hexdigest(), '49').replace('=', '')
+        hashed.append((identifier, str(r[:length])))
 
     return dict(hashed)

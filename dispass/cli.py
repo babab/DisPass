@@ -23,6 +23,7 @@ try:
 except ImportError:
     hasCurses = False
 
+
 class CLI:
     '''Command Line Interface handling'''
 
@@ -98,7 +99,7 @@ class CLI:
             if self.promptDouble:
                 inp2 = getpass.getpass("Password (again): ")
                 if inp == inp2:
-                    break;
+                    break
                 else:
                     print "Passwords do not match. Please try again."
             else:
@@ -137,7 +138,7 @@ class CLI:
             curses.cbreak()
 
             stdscr.addstr(0, 0, versionStr + " - press 'q' to quit",
-                    curses.A_BOLD)
+                          curses.A_BOLD)
             stdscr.addstr(1, 0, "Your passphrase(s)", curses.A_BOLD)
 
             j = 3

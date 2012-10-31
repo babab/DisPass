@@ -20,6 +20,7 @@ import digest
 
 versionStr = 'g%s' % dispass.versionStr
 
+
 class GUI(Frame):
     '''Houses all GUI related objects and interactions'''
 
@@ -101,11 +102,11 @@ class GUI(Frame):
             return
         elif len(passwordin1) < 8:
             self.warn('Password must contain at least 8 characters', 'hard',
-                    box_title='Password is too short')
+                      box_title='Password is too short')
             return
         elif isnew and passwordin1 != passwordin2:
             self.warn('Passwords are not identical, please try again', 'hard',
-                    box_title='Password mismatch')
+                      box_title='Password mismatch')
             return
 
         # All checks passed, create digest
@@ -168,25 +169,25 @@ class GUI(Frame):
 
         ttitle = Label(self, text=versionStr, font=self.getFont(4))
         wisnew = Checkbutton(self, height=2, font=self.getFont(),
-                text="This is a new password, that I have not used before",
-                variable=self.isnew, command=self.toggleCheck)
+                             text="This is a new password, that I have not "
+                                  + "used before",
+                             variable=self.isnew, command=self.toggleCheck)
         tlabel = Label(self, text='Label', font=self.getFont(2))
         tpasswordin1 = Label(self, text='Password', font=self.getFont(2))
         tpasswordin2 = Label(self, text='Password (again)',
-                font=self.getFont(2))
+                             font=self.getFont(2))
         self.label = Entry(self, width=27, font=self.getFont())
-        self.passwordin1 = Entry(self, width=27, font=self.getFont(),
-                show="*")
-        self.passwordin2 = Entry(self, width=27, font=self.getFont(),
-                show="*", state=DISABLED)
+        self.passwordin1 = Entry(self, width=27, font=self.getFont(), show="*")
+        self.passwordin2 = Entry(self, width=27, font=self.getFont(), show="*",
+                                 state=DISABLED)
         genbutton = Button(self, text="Generate password",
-                font=self.getFont(), command=self.validateAndShow,
-                default="active")
+                           font=self.getFont(), command=self.validateAndShow,
+                           default="active")
         clrbutton = Button(self, text="Clear fields", font=self.getFont(),
-                command=self.clearIO)
+                           command=self.clearIO)
         self.result = Entry(self, font=self.getFont(4),
-                textvariable=self.passwordout, state="readonly", fg="black",
-                readonlybackground="gray")
+                            textvariable=self.passwordout, state="readonly",
+                            fg="black", readonlybackground="gray")
 
         # Keybindings
         self.passwordin1.bind('<Return>', lambda e: genbutton.invoke())
@@ -195,17 +196,17 @@ class GUI(Frame):
         self.master.bind('<Escape>', lambda e: self.reset())
 
         # Layout widgets in a grid
-        ttitle.grid(row=0, column=0, sticky=N+S+E+W, columnspan=3)
-        wisnew.grid(row=1, column=0, sticky=N+S+E+W, columnspan=3)
-        tlabel.grid(row=2, column=0, sticky=N+S+E+W)
-        tpasswordin1.grid(row=2, column=1, sticky=N+S+E+W)
-        tpasswordin2.grid(row=2, column=2, sticky=N+S+E+W)
-        self.label.grid(row=3, column=0, sticky=N+S+E+W)
-        self.passwordin1.grid(row=3, column=1, sticky=N+S+E+W)
-        self.passwordin2.grid(row=3, column=2, sticky=N+S+E+W)
-        genbutton.grid(row=4, column=0, sticky=N+S+E+W, columnspan=2)
-        clrbutton.grid(row=4, column=2, sticky=N+S+E+W)
-        self.result.grid(row=5, column=0, sticky=N+S+E+W, columnspan=3)
+        ttitle.grid(row=0, column=0, sticky=N + S + E + W, columnspan=3)
+        wisnew.grid(row=1, column=0, sticky=N + S + E + W, columnspan=3)
+        tlabel.grid(row=2, column=0, sticky=N + S + E + W)
+        tpasswordin1.grid(row=2, column=1, sticky=N + S + E + W)
+        tpasswordin2.grid(row=2, column=2, sticky=N + S + E + W)
+        self.label.grid(row=3, column=0, sticky=N + S + E + W)
+        self.passwordin1.grid(row=3, column=1, sticky=N + S + E + W)
+        self.passwordin2.grid(row=3, column=2, sticky=N + S + E + W)
+        genbutton.grid(row=4, column=0, sticky=N + S + E + W, columnspan=2)
+        clrbutton.grid(row=4, column=2, sticky=N + S + E + W)
+        self.result.grid(row=5, column=0, sticky=N + S + E + W, columnspan=3)
 
         # Initially, set focus on self.label
         self.label.focus_set()
