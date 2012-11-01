@@ -1,4 +1,4 @@
-.TH "DISPASS" "1" "October 09, 2012" "0.1" "DisPass"
+.TH "DISPASS" "1" "November 01, 2012" "0.1" "DisPass"
 .SH NAME
 dispass \- DisPass Documentation
 .
@@ -35,7 +35,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .sp
 dispass [\-cghoV] [\-f <labelfile>] [\-s <string>] [\-\-script]
 .sp
-dispass [\-co] [\-l <length>] <label> [<label2>] [...] [\-\-script]
+dispass [\-co] [\-a <algo>] [\-l <length>] <label> [<label2>] [...] [\-\-script]
 .sp
 gdispass
 .SS dispass\-label
@@ -202,6 +202,9 @@ dispass label from file that uniquely matches <string>
 .TP
 .BI \-f \ <labelfile>
 set location of labelfile
+.TP
+.BI \-a \ <algorithm>
+override algorithm for generating passphrase(s)
 .UNINDENT
 .sp
 Long options:
@@ -231,6 +234,9 @@ dispass label from file that uniquely matches <string>
 .TP
 .BI \-\-file \ <labelfile>
 set location of labelfile
+.TP
+.BI \-\-algo \ <algorithm>
+override algorithm for generating passphrase(s)
 .TP
 .B \-\-script
 optimize input/output for \(aqwrapping\(aq dispass

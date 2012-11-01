@@ -115,7 +115,7 @@ you can store your labels in a textfile called a labelfile.
 
 :USAGE: dispass [-cghoV] [-f <labelfile>] [-s <string>] [--script]
 
-        dispass [-co] [-l <length>] <label> [<label2>] [...] [--script]
+        dispass [-co] [-a <algo>] [-l <length>] <label> [<label2>] [...]
 
         gdispass
 
@@ -131,6 +131,7 @@ Short options:
 -l <length>         set length of passphrase (default: 30, max: 171)
 -s <string>         dispass label from file that uniquely matches <string>
 -f <labelfile>      set location of labelfile
+-a <algorithm>      override algorithm for generating passphrase(s)
 
 Long options:
 
@@ -143,6 +144,7 @@ Long options:
 --length <length>   set length of passphrase (default: 30, max: 171)
 --search <string>   dispass label from file that uniquely matches <string>
 --file <labelfile>  set location of labelfile
+--algo <algorithm>  override algorithm for generating passphrase(s)
 --script            optimize input/output for 'wrapping' dispass
 
 

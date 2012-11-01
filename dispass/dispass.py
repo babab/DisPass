@@ -37,17 +37,15 @@ def usage():
 
     print "%s - http://dispass.babab.nl/" % (versionStr)
     print
-    print "When DisPass is executed as 'gdispass' or 'dispass -g',"
-    print 'the graphical version will be started.'
-    print
-    print 'USAGE: dispass [-cghoV] [-f <labelfile>] [-s <string>] [--script]'
-    print '       dispass [-co] [-l <length>] <label> [<label2>] [...]',
-    print '[--script]\n', '       gdispass'
+    print 'USAGE: dispass [-cghoV?] [-f <labelfile>] [-s <string>]'
+    print('       dispass [-co] [-a <algo>] [-l <length>] <label> '
+          '[<label2>] [...]')
+    print '       gdispass'
     print
     print 'Options:'
     print '-c, --create    use if this passphrase is new (check input PW)'
     print '-g, --gui       start guided graphical version of DisPass'
-    print '-h, --help      show this help and exit'
+    print '-h, --help, -?  show this help and exit'
     print '-o, --output    output passphrases to stdout (instead of the '
     print '                more secure way of displaying via curses)'
     print '-V, --version   show full version information and exit'
@@ -58,6 +56,8 @@ def usage():
     print ' ' * 15, 'dispass label from file that uniquely matches <string>'
     print '-f <labelfile>, --file=<labelfile>'
     print '                set location of labelfile'
+    print '-a <algorithm>, --algo=<algorithm>'
+    print '                override algorithm for generating passphrase(s)'
     print "--script        optimize input/output for 'wrapping' dispass"
 
 
