@@ -14,7 +14,7 @@
 
 import getpass
 
-import digest
+import algos
 from dispass import versionStr
 
 try:
@@ -121,10 +121,11 @@ class CLI:
             for i in labels:
                 labelmap.append((i, self.passphraseLength))
 
-            hashedLabels = digest.digestPasswordDict(dict(labelmap), password)
+            hashedLabels = algos.dispass1.digestPasswordDict(dict(labelmap),
+                                                             password)
             divlen = len(max(labels, key=len)) + 2
         elif isinstance(labels, dict):
-            hashedLabels = digest.digestPasswordDict(labels, password)
+            hashedLabels = algos.dispass1.digestPasswordDict(labels, password)
             label_list = []
             for label, length in hashedLabels.iteritems():
                 label_list.append(label)

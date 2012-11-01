@@ -21,7 +21,7 @@ setup(
     author_email='benjamin@babab.nl',
     url='http://dispass.babab.nl/',
     download_url='http://pypi.python.org/pypi/DisPass/',
-    packages = ['dispass'],
+    packages = ['dispass', 'dispass.algos'],
     license='ISC',
     long_description=long_desc,
     platforms='any',

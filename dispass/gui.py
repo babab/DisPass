@@ -15,8 +15,8 @@
 from Tkinter import *
 import tkMessageBox
 
+import algos
 import dispass
-import digest
 
 versionStr = 'g%s' % dispass.versionStr
 
@@ -110,7 +110,7 @@ class GUI(Frame):
             return
 
         # All checks passed, create digest
-        h = digest.digest(label + passwordin1)
+        h = algos.dispass1.digest(label + passwordin1)
         self.result.config(fg="black", readonlybackground="green")
         self.passwordout.set(h)
         self.clearInput()
