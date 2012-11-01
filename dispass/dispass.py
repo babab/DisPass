@@ -26,6 +26,7 @@ import getopt
 import os
 import sys
 
+from algos import algos
 import cli
 import gui
 import labelfile
@@ -72,8 +73,8 @@ def main(argv):
     f_flag = None
 
     try:
-        opts, args = getopt.getopt(argv[1:], "cf:ghl:os:V?",
-                                   ["create", "file=", "gui", "help",
+        opts, args = getopt.getopt(argv[1:], "a:cf:ghl:os:V?",
+                                   ["algo=", "create", "file=", "gui", "help",
                                     "length=", "output", "script", "search=",
                                     "version"])
     except getopt.GetoptError, err:
@@ -102,6 +103,12 @@ def main(argv):
             except exceptions.KeyboardInterrupt:
                 print '\nOk, bye'
             return
+        elif o in ("-a", "--algo"):
+            if algos.exists(a):
+                console.setAlgo(a)
+            else:
+                print 'error: algo "{algo}" does not exist'.format(algo=a)
+                return 1
         elif o in ("-c", "--create"):
             console.setPrompt(promptDouble=True)
         elif o in ("-l", "--length"):

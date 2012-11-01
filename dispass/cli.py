@@ -14,7 +14,6 @@
 
 import getpass
 
-import algos
 from dispass import versionStr
 
 try:
@@ -26,6 +25,9 @@ except ImportError:
 
 class CLI:
     '''Command Line Interface handling'''
+
+    algorithm = 'dispass1'
+    '''String. The algorithm to use, default is dispass1'''
 
     passphraseLength = 30
     '''Length of output passphrase, default is 30'''
@@ -43,6 +45,15 @@ class CLI:
         '''
 
         self.useCurses = hasCurses
+
+    def setAlgo(self, algo):
+        '''Optionally override the algorithm to use for generating passphrases
+
+        :Parameters:
+            - `algo`: String. Name of the algorithm
+        '''
+
+        self.algorithm = algo
 
     def setCurses(self, useCurses):
         '''Optionally override `self.useCurses`
@@ -116,16 +127,22 @@ class CLI:
 
         password = self.passwordPrompt()
 
+        if self.algorithm == 'dispass1':
+            from algos import dispass1 as algo
+        else:
+            print ('error: algo "{algo}" could not be '
+                   'imported'.format(algo=self.algorithm))
+            return 2
+
         if isinstance(labels, list):
             labelmap = []
             for i in labels:
                 labelmap.append((i, self.passphraseLength))
 
-            hashedLabels = algos.dispass1.digestPasswordDict(dict(labelmap),
-                                                             password)
+            hashedLabels = algo.digestPasswordDict(dict(labelmap), password)
             divlen = len(max(labels, key=len)) + 2
         elif isinstance(labels, dict):
-            hashedLabels = algos.dispass1.digestPasswordDict(labels, password)
+            hashedLabels = algo.digestPasswordDict(labels, password)
             label_list = []
             for label, length in hashedLabels.iteritems():
                 label_list.append(label)
