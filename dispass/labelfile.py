@@ -27,8 +27,8 @@ class FileHandler:
     default_length = 30
     '''Default passphrase length'''
 
-    default_hashname = 'dispass1'
-    '''Name of hash to use by default'''
+    algorithm = 'dispass1'
+    '''String. The algorithm to use, default is dispass1'''
 
     filehandle = None
     '''File object, set on init if labelfile is found'''
@@ -100,7 +100,7 @@ class FileHandler:
         for line in labels:
             labelname = line.pop(0)
             length = self.default_length
-            hashname = self.default_hashname
+            algo = self.algorithm
 
             for arg in line:
                 if 'length=' in arg:
@@ -108,10 +108,10 @@ class FileHandler:
                         length = int(arg.strip('length='))
                     except ValueError:
                         print "Warning: Invalid length in: '%s'" % line
-                elif 'hash=' in arg:
-                    hashname = arg.strip('hash=')
+                elif 'algo=' in arg:
+                    algo = arg.strip('algo=')
 
-            if hashname == 'dispass1':
+            if algo == 'dispass1':
                 labels_dispass1.append((labelname, length))
 
         self.labels = dict(labels_dispass1)
