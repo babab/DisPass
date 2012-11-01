@@ -72,7 +72,7 @@ def main(argv):
     f_flag = None
 
     try:
-        opts, args = getopt.getopt(argv[1:], "cf:ghl:os:V",
+        opts, args = getopt.getopt(argv[1:], "cf:ghl:os:V?",
                                    ["create", "file=", "gui", "help",
                                     "length=", "output", "script", "search=",
                                     "version"])
@@ -146,7 +146,7 @@ def main(argv):
                 return 1
         elif o in ("-o", "--output"):
             console.setCurses(False)
-        elif o in ("-h", "--help"):
+        elif o in ("-h", "-?", "--help"):
             usage()
             return
         elif o in ("-V", "--version"):
