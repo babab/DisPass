@@ -26,7 +26,7 @@ import getopt
 import os
 import sys
 
-from algos import algos
+import algos
 import cli
 import gui
 import labelfile

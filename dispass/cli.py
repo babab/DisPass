@@ -13,7 +13,7 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 import getpass
-from algos import algos
+import algos
 
 from dispass import versionStr
 
