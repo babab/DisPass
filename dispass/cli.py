@@ -13,6 +13,7 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 import getpass
+from algos import algos
 
 from dispass import versionStr
 
@@ -131,11 +132,7 @@ class CLI:
         password = self.passwordPrompt()
 
         if self.algorithm == 'dispass1':
-            from algos import dispass1 as algo
-        else:
-            print ('error: algo "{algo}" could not be '
-                   'imported'.format(algo=self.algorithm))
-            return 2
+            algo = algos.Dispass1()
 
         if isinstance(labels, list):
             labelmap = []
