@@ -50,7 +50,7 @@ def digestPasswordDict(indentifierDict, password):
         - `password`: The password to use for hashing entries
 
     :Return:
-        - The secure hash of `message`
+        - A list of 2-tuples of '(identifier, passphrase)'
     '''
 
     hashed = []
@@ -61,4 +61,4 @@ def digestPasswordDict(indentifierDict, password):
         r = base64.b64encode(sha.hexdigest(), '49').replace('=', '')
         hashed.append((identifier, str(r[:length])))
 
-    return dict(hashed)
+    return hashed

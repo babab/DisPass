@@ -38,6 +38,9 @@ class CLI:
     scriptableIO = None
     '''Boolean. Optimize input/output for wrapping dispass'''
 
+    passphrases = []
+    '''List of 2-tuples of labels and generated passphrases'''
+
     def __init__(self):
         '''Set `useCurses` to True or False.
 
@@ -139,16 +142,21 @@ class CLI:
             for i in labels:
                 labelmap.append((i, self.passphraseLength))
 
-            hashedLabels = algo.digestPasswordDict(dict(labelmap), password)
+            self.passphrases += algo.digestPasswordDict(dict(labelmap),
+                                                        password)
             divlen = len(max(labels, key=len)) + 2
         elif isinstance(labels, dict):
-            hashedLabels = algo.digestPasswordDict(labels, password)
+            self.passphrases += algo.digestPasswordDict(labels, password)
             label_list = []
-            for label, length in hashedLabels.iteritems():
+            self.passphrases = dict(self.passphrases)
+            for label, length in self.passphrases.iteritems():
                 label_list.append(label)
             divlen = len(max(label_list, key=len)) + 2
 
         del password
+
+        if not isinstance(self.passphrases, dict):
+            self.passphrases = dict(self.passphrases)
 
         if self.useCurses:
             stdscr = curses.initscr()
@@ -160,7 +168,7 @@ class CLI:
             stdscr.addstr(1, 0, "Your passphrase(s)", curses.A_BOLD)
 
             j = 3
-            for label, passphrase in hashedLabels.iteritems():
+            for label, passphrase in self.passphrases.iteritems():
                 stdscr.addstr(j,  0, label, curses.A_BOLD)
                 stdscr.addstr(j, divlen, passphrase, curses.A_REVERSE)
                 j += 1
@@ -175,8 +183,9 @@ class CLI:
             curses.echo()
             curses.endwin()
         else:
-            for label, passphrase in hashedLabels.iteritems():
+            for label, passphrase in self.passphrases.iteritems():
                 if self.scriptableIO:
                     print '{:50} {}'.format(label[:50], passphrase)
                 else:
                     print "{:{fill}} {}".format(label, passphrase, fill=divlen)
+        self.passphrases = {}
