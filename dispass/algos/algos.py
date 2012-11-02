@@ -13,19 +13,3 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 algorithms = ('dispass1', )
-
-
-def exists(algo):
-    '''Check if algorithm exists
-
-    :Parameters:
-        - `algo`: String. The name of the algorithm
-        - `length`: Length of output hash (optional)
-
-    :Return:
-        - Bool
-    '''
-
-    if algo in algorithms:
-        return True
-    return False
