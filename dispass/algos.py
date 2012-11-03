@@ -43,14 +43,14 @@ class Dispass1:
 
     @staticmethod
     def digestPasswordDict(indentifierDict, password):
-        '''Creat secure hashes of a dict of `identifier:length` and a password
+        '''Creat secure hashes of a dict of `{identifier:(length, )}`
 
         A secure hash/message digest formed by hashing the `message` with
         the sha512 algorithm, encoding this hash with base64 and stripping
         it down to the first `length` characters.
 
         :Parameters:
-            - `indentifierDict`: A dict of `{identifier: length,}` entries
+            - `indentifierDict`: A dict of `{identifier: (length, )}`
             - `password`: The password to use for hashing entries
 
         :Return:
@@ -59,10 +59,10 @@ class Dispass1:
 
         hashed = []
 
-        for identifier, length in indentifierDict.iteritems():
+        for identifier, params in indentifierDict.iteritems():
             sha = hashlib.sha512()
             sha.update(identifier + password)
             r = base64.b64encode(sha.hexdigest(), '49').replace('=', '')
-            hashed.append((identifier, str(r[:length])))
+            hashed.append((identifier, str(r[:params[0]])))
 
         return hashed

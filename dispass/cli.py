@@ -30,6 +30,9 @@ class CLI:
     algorithm = 'dispass1'
     '''String. The algorithm to use, default is dispass1'''
 
+    seqno = 1
+    '''Int. The (optional) sequence number for the password, default is 1'''
+
     passphraseLength = 30
     '''Length of output passphrase, default is 30'''
 
@@ -58,6 +61,15 @@ class CLI:
         '''
 
         self.algorithm = algo
+
+    def setSeqNo(self, seqno):
+        '''Optionally override the sequence number to use
+
+        :Parameters:
+            - `algo`: String. Name of the algorithm
+        '''
+
+        self.seqno = seqno
 
     def setCurses(self, useCurses):
         '''Optionally override `self.useCurses`
@@ -137,11 +149,12 @@ class CLI:
         if isinstance(labels, list):
             labelmap = []
             for i in labels:
-                labelmap.append((i, self.passphraseLength))
+                labelmap.append((i, (self.passphraseLength, )))
 
             self.passphrases += algo.digestPasswordDict(dict(labelmap),
                                                         password)
             divlen = len(max(labels, key=len)) + 2
+            self.passphrases = dict(self.passphrases)
         elif isinstance(labels, dict):
             self.passphrases += algo.digestPasswordDict(labels, password)
             label_list = []
@@ -151,9 +164,6 @@ class CLI:
             divlen = len(max(label_list, key=len)) + 2
 
         del password
-
-        if not isinstance(self.passphrases, dict):
-            self.passphrases = dict(self.passphrases)
 
         if self.useCurses:
             stdscr = curses.initscr()

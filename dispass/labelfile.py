@@ -109,7 +109,7 @@ class FileHandler:
                     algo = arg.strip('algo=')
 
             if algo == 'dispass1':
-                labels_dispass1.append((labelname, length))
+                labels_dispass1.append((labelname, (length, )))
 
         self.labels = dict(labels_dispass1)
         return self
