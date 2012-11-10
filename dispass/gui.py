@@ -38,6 +38,10 @@ class GUI(Frame):
         '''
 
         Frame.__init__(self, Tk(className='dispass'))
+
+        self.lengthVar = IntVar()
+        self.lengthVar.set(30)
+
         self.master.title(versionStr)
         self.grid()
         self.createWidgets()
@@ -110,7 +114,8 @@ class GUI(Frame):
             return
 
         # All checks passed, create digest
-        h = algos.Dispass1.digest(label + passwordin1)
+        h = algos.Dispass1.digest(label + passwordin1,
+                                  length=self.lengthVar.get())
         self.result.config(fg="black", readonlybackground="green")
         self.passwordout.set(h)
         self.clearInput()
@@ -176,10 +181,13 @@ class GUI(Frame):
         tpasswordin1 = Label(self, text='Password', font=self.getFont(2))
         tpasswordin2 = Label(self, text='Password (again)',
                              font=self.getFont(2))
+        tlength = Label(self, text='Length', font=self.getFont(2))
         self.label = Entry(self, width=27, font=self.getFont())
         self.passwordin1 = Entry(self, width=27, font=self.getFont(), show="*")
         self.passwordin2 = Entry(self, width=27, font=self.getFont(), show="*",
                                  state=DISABLED)
+        length = Spinbox(self, width=3, font=self.getFont, from_=1,
+                         to=999, textvariable=self.lengthVar)
         genbutton = Button(self, text="Generate password",
                            font=self.getFont(), command=self.validateAndShow,
                            default="active")
@@ -192,21 +200,24 @@ class GUI(Frame):
         # Keybindings
         self.passwordin1.bind('<Return>', lambda e: genbutton.invoke())
         self.passwordin2.bind('<Return>', lambda e: genbutton.invoke())
+        length.bind('<Return>', lambda e: genbutton.invoke())
         self.master.bind('<Control-q>', lambda e: self.quit())
         self.master.bind('<Escape>', lambda e: self.reset())
 
         # Layout widgets in a grid
-        ttitle.grid(row=0, column=0, sticky=N + S + E + W, columnspan=3)
-        wisnew.grid(row=1, column=0, sticky=N + S + E + W, columnspan=3)
+        ttitle.grid(row=0, column=0, sticky=N + S + E + W, columnspan=4)
+        wisnew.grid(row=1, column=0, sticky=N + S + E + W, columnspan=4)
         tlabel.grid(row=2, column=0, sticky=N + S + E + W)
         tpasswordin1.grid(row=2, column=1, sticky=N + S + E + W)
         tpasswordin2.grid(row=2, column=2, sticky=N + S + E + W)
+        tlength.grid(row=2, column=3, sticky=N + S + E + W)
         self.label.grid(row=3, column=0, sticky=N + S + E + W)
         self.passwordin1.grid(row=3, column=1, sticky=N + S + E + W)
         self.passwordin2.grid(row=3, column=2, sticky=N + S + E + W)
+        length.grid(row=3, column=3, sticky=N + S + E + W)
         genbutton.grid(row=4, column=0, sticky=N + S + E + W, columnspan=2)
-        clrbutton.grid(row=4, column=2, sticky=N + S + E + W)
-        self.result.grid(row=5, column=0, sticky=N + S + E + W, columnspan=3)
+        clrbutton.grid(row=4, column=2, sticky=N + S + E + W, columnspan=2)
+        self.result.grid(row=5, column=0, sticky=N + S + E + W, columnspan=4)
 
         # Initially, set focus on self.label
         self.label.focus_set()
