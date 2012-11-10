@@ -110,7 +110,7 @@ class GUI(Frame):
             return
 
         # All checks passed, create digest
-        h = algos.dispass1.digest(label + passwordin1)
+        h = algos.Dispass1.digest(label + passwordin1)
         self.result.config(fg="black", readonlybackground="green")
         self.passwordout.set(h)
         self.clearInput()
