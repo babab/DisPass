@@ -190,6 +190,7 @@ class FileHandler:
         * Column 1-50: label (50 chars)
         * Column 52-54: length (3 chars wide)
         * Column 56-70: hash algo (15 chars wide)
+        * Column 72-74: sequence number (3 chars wide)
 
         If fixed columns is false an ascii table is printed with a variable
         width depending on the length of the longest label. The table has
@@ -200,20 +201,25 @@ class FileHandler:
 
             for algo, labels in self.labels.iteritems():
                 for label, params in labels.iteritems():
-                    print '{:50} {:3} {:15}'.format(label[:50],
-                                                    str(params[0])[:3], algo)
+                    print('{:50} {:3} {:15} {:3}'
+                          .format(label[:50], str(params[0])[:3], algo[:15],
+                                  str(params[1]) if params[1] else ''))
         else:
             divlen = self.getLongestLabel()
 
-            print '+-{:{fill}}-+--------+'.format('-' * divlen, fill=divlen)
-            print '| {:{fill}} | Length |'.format('Label', fill=divlen)
+            print('+-{spacer:{fill}}-+--------+----------+--------+\n'
+                  '| {title:{fill}} | Length | Algo     | Number | \n'
+                  '+-{spacer:{fill}}-+--------+----------+--------+'
+                  .format(spacer='-' * divlen, title='Label', fill=divlen))
 
-            print '+-{:{fill}}-+--------+'.format('-' * divlen, fill=divlen)
             for algo, labels in self.labels.iteritems():
                 for label, params in labels.iteritems():
-                    print '| {:{fill}} |    {:3} |'.format(label, params[0],
-                                                           fill=divlen)
-            print '+-{:{fill}}-+--------+'.format('-' * divlen, fill=divlen)
+                    seqno = int(params[1]) if params[1] else ''
+                    print('| {:{fill}} |    {:3} | {:8} |    {:3} |'
+                          .format(label, params[0], algo, seqno,
+                                  fill=divlen))
+            print('+-{:{fill}}-+--------+----------+--------+'
+                  .format('-' * divlen, fill=divlen))
 
 
 if __name__ == '__main__':

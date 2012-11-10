@@ -1,4 +1,4 @@
-User Documentation
+README
 ******************************************************************************
 
 DisPass is a passphrase generator for GNU/Linux, \*BSD, MacOS X and Windows.
@@ -290,9 +290,10 @@ the output will be optimized for easy parsing by other programs
 and scripts by not printing the header and always printing one
 entry on a single line using the following positions::
 
-   Column  1-50: label     (50 chars wide)
-   Column 52-54: length    ( 3 chars wide)
-   Column 56-70: hash algo (15 chars wide)
+   Column  1-50: label           (50 chars wide)
+   Column 52-54: length           (3 chars wide)
+   Column 56-70: hash algo       (15 chars wide)
+   Column 72-74: sequence number  (3 chars wide)
 
 Otherwise an ascii table is printed with a variable width depending
 on the length of the longest label. The table has a header but does
