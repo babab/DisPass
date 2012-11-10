@@ -19,6 +19,21 @@ algorithms = ('dispass1', 'dispass2')
 
 
 class Dispass1:
+    '''Dispass1 algorithm
+
+    Tests:
+
+    >>> dispass1 = Dispass1()
+    >>> dispass1.digest('test' 'qqqqqqqq')
+    'Y2Y4Y2Y0Yzg5Nzc1Yzc2MmI4OTU0ND'
+    >>> dispass1.digestPasswordDict({'test': (30, None)}, 'qqqqqqqq')
+    [('test', 'Y2Y4Y2Y0Yzg5Nzc1Yzc2MmI4OTU0ND')]
+    >>> dispass1.digest('test2' 'qqqqqqqq', 50)
+    'NmQzNjUzZTlhNTc4NWFlNTU5ZTVkZGQ5ZTc2NzliZjgzZDQ1Zj'
+    >>> dispass1.digestPasswordDict({'test2': (50, )}, 'qqqqqqqq')
+    [('test2', 'NmQzNjUzZTlhNTc4NWFlNTU5ZTVkZGQ5ZTc2NzliZjgzZDQ1Zj')]
+    '''
+
     @staticmethod
     def digest(message, length=30):
         '''Create and return secure hash of message
@@ -50,11 +65,11 @@ class Dispass1:
         it down to the first `length` characters.
 
         :Parameters:
-            - `indentifierDict`: A dict of `{identifier: (length, )}`
+            - `indentifierDict`: A dict of `{identifier: (length, None)}`
             - `password`: The password to use for hashing entries
 
         :Return:
-            - A list of 2-tuples of '(identifier, passphrase)'
+            - A list of '(identifier: (length, seqno)), passphrase)' entries
         '''
 
         hashed = []
@@ -69,6 +84,43 @@ class Dispass1:
 
 
 class Dispass2:
+    '''Dispass2 algorithm
+
+    Tests:
+
+    >>> dispass2 = Dispass2()
+    >>> dispass2.digest('test' '1' 'qqqqqqqq')
+    'ZTdiNGNkYmQ2ZjFmNzc3NGFjZWEwMz'
+    >>> dispass2.digestPasswordDict({'test': (30, 1)}, 'qqqqqqqq')
+    [('test', 'ZTdiNGNkYmQ2ZjFmNzc3NGFjZWEwMz')]
+    >>> dispass2.digest('test2' '10' 'qqqqqqqq', 50)
+    'NGEwNjMxMzZiMzljODVmODk4OWQ1ZmE4YTRlY2E4ODZkZjZlZW'
+    >>> dispass2.digestPasswordDict({'test2': (50, 10)}, 'qqqqqqqq')
+    [('test2', 'NGEwNjMxMzZiMzljODVmODk4OWQ1ZmE4YTRlY2E4ODZkZjZlZW')]
+    '''
+
+    @staticmethod
+    def digest(message, length=30):
+        '''Create and return secure hash of message
+
+        A secure hash/message digest formed by hashing the `message` with
+        the sha512 algorithm, encoding this hash with base64 and stripping
+        it down to the first `length` characters.
+
+        :Parameters:
+            - `message`: The string from which to form the digest
+            - `length`: Length of output hash (optional)
+
+        :Return:
+            - The secure hash of `message`
+        '''
+
+        sha = hashlib.sha512()
+        sha.update(message)
+        r = base64.b64encode(sha.hexdigest(), '49').replace('=', '')
+
+        return str(r[:length])
+
     @staticmethod
     def digestPasswordDict(indentifierDict, password):
         '''Creat secure hashes of a dict of `{identifier:(length, seqno)}`
@@ -82,7 +134,7 @@ class Dispass2:
             - `password`: The password to use for hashing entries
 
         :Return:
-            - A list of 2-tuples of '(identifier, passphrase)'
+            - A list of '(identifier: (length, seqno)), passphrase)' entries
         '''
 
         hashed = []
@@ -94,3 +146,7 @@ class Dispass2:
             hashed.append((identifier, str(r[:params[0]])))
 
         return hashed
+
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod()
