@@ -42,8 +42,8 @@ class FileHandler:
     file_stripped = []
     '''Labelfile contents with comments and blank lines removed'''
 
-    labels = None
-    '''Dict of `{label: length}`'''
+    algodict = None
+    '''Dictionary of {algorithm: (label, (length, seqno))}'''
 
     def __init__(self, write=False, file_location=None):
         '''Open file; if file is found: strip comments and parse()'''
@@ -120,8 +120,8 @@ class FileHandler:
             elif algo == 'dispass2':
                 labels_dispass2.append((labelname, (length, seqno)))
 
-        self.labels = {'dispass1': dict(labels_dispass1),
-                       'dispass2': dict(labels_dispass2)}
+        self.algodict = {'dispass1': dict(labels_dispass1),
+                         'dispass2': dict(labels_dispass2)}
         return self
 
     def close(self):
@@ -151,7 +151,7 @@ class FileHandler:
         length = None
         seqno = None
 
-        for algo, labels in self.labels.iteritems():
+        for algo, labels in self.algodict.iteritems():
             for label, params in labels.iteritems():
                 if search_string in label:
                     found_algo = algo
@@ -171,7 +171,7 @@ class FileHandler:
     def getLongestLabel(self):
         '''Return length of longest label name'''
         labelnames = []
-        for algo, labels in self.labels.iteritems():
+        for algo, labels in self.algodict.iteritems():
             for label, params in labels.iteritems():
                 labelnames.append(label)
         return len(max(labelnames, key=len))
@@ -199,7 +199,7 @@ class FileHandler:
         '''
         if fixed_columns:
 
-            for algo, labels in self.labels.iteritems():
+            for algo, labels in self.algodict.iteritems():
                 for label, params in labels.iteritems():
                     print('{:50} {:3} {:15} {:3}'
                           .format(label[:50], str(params[0])[:3], algo[:15],
@@ -212,7 +212,7 @@ class FileHandler:
                   '+-{spacer:{fill}}-+--------+----------+--------+'
                   .format(spacer='-' * divlen, title='Label', fill=divlen))
 
-            for algo, labels in self.labels.iteritems():
+            for algo, labels in self.algodict.iteritems():
                 for label, params in labels.iteritems():
                     seqno = int(params[1]) if params[1] else ''
                     print('| {:{fill}} |    {:3} | {:8} |    {:3} |'

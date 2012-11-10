@@ -186,7 +186,7 @@ def main(argv):
             lf = labelfile.FileHandler()
 
         if lf.file_found:
-            console.interactive(lf.labels)
+            console.interactive(lf.algodict)
             return
         else:
             print 'error: could not load labelfile at %s\n' % lf.file_location
