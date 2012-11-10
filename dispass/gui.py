@@ -19,6 +19,7 @@ import algos
 import dispass
 
 versionStr = 'g%s' % dispass.versionStr
+DEFAULT_LENGTH = 30
 
 
 class GUI(Frame):
@@ -40,7 +41,7 @@ class GUI(Frame):
         Frame.__init__(self, Tk(className='dispass'))
 
         self.lengthVar = IntVar()
-        self.lengthVar.set(30)
+        self.lengthVar.set(DEFAULT_LENGTH)
 
         self.master.title(versionStr)
         self.grid()
@@ -142,6 +143,7 @@ class GUI(Frame):
 
     def clearOutput(self):
         '''Clear all output fields'''
+        self.lengthVar.set(DEFAULT_LENGTH)
 
         self.passwordout.set('- No password generated -')
         self.result.config(fg="black", readonlybackground="gray")
