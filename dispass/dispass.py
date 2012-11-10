@@ -38,28 +38,31 @@ def usage():
     print "%s - http://dispass.babab.nl/" % (versionStr)
     print
     print 'USAGE: dispass [options]'
-    print('       dispass [options] <label> [<label2>] [...]')
+    print('       dispass [options] <label> [<label2>] [<label3>] [...]')
     print '       gdispass'
     print
-    print 'Options:'
+    print 'Options (general):'
     print '-c, --create    use if this passphrase is new (check input PW)'
     print '-g, --gui       start guided graphical version of DisPass'
-    print '-h, --help, -?  show this help and exit'
+    print '-h, -?, --help  show this help and exit'
     print '-o, --output    output passphrases to stdout (instead of the '
     print '                more secure way of displaying via curses)'
     print '-V, --version   show full version information and exit'
+    print "--script        optimize input/output for 'wrapping' dispass"
     print
-    print '-l <length>, --length=<length>'
-    print '                set length of passphrase (default: 30, max: 171)'
+    print 'Options (when using labelfile):'
     print '-s <string>, --search=<string>'
     print ' ' * 15, 'dispass label from file that uniquely matches <string>'
     print '-f <labelfile>, --file=<labelfile>'
     print '                set location of labelfile'
+    print
+    print 'Options (when passing labels as arguments):'
+    print '-l <length>, --length=<length>'
+    print '                set length of passphrase (default: 30, max: 171)'
     print '-a <algorithm>, --algo=<algorithm>'
     print '                override algorithm for generating passphrase(s)'
     print '-n <number>, --number=<number>'
     print '                override sequence number (default = 1)'
-    print "--script        optimize input/output for 'wrapping' dispass"
 
 
 def main(argv):

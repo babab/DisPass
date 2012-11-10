@@ -1,4 +1,4 @@
-.TH "DISPASS" "1" "November 01, 2012" "0.1" "DisPass"
+.TH "DISPASS" "1" "November 10, 2012" "0.1" "DisPass"
 .SH NAME
 dispass \- DisPass Documentation
 .
@@ -33,9 +33,9 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .SH SYNOPSIS
 .SS dispass
 .sp
-dispass [\-cghoV] [\-f <labelfile>] [\-s <string>] [\-\-script]
+dispass [\-cghoV?] [\-f <labelfile>] [\-s <string>] [\-\-script]
 .sp
-dispass [\-co] [\-a <algo>] [\-l <length>] <label> [<label2>] [...] [\-\-script]
+dispass [\-co] [\-l <length>] [\-a <algo>] [\-n <sequence\-number>] [\-\-script] <label> [<label2>] [label3]  [...]
 .sp
 gdispass
 .SS dispass\-label
@@ -175,107 +175,73 @@ passphrases with varying lengths.
 .SH OPTIONS
 .SS dispass
 .sp
-Short options:
+Options (general):
 .INDENT 0.0
 .TP
-.B \-c
+.B \-c,  \-\-create
 use if this passphrase is new (check input PW)
 .TP
-.B \-g
+.B \-g,  \-\-gui
 start guided graphical version of DisPass
 .TP
-.B \-h
+.B \-h,  \-\-help
 show this help and exit
 .TP
-.B \-o
+.B \-o,  \-\-output
 output passphrases to stdout
 (instead of the more secure way of displaying via curses)
 .TP
-.B \-V
+.B \-V,  \-\-version
 show full version information and exit
-.TP
-.BI \-l \ <length>
-set length of passphrase (default: 30, max: 171)
-.TP
-.BI \-s \ <string>
-dispass label from file that uniquely matches <string>
-.TP
-.BI \-f \ <labelfile>
-set location of labelfile
-.TP
-.BI \-a \ <algorithm>
-override algorithm for generating passphrase(s)
-.UNINDENT
-.sp
-Long options:
-.INDENT 0.0
-.TP
-.B \-\-create
-use if this passphrase is new (check input PW)
-.TP
-.B \-\-gui
-start guided graphical version of DisPass
-.TP
-.B \-\-help
-show this help and exit
-.TP
-.B \-\-output
-output passphrases to stdout
-(instead of the more secure way of displaying via curses)
-.TP
-.B \-\-version
-show full version information and exit
-.TP
-.BI \-\-length \ <length>
-set length of passphrase (default: 30, max: 171)
-.TP
-.BI \-\-search \ <string>
-dispass label from file that uniquely matches <string>
-.TP
-.BI \-\-file \ <labelfile>
-set location of labelfile
-.TP
-.BI \-\-algo \ <algorithm>
-override algorithm for generating passphrase(s)
 .TP
 .B \-\-script
 optimize input/output for \(aqwrapping\(aq dispass
 .UNINDENT
-.SS dispass\-labels
 .sp
-Short options:
+Options (when using labelfile):
 .INDENT 0.0
 .TP
-.B \-h
-show this help and exit
+.BI \-s \ <string>, \ \-\-search\fB= <string>
+dispass label from file that uniquely
+matches <string>
 .TP
-.B \-l
-print all labels and options found in labelfile
-.TP
-.B \-V
-show full version information and exit
-.TP
-.BI \-f \ <labelfile>
+.BI \-f \ <labelfile>, \ \-\-file\fB= <labelfile>
 set location of labelfile
 .UNINDENT
 .sp
-Long options:
+Options (when passing labels as arguments):
 .INDENT 0.0
 .TP
-.B \-\-help
-show this help and exit
+.BI \-l \ <length>, \ \-\-length\fB= <length>
+set length of passphrase
+(default: 30, max: 171)
 .TP
-.B \-\-list
-print all labels and options found in labelfile
+.BI \-a \ <algorithm>, \ \-\-algo\fB= <algorithm>
+override algorithm for generating
+passphrase(s)
 .TP
-.B \-\-version
+.BI \-n \ <number>, \ \-\-number\fB= <number>
+override sequence number (default = 1)
+.UNINDENT
+.SS dispass\-label
+.INDENT 0.0
+.TP
+.B \-h,  \-\-help
+show help and exit
+.TP
+.B \-l,  \-\-list
+print all labels and options found in
+labelfile
+.TP
+.B \-V,  \-\-version
 show full version information and exit
 .TP
-.BI \-\-file\fB= <labelfile>
+.BI \-f \ <labelfile>, \ \-\-file\fB= <labelfile>
 set location of labelfile
 .TP
 .B \-\-script
-optimize input/output for \(aqwrapping\(aq dispass\-label
+optimize input/output for \(aqwrapping\(aq
+dispass\-label
 .UNINDENT
 .SH USING THE GRAPHICAL GDISPASS APPLICATION
 .sp

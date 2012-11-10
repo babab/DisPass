@@ -7,9 +7,9 @@ SYNOPSIS
 dispass
 -------
 
-dispass [-cghoV] [-f <labelfile>] [-s <string>] [--script]
+dispass [-cghoV?] [-f <labelfile>] [-s <string>] [--script]
 
-dispass [-co] [-a <algo>] [-l <length>] <label> [<label2>] [...] [--script]
+dispass [-co] [-l <length>] [-a <algo>] [-n <sequence-number>] [--script] <label> [<label2>] [label3]  [...]
 
 gdispass
 
@@ -135,50 +135,40 @@ OPTIONS
 dispass
 -------
 
-Short options:
+Options (general):
 
--c                  use if this passphrase is new (check input PW)
--g                  start guided graphical version of DisPass
--h                  show this help and exit
--o                  output passphrases to stdout
-                    (instead of the more secure way of displaying via curses)
--V                  show full version information and exit
--l <length>         set length of passphrase (default: 30, max: 171)
--s <string>         dispass label from file that uniquely matches <string>
--f <labelfile>      set location of labelfile
--a <algorithm>      override algorithm for generating passphrase(s)
+-c, --create    use if this passphrase is new (check input PW)
+-g, --gui       start guided graphical version of DisPass
+-h, --help      show this help and exit
+-o, --output    output passphrases to stdout
+                (instead of the more secure way of displaying via curses)
+-V, --version   show full version information and exit
+--script        optimize input/output for 'wrapping' dispass
 
-Long options:
+Options (when using labelfile):
 
---create            use if this passphrase is new (check input PW)
---gui               start guided graphical version of DisPass
---help              show this help and exit
---output            output passphrases to stdout
-                    (instead of the more secure way of displaying via curses)
---version           show full version information and exit
---length <length>   set length of passphrase (default: 30, max: 171)
---search <string>   dispass label from file that uniquely matches <string>
---file <labelfile>  set location of labelfile
---algo <algorithm>  override algorithm for generating passphrase(s)
---script            optimize input/output for 'wrapping' dispass
+-s <string>, --search=<string>      dispass label from file that uniquely
+                                    matches <string>
+-f <labelfile>, --file=<labelfile>  set location of labelfile
 
-dispass-labels
---------------
+Options (when passing labels as arguments):
 
-Short options:
+-l <length>, --length=<length>      set length of passphrase
+                                    (default: 30, max: 171)
+-a <algorithm>, --algo=<algorithm>  override algorithm for generating
+                                    passphrase(s)
+-n <number>, --number=<number>      override sequence number (default = 1)
 
--h                  show this help and exit
--l                  print all labels and options found in labelfile
--V                  show full version information and exit
--f <labelfile>      set location of labelfile
+dispass-label
+-------------
 
-Long options:
-
---help              show this help and exit
---list              print all labels and options found in labelfile
---version           show full version information and exit
---file=<labelfile>  set location of labelfile
---script            optimize input/output for 'wrapping' dispass-label
+-h, --help                          show help and exit
+-l, --list                          print all labels and options found in
+                                    labelfile
+-V, --version                       show full version information and exit
+-f <labelfile>, --file=<labelfile>  set location of labelfile
+--script                            optimize input/output for 'wrapping'
+                                    dispass-label
 
 
 Using the graphical *gdispass* application
