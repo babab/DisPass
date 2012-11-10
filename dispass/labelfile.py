@@ -24,6 +24,9 @@ class FileHandler:
     default_length = 30
     '''Default passphrase length'''
 
+    default_sequence_number = 1
+    '''Default sequence number'''
+
     algorithm = 'dispass1'
     '''String. The algorithm to use, default is dispass1'''
 
@@ -81,10 +84,11 @@ class FileHandler:
             return '~/.local/share/dispass/labels'
 
     def parse(self):
-        '''Create dictionary of ``labels = {label: length, ...}``'''
+        '''Create dictionary {algorithm: (label, (length, seqno))}'''
 
         labels = []
         labels_dispass1 = []
+        labels_dispass2 = []
 
         for i in self.file_stripped:
             wordlist = []
@@ -97,6 +101,7 @@ class FileHandler:
         for line in labels:
             labelname = line.pop(0)
             length = self.default_length
+            seqno = self.default_sequence_number
             algo = self.algorithm
 
             for arg in line:
@@ -107,11 +112,16 @@ class FileHandler:
                         print "Warning: Invalid length in: '%s'" % line
                 elif 'algo=' in arg:
                     algo = arg.strip('algo=')
+                elif 'seqno=' in arg:
+                    seqno = arg.strip('seqno=')
 
             if algo == 'dispass1':
-                labels_dispass1.append((labelname, (length, )))
+                labels_dispass1.append((labelname, (length, None)))
+            elif algo == 'dispass2':
+                labels_dispass2.append((labelname, (length, seqno)))
 
-        self.labels = dict(labels_dispass1)
+        self.labels = {'dispass1': dict(labels_dispass1),
+                       'dispass2': dict(labels_dispass2)}
         return self
 
     def close(self):
@@ -132,17 +142,23 @@ class FileHandler:
 
         If no matches are found, return False.
         If multiple matches are found, return Integer of number of matches
-        If a unique match is found a dict of ``{label, passphrase_length}``
-        is returned.
+        If a unique match is found a dict of
+        ``{algo: {label, (passphrase_length, sequence_number)}}`` is returned.
         '''
-        found = []
         count = 0
+        found = []
+        found_algo = None
+        length = None
+        seqno = None
 
-        for label, length in self.labels.iteritems():
-            if search_string in label:
-                found.append(label)
-                found_length = length
-                count += 1
+        for algo, labels in self.labels.iteritems():
+            for label, params in labels.iteritems():
+                if search_string in label:
+                    found_algo = algo
+                    length = params[0]
+                    seqno = params[1]
+                    found.append(label)
+                    count += 1
 
         if not found:
             return False
@@ -150,11 +166,15 @@ class FileHandler:
         if count > 1:
             return count
 
-        return {found.pop(): found_length}
+        return {found_algo: {found.pop(): (length, seqno)}}
 
     def getLongestLabel(self):
         '''Return length of longest label name'''
-        return len(max(self.labels.keys(), key=len))
+        labelnames = []
+        for algo, labels in self.labels.iteritems():
+            for label, params in labels.iteritems():
+                labelnames.append(label)
+        return len(max(labelnames, key=len))
 
     def printLabels(self, fixed_columns=False):
         '''Print a formatted table of labelfile contents
@@ -177,9 +197,11 @@ class FileHandler:
         hashing algos is added.
         '''
         if fixed_columns:
-            for label, length in self.labels.iteritems():
-                print '{:50} {:3} {:15}'.format(label[:50], str(length)[:3],
-                                                "dispass1")
+
+            for algo, labels in self.labels.iteritems():
+                for label, params in labels.iteritems():
+                    print '{:50} {:3} {:15}'.format(label[:50],
+                                                    str(params[0])[:3], algo)
         else:
             divlen = self.getLongestLabel()
 
@@ -187,9 +209,10 @@ class FileHandler:
             print '| {:{fill}} | Length |'.format('Label', fill=divlen)
 
             print '+-{:{fill}}-+--------+'.format('-' * divlen, fill=divlen)
-            for label, length in self.labels.iteritems():
-                print '| {:{fill}} |    {:3} |'.format(label, length,
-                                                       fill=divlen)
+            for algo, labels in self.labels.iteritems():
+                for label, params in labels.iteritems():
+                    print '| {:{fill}} |    {:3} |'.format(label, params[0],
+                                                           fill=divlen)
             print '+-{:{fill}}-+--------+'.format('-' * divlen, fill=divlen)
 
 

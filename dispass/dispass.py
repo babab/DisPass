@@ -104,8 +104,9 @@ def main(argv):
                 print '\nOk, bye'
             return
         elif o in ("-a", "--algo"):
-            if a in algos.algorithms:
-                console.setAlgo(a)
+            algoname = a.lower()
+            if algoname in algos.algorithms:
+                console.setAlgo(algoname)
             else:
                 print 'error: algo "{algo}" does not exist'.format(algo=a)
                 return 1

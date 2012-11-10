@@ -143,20 +143,36 @@ class CLI:
 
         password = self.passwordPrompt()
 
-        if self.algorithm == 'dispass1':
-            algo = algos.Dispass1()
+        algo_dispass1 = algos.Dispass1()
+        algo_dispass2 = algos.Dispass2()
 
         if isinstance(labels, list):
             labelmap = []
             for i in labels:
-                labelmap.append((i, (self.passphraseLength, )))
+                labelmap.append((i, (self.passphraseLength, self.algorithm)))
 
-            self.passphrases += algo.digestPasswordDict(dict(labelmap),
-                                                        password)
+            if self.algorithm == 'dispass1':
+                self.passphrases += algo_dispass1.digestPasswordDict(
+                    dict(labelmap), password
+                )
+            elif self.algorithm == 'dispass2':
+                self.passphrases += algo_dispass2.digestPasswordDict(
+                    dict(labelmap), password
+                )
+
             divlen = len(max(labels, key=len)) + 2
             self.passphrases = dict(self.passphrases)
         elif isinstance(labels, dict):
-            self.passphrases += algo.digestPasswordDict(labels, password)
+            for algo, labels in labels.iteritems():
+                if algo == 'dispass1':
+                    self.passphrases += algo_dispass1.digestPasswordDict(
+                        labels, password
+                    )
+                elif algo == 'dispass2':
+                    self.passphrases += algo_dispass2.digestPasswordDict(
+                        labels, password
+                    )
+
             label_list = []
             self.passphrases = dict(self.passphrases)
             for label, length in self.passphrases.iteritems():

@@ -15,7 +15,7 @@
 import base64
 import hashlib
 
-algorithms = ('dispass1', )
+algorithms = ('dispass1', 'dispass2')
 
 
 class Dispass1:
