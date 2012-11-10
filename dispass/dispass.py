@@ -37,9 +37,8 @@ def usage():
 
     print "%s - http://dispass.babab.nl/" % (versionStr)
     print
-    print 'USAGE: dispass [-cghoV?] [-f <labelfile>] [-s <string>]'
-    print('       dispass [-co] [-a <algo>] [-l <length>] <label> '
-          '[<label2>] [...]')
+    print 'USAGE: dispass [options]'
+    print('       dispass [options] <label> [<label2>] [...]')
     print '       gdispass'
     print
     print 'Options:'
@@ -58,6 +57,8 @@ def usage():
     print '                set location of labelfile'
     print '-a <algorithm>, --algo=<algorithm>'
     print '                override algorithm for generating passphrase(s)'
+    print '-n <number>, --number=<number>'
+    print '                override sequence number (default = 1)'
     print "--script        optimize input/output for 'wrapping' dispass"
 
 
@@ -73,10 +74,10 @@ def main(argv):
     f_flag = None
 
     try:
-        opts, args = getopt.getopt(argv[1:], "a:cf:ghl:os:V?",
+        opts, args = getopt.getopt(argv[1:], "a:cf:ghl:n:os:V?",
                                    ["algo=", "create", "file=", "gui", "help",
-                                    "length=", "output", "script", "search=",
-                                    "version"])
+                                    "length=", "number", "output", "script",
+                                    "search=", "version"])
     except getopt.GetoptError, err:
         print str(err), "\n"
         usage()
@@ -110,6 +111,14 @@ def main(argv):
             else:
                 print 'error: algo "{algo}" does not exist'.format(algo=a)
                 return 1
+        elif o in ("-n", "--number"):
+            try:
+                seqno = int(a)
+            except ValueError:
+                print 'error: sequence number must be a number\n'
+                usage()
+                return 1
+            console.setSeqNo(seqno)
         elif o in ("-c", "--create"):
             console.setPrompt(promptDouble=True)
         elif o in ("-l", "--length"):
