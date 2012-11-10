@@ -30,14 +30,14 @@ class GUI(Frame):
     fontsize = 10
     '''Default fontsize (10 pt.)'''
 
-    def __init__(self, master=None):
+    def __init__(self):
         '''Initialize GUI object, create the widgets and start mainloop
 
         Try to import Tkinter and tkMessageBox. If that fails, show a help
         message with quick instructions on installing Tkinter.
         '''
 
-        Frame.__init__(self, master)
+        Frame.__init__(self, Tk(className='dispass'))
         self.master.title(versionStr)
         self.grid()
         self.createWidgets()
