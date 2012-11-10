@@ -193,13 +193,15 @@ class CLI:
             j = 3
             for label, passphrase in self.passphrases.iteritems():
                 stdscr.addstr(j,  0, label, curses.A_BOLD)
-                stdscr.addstr(j, divlen, passphrase, curses.A_REVERSE)
+                stdscr.addstr(j, divlen, passphrase)
                 j += 1
             stdscr.refresh()
+            curses.curs_set(0)
 
             while True:
                 c = stdscr.getch()
                 if c == ord('q'):
+                    stdscr.erase()
                     break
 
             curses.nocbreak()
