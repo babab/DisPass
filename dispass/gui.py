@@ -188,8 +188,8 @@ class GUI(Frame):
         self.passwordin1 = Entry(self, width=27, font=self.getFont(), show="*")
         self.passwordin2 = Entry(self, width=27, font=self.getFont(), show="*",
                                  state=DISABLED)
-        length = Spinbox(self, width=3, font=self.getFont, from_=1,
-                         to=999, textvariable=self.lengthVar)
+        length = Spinbox(self, width=3, font=self.getFont, from_=9,
+                         to=171, textvariable=self.lengthVar)
         genbutton = Button(self, text="Generate password",
                            font=self.getFont(), command=self.validateAndShow,
                            default="active")
