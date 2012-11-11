@@ -152,11 +152,11 @@ class CLI:
                 labelmap.append((i, (self.passphraseLength, self.algorithm)))
 
             if self.algorithm == 'dispass1':
-                self.passphrases += algo_dispass1.digestPasswordDict(
+                self.passphrases = algo_dispass1.digestPasswordDict(
                     dict(labelmap), password
                 )
             elif self.algorithm == 'dispass2':
-                self.passphrases += algo_dispass2.digestPasswordDict(
+                self.passphrases = algo_dispass2.digestPasswordDict(
                     dict(labelmap), password
                 )
 

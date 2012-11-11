@@ -74,6 +74,7 @@ def main(argv):
 
     execname = argv[0].split('/').pop()
     console = cli.CLI()
+    a_flag = None
     f_flag = None
 
     try:
@@ -114,6 +115,7 @@ def main(argv):
             else:
                 print 'error: algo "{algo}" does not exist'.format(algo=a)
                 return 1
+            a_flag = True
         elif o in ("-n", "--number"):
             try:
                 seqno = int(a)
@@ -180,6 +182,10 @@ def main(argv):
     if labels:
         console.interactive(labels)
     else:
+        if a_flag:
+            print('error: option -a can only be used when specifying label(s)'
+                  ' as argument(s)')
+            return 1
         if f_flag:
             lf = labelfile.FileHandler(file_location=f_flag)
         else:
