@@ -14,13 +14,16 @@
 
 from Tkinter import *
 import tkMessageBox
+import ttk
 
 import algos
 import dispass
+import labelfile
 
 versionStr = 'g%s' % dispass.versionStr
 DEFAULT_LENGTH = 30
 
+LABELSPECS = labelfile.FileHandler().algodict['dispass1']
 
 class GUI(Frame):
     '''Houses all GUI related objects and interactions'''
@@ -159,6 +162,10 @@ class GUI(Frame):
         self.clearIO()
         self.label.focus_set()
 
+    def labelSelected(self, event):
+        '''Set values of input fields according to the selected label.'''
+        self.lengthVar.set(LABELSPECS[self.label.get()][0])
+
 # GUI # Create Widgets
     def createWidgets(self):
         '''Create and align widgets'''
@@ -183,7 +190,8 @@ class GUI(Frame):
         tpasswordin2 = Label(self, text='Password (again)',
                              font=self.getFont(2))
         tlength = Label(self, text='Length', font=self.getFont(2))
-        self.label = Entry(self, width=27, font=self.getFont())
+        self.label = ttk.Combobox(self, width=27, font=self.getFont(),
+                                  values=LABELSPECS.keys())
         self.passwordin1 = Entry(self, width=27, font=self.getFont(), show="*")
         self.passwordin2 = Entry(self, width=27, font=self.getFont(), show="*",
                                  state=DISABLED)
@@ -204,6 +212,7 @@ class GUI(Frame):
         length.bind('<Return>', lambda e: genbutton.invoke())
         self.master.bind('<Control-q>', lambda e: self.quit())
         self.master.bind('<Escape>', lambda e: self.reset())
+        self.label.bind('<<ComboboxSelected>>', self.labelSelected)
 
         # Layout widgets in a grid
         ttitle.grid(row=0, column=0, sticky=N + S + E + W, columnspan=4)
