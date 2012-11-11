@@ -14,12 +14,16 @@
 
 from Tkinter import *
 import tkMessageBox
+import ttk
 
 import algos
 import dispass
+import labelfile
 
 versionStr = 'g%s' % dispass.versionStr
+DEFAULT_LENGTH = 30
 
+LABELSPECS = labelfile.FileHandler().algodict.get('dispass1', {})
 
 class GUI(Frame):
     '''Houses all GUI related objects and interactions'''
@@ -38,6 +42,10 @@ class GUI(Frame):
         '''
 
         Frame.__init__(self, Tk(className='dispass'))
+
+        self.lengthVar = IntVar()
+        self.lengthVar.set(DEFAULT_LENGTH)
+
         self.master.title(versionStr)
         self.grid()
         self.createWidgets()
@@ -110,7 +118,8 @@ class GUI(Frame):
             return
 
         # All checks passed, create digest
-        h = algos.dispass1.digest(label + passwordin1)
+        h = algos.Dispass1.digest(label + passwordin1,
+                                  length=self.lengthVar.get())
         self.result.config(fg="black", readonlybackground="green")
         self.passwordout.set(h)
         self.clearInput()
@@ -131,13 +140,13 @@ class GUI(Frame):
     def clearInput(self):
         '''Clear all input fields'''
 
+        self.lengthVar.set(DEFAULT_LENGTH)
         self.label.delete(0, END)
         self.passwordin1.delete(0, END)
         self.passwordin2.delete(0, END)
 
     def clearOutput(self):
         '''Clear all output fields'''
-
         self.passwordout.set('- No password generated -')
         self.result.config(fg="black", readonlybackground="gray")
 
@@ -152,6 +161,10 @@ class GUI(Frame):
 
         self.clearIO()
         self.label.focus_set()
+
+    def labelSelected(self, event):
+        '''Set values of input fields according to the selected label.'''
+        self.lengthVar.set(LABELSPECS[self.label.get()][0])
 
 # GUI # Create Widgets
     def createWidgets(self):
@@ -176,10 +189,14 @@ class GUI(Frame):
         tpasswordin1 = Label(self, text='Password', font=self.getFont(2))
         tpasswordin2 = Label(self, text='Password (again)',
                              font=self.getFont(2))
-        self.label = Entry(self, width=27, font=self.getFont())
+        tlength = Label(self, text='Length', font=self.getFont(2))
+        self.label = ttk.Combobox(self, width=27, font=self.getFont(),
+                                  values=LABELSPECS.keys())
         self.passwordin1 = Entry(self, width=27, font=self.getFont(), show="*")
         self.passwordin2 = Entry(self, width=27, font=self.getFont(), show="*",
                                  state=DISABLED)
+        length = Spinbox(self, width=3, font=self.getFont, from_=9,
+                         to=171, textvariable=self.lengthVar)
         genbutton = Button(self, text="Generate password",
                            font=self.getFont(), command=self.validateAndShow,
                            default="active")
@@ -192,21 +209,25 @@ class GUI(Frame):
         # Keybindings
         self.passwordin1.bind('<Return>', lambda e: genbutton.invoke())
         self.passwordin2.bind('<Return>', lambda e: genbutton.invoke())
+        length.bind('<Return>', lambda e: genbutton.invoke())
         self.master.bind('<Control-q>', lambda e: self.quit())
         self.master.bind('<Escape>', lambda e: self.reset())
+        self.label.bind('<<ComboboxSelected>>', self.labelSelected)
 
         # Layout widgets in a grid
-        ttitle.grid(row=0, column=0, sticky=N + S + E + W, columnspan=3)
-        wisnew.grid(row=1, column=0, sticky=N + S + E + W, columnspan=3)
+        ttitle.grid(row=0, column=0, sticky=N + S + E + W, columnspan=4)
+        wisnew.grid(row=1, column=0, sticky=N + S + E + W, columnspan=4)
         tlabel.grid(row=2, column=0, sticky=N + S + E + W)
         tpasswordin1.grid(row=2, column=1, sticky=N + S + E + W)
         tpasswordin2.grid(row=2, column=2, sticky=N + S + E + W)
+        tlength.grid(row=2, column=3, sticky=N + S + E + W)
         self.label.grid(row=3, column=0, sticky=N + S + E + W)
         self.passwordin1.grid(row=3, column=1, sticky=N + S + E + W)
         self.passwordin2.grid(row=3, column=2, sticky=N + S + E + W)
+        length.grid(row=3, column=3, sticky=N + S + E + W)
         genbutton.grid(row=4, column=0, sticky=N + S + E + W, columnspan=2)
-        clrbutton.grid(row=4, column=2, sticky=N + S + E + W)
-        self.result.grid(row=5, column=0, sticky=N + S + E + W, columnspan=3)
+        clrbutton.grid(row=4, column=2, sticky=N + S + E + W, columnspan=2)
+        self.result.grid(row=5, column=0, sticky=N + S + E + W, columnspan=4)
 
         # Initially, set focus on self.label
         self.label.focus_set()

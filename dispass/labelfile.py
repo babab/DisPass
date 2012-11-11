@@ -45,7 +45,7 @@ class FileHandler:
     file_stripped = []
     '''Labelfile contents with comments and blank lines removed'''
 
-    algodict = None
+    algodict = {}
     '''Dictionary of {algorithm: (labelname, (length, seqno))}'''
 
     labelfile = []
