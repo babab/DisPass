@@ -15,27 +15,26 @@
 import sys
 
 import algos
-from labelfile import FileHandler
 
 
 class InteractiveEditor:
 
     filehandler = None
-    '''FileHandler object, set on init if labelfile is found'''
+    '''FileHandler object'''
 
-    def __init__(self, file_location=None):
-        if file_location:
-            self.filehandler = FileHandler(file_location=file_location)
-        else:
-            self.filehandler = FileHandler()
-        print('Using {loc} as labelfile\n'
-              .format(loc=self.filehandler.file_location))
+    def __init__(self, filehandler, interactive=False):
+        self.filehandler = filehandler
+
+        if interactive:
+            print('Using {loc} as labelfile\n'
+                  .format(loc=self.filehandler.file_location))
+            self.menu()
 
     def menu(self):
-        print('a[ad]             Add label\n'
-              'l[s]              List all labels\n'
-              'h[elp]            Show this help information\n'
-              'q[uit]            Quit')
+        print('add     Add label\n'
+              'ls      List all labels\n'
+              'help    Show this help information\n'
+              'quit    Quit')
         self.prompt()
 
     def prompt(self):
@@ -115,17 +114,17 @@ class InteractiveEditor:
                 try:
                     choice = int(choice)
                 except ValueError:
-                    print 'Invalid choice'
+                    print('Invalid choice')
                     continue
 
                 if choice < 1:
-                    print 'Invalid choice'
+                    print('Invalid choice')
                     continue
 
                 try:
                     algo = algos.algorithms[choice - 1]
                 except IndexError:
-                    print 'Invalid choice'
+                    print('Invalid choice')
                     continue
             print algo
             break
@@ -160,10 +159,16 @@ class InteractiveEditor:
         if self.filehandler.add(labelname=label, length=length,
                                 algo=algo, seqno=seqno):
             self.filehandler.save()
-            print 'Label saved '
+            print('Label saved')
         else:
-            print 'Label already exists in labelfile'
+            print('Label already exists in labelfile')
 
 if __name__ == '__main__':
-    ie = InteractiveEditor()
-    ie.menu()
+    import labelfile
+    lf = labelfile.FileHandler()
+
+    if not lf.file_found:
+        print 'error: could not load labelfile at %s\n' % lf.file_location
+        sys.exit(1)
+
+    ie = InteractiveEditor(lf, interactive=True)

@@ -20,6 +20,7 @@ import sys
 
 import dispass
 import labelfile
+from interactive_editor import InteractiveEditor
 
 versionStr = dispass.versionStr
 __version_info__ = dispass.__version_info__
@@ -93,6 +94,9 @@ def main(argv):
 
     if l_flag:
         lf.printLabels(script_flag)
+        return
+
+    InteractiveEditor(lf, interactive=True)
 
 if __name__ == '__main__':
     sys.exit(main(sys.argv))
