@@ -137,14 +137,13 @@ class GUI(Frame):
     def clearInput(self):
         '''Clear all input fields'''
 
+        self.lengthVar.set(DEFAULT_LENGTH)
         self.label.delete(0, END)
         self.passwordin1.delete(0, END)
         self.passwordin2.delete(0, END)
 
     def clearOutput(self):
         '''Clear all output fields'''
-        self.lengthVar.set(DEFAULT_LENGTH)
-
         self.passwordout.set('- No password generated -')
         self.result.config(fg="black", readonlybackground="gray")
 
