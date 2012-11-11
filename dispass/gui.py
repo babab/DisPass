@@ -23,7 +23,7 @@ import labelfile
 versionStr = 'g%s' % dispass.versionStr
 DEFAULT_LENGTH = 30
 
-LABELSPECS = labelfile.FileHandler().algodict['dispass1']
+LABELSPECS = labelfile.FileHandler().algodict.get('dispass1', {})
 
 class GUI(Frame):
     '''Houses all GUI related objects and interactions'''
