@@ -160,6 +160,7 @@ class InteractiveEditor:
                                 algo=algo, seqno=seqno):
             self.filehandler.save()
             print('Label saved')
+            self.filehandler.parse()
         else:
             print('Label already exists in labelfile')
 

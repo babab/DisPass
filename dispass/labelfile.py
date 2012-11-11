@@ -42,9 +42,6 @@ class FileHandler:
     file_location = None
     '''String of labelfile location, set on init'''
 
-    file_stripped = []
-    '''Labelfile contents with comments and blank lines removed'''
-
     algodict = {}
     '''Dictionary of {algorithm: (labelname, (length, seqno))}'''
 
@@ -62,21 +59,7 @@ class FileHandler:
         else:
             self.file_location = self.getDefaultFileLocation()
 
-        try:
-            self.filehandle = open(expanduser(self.file_location), 'r')
-            self.file_found = True
-        except IOError:
-            self.file_found = False
-            return
-
-        # Strip comments and blank lines
-        for i in self.filehandle:
-            if i[0] != '\n' and i[0] != '#':
-                self.file_stripped.append(i)
-
-        if self.file_found:
-            self.filehandle.close()
-            self.parse()
+        self.parse()
 
     def getDefaultFileLocation(self):
         """Scan default labelfile paths"""
@@ -91,11 +74,31 @@ class FileHandler:
     def parse(self):
         '''Create dictionary {algorithm: (label, (length, seqno))}'''
 
+        file_stripped = []
+        self.labelfile = []
+
+        try:
+            self.filehandle = open(expanduser(self.file_location), 'r')
+            self.file_found = True
+        except IOError:
+            self.file_found = False
+            return
+
+        # Strip comments and blank lines
+        for i in self.filehandle:
+            if i[0] != '\n' and i[0] != '#':
+                file_stripped.append(i)
+
+        if self.file_found:
+            self.filehandle.close()
+        else:
+            return
+
         labels = []
         labels_dispass1 = []
         labels_dispass2 = []
 
-        for i in self.file_stripped:
+        for i in file_stripped:
             wordlist = []
             line = i.rsplit(' ')
             for word in line:
