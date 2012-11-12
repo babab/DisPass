@@ -246,12 +246,9 @@ class FileHandler:
         * Column 72-74: sequence number (3 chars wide)
 
         If fixed columns is false an ascii table is printed with a variable
-        width depending on the length of the longest label. The table has
-        a header but does not display the hash algo until support for multiple
-        hashing algos is added.
+        width depending on the length of the longest label.
         '''
         if fixed_columns:
-
             for algo, labels in self.algodict.iteritems():
                 for label, params in labels.iteritems():
                     print('{:50} {:3} {:15} {:3}'
