@@ -27,9 +27,9 @@ import os
 import sys
 
 import algos
-import cli
-import gui
-import labelfile
+from cli import CLI
+from gui import GUI
+from labelfile import FileHandler
 
 
 def usage():
@@ -73,7 +73,7 @@ def main(argv):
     '''
 
     execname = argv[0].split('/').pop()
-    console = cli.CLI()
+    console = CLI()
     a_flag = None
     f_flag = None
 
@@ -95,7 +95,7 @@ def main(argv):
     for o, a in opts:
         if o in ("-g", "--gui"):
             try:
-                g = gui.GUI()
+                g = GUI()
                 g.mainloop()
             except ImportError:
                 print ('Could not find Tkinter, this is a package needed for'
@@ -135,7 +135,7 @@ def main(argv):
                 return 1
             console.setLength(length)
         elif o in ("-f", "--file"):
-            lf = labelfile.FileHandler(file_location=a)
+            lf = FileHandler(file_location=a)
             if lf.file_found:
                 f_flag = a
             else:
@@ -144,9 +144,9 @@ def main(argv):
                 return 1
         elif o in ("-s", "--search"):
             if f_flag:
-                lf = labelfile.FileHandler(file_location=f_flag)
+                lf = FileHandler(file_location=f_flag)
             else:
-                lf = labelfile.FileHandler()
+                lf = FileHandler()
 
             if lf.file_found:
                 result = lf.search(a)
@@ -187,9 +187,9 @@ def main(argv):
                   ' as argument(s)')
             return 1
         if f_flag:
-            lf = labelfile.FileHandler(file_location=f_flag)
+            lf = FileHandler(file_location=f_flag)
         else:
-            lf = labelfile.FileHandler()
+            lf = FileHandler()
 
         if lf.file_found:
             console.interactive(lf.algodict)

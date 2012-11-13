@@ -165,8 +165,8 @@ class InteractiveEditor:
             print('Label already exists in labelfile')
 
 if __name__ == '__main__':
-    import labelfile
-    lf = labelfile.FileHandler()
+    from labelfile import FileHandler
+    lf = FileHandler()
 
     if not lf.file_found:
         print 'error: could not load labelfile at %s\n' % lf.file_location

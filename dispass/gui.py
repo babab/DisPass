@@ -17,13 +17,13 @@ import tkMessageBox
 import ttk
 
 import algos
-import dispass
-import labelfile
+from dispass import versionStr as dispass_version
+from labelfile import FileHandler
 
-versionStr = 'g%s' % dispass.versionStr
+versionStr = 'g%s' % dispass_version
 DEFAULT_LENGTH = 30
 
-LABELSPECS = labelfile.FileHandler().algodict.get('dispass1', {})
+LABELSPECS = FileHandler().algodict.get('dispass1', {})
 
 class GUI(Frame):
     '''Houses all GUI related objects and interactions'''

@@ -19,7 +19,7 @@ import os
 import sys
 
 import dispass
-import labelfile
+from labelfile import FileHandler
 from interactive_editor import InteractiveEditor
 
 versionStr = dispass.versionStr
@@ -68,7 +68,7 @@ def main(argv):
             print versionStr, '-', __version_info__, 'running on', os.name
             return
         elif o in ("-f", "--file"):
-            lf = labelfile.FileHandler(file_location=a)
+            lf = FileHandler(file_location=a)
             if lf.file_found:
                 f_flag = a
             else:
@@ -83,9 +83,9 @@ def main(argv):
             assert False, "unhandled option"
 
     if f_flag:
-        lf = labelfile.FileHandler(file_location=f_flag)
+        lf = FileHandler(file_location=f_flag)
     else:
-        lf = labelfile.FileHandler()
+        lf = FileHandler()
 
     if not lf.file_found:
         print 'error: could not load labelfile at %s\n' % lf.file_location
