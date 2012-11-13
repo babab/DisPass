@@ -29,7 +29,7 @@ import sys
 import algos
 from cli import CLI
 from gui import GUI
-from filehandler import FileHandler
+from filehandler import Filehandler
 
 
 def usage():
@@ -135,7 +135,7 @@ def main(argv):
                 return 1
             console.setLength(length)
         elif o in ("-f", "--file"):
-            lf = FileHandler(file_location=a)
+            lf = Filehandler(file_location=a)
             if lf.file_found:
                 f_flag = a
             else:
@@ -144,9 +144,9 @@ def main(argv):
                 return 1
         elif o in ("-s", "--search"):
             if f_flag:
-                lf = FileHandler(file_location=f_flag)
+                lf = Filehandler(file_location=f_flag)
             else:
-                lf = FileHandler()
+                lf = Filehandler()
 
             if lf.file_found:
                 result = lf.search(a)
@@ -187,9 +187,9 @@ def main(argv):
                   ' as argument(s)')
             return 1
         if f_flag:
-            lf = FileHandler(file_location=f_flag)
+            lf = Filehandler(file_location=f_flag)
         else:
-            lf = FileHandler()
+            lf = Filehandler()
 
         if lf.file_found:
             console.interactive(lf.algodict)

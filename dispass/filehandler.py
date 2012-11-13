@@ -21,7 +21,7 @@ from os.path import expanduser
 from dispass import __version__
 
 
-class FileHandler:
+class Filehandler:
     '''Parsing of labelfiles and writing to labelfiles'''
 
     default_length = 30
@@ -268,7 +268,7 @@ class FileHandler:
                   .format('-' * divlen, fill=divlen))
 
 if __name__ == '__main__':
-    fh = FileHandler()
+    fh = Filehandler()
 
     testlabel = 'test'
 

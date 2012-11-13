@@ -20,7 +20,7 @@ import algos
 class InteractiveEditor:
 
     filehandler = None
-    '''FileHandler object'''
+    '''Filehandler object'''
 
     def __init__(self, filehandler, interactive=False):
         self.filehandler = filehandler
@@ -165,8 +165,8 @@ class InteractiveEditor:
             print('Label already exists in labelfile')
 
 if __name__ == '__main__':
-    from labelfile import FileHandler
-    lf = FileHandler()
+    from filehandler import Filehandler
+    lf = Filehandler()
 
     if not lf.file_found:
         print 'error: could not load labelfile at %s\n' % lf.file_location

@@ -18,12 +18,12 @@ import ttk
 
 import algos
 from dispass import versionStr as dispass_version
-from filehandler import FileHandler
+from filehandler import Filehandler
 
 versionStr = 'g%s' % dispass_version
 DEFAULT_LENGTH = 30
 
-LABELSPECS = FileHandler().algodict.get('dispass1', {})
+LABELSPECS = Filehandler().algodict.get('dispass1', {})
 
 class GUI(Frame):
     '''Houses all GUI related objects and interactions'''
