@@ -18,11 +18,11 @@
 import sys
 import exceptions
 
-from dispass import dispass
+from dispass.dispass import Dispass
 
 if __name__ == '__main__':
     try:
-        sys.exit(dispass.main(sys.argv))
+        sys.exit(Dispass().main(sys.argv))
     except exceptions.KeyboardInterrupt:
         print
         print 'Ok, bye'
