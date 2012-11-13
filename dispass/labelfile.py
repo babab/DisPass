@@ -249,28 +249,23 @@ class FileHandler:
         width depending on the length of the longest label.
         '''
         if fixed_columns:
-            for algo, labels in self.algodict.iteritems():
-                for label, params in labels.iteritems():
-                    print('{:50} {:3} {:15} {:3}'
-                          .format(label[:50], str(params[0])[:3], algo[:15],
-                                  str(params[1]) if params[1] else ''))
+            for label in self.labelfile:
+                print('{:50} {:3} {:15} {:3}'
+                      .format(label[0][:50], str(label[1])[:3],
+                              label[2][:15], str(label[3])))
         else:
             divlen = self.getLongestLabel()
-
             print('+-{spacer:{fill}}-+--------+----------+--------+\n'
                   '| {title:{fill}} | Length | Algo     | Number | \n'
                   '+-{spacer:{fill}}-+--------+----------+--------+'
                   .format(spacer='-' * divlen, title='Label', fill=divlen))
 
-            for algo, labels in self.algodict.iteritems():
-                for label, params in labels.iteritems():
-                    seqno = int(params[1]) if params[1] else ''
-                    print('| {:{fill}} |    {:3} | {:8} |    {:3} |'
-                          .format(label, params[0], algo, seqno,
-                                  fill=divlen))
+            for label in self.labelfile:
+                print('| {:{fill}} |    {:3} | {:8} |      {:3>} |'
+                      .format(label[0], label[1], label[2], int(label[3]),
+                              fill=divlen))
             print('+-{:{fill}}-+--------+----------+--------+'
                   .format('-' * divlen, fill=divlen))
-
 
 if __name__ == '__main__':
     fh = FileHandler()
