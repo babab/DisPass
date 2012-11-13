@@ -18,7 +18,7 @@ import ttk
 
 import algos
 from dispass import versionStr as dispass_version
-from labelfile import FileHandler
+from filehandler import FileHandler
 
 versionStr = 'g%s' % dispass_version
 DEFAULT_LENGTH = 30

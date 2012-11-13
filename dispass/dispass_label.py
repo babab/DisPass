@@ -19,7 +19,7 @@ import os
 import sys
 
 import dispass
-from labelfile import FileHandler
+from filehandler import FileHandler
 from interactive_editor import InteractiveEditor
 
 versionStr = dispass.versionStr

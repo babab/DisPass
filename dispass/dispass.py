@@ -29,7 +29,7 @@ import sys
 import algos
 from cli import CLI
 from gui import GUI
-from labelfile import FileHandler
+from filehandler import FileHandler
 
 
 def usage():
