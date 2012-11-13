@@ -55,9 +55,9 @@ class FileHandler:
         '''Open file; if file is found: strip comments and parse()'''
 
         if file_location:
-            self.file_location = file_location
+            self.file_location = expanduser(file_location)
         else:
-            self.file_location = self.getDefaultFileLocation()
+            self.file_location = expanduser(self.getDefaultFileLocation())
 
         self.parse()
 
@@ -78,7 +78,7 @@ class FileHandler:
         self.labelfile = []
 
         try:
-            self.filehandle = open(expanduser(self.file_location), 'r')
+            self.filehandle = open(self.file_location, 'r')
             self.file_found = True
         except IOError:
             self.file_found = False
@@ -177,7 +177,7 @@ class FileHandler:
             labelfile += ('{label:{divlen}}  {options}\n'
                           .format(label=label[0], options=options,
                                   divlen=len(self.longest_labelname)))
-        self.filehandle = open(expanduser(self.file_location), 'w')
+        self.filehandle = open(self.file_location, 'w')
         self.filehandle.write(labelfile)
         self.filehandle.close()
         return True
