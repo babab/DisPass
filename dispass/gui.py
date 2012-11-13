@@ -23,7 +23,8 @@ from filehandler import Filehandler
 versionStr = 'g%s' % dispass_version
 DEFAULT_LENGTH = 30
 
-LABELSPECS = Filehandler().algodict.get('dispass1', {})
+LABELSPECS = FileHandler().labelfile
+LABELS = [l[0] for l in LABELSPECS]
 
 class GUI(Frame):
     '''Houses all GUI related objects and interactions'''
@@ -191,7 +192,7 @@ class GUI(Frame):
                              font=self.getFont(2))
         tlength = Label(self, text='Length', font=self.getFont(2))
         self.label = ttk.Combobox(self, width=27, font=self.getFont(),
-                                  values=LABELSPECS.keys())
+                                  values=LABELS)
         self.passwordin1 = Entry(self, width=27, font=self.getFont(), show="*")
         self.passwordin2 = Entry(self, width=27, font=self.getFont(), show="*",
                                  state=DISABLED)
