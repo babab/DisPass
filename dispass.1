@@ -1,4 +1,4 @@
-.TH "DISPASS" "1" "November 10, 2012" "0.1" "DisPass"
+.TH "DISPASS" "1" "November 14, 2012" "0.1" "DisPass"
 .SH NAME
 dispass \- DisPass Documentation
 .
@@ -72,10 +72,9 @@ characters long and does not have a maximum length.
 .TP
 .B passphrase
 With \(aqpassphrase\(aq I always mean the output passphrase, i.e. the passphrase
-that is unique and generated from a label and password. Generated
-passphrases are 30 characters long. The length can be optionally changed in
-the command line version of DisPass. gDisPass currently does not have this
-feature.
+that is unique and generated from a label, password and sequence number.
+Generated passphrases are 30 characters long. The length can be optionally
+changed.
 .UNINDENT
 .sp
 When DisPass is executed as \(aqgdispass\(aq or \(aqdispass \-g\(aq,
@@ -152,7 +151,7 @@ locations:
 .IP \(bu 2
 \fB*BSD and other Unixen\fP: \fB~/.local/share/dispass/labels\fP
 .IP \(bu 2
-\fBWindows\fP:   \fBC:\eUsers\e<username>\e.local\eshare\edispass\elabels\fP
+\fBWindows\fP:   \fBC:\eUsers\e<username>\edispass\elabels\fP
 .UNINDENT
 .UNINDENT
 .sp
@@ -306,6 +305,11 @@ Otherwise an ascii table is printed with a variable width depending
 on the length of the longest label. The table has a header but does
 not display the hash algo until support for multiple hashing algos
 is added.
+.SH ACKNOWLEDGEMENTS
+.sp
+Many thanks go out to Tom (ryuslash) Willemsen for valuable contributions to
+gdispass and the new algorithm. He also wrote an awesome wrapper for Emacs so
+you can use DisPass in your favorite editor.
 .SH SEE ALSO
 .INDENT 0.0
 .TP

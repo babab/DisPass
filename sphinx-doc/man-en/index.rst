@@ -51,10 +51,9 @@ password
 
 passphrase
    With 'passphrase' I always mean the output passphrase, i.e. the passphrase
-   that is unique and generated from a label and password. Generated
-   passphrases are 30 characters long. The length can be optionally changed in
-   the command line version of DisPass. gDisPass currently does not have this
-   feature.
+   that is unique and generated from a label, password and sequence number.
+   Generated passphrases are 30 characters long. The length can be optionally
+   changed.
 
 When DisPass is executed as 'gdispass' or 'dispass -g',
 the graphical version will be started.
@@ -113,7 +112,7 @@ with a different 'master' password for each set.
 
    * **GNU/Linux and Mac OS X**: ``~/.local/share/dispass/labels``
    * **\*BSD and other Unixen**: ``~/.local/share/dispass/labels``
-   * **Windows**:   ``C:\Users\<username>\.local\share\dispass\labels``
+   * **Windows**:   ``C:\Users\<username>\dispass\labels``
 
 You can start by copying the labelfile from skel/dot.dispass to this location
 and editing it by adding your own labels. Or you can just start writing the
@@ -234,6 +233,14 @@ Otherwise an ascii table is printed with a variable width depending
 on the length of the longest label. The table has a header but does
 not display the hash algo until support for multiple hashing algos
 is added.
+
+
+Acknowledgements
+==============================================================================
+
+Many thanks go out to Tom (ryuslash) Willemsen for valuable contributions to
+gdispass and the new algorithm. He also wrote an awesome wrapper for Emacs so
+you can use DisPass in your favorite editor.
 
 
 SEE ALSO
