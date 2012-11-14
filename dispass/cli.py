@@ -177,7 +177,11 @@ class CLI:
             self.passphrases = dict(self.passphrases)
             for label, length in self.passphrases.iteritems():
                 label_list.append(label)
-            divlen = len(max(label_list, key=len)) + 2
+            if label_list:
+                divlen = len(max(label_list, key=len)) + 2
+            else:
+                print('Nothing to generate, you need to add some labels')
+                return
 
         del password
 

@@ -69,12 +69,7 @@ def main(argv):
             return
         elif o in ("-f", "--file"):
             lf = Filehandler(file_location=a)
-            if lf.file_found:
-                f_flag = a
-            else:
-                print ('error: could not load labelfile at '
-                       '"{loc}"\n').format(loc=lf.file_location)
-                return 1
+            f_flag = a
         elif o in ("-l", "--list"):
             l_flag = True
         elif o in "--script":
@@ -88,9 +83,17 @@ def main(argv):
         lf = Filehandler()
 
     if not lf.file_found:
-        print 'error: could not load labelfile at %s\n' % lf.file_location
-        usage()
-        return 1
+        print ('error: could not load labelfile at "{loc}"'
+               .format(loc=lf.file_location))
+        inp = raw_input('Do you want to create it? Y/n ')
+
+        if inp == '' or inp[0].lower() == 'y':
+            if not lf.save():
+                print ('error: could not save to "{loc}"\n'
+                       .format(loc=lf.file_location))
+                return 1
+        else:
+            return 1
 
     if l_flag:
         lf.printLabels(script_flag)

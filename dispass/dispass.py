@@ -98,12 +98,13 @@ class Dispass(object):
                     g = GUI()
                     g.mainloop()
                 except ImportError:
-                    print ('Could not find Tkinter, this is a package needed for'
-                           ' using\n' 'the graphical version of dispass.\n'
+                    print ('Could not find Tkinter, this is a package needed '
+                           'for using\n' 'the graphical version of dispass.\n'
                            'To install, search for a python-tk package for'
                            ' your OS.\n'
                            'Arch Linux     \t\t# pacman -S python-tk\n'
-                           'Debian / Ubuntu\t\t$ sudo apt-get install python-tk\n'
+                           'Debian / Ubuntu\t\t$ sudo apt-get install '
+                           'python-tk\n'
                            'OpenBSD        \t\t# pkg_add -i python-tk')
                 except exceptions.KeyboardInterrupt:
                     print '\nOk, bye'
@@ -136,12 +137,7 @@ class Dispass(object):
                 console.setLength(length)
             elif o in ("-f", "--file"):
                 lf = Filehandler(file_location=a)
-                if lf.file_found:
-                    f_flag = a
-                else:
-                    print ('error: could not load labelfile at '
-                           '"{loc}"\n').format(loc=lf.file_location)
-                    return 1
+                f_flag = a
             elif o in ("-s", "--search"):
                 if f_flag:
                     lf = Filehandler(file_location=f_flag)
@@ -187,6 +183,7 @@ class Dispass(object):
                 print('error: option -a can only be used when specifying '
                       'label(s) as argument(s)')
                 return 1
+
             if f_flag:
                 lf = Filehandler(file_location=f_flag)
             else:
@@ -196,10 +193,17 @@ class Dispass(object):
                 console.interactive(lf.algodict)
                 return
             else:
-                print('error: could not load labelfile at {loc}\n'
-                      .format(loc=lf.file_location))
-                self.usage()
-                return 1
+                print ('error: could not load labelfile at "{loc}"'
+                       .format(loc=lf.file_location))
+                inp = raw_input('Do you want to create it? Y/n ')
+
+                if inp == '' or inp[0].lower() == 'y':
+                    if not lf.save():
+                        print ('error: could not save to "{loc}"\n'
+                               .format(loc=lf.file_location))
+                        return 1
+                else:
+                    return 1
 
 if __name__ == '__main__':
     sys.exit(Dispass().main(sys.argv))

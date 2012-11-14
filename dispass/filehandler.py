@@ -158,7 +158,8 @@ class Filehandler:
         labelnames = []
         for label in self.labelfile:
             labelnames.append(label[0])
-        self.longest_labelname = max(labelnames, key=len)
+        if labelnames:
+            self.longest_labelname = max(labelnames, key=len)
 
     def save(self):
         '''Save `labelfile` to file'''
@@ -179,9 +180,13 @@ class Filehandler:
             labelfile += ('{label:{divlen}}  {options}\n'
                           .format(label=label[0], options=options,
                                   divlen=len(self.longest_labelname)))
-        self.filehandle = open(self.file_location, 'w')
-        self.filehandle.write(labelfile)
-        self.filehandle.close()
+        try:
+            self.filehandle = open(self.file_location, 'w')
+            self.filehandle.write(labelfile)
+            self.filehandle.close()
+        except IOError:
+            return False
+
         return True
 
     def search(self, search_string):
@@ -229,7 +234,10 @@ class Filehandler:
         for algo, labels in self.algodict.iteritems():
             for label, params in labels.iteritems():
                 labelnames.append(label)
-        return len(max(labelnames, key=len))
+        if labelnames:
+            return len(max(labelnames, key=len))
+        else:
+            return False
 
     def printLabels(self, fixed_columns=False):
         '''Print a formatted table of labelfile contents
@@ -257,6 +265,8 @@ class Filehandler:
                               label[2][:15], str(label[3])))
         else:
             divlen = self.getLongestLabel()
+            if not divlen:
+                return
             print('+-{spacer:{fill}}-+--------+----------+--------+\n'
                   '| {title:{fill}} | Length | Algo     | Number | \n'
                   '+-{spacer:{fill}}-+--------+----------+--------+'
