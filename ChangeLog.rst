@@ -13,9 +13,16 @@ ChangeLog
     To the following location:
 
     * **\*nix**:   ``~/.local/share/dispass/labels``
-    * **Windows**: ``C:\Users\<username>\.local\share\dispass\labels``
+    * **Windows**: ``C:\Users\<username>\dispass\labels``
 
 
+* Add support for multiple algorithms
+* Add new algorithm Dispass2
+* Add -a, --algo option for specifying algorithm
+* Add -n, --number option for specifying sequence no
+* Add label length selection in gui
+* Add label/parameters selection in gui
+* Add interactive labelfile editor 'dispass-label'
 * Center the fields when the window gets bigger
 * Reset all fields in gdispass by pressing <Escape>
 * Optionally quit gdispass with Ctrl-Q
