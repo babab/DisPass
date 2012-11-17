@@ -24,15 +24,6 @@ from dispass import __version__
 class Filehandler:
     '''Parsing of labelfiles and writing to labelfiles'''
 
-    default_length = 30
-    '''Default passphrase length'''
-
-    default_sequence_number = 1
-    '''Default sequence number'''
-
-    algorithm = 'dispass1'
-    '''String. The algorithm to use, default is dispass1'''
-
     filehandle = None
     '''File object, set on init if labelfile is found'''
 
@@ -51,8 +42,10 @@ class Filehandler:
     longest_labelname = None
     '''String. The longest labelname of `labelfile`. Set on refresh()'''
 
-    def __init__(self, file_location=None):
+    def __init__(self, settings, file_location=None):
         '''Open file; if file is found: strip comments and parse()'''
+
+        self.settings = settings
 
         if file_location:
             self.file_location = expanduser(file_location)
@@ -110,9 +103,9 @@ class Filehandler:
 
         for line in labels:
             labelname = line.pop(0)
-            length = self.default_length
-            seqno = self.default_sequence_number
-            algo = self.algorithm
+            length = self.settings.passphrase_length
+            seqno = self.settings.sequence_number
+            algo = self.settings.algorithm
 
             for arg in line:
                 if 'length=' in arg:
@@ -139,9 +132,9 @@ class Filehandler:
     def add(self, labelname, length=None, algo=None, seqno=None):
         '''Add label to `labelfile`'''
 
-        length = length if length else self.default_length
-        algo = algo if algo else self.algorithm
-        seqno = seqno if seqno else self.default_sequence_number
+        length = length if length else self.settings.passphrase_length
+        algo = algo if algo else self.settings.algorithm
+        seqno = seqno if seqno else self.settings.sequence_number
 
         for label in self.labelfile:
             if labelname == label[0]:
@@ -170,11 +163,11 @@ class Filehandler:
                              datetime=datetime.datetime.now()))
         for label in self.labelfile:
             options = ''
-            if label[1] != self.default_length:
+            if label[1] != self.settings.passphrase_length:
                 options += 'length={length}  '.format(length=label[1])
-            if label[2] != self.algorithm:
+            if label[2] != self.settings.algorithm:
                 options += 'algo={algo}  '.format(algo=label[2])
-            if label[3] != self.default_sequence_number:
+            if label[3] != self.settings.sequence_number:
                 options += 'seqno={seqno}  '.format(seqno=label[3])
 
             labelfile += ('{label:{divlen}}  {options}\n'
@@ -278,15 +271,3 @@ class Filehandler:
                               fill=divlen))
             print('+-{:{fill}}-+--------+----------+--------+'
                   .format('-' * divlen, fill=divlen))
-
-if __name__ == '__main__':
-    fh = Filehandler()
-
-    testlabel = 'test'
-
-    if fh.file_found:
-        if not fh.add(testlabel):
-            print 'label already exists'
-    else:
-        print 'Labelfile not found'
-    fh.save()

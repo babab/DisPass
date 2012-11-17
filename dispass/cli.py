@@ -27,15 +27,6 @@ except ImportError:
 class CLI:
     '''Command Line Interface handling'''
 
-    algorithm = 'dispass1'
-    '''String. The algorithm to use, default is dispass1'''
-
-    seqno = 1
-    '''Int. The (optional) sequence number for the password, default is 1'''
-
-    passphraseLength = 30
-    '''Length of output passphrase, default is 30'''
-
     promptDouble = False
     '''Boolean. Prompt for password twice'''
 
@@ -45,12 +36,14 @@ class CLI:
     passphrases = []
     '''List of 2-tuples of labels and generated passphrases'''
 
-    def __init__(self):
+    def __init__(self, settings):
         '''Set `useCurses` to True or False.
 
         Depending on the availability of curses
         '''
-
+        self.algorithm = settings.algorithm
+        self.passphraseLength = settings.passphrase_length = 30
+        self.seqno = settings.sequence_number = 1
         self.useCurses = hasCurses
 
     def setAlgo(self, algo):

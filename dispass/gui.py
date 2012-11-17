@@ -21,9 +21,7 @@ from dispass import versionStr as dispass_version
 from filehandler import Filehandler
 
 versionStr = 'g%s' % dispass_version
-DEFAULT_LENGTH = 30
 
-LABELSPECS = {l[0]: l[1:] for l in Filehandler().labelfile}
 
 class GUI(Frame):
     '''Houses all GUI related objects and interactions'''
@@ -34,18 +32,20 @@ class GUI(Frame):
     fontsize = 10
     '''Default fontsize (10 pt.)'''
 
-    def __init__(self):
+    def __init__(self, settings):
         '''Initialize GUI object, create the widgets and start mainloop
 
         Try to import Tkinter and tkMessageBox. If that fails, show a help
         message with quick instructions on installing Tkinter.
         '''
 
+        self.settings = settings
+        self.labelspecs = {l[0]: l[1:] for l in
+                           Filehandler(self.settings).labelfile}
+
         Frame.__init__(self, Tk(className='dispass'))
-
         self.lengthVar = IntVar()
-        self.lengthVar.set(DEFAULT_LENGTH)
-
+        self.lengthVar.set(self.settings.passphrase_length)
         self.master.title(versionStr)
         self.grid()
         self.createWidgets()
@@ -140,7 +140,7 @@ class GUI(Frame):
     def clearInput(self):
         '''Clear all input fields'''
 
-        self.lengthVar.set(DEFAULT_LENGTH)
+        self.lengthVar.set(self.settings.passphrase_length)
         self.label.delete(0, END)
         self.passwordin1.delete(0, END)
         self.passwordin2.delete(0, END)
@@ -164,7 +164,7 @@ class GUI(Frame):
 
     def labelSelected(self, event):
         '''Set values of input fields according to the selected label.'''
-        self.lengthVar.set(LABELSPECS[self.label.get()][0])
+        self.lengthVar.set(self.labelspecs[self.label.get()][0])
 
 # GUI # Create Widgets
     def createWidgets(self):
@@ -191,7 +191,7 @@ class GUI(Frame):
                              font=self.getFont(2))
         tlength = Label(self, text='Length', font=self.getFont(2))
         self.label = ttk.Combobox(self, width=27, font=self.getFont(),
-                                  values=LABELSPECS.keys())
+                                  values=self.labelspecs.keys())
         self.passwordin1 = Entry(self, width=27, font=self.getFont(), show="*")
         self.passwordin2 = Entry(self, width=27, font=self.getFont(), show="*",
                                  state=DISABLED)

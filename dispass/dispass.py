@@ -33,7 +33,24 @@ from gui import GUI
 from interactive_editor import InteractiveEditor
 
 
+class Settings(object):
+    '''Global settings'''
+
+    passphrase_length = 30
+    '''Int. Default passphrase length'''
+
+    algorithm = 'dispass1'
+    '''String. The algorithm to use, default is dispass1'''
+
+    sequence_number = 1
+    '''Int. Default sequence number'''
+
+settings = Settings()
+
+
 class Dispass(object):
+    '''Command handler for ``dispass``'''
+
     def usage(self):
         '''Print help / usage information'''
 
@@ -74,7 +91,7 @@ class Dispass(object):
         '''
 
         execname = argv[0].split('/').pop()
-        console = CLI()
+        console = CLI(settings)
         a_flag = None
         f_flag = None
 
@@ -96,7 +113,7 @@ class Dispass(object):
         for o, a in opts:
             if o in ("-g", "--gui"):
                 try:
-                    g = GUI()
+                    g = GUI(settings)
                     g.mainloop()
                 except ImportError:
                     print ('Could not find Tkinter, this is a package needed '
@@ -137,13 +154,12 @@ class Dispass(object):
                     return 1
                 console.setLength(length)
             elif o in ("-f", "--file"):
-                lf = Filehandler(file_location=a)
                 f_flag = a
             elif o in ("-s", "--search"):
                 if f_flag:
-                    lf = Filehandler(file_location=f_flag)
+                    lf = Filehandler(settings, file_location=f_flag)
                 else:
-                    lf = Filehandler()
+                    lf = Filehandler(settings)
 
                 if lf.file_found:
                     result = lf.search(a)
@@ -186,9 +202,9 @@ class Dispass(object):
                 return 1
 
             if f_flag:
-                lf = Filehandler(file_location=f_flag)
+                lf = Filehandler(settings, file_location=f_flag)
             else:
-                lf = Filehandler()
+                lf = Filehandler(settings)
 
             if lf.file_found:
                 console.interactive(lf.algodict)
@@ -208,7 +224,7 @@ class Dispass(object):
 
 
 class DispassLabel(object):
-    '''Dispass labelfile manager'''
+    '''Command handler for ``dispass-label``'''
 
     def usage(self):
         '''Print help / usage information'''
@@ -252,7 +268,6 @@ class DispassLabel(object):
                 print versionStr, '-', __version_info__, 'running on', os.name
                 return
             elif o in ("-f", "--file"):
-                lf = Filehandler(file_location=a)
                 f_flag = a
             elif o in ("-l", "--list"):
                 l_flag = True
@@ -262,9 +277,9 @@ class DispassLabel(object):
                 assert False, "unhandled option"
 
         if f_flag:
-            lf = Filehandler(file_location=f_flag)
+            lf = Filehandler(settings, file_location=f_flag)
         else:
-            lf = Filehandler()
+            lf = Filehandler(settings)
 
         if not lf.file_found:
             print ('error: could not load labelfile at "{loc}"'
@@ -283,7 +298,7 @@ class DispassLabel(object):
             lf.printLabels(script_flag)
             return
 
-        InteractiveEditor(lf, interactive=True)
+        InteractiveEditor(settings, lf, interactive=True)
 
 if __name__ == '__main__':
     sys.exit(Dispass().main(sys.argv))

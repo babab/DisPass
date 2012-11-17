@@ -17,11 +17,12 @@
 
 import exceptions
 
-import dispass.gui
+from dispass.gui import GUI
+from dispass.dispass import Settings
 
 if __name__ == '__main__':
     try:
-        gui = dispass.gui.GUI()
+        gui = GUI(Settings())
         gui.mainloop()
     except ImportError:
         print ('Could not find Tkinter, this is a package needed for using\n'

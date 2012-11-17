@@ -18,11 +18,13 @@ import algos
 
 
 class InteractiveEditor:
+    '''User interface for altering labelfiles'''
 
     filehandler = None
     '''Filehandler object'''
 
-    def __init__(self, filehandler, interactive=False):
+    def __init__(self, settings, filehandler, interactive=False):
+        self.settings = settings
         self.filehandler = filehandler
 
         if interactive:
@@ -75,10 +77,10 @@ class InteractiveEditor:
             try:
                 length = (
                     raw_input('Length [press enter for default "{len}"]: '
-                              .format(len=self.filehandler.default_length))
+                              .format(len=self.settings.passphrase_length))
                     .split()[0])
             except IndexError:
-                length = self.filehandler.default_length
+                length = self.settings.passphrase_length
                 break
 
             try:
@@ -100,14 +102,14 @@ class InteractiveEditor:
                 for algoname in algos.algorithms:
                     choices = ('[{num}] {algoname}'
                                .format(num=i, algoname=algoname))
-                    if algoname == self.filehandler.algorithm:
+                    if algoname == self.settings.algorithm:
                         choices += ' [default]'
                     print choices
                     i += 1
                 choice = (raw_input('Algorithm [press enter for default]: ')
                           .split()[0])
             except IndexError:
-                algo = self.filehandler.algorithm
+                algo = self.settings.algorithm
                 break
 
             if not algo:
@@ -130,7 +132,7 @@ class InteractiveEditor:
             break
 
         if algo != 'dispass1':
-            default_seqno = self.filehandler.default_sequence_number
+            default_seqno = self.settings.sequence_number
             while True:
                 try:
                     seqno = (
@@ -139,7 +141,7 @@ class InteractiveEditor:
                             ' "{seqno}"]: '.format(seqno=default_seqno))
                         .split()[0])
                 except IndexError:
-                    seqno = self.filehandler.default_sequence_number
+                    seqno = self.settings.sequence_number
                     break
 
                 try:
@@ -154,7 +156,7 @@ class InteractiveEditor:
                 else:
                     break
         else:
-            seqno = self.filehandler.default_sequence_number
+            seqno = self.settings.sequence_number
 
         if self.filehandler.add(labelname=label, length=length,
                                 algo=algo, seqno=seqno):
@@ -163,13 +165,3 @@ class InteractiveEditor:
             self.filehandler.parse()
         else:
             print('Label already exists in labelfile')
-
-if __name__ == '__main__':
-    from filehandler import Filehandler
-    lf = Filehandler()
-
-    if not lf.file_found:
-        print 'error: could not load labelfile at %s\n' % lf.file_location
-        sys.exit(1)
-
-    ie = InteractiveEditor(lf, interactive=True)
