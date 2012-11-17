@@ -1,4 +1,4 @@
-.TH "DISPASS" "1" "November 14, 2012" "0.1" "DisPass"
+.TH "DISPASS" "1" "November 17, 2012" "0.1" "DisPass"
 .SH NAME
 dispass \- DisPass Documentation
 .
@@ -140,16 +140,16 @@ If \-f flag is given, that value is used.
 .IP 2. 3
 If environment var DISPASS_LABELFILE is set, that value is used.
 .IP 3. 3
-If environment var XDG_DATA_HOME is set, \fB$XDG_DATA_HOME/dispass/labels\fP
-is used.
+If environment var XDG_CONFIG_HOME is set,
+\fB$XDG_CONFIG_HOME/dispass/labels\fP is used.
 .IP 4. 3
 If none of the above applies, the labelfile will default to the following
 locations:
 .INDENT 3.0
 .IP \(bu 2
-\fBGNU/Linux and Mac OS X\fP: \fB~/.local/share/dispass/labels\fP
+\fBGNU/Linux and Mac OS X\fP: \fB~/.config/dispass/labels\fP
 .IP \(bu 2
-\fB*BSD and other Unixen\fP: \fB~/.local/share/dispass/labels\fP
+\fB*BSD and other Unixen\fP: \fB~/.config/dispass/labels\fP
 .IP \(bu 2
 \fBWindows\fP:   \fBC:\eUsers\e<username>\edispass\elabels\fP
 .UNINDENT

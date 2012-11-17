@@ -105,13 +105,13 @@ with a different 'master' password for each set.
 
 1. If -f flag is given, that value is used.
 2. If environment var DISPASS_LABELFILE is set, that value is used.
-3. If environment var XDG_DATA_HOME is set, ``$XDG_DATA_HOME/dispass/labels``
-   is used.
+3. If environment var XDG_CONFIG_HOME is set,
+   ``$XDG_CONFIG_HOME/dispass/labels`` is used.
 4. If none of the above applies, the labelfile will default to the following
    locations:
 
-   * **GNU/Linux and Mac OS X**: ``~/.local/share/dispass/labels``
-   * **\*BSD and other Unixen**: ``~/.local/share/dispass/labels``
+   * **GNU/Linux and Mac OS X**: ``~/.config/dispass/labels``
+   * **\*BSD and other Unixen**: ``~/.config/dispass/labels``
    * **Windows**:   ``C:\Users\<username>\dispass\labels``
 
 You can start by copying the labelfile from skel/dot.dispass to this location

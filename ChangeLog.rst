@@ -12,7 +12,7 @@ ChangeLog
 
     To the following location:
 
-    * **\*nix**:   ``~/.local/share/dispass/labels``
+    * **\*nix**:   ``~/.config/dispass/labels``
     * **Windows**: ``C:\Users\<username>\dispass\labels``
 
 

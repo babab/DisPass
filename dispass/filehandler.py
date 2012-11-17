@@ -59,12 +59,12 @@ class Filehandler:
 
         if os.getenv('DISPASS_LABELFILE'):
             return os.getenv('DISPASS_LABELFILE')
-        elif os.getenv('XDG_DATA_HOME'):
-            return os.getenv('XDG_DATA_HOME') + '/dispass/labels'
+        elif os.getenv('XDG_CONFIG_HOME'):
+            return os.getenv('XDG_CONFIG_HOME') + '/dispass/labels'
         elif os.getenv('APPDATA'):
             return os.getenv('APPDATA') + '/dispass/labels'
         else:
-            return '~/.local/share/dispass/labels'
+            return '~/.config/dispass/labels'
 
     def parse(self):
         '''Create dictionary {algorithm: (label, (length, seqno))}'''
