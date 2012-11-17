@@ -16,6 +16,7 @@ import getpass
 import algos
 
 from dispass import versionStr
+from filehandler import Filehandler
 
 try:
     import curses
@@ -27,8 +28,8 @@ except ImportError:
 class CLI:
     '''Command Line Interface handling'''
 
-    promptDouble = False
-    '''Boolean. Prompt for password twice'''
+    createLabel = False
+    '''Boolean. Prompt for password twice and save label to labelfile'''
 
     scriptableIO = None
     '''Boolean. Optimize input/output for wrapping dispass'''
@@ -44,6 +45,7 @@ class CLI:
         self.algorithm = settings.algorithm
         self.passphraseLength = settings.passphrase_length
         self.seqno = settings.sequence_number
+        self.settings = settings
         self.useCurses = hasCurses
 
     def setAlgo(self, algo):
@@ -94,14 +96,6 @@ class CLI:
 
         self.passphraseLength = length
 
-    def setPrompt(self, promptDouble=False):
-        '''Set options for the passwordPrompt)
-
-        :Parameters:
-            - `promptDouble`: Boolean. Prompt 2x and compare passwords
-        '''
-        self.promptDouble = promptDouble
-
     def passwordPrompt(self):
         '''Prompt for password.
 
@@ -116,7 +110,7 @@ class CLI:
                 print 'Please try again.'
                 continue
 
-            if self.promptDouble:
+            if self.createLabel:
                 inp2 = getpass.getpass("Password (again): ")
                 if inp == inp2:
                     break
@@ -127,7 +121,7 @@ class CLI:
 
         return inp
 
-    def interactive(self, labels):
+    def interactive(self, labels, filehandler):
         '''Start interactive prompt, generating and showing the passprase(s)
 
         :Parameters:
@@ -135,14 +129,21 @@ class CLI:
         '''
 
         password = self.passwordPrompt()
-
         algo_dispass1 = algos.Dispass1()
         algo_dispass2 = algos.Dispass2()
+        fh = filehandler
+        added = False
+        saved = False
 
         if isinstance(labels, list):
             labelmap = []
             for i in labels:
                 labelmap.append((i, (self.passphraseLength, self.algorithm)))
+                if fh.add(labelname=i, length=self.passphraseLength,
+                          algo=self.algorithm, seqno=self.seqno):
+                    added = True
+            if added and fh.save():
+                saved = True
 
             if self.algorithm == 'dispass1':
                 self.passphrases = algo_dispass1.digestPasswordDict(
@@ -155,6 +156,7 @@ class CLI:
 
             divlen = len(max(labels, key=len)) + 2
             self.passphrases = dict(self.passphrases)
+
         elif isinstance(labels, dict):
             for algo, labels in labels.iteritems():
                 if algo == 'dispass1':
@@ -211,3 +213,10 @@ class CLI:
                 else:
                     print "{:{fill}} {}".format(label, passphrase, fill=divlen)
         self.passphrases = {}
+
+        if saved:
+            print('Succesfully added label(s) to {loc}'
+                  .format(loc=fh.file_location))
+        if self.createLabel and not saved:
+            print('error: could not save to "{loc}"\n'
+                  .format(loc=fh.file_location))

@@ -144,7 +144,7 @@ class Dispass(object):
                     return 1
                 console.setSeqNo(seqno)
             elif o in ("-c", "--create"):
-                console.setPrompt(promptDouble=True)
+                console.createLabel = True
             elif o in ("-l", "--length"):
                 try:
                     length = int(a)
@@ -193,18 +193,18 @@ class Dispass(object):
             else:
                 assert False, "unhandled option"
 
+        if f_flag:
+            lf = Filehandler(settings, file_location=f_flag)
+        else:
+            lf = Filehandler(settings)
+
         if labels:
-            console.interactive(labels)
+            console.interactive(labels, lf)
         else:
             if a_flag:
                 print('error: option -a can only be used when specifying '
                       'label(s) as argument(s)')
                 return 1
-
-            if f_flag:
-                lf = Filehandler(settings, file_location=f_flag)
-            else:
-                lf = Filehandler(settings)
 
             if lf.file_found:
                 console.interactive(lf.algodict)
