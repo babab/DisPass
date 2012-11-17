@@ -42,8 +42,8 @@ class CLI:
         Depending on the availability of curses
         '''
         self.algorithm = settings.algorithm
-        self.passphraseLength = settings.passphrase_length = 30
-        self.seqno = settings.sequence_number = 1
+        self.passphraseLength = settings.passphrase_length
+        self.seqno = settings.sequence_number
         self.useCurses = hasCurses
 
     def setAlgo(self, algo):
