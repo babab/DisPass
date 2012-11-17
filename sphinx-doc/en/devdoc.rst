@@ -5,6 +5,12 @@ Developer documentation
 * :ref:`modindex`
 * :ref:`search`
 
+dispass.algos
+==============================================================================
+
+.. automodule:: dispass.algos
+   :members:
+
 dispass.dispass
 ==============================================================================
 
@@ -17,28 +23,22 @@ dispass.cli
 .. automodule:: dispass.cli
    :members:
 
-dispass.digest
-==============================================================================
-
-.. automodule:: dispass.digest
-   :members:
-
 dispass.gui
 ==============================================================================
 
 .. automodule:: dispass.gui
    :members:
 
-dispass.dispass_label
+dispass.filehandler
 ==============================================================================
 
-.. automodule:: dispass.dispass_label
+.. automodule:: dispass.filehandler
    :members:
 
-dispass.labelfile
+dispass.interactive_editor
 ==============================================================================
 
-.. automodule:: dispass.labelfile
+.. automodule:: dispass.interactive_editor
    :members:
 
 
