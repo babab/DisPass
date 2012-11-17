@@ -28,8 +28,9 @@ import sys
 
 import algos
 from cli import CLI
-from gui import GUI
 from filehandler import Filehandler
+from gui import GUI
+from interactive_editor import InteractiveEditor
 
 
 class Dispass(object):
@@ -204,6 +205,85 @@ class Dispass(object):
                         return 1
                 else:
                     return 1
+
+
+class DispassLabel(object):
+    '''Dispass labelfile manager'''
+
+    def usage(self):
+        '''Print help / usage information'''
+
+        print('USAGE: dispass-label [-hlV] [-f <labelfile>] [--script]\n\n'
+              'Options:\n'
+              '-h, --help      show this help and exit\n'
+              '-l, --list      print all labels and options found '
+              'in labelfile\n'
+              '-V, --version   show full version information and exit\n'
+              '-f <labelfile>, --file=<labelfile>\n'
+              '                set location of labelfile\n'
+              "--script        optimize input/output for 'wrapping' "
+              'dispass-label')
+
+    def main(self, argv):
+        '''Entry point and handler of command options and arguments
+
+        :Parameters:
+            - `argv`: List of command arguments
+        '''
+
+        f_flag = None
+        l_flag = None
+        script_flag = None
+
+        try:
+            opts, args = getopt.getopt(argv[1:], "f:hlV",
+                                       ["file", "help", "list",
+                                        "script", "version"])
+        except getopt.GetoptError, err:
+            print str(err), "\n"
+            self.usage()
+            return 2
+
+        for o, a in opts:
+            if o in ("-h", "--help"):
+                self.usage()
+                return
+            elif o in ("-V", "--version"):
+                print versionStr, '-', __version_info__, 'running on', os.name
+                return
+            elif o in ("-f", "--file"):
+                lf = Filehandler(file_location=a)
+                f_flag = a
+            elif o in ("-l", "--list"):
+                l_flag = True
+            elif o in "--script":
+                script_flag = True
+            else:
+                assert False, "unhandled option"
+
+        if f_flag:
+            lf = Filehandler(file_location=f_flag)
+        else:
+            lf = Filehandler()
+
+        if not lf.file_found:
+            print ('error: could not load labelfile at "{loc}"'
+                   .format(loc=lf.file_location))
+            inp = raw_input('Do you want to create it? Y/n ')
+
+            if inp == '' or inp[0].lower() == 'y':
+                if not lf.save():
+                    print ('error: could not save to "{loc}"\n'
+                           .format(loc=lf.file_location))
+                    return 1
+            else:
+                return 1
+
+        if l_flag:
+            lf.printLabels(script_flag)
+            return
+
+        InteractiveEditor(lf, interactive=True)
 
 if __name__ == '__main__':
     sys.exit(Dispass().main(sys.argv))

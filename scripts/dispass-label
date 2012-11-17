@@ -18,7 +18,7 @@
 import sys
 import exceptions
 
-from dispass.dispass_label import DispassLabel
+from dispass.dispass import DispassLabel
 
 if __name__ == '__main__':
     try:
