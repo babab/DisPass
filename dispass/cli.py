@@ -139,8 +139,9 @@ class CLI:
             labelmap = []
             for i in labels:
                 labelmap.append((i, (self.passphraseLength, self.algorithm)))
-                if fh.add(labelname=i, length=self.passphraseLength,
-                          algo=self.algorithm, seqno=self.seqno):
+                if (self.createLabel and
+                    fh.add(labelname=i, length=self.passphraseLength,
+                           algo=self.algorithm, seqno=self.seqno)):
                     added = True
             if added and fh.save():
                 saved = True
