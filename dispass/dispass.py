@@ -174,7 +174,7 @@ class Dispass(object):
                               'specific').format(execname=execname, qty=result)
                         return
 
-                    console.interactive(result)
+                    console.interactive(result, lf)
                     return
                 else:
                     print ('error: could not load labelfile at '
@@ -207,7 +207,7 @@ class Dispass(object):
                 return 1
 
             if lf.file_found:
-                console.interactive(lf.algodict)
+                console.interactive(lf.algodict, lf)
                 return
             else:
                 print ('error: could not load labelfile at "{loc}"'
