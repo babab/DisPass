@@ -59,11 +59,11 @@ class Filehandler:
 
         label_env = os.getenv('DISPASS_LABELFILE')
         std_env = os.getenv('XDG_DATA_HOME') or os.getenv('APPDATA')
-        home_file = expanduser('~/.dispass/labels')
+        home_file = '~/.dispass/labels'
 
         if label_env:
             return label_env
-        if not os.path.exists(home_file) and std_env:
+        if not exists(home_file) and std_env:
             return std_env + '/dispass/labels'
         else:
             return home_file
