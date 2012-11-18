@@ -16,7 +16,7 @@
 
 import datetime
 import os
-from os.path import expanduser
+from os.path import expanduser, exists
 
 from dispass import __version__
 
@@ -57,14 +57,16 @@ class Filehandler:
     def getDefaultFileLocation(self):
         """Scan default labelfile paths"""
 
-        if os.getenv('DISPASS_LABELFILE'):
-            return os.getenv('DISPASS_LABELFILE')
-        elif os.getenv('XDG_CONFIG_HOME'):
-            return os.getenv('XDG_CONFIG_HOME') + '/dispass/labels'
-        elif os.getenv('APPDATA'):
-            return os.getenv('APPDATA') + '/dispass/labels'
+        label_env = os.getenv('DISPASS_LABELFILE')
+        std_env = os.getenv('XDG_DATA_HOME') or os.getenv('APPDATA')
+        home_file = expanduser('~/.dispass/labels')
+
+        if label_env:
+            return label_env
+        if not os.path.exists(home_file) and std_env:
+            return std_env + '/dispass/labels'
         else:
-            return '~/.config/dispass/labels'
+            return home_file
 
     def parse(self):
         '''Create dictionary {algorithm: (label, (length, seqno))}'''
