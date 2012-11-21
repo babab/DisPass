@@ -6,4 +6,4 @@ include README.rst
 recursive-include scripts dispass
 recursive-include scripts dispass-label
 recursive-include scripts gdispass
-recursive-include skel dot.dispass
+recursive-include skel labelfile
