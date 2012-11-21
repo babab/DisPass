@@ -58,42 +58,32 @@ passphrase
 When DisPass is executed as 'gdispass' or 'dispass -g',
 the graphical version will be started.
 
-You can use dispass by entering your labels after the dispass command and/or
-you can store your labels in a textfile called a labelfile.
-
-
 Using dispass to create one or more passphrases
 -----------------------------------------------
 
 You can start using dispass for e.g. google.com like this::
 
-   $ dispass -c google.com
-
-Now you will be asked to enter a password twice and after that your
-passphrase will be shown on the screen. This will now be the passphrase you
-will use for logging in to google.com
-It can be created everytime you need it by running::
-
    $ dispass google.com
 
-The ``-c`` argument we used before was just a way to make sure to not make
-typos when creating passphrases for the first time. It is advised you use
-this everytime you create a passphrase for a new label.
+The passphrases created are 30 characters long by default, but some
+website's may not validate such a long passphrase or you might want to
+make it even longer. You can easily set a desired passphrase length
+using the ``-l`` flag. Hotmail passwords are limited to 16 characters::
 
-The passphrases created are 30 characters long by default, but some website's
-may not validate such a long passphrase or you might want to make it even
-longer. You can easily set a desired passphrase length using the ``-l`` flag.
-If you wanted to make your google.com 18 chars you can run::
-
-   $ dispass -c -l 18 google.com
+   $ dispass -l 18 hotmail
 
 Generating passphrases for multiple labels is just as easy::
 
-   $ dispass google.com yahoo.com
+   $ dispass google hotmail YaHo0 "P0551bly*a81t)H4rd2rmbr"
 
+Labels are case-sensitive and digits and special characters can be used.
+You should try to name labels in a way that you can easily 'dispass' a
+passphrase on any computer/device that has DisPass at any given moment.
+You are encouraged to store your labels in a labelfile for convenience
+though.
 
-Using a labelfile
-=================
+Labelfile location
+------------------
 
 When dispass is run without arguments it will try to find a labelfile.
 The location of this file varies and depends on the platform type you use,
@@ -105,27 +95,34 @@ with a different 'master' password for each set.
 
 1. If -f flag is given, that value is used.
 2. If environment var DISPASS_LABELFILE is set, that value is used.
-3. If environment var XDG_CONFIG_HOME is set,
-   ``$XDG_CONFIG_HOME/dispass/labels`` is used.
+3. If environment var XDG_DATA_HOME is set,
+   ``$XDG_DATA_HOME/dispass/labels`` is used.
+
 4. If none of the above applies, the labelfile will default to the following
    locations:
 
-   * **GNU/Linux and Mac OS X**: ``~/.config/dispass/labels``
-   * **\*BSD and other Unixen**: ``~/.config/dispass/labels``
+   * **GNU/Linux and Mac OS X**: ``~/.dispass/labels``
+   * **\*BSD and other Unixen**: ``~/.dispass/labels``
    * **Windows**:   ``C:\Users\<username>\dispass\labels``
 
-You can start by copying the labelfile from skel/dot.dispass to this location
-and editing it by adding your own labels. Or you can just start writing the
-file from scratch which really isn't a hard thing to do.
+You can edit the labelfile(s) by using ``dispass-label``.
 
-The labels need to be specified on a single line with optional arguments.
-A typical labelfile might look like this::
+Creating and searching stored labels
+------------------------------------
 
-   google.com length=18
-   yahoo.com
+When creating a new label/password combination you can store the label
+and it's arguments by using the ``-c`` flag, this will ask for your
+password twice so you can be asured to avoid typing errors::
 
-Now, when running ``dispass`` without arguments it will create two
-passphrases with varying lengths.
+   $ dispass -c -l 16 hotmail.com
+
+Now you will be asked to enter a password twice and after that your
+passphrase will be shown on the screen. It can be re-created everytime you
+need it by searching for a label using the ``-s`` flag::
+
+   $ dispass -s hotm
+
+Only part of the label is needed, as long as the (sub)string is unique.
 
 
 OPTIONS
