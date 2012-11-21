@@ -1,13 +1,10 @@
 # DisPass labels file Example
 #
-# Copy this file to ~/.dispass and edit it to your own labels
 
-google                      length=50
-google-2                    length=18           algo=dispass1
-jabber                      algo=dispass1
-#irc-account-1               length=12
+google              length=50
+google-2            length=18       algo=dispass1
+jabber
+#irc-account-1       length=12 algo=dispass2
 irc-account-2
-ssh-server-1                length=15
-ssh-server-2
-ssh-server-3
-
+ssh-server-1        algo=dispass2 seqno=4
+ssh-server-2        algo=dispass2 seqno=2 length=42

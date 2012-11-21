@@ -1,8 +1,9 @@
 include ChangeLog
 include dispass.1
 include LICENSE
+include Makefile
 include README.rst
-recursive-include emacs dispass.el
-recursive-include emacs README.rst
 recursive-include scripts dispass
+recursive-include scripts dispass-label
+recursive-include scripts gdispass
 recursive-include skel dot.dispass
