@@ -17,21 +17,16 @@ rm_pyc:
 	find . -name "*.pyc" | xargs /bin/rm -f
 
 doc_clean: rm_pyc
-	cd sphinx-doc/root/; make clean
 	cd sphinx-doc/en/; make clean
 	#cd sphinx-doc/nl/; make clean
 
 doc: doc_clean
-	cd sphinx-doc/root/; make html
 	cd sphinx-doc/en/; make html
-	#cd sphinx-doc/nl/; make html
-	rm -rf doc/html
-	mkdir -p doc
-	mv sphinx-doc/root/_build/html doc/html
+	cd sphinx-doc/nl/; make html
+	rm -rf doc/html/$(VERSION)
 	mkdir -p doc/html/$(VERSION)
 	mv sphinx-doc/en/_build/html doc/html/$(VERSION)/en
-	mv doc/html/index.html doc/html/all.html
-	#mv sphinx-doc/nl/_build/html doc/html/$(VERSION)/nl
+	mv sphinx-doc/nl/_build/html doc/html/$(VERSION)/nl
 	make doc_clean
 
 man: rm_pyc

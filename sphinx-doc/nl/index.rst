@@ -1,11 +1,48 @@
 .. note::
-   No dutch documentation available yet
+   Dit gedeelte is om praktische redenen alleen beschikbaar in het Engels.
 
-.. include:: ../../README.rst
+Documentatie voor ontwikkelaars
+******************************************************************************
 
-.. toctree::
-   :maxdepth: 2
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
 
-   devdoc
+dispass.algos
+==============================================================================
+
+.. automodule:: dispass.algos
+   :members:
+
+dispass.dispass
+==============================================================================
+
+.. automodule:: dispass.dispass
+   :members:
+
+dispass.cli
+==============================================================================
+
+.. automodule:: dispass.cli
+   :members:
+
+dispass.gui
+==============================================================================
+
+.. automodule:: dispass.gui
+   :members:
+
+dispass.filehandler
+==============================================================================
+
+.. automodule:: dispass.filehandler
+   :members:
+
+dispass.interactive_editor
+==============================================================================
+
+.. automodule:: dispass.interactive_editor
+   :members:
+
 
 .. vim: set et ts=3 sw=3 sts=3 ai:

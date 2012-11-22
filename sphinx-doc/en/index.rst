@@ -1,12 +1,45 @@
-Show all versions_ | Language: **English**
+Developer documentation
+******************************************************************************
 
-.. _`versions`: ../../all.html
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
 
-.. include:: ../../README.rst
+dispass.algos
+==============================================================================
 
-.. toctree::
-   :maxdepth: 2
+.. automodule:: dispass.algos
+   :members:
 
-   devdoc
+dispass.dispass
+==============================================================================
+
+.. automodule:: dispass.dispass
+   :members:
+
+dispass.cli
+==============================================================================
+
+.. automodule:: dispass.cli
+   :members:
+
+dispass.gui
+==============================================================================
+
+.. automodule:: dispass.gui
+   :members:
+
+dispass.filehandler
+==============================================================================
+
+.. automodule:: dispass.filehandler
+   :members:
+
+dispass.interactive_editor
+==============================================================================
+
+.. automodule:: dispass.interactive_editor
+   :members:
+
 
 .. vim: set et ts=3 sw=3 sts=3 ai:
