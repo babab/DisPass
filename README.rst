@@ -309,8 +309,9 @@ is added.
 Support / ideas / questions / suggestions
 ==============================================================================
 
-Please use the Issue tracker at github:
-https://github.com/babab/DisPass/issues
+Issue tracker at Github: https://github.com/babab/DisPass/issues
+
+A mailing list is available: dispass@librelist.com
 
 You can also visit #dispass at Freenode (chat.freenode.net) with your favorite
 IRC client.
