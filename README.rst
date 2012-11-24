@@ -265,7 +265,7 @@ Got Emacs? You can use the Emacs wrapper
 If you have Emacs you can use the Emacs wrapper created and maintained by
 Tom Willemsen (ryuslash).
 
-You can find it at: https://github.com/ryuslash/dispass.el
+You can find it at: http://ryuslash.org/projects/dispass.el/
 
 
 Wrapping / scripting dispass
