@@ -7,7 +7,7 @@ SYNOPSIS
 dispass
 -------
 
-dispass [-cghoV?] [-f <labelfile>] [-s <string>] [--script]
+dispass [-ghoV?] [-f <labelfile>] [-s <string>] [--script]
 
 dispass [-co] [-l <length>] [-a <algo>] [-n <sequence-number>] [--script] <label> [<label2>] [label3]  [...]
 
@@ -105,7 +105,7 @@ with a different 'master' password for each set.
    * **\*BSD and other Unixen**: ``~/.dispass/labels``
    * **Windows**:   ``C:\Users\<username>\dispass\labels``
 
-You can edit the labelfile(s) by using ``dispass-label``.
+You can edit the labelfile(s) by using the ``dispass-label`` program.
 
 Creating and searching stored labels
 ------------------------------------

@@ -88,8 +88,8 @@ Then you can either:
 
    $ python setup.py sdist
    $ sudo pip install dist/DisPass-<version>.tar.gz
-   $ gzip -c dispass.1 > dispass.1.gz
-   $ mv dispass.1.gz /usr/share/man/man1/
+   $ sudo gzip -c dispass.1 > dispass.1.gz
+   $ sudo mv dispass.1.gz /usr/share/man/man1/
 
 3. Install manually::
 
@@ -196,7 +196,7 @@ with a different 'master' password for each set.
    * **\*BSD and other Unixen**: ``~/.dispass/labels``
    * **Windows**:   ``C:\Users\<username>\dispass\labels``
 
-You can edit the labelfile(s) by using ``dispass-label``.
+You can edit the labelfile(s) by using the ``dispass-label`` program.
 
 Creating and searching stored labels
 ------------------------------------
@@ -319,7 +319,7 @@ IRC client.
 Acknowledgements
 ==============================================================================
 
-Many thanks go out to Tom (@ryuslash) Willemsen for valuable contributions to
+Many thanks go out to Tom (ryuslash) Willemsen for valuable contributions to
 gdispass and the new algorithm. He also wrote an awesome wrapper for Emacs so
 you can use DisPass in your favorite editor.
 
