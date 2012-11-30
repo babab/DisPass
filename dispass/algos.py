@@ -24,34 +24,37 @@ class Dispass1:
     Tests:
 
     >>> dispass1 = Dispass1()
-    >>> dispass1.digest('test' 'qqqqqqqq')
+    >>> dispass1.digest('test', 'qqqqqqqq')
     'Y2Y4Y2Y0Yzg5Nzc1Yzc2MmI4OTU0ND'
     >>> dispass1.digestPasswordDict({'test': (30, None)}, 'qqqqqqqq')
     [('test', 'Y2Y4Y2Y0Yzg5Nzc1Yzc2MmI4OTU0ND')]
-    >>> dispass1.digest('test2' 'qqqqqqqq', 50)
+    >>> dispass1.digest('test2', 'qqqqqqqq', 50)
     'NmQzNjUzZTlhNTc4NWFlNTU5ZTVkZGQ5ZTc2NzliZjgzZDQ1Zj'
     >>> dispass1.digestPasswordDict({'test2': (50, )}, 'qqqqqqqq')
     [('test2', 'NmQzNjUzZTlhNTc4NWFlNTU5ZTVkZGQ5ZTc2NzliZjgzZDQ1Zj')]
     '''
 
     @staticmethod
-    def digest(message, length=30):
+    def digest(label, password, length=30, seqno=None):
         '''Create and return secure hash of message
 
-        A secure hash/message digest formed by hashing the `message` with
-        the sha512 algorithm, encoding this hash with base64 and stripping
-        it down to the first `length` characters.
+        A secure hash/message digest formed by hashing a string (formed by
+        concatenating label+password) with the sha512 algorithm, encoding
+        this hash with base64 and stripping it down to the first `length`
+        characters.
 
         :Parameters:
-            - `message`: The string from which to form the digest
+            - `label`: String. Labelname
+            - `password`: String. The input password
             - `length`: Length of output hash (optional)
+            - `seqno`: Sequence number. Not used in Dispass1
 
         :Return:
-            - The secure hash of `message`
+            - The secure hash of `label` + `password`
         '''
 
         sha = hashlib.sha512()
-        sha.update(message)
+        sha.update(str(label) + str(password))
         r = base64.b64encode(sha.hexdigest(), '49').replace('=', '')
 
         return str(r[:length])
@@ -89,34 +92,37 @@ class Dispass2:
     Tests:
 
     >>> dispass2 = Dispass2()
-    >>> dispass2.digest('test' '1' 'qqqqqqqq')
+    >>> dispass2.digest('test', 'qqqqqqqq')
     'ZTdiNGNkYmQ2ZjFmNzc3NGFjZWEwMz'
     >>> dispass2.digestPasswordDict({'test': (30, 1)}, 'qqqqqqqq')
     [('test', 'ZTdiNGNkYmQ2ZjFmNzc3NGFjZWEwMz')]
-    >>> dispass2.digest('test2' '10' 'qqqqqqqq', 50)
+    >>> dispass2.digest('test2', 'qqqqqqqq', 50, 10)
     'NGEwNjMxMzZiMzljODVmODk4OWQ1ZmE4YTRlY2E4ODZkZjZlZW'
     >>> dispass2.digestPasswordDict({'test2': (50, 10)}, 'qqqqqqqq')
     [('test2', 'NGEwNjMxMzZiMzljODVmODk4OWQ1ZmE4YTRlY2E4ODZkZjZlZW')]
     '''
 
     @staticmethod
-    def digest(message, length=30):
+    def digest(label, password, length=30, seqno=1):
         '''Create and return secure hash of message
 
-        A secure hash/message digest formed by hashing the `message` with
-        the sha512 algorithm, encoding this hash with base64 and stripping
-        it down to the first `length` characters.
+        A secure hash/message digest formed by hashing a string (formed by
+        concatenating label+seqno+password) with the sha512 algorithm, encoding
+        this hash with base64 and stripping it down to the first `length`
+        characters.
 
         :Parameters:
-            - `message`: The string from which to form the digest
+            - `label`: String. Labelname
+            - `password`: String. The input password
             - `length`: Length of output hash (optional)
+            - `seqno`: Integer. Sequence number.
 
         :Return:
-            - The secure hash of `message`
+            - The secure hash of `label` + `seqno` + `password`
         '''
 
         sha = hashlib.sha512()
-        sha.update(message)
+        sha.update(str(label) + str(seqno) + str(password))
         r = base64.b64encode(sha.hexdigest(), '49').replace('=', '')
 
         return str(r[:length])
