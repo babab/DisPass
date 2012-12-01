@@ -130,7 +130,7 @@ class Dispass(object):
             elif o in ("-a", "--algo"):
                 algoname = a.lower()
                 if algoname in algos.algorithms:
-                    console.setAlgo(algoname)
+                    console.algorithm = algoname
                 else:
                     print 'error: algo "{algo}" does not exist'.format(algo=a)
                     return 1
@@ -142,7 +142,7 @@ class Dispass(object):
                     print 'error: sequence number must be a number\n'
                     self.usage()
                     return 1
-                console.setSeqNo(seqno)
+                console.seqno = seqno
             elif o in ("-c", "--create"):
                 console.createLabel = True
             elif o in ("-l", "--length"):
@@ -152,7 +152,7 @@ class Dispass(object):
                     print 'error: length must be a number\n'
                     self.usage()
                     return 1
-                console.setLength(length)
+                console.passphraseLength = length
             elif o in ("-f", "--file"):
                 f_flag = a
             elif o in ("-s", "--search"):
@@ -189,7 +189,7 @@ class Dispass(object):
                 print versionStr, '-', __version_info__, 'running on', os.name
                 return
             elif o in "--script":
-                console.setScriptableIO()
+                console.scriptableIO = True
             else:
                 assert False, "unhandled option"
 

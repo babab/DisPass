@@ -16,7 +16,6 @@ import getpass
 import algos
 
 from dispass import versionStr
-from filehandler import Filehandler
 
 try:
     import curses
@@ -31,7 +30,7 @@ class CLI:
     createLabel = False
     '''Boolean. Prompt for password twice and save label to labelfile'''
 
-    scriptableIO = None
+    scriptableIO = False
     '''Boolean. Optimize input/output for wrapping dispass'''
 
     passphrases = []
@@ -48,24 +47,6 @@ class CLI:
         self.settings = settings
         self.useCurses = hasCurses
 
-    def setAlgo(self, algo):
-        '''Optionally override the algorithm to use for generating passphrases
-
-        :Parameters:
-            - `algo`: String. Name of the algorithm
-        '''
-
-        self.algorithm = algo
-
-    def setSeqNo(self, seqno):
-        '''Optionally override the sequence number to use
-
-        :Parameters:
-            - `algo`: String. Name of the algorithm
-        '''
-
-        self.seqno = seqno
-
     def setCurses(self, useCurses):
         '''Optionally override `self.useCurses`
 
@@ -77,24 +58,6 @@ class CLI:
             self.useCurses = False
         else:
             self.useCurses = useCurses
-
-    def setScriptableIO(self, scriptableIO=True):
-        '''Optimize input/output for wrapping dispass in a script or program
-
-        :Parameters:
-            - `sriptableIO`: Boolean
-        '''
-
-        self.scriptableIO = scriptableIO
-
-    def setLength(self, length):
-        '''Optionally override length of output passphrase
-
-        :Parameters:
-            - `length`: Integer. Length of output passphrase
-        '''
-
-        self.passphraseLength = length
 
     def passwordPrompt(self):
         '''Prompt for password.

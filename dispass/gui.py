@@ -50,11 +50,6 @@ class GUI(Frame):
         self.grid()
         self.createWidgets()
 
-# GUI # Setters and getters
-    def setFont(self):
-        '''Set font and fontsize; not used at this moment'''
-        pass
-
     def getFont(self, sizediff=0):
         '''Get `font` and `fontsize`, optionally differ from default `fontsize`
 
@@ -67,7 +62,6 @@ class GUI(Frame):
 
         return (self.font, self.fontsize + sizediff)
 
-# GUI # Prototypes
     def warn(self, message, warning_type='soft', box_title=''):
         '''Prototype for warning user
 
