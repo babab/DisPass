@@ -229,7 +229,8 @@ class DispassLabel(object):
     def usage(self):
         '''Print help / usage information'''
 
-        print('USAGE: dispass-label [-hlV] [-f <labelfile>] [--script]\n\n'
+        print('USAGE: dispass-label [-hlV] [-f <labelfile>] \n'
+              '                     [-a|--add <labelspec>] [--script]\n\n'
               'Options:\n'
               '-h, --help      show this help and exit\n'
               '-l, --list      print all labels and options found '
@@ -237,6 +238,10 @@ class DispassLabel(object):
               '-V, --version   show full version information and exit\n'
               '-f <labelfile>, --file=<labelfile>\n'
               '                set location of labelfile\n'
+              '-a, --add <labelspec>\n'
+              '                add a new label to the labelfile, the\n'
+              '                labelspec looks like this:\n'
+              '                label[:size[:algorithm[:sequence_number]]]\n'
               "--script        optimize input/output for 'wrapping' "
               'dispass-label')
 
@@ -250,11 +255,12 @@ class DispassLabel(object):
         f_flag = None
         l_flag = None
         script_flag = None
+        a_flag = None
 
         try:
-            opts, args = getopt.getopt(argv[1:], "f:hlV",
+            opts, args = getopt.getopt(argv[1:], "f:hlVa:",
                                        ["file", "help", "list",
-                                        "script", "version"])
+                                        "script", "version", "add="])
         except getopt.GetoptError, err:
             print str(err), "\n"
             self.usage()
@@ -273,6 +279,8 @@ class DispassLabel(object):
                 l_flag = True
             elif o in "--script":
                 script_flag = True
+            elif o in ("-a", "--add"):
+                a_flag = a.split(':')
             else:
                 assert False, "unhandled option"
 
@@ -297,6 +305,41 @@ class DispassLabel(object):
         if l_flag:
             lf.printLabels(script_flag)
             return
+        elif a_flag:
+            params = len(a_flag)
+
+            length = 0
+            try:
+                length = params >= 2 and int(a_flag[1])
+            except ValueError:
+                pass
+
+            if not length:
+                length = settings.passphrase_length
+
+            algo = params >= 3 and a_flag[2] or settings.algorithm
+            if not algo in algos.algorithms:
+                algo = settings.algorithm
+
+            seqno = 0
+            if algo != 'dispass1':
+                try:
+                    seqno = params >= 4 and int(a_flag[3])
+                except ValueError:
+                    pass
+
+            if not seqno:
+                seqno = settings.sequence_number
+
+            if lf.add(labelname=a_flag[0], length=length, algo=algo,
+                      seqno=seqno):
+                lf.save()
+                print('Label saved')
+                lf.parse()
+                return 0
+            else:
+                print('Label already exists in labelfile')
+                return 1
 
         InteractiveEditor(settings, lf, interactive=True)
 
