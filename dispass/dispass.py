@@ -258,9 +258,9 @@ class DispassLabel(object):
         a_flag = None
 
         try:
-            opts, args = getopt.getopt(argv[1:], "f:hlVa:",
-                                       ["file", "help", "list",
-                                        "script", "version", "add="])
+            opts, args = getopt.getopt(argv[1:], "a:f:hlV",
+                                       ["add=", "file=", "help", "list",
+                                        "script", "version"])
         except getopt.GetoptError, err:
             print str(err), "\n"
             self.usage()
