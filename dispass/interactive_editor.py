@@ -41,32 +41,35 @@ class InteractiveEditor:
         self.prompt()
 
     def prompt(self):
-        inp = raw_input('\n> ').split()
-        if not inp:
-            print 'No menu option given'
-            self.prompt()
+        try:
+            inp = raw_input('\n> ').split()
+            if not inp:
+                print 'No menu option given'
+                self.prompt()
 
-        command = inp[0].lower()
-        command_char = command[0].lower()
+            command = inp[0].lower()
+            command_char = command[0].lower()
 
-        if command_char == 'l':
-            self.filehandler.printLabels()
+            if command_char == 'l':
+                self.filehandler.printLabels()
+                self.prompt()
+            elif command_char == 'a':
+                self.add()
+                self.prompt()
+            elif command_char == 'r':
+                self.remove()
+                self.prompt()
+            elif command_char == 'q':
+                print('Bye')
+                sys.exit()
+            elif command_char == 'h':
+                self.menu()
+                self.prompt()
+            else:
+                print("Invalid option '{command}'".format(command=command))
+                self.menu()
+        except KeyboardInterrupt:
             self.prompt()
-        elif command_char == 'a':
-            self.add()
-            self.prompt()
-        elif command_char == 'r':
-            self.remove()
-            self.prompt()
-        elif command_char == 'q':
-            print('Bye')
-            sys.exit()
-        elif command_char == 'h':
-            self.menu()
-            self.prompt()
-        else:
-            print("Invalid option '{command}'".format(command=command))
-            self.menu()
 
     def read_label(self):
         '''Keep bugging the user for a label until they crack and give us

@@ -23,7 +23,7 @@ from dispass.dispass import DispassLabel
 if __name__ == '__main__':
     try:
         sys.exit(DispassLabel().main(sys.argv))
-    except exceptions.KeyboardInterrupt:
+    except (exceptions.KeyboardInterrupt, exceptions.EOFError):
         print
         print 'Ok, bye'
         sys.exit(1)
