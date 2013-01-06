@@ -145,6 +145,19 @@ class Filehandler:
         self.labelfile.append((labelname, length, algo, seqno))
         return True
 
+    def remove(self, labelname):
+        '''Remove label from `labelfile`'''
+
+        removed = False
+
+        for i in range(len(self.labelfile)):
+            if self.labelfile[i][0] == labelname:
+                del self.labelfile[i]
+                removed = True
+                break
+
+        return removed
+
     def refresh(self, sort=True):
         '''Sort `labelfile` on labelname and get longest label'''
 

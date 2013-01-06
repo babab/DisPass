@@ -242,6 +242,8 @@ class DispassLabel(object):
               '                add a new label to the labelfile, the\n'
               '                labelspec looks like this:\n'
               '                label[:size[:algorithm[:sequence_number]]]\n'
+              '-r, --remove <labelname>\n'
+              '                remove a label from the labelfile\n'
               "--script        optimize input/output for 'wrapping' "
               'dispass-label')
 
@@ -256,11 +258,12 @@ class DispassLabel(object):
         l_flag = None
         script_flag = None
         a_flag = None
+        r_flag = None
 
         try:
-            opts, args = getopt.getopt(argv[1:], "a:f:hlV",
+            opts, args = getopt.getopt(argv[1:], "a:f:hlr:V",
                                        ["add=", "file=", "help", "list",
-                                        "script", "version"])
+                                        "remove=", "script", "version"])
         except getopt.GetoptError, err:
             print str(err), "\n"
             self.usage()
@@ -281,6 +284,8 @@ class DispassLabel(object):
                 script_flag = True
             elif o in ("-a", "--add"):
                 a_flag = a.split(':')
+            elif o in ("-r", "--remove"):
+                r_flag = a
             else:
                 assert False, "unhandled option"
 
@@ -339,6 +344,14 @@ class DispassLabel(object):
                 return 0
             else:
                 print('Label already exists in labelfile')
+                return 1
+        elif r_flag:
+            if lf.remove(r_flag):
+                lf.save()
+                print('Label removed')
+                return 0
+            else:
+                print("Label doesn't exist in labelfile")
                 return 1
 
         InteractiveEditor(settings, lf, interactive=True)

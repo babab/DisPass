@@ -34,6 +34,7 @@ class InteractiveEditor:
 
     def menu(self):
         print('add     Add label\n'
+              'remove  Remove label\n'
               'ls      List all labels\n'
               'help    Show this help information\n'
               'quit    Quit')
@@ -54,6 +55,9 @@ class InteractiveEditor:
         elif command_char == 'a':
             self.add()
             self.prompt()
+        elif command_char == 'r':
+            self.remove()
+            self.prompt()
         elif command_char == 'q':
             print('Bye')
             sys.exit()
@@ -64,14 +68,20 @@ class InteractiveEditor:
             print("Invalid option '{command}'".format(command=command))
             self.menu()
 
-    def add(self):
+    def read_label(self):
+        '''Keep bugging the user for a label until they crack and give us
+        one.
+
+        '''
         while True:
             try:
-                label = raw_input('Label: ').split()[0]
-                break
+                return raw_input('Label: ').split()[0]
             except IndexError:
                 print 'label cannot be empty - please try again'
                 continue
+
+    def add(self):
+        label = self.read_label()
 
         while True:
             try:
@@ -165,3 +175,12 @@ class InteractiveEditor:
             self.filehandler.parse()
         else:
             print('Label already exists in labelfile')
+
+    def remove(self):
+        label = self.read_label()
+
+        if self.filehandler.remove(label):
+            self.filehandler.save()
+            print('Label removed')
+        else:
+            print("Label doesn't exist in labelfile")
