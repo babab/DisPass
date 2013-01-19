@@ -101,7 +101,7 @@ class CLI:
         if isinstance(labels, list):
             labelmap = []
             for i in labels:
-                labelmap.append((i, (self.passphraseLength, self.algorithm)))
+                labelmap.append((i, (self.passphraseLength, self.seqno)))
                 if (self.createLabel and
                     fh.add(labelname=i, length=self.passphraseLength,
                            algo=self.algorithm, seqno=self.seqno)):
