@@ -17,8 +17,8 @@
 __docformat__ = 'restructuredtext'
 __author__ = "Benjamin Althues"
 __copyright__ = "Copyright (C) 2011, 2012, 2013  Benjamin Althues"
-__version_info__ = (0, 2, 0, 'final', 0)
-__version__ = '0.2.0'
+__version_info__ = (0, 3, 0, 'alpha', 0)
+__version__ = '0.3.0-dev'
 versionStr = 'DisPass ' + __version__
 
 import exceptions
@@ -27,7 +27,7 @@ import os
 import sys
 
 import algos
-from cli import CLI
+# from cli import CLI
 from filehandler import Filehandler
 from gui import GUI
 from interactive_editor import InteractiveEditor
@@ -51,15 +51,48 @@ settings = Settings()
 class Dispass(object):
     '''Command handler for ``dispass``'''
 
-    def usage(self):
+    def usage(self, command=None):
         '''Print help / usage information'''
 
-        print "%s - http://dispass.babab.nl/" % (versionStr)
-        print
-        print 'USAGE: dispass [options]'
-        print('       dispass [options] <label> [<label2>] [<label3>] [...]')
-        print '       gdispass'
-        print
+        if not command or command == 'help':
+            print('usage: dispass [--file=<labelfile>] <command> [<args>]')
+            print
+            print('Commands:')
+            print('   add          add a new label and generate passphrase')
+            print('   gui          start the graphical version of DisPass')
+            print('   help         show this help information')
+            print('   list         list all labels in labelfile')
+            print('   settings     show default values for length, algo etc.')
+            print('   version      show full version information')
+            print
+            print("See 'dispass help <command>' for more information on a "
+                  "specific command.")
+        elif command == 'add':
+            print('usage: dispass add [-i] [-n] [-v] [<labelspec>]')
+            print
+            print('Add a new label to the labelfile and generate passphrase.')
+            print('The labelspec looks like this:')
+            print
+            print('    label[:size[:algorithm[:sequence_number]]]')
+            print
+            print('Options:')
+            print '-i, --interactive    add a new label interactively'
+            print '-n, --dry-run        do not actually add label to labelfile'
+            print '-v, --verbose        verbose output'
+        elif command == 'gui':
+            print('usage: dispass gui')
+            print
+            print('Start the graphical version of DisPass.')
+        elif command == 'list':
+            print('usage: dispass list')
+            print
+            print('List all labels in labelfile.')
+        else:
+            print('command {command} does not exist'.format(command=command))
+            return 1
+        return 0
+
+        '''
         print 'Options (general):'
         print '-c, --create    use if this passphrase is new (check input PW)'
         print '-g, --gui       start guided graphical version of DisPass'
@@ -82,6 +115,28 @@ class Dispass(object):
         print '                override algorithm for generating passphrase(s)'
         print '-n <number>, --number=<number>'
         print '                override sequence number (default = 1)'
+        '''
+
+    def versionString(self):
+        return('{dispass} - {version} running on {os}'
+               .format(dispass=versionStr, version=__version_info__,
+                       os=os.name))
+
+    def startGUI(self):
+        try:
+            g = GUI(settings)
+            g.mainloop()
+        except ImportError:
+            print ('Could not find Tkinter, this is a package needed '
+                   'for using\n' 'the graphical version of dispass.\n'
+                   'To install, search for a python-tk package for'
+                   ' your OS.\n'
+                   'Arch Linux     \t\t# pacman -S python-tk\n'
+                   'Debian / Ubuntu\t\t$ sudo apt-get install '
+                   'python-tk\n'
+                   'OpenBSD        \t\t# pkg_add -i python-tk')
+        except exceptions.KeyboardInterrupt:
+            print '\nOk, bye'
 
     def main(self, argv):
         '''Entry point and handler of command options and arguments
@@ -90,137 +145,55 @@ class Dispass(object):
             - `argv`: List of command arguments
         '''
 
-        execname = argv[0].split('/').pop()
-        console = CLI(settings)
-        a_flag = None
-        f_flag = None
+        # execname = argv[0].split('/').pop()
+        # console = CLI(settings)
+        # a_flag = None
+        # f_flag = None
 
         try:
-            opts, args = getopt.getopt(
-                argv[1:], "a:cf:ghl:n:os:V?",
-                ["algo=", "create", "file=", "gui", "help", "length=",
-                 "number", "output", "script", "search=", "version"])
+            opts, arguments = getopt.getopt(argv[1:],
+                                            "hV?", ["help", "version"])
         except getopt.GetoptError, err:
-            print str(err), "\n"
-            self.usage()
-            return 2
+            print str(err)
+            return 1
 
-        if args:
-            labels = args
+        if arguments:
+            args = arguments
         else:
-            labels = False
+            args = False
 
         for o, a in opts:
-            if o in ("-g", "--gui"):
-                try:
-                    g = GUI(settings)
-                    g.mainloop()
-                except ImportError:
-                    print ('Could not find Tkinter, this is a package needed '
-                           'for using\n' 'the graphical version of dispass.\n'
-                           'To install, search for a python-tk package for'
-                           ' your OS.\n'
-                           'Arch Linux     \t\t# pacman -S python-tk\n'
-                           'Debian / Ubuntu\t\t$ sudo apt-get install '
-                           'python-tk\n'
-                           'OpenBSD        \t\t# pkg_add -i python-tk')
-                except exceptions.KeyboardInterrupt:
-                    print '\nOk, bye'
-                return
-            elif o in ("-a", "--algo"):
-                algoname = a.lower()
-                if algoname in algos.algorithms:
-                    console.algorithm = algoname
-                else:
-                    print 'error: algo "{algo}" does not exist'.format(algo=a)
-                    return 1
-                a_flag = True
-            elif o in ("-n", "--number"):
-                try:
-                    seqno = int(a)
-                except ValueError:
-                    print 'error: sequence number must be a number\n'
-                    self.usage()
-                    return 1
-                console.seqno = seqno
-            elif o in ("-c", "--create"):
-                console.createLabel = True
-            elif o in ("-l", "--length"):
-                try:
-                    length = int(a)
-                except ValueError:
-                    print 'error: length must be a number\n'
-                    self.usage()
-                    return 1
-                console.passphraseLength = length
-            elif o in ("-f", "--file"):
-                f_flag = a
-            elif o in ("-s", "--search"):
-                if f_flag:
-                    lf = Filehandler(settings, file_location=f_flag)
-                else:
-                    lf = Filehandler(settings)
-
-                if lf.file_found:
-                    result = lf.search(a)
-
-                    if not result:
-                        print('{execname}: could not find a label with '
-                              '"{label}" in labelfile'
-                              .format(execname=execname, label=a))
-                        return
-                    elif isinstance(result, int):
-                        print('{execname}: {qty} labels found, please be more '
-                              'specific').format(execname=execname, qty=result)
-                        return
-
-                    console.interactive(result, lf)
-                    return
-                else:
-                    print ('error: could not load labelfile at '
-                           '"{loc}"\n').format(loc=lf.file_location)
-                    return 1
-            elif o in ("-o", "--output"):
-                console.setCurses(False)
-            elif o in ("-h", "-?", "--help"):
-                self.usage()
-                return
+            if o in ("-h", "-?", "--help"):
+                if args:
+                    return self.usage(args[0])
+                return self.usage()
             elif o in ("-V", "--version"):
-                print versionStr, '-', __version_info__, 'running on', os.name
+                print(self.versionString())
                 return
-            elif o in "--script":
-                console.scriptableIO = True
+
+        if not args:
+            self.usage()
+            return 2
+        elif args[0] == 'add':
+            return self.usage(args[0])
+        elif args[0] == 'gui':
+            self.startGUI()
+            return
+        elif args[0] == 'help':
+            if len(args) > 1:
+                self.usage(args[1])
             else:
-                assert False, "unhandled option"
-
-        if f_flag:
-            lf = Filehandler(settings, file_location=f_flag)
-        else:
-            lf = Filehandler(settings)
-
-        if labels:
-            console.interactive(labels, lf)
-        else:
-            if a_flag:
-                print('error: option -a can only be used when specifying '
-                      'label(s) as argument(s)')
-                return 1
-
-            if lf.file_found:
-                console.interactive(lf.algodict, lf)
-                return
-            else:
-                print ('error: could not load labelfile at "{loc}"'
-                       .format(loc=lf.file_location))
-                inp = raw_input('Do you want to create it? Y/n ')
-
-                if inp == '' or inp[0].lower() == 'y':
-                    if not lf.save():
-                        print ('error: could not save to "{loc}"\n'
-                               .format(loc=lf.file_location))
-                        return 1
-                else:
-                    return 1
+                self.usage()
+            return
+        elif args[0] == 'list':
+            print 'command n/a yet'
+            return
+        elif args[0] == 'settings':
+            print 'command n/a yet'
+            return
+        elif args[0] == 'version':
+            print(self.versionString())
+            return
 
 
 class DispassLabel(object):
