@@ -47,20 +47,20 @@ class CommandBase(object):
     '''String. Optional extra usage information'''
 
     def __init__(self, settings, argv):
-        self.argv = argv
         self.error = None
-        self.longopts = []
         self.settings = settings
-        self.shortopts = ''
         self.usage = ''
+
+        longopts = []
+        shortopts = ''
 
         # Create usage information
         opthelp = ''
         self.optionList = OrderedDict(sorted(self.optionList.items()))
         for flag, val in self.optionList.iteritems():
-            self.longopts.append(flag)
+            longopts.append(flag)
             if val[0]:
-                self.shortopts += val[0]
+                shortopts += val[0]
                 opthelp += ('-{short}, --{flag:15} {desc}\n'
                             .format(short=stripargstring(val[0]),
                                     flag=stripargstring(flag), desc=val[1]))
@@ -78,7 +78,6 @@ class CommandBase(object):
 
         # Parse arguments and options
         try:
-            self.opts, self.args = getopt.getopt(self.argv, self.shortopts,
-                                                 self.longopts)
+            self.opts, self.args = getopt.getopt(argv, shortopts, longopts)
         except getopt.GetoptError, err:
             self.error = err
