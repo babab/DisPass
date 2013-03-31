@@ -12,42 +12,33 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-from ..common import CommandBase
+from dispass.common import CommandBase
 
 
 class Command(CommandBase):
-    usagestr = 'usage: dispass add [-i] [-n] [-v] [<labelspec>]'
+    usagestr = ('usage: dispass add [-no] <labelspec>\n'
+                '       dispass add [-hio]')
     description = (
         'Add a new label to the labelfile and generate passphrase.\n'
         'The labelspec looks like this:\n\n'
         '    label[:size[:algorithm[:sequence_number]]]'
     )
     optionList = {
-        'dry-run':     ('n', 'do not actually add label to labelfile'),
         'help':        ('h', 'show this help information'),
         'interactive': ('i', 'add a new label interactively'),
-        'verbose':     ('v', 'verbose output'),
+        'dry-run':     ('n', 'do not actually add label to labelfile'),
+        'output':      ('o', 'generate and output passphrase for label'),
     }
 
     def run(self):
-        dryrun = False
-        interactive = False
-        verbose = False
-
-        for o, a in self.opts:
-            if o in ("-h", "--help"):
-                print self.usage
-                return
-            elif o in ("-n", "--dry-run"):
-                dryrun = True
-            elif o in ("-i", "--interactive"):
-                interactive = True
-            elif o in ("-v", "--verbose"):
-                verbose = True
-
-        if not self.args:
+        if self.flags['help']:
             print self.usage
             return
+
+        if not self.args:
+            if not self.flags['interactive']:
+                print self.usage
+                return
         else:
             labelspec = self.args[0]
             print labelspec

@@ -15,8 +15,8 @@
 import exceptions
 import importlib
 
-from ..common import CommandBase
-from ..dispass import Dispass, settings
+from dispass.common import CommandBase
+from dispass.dispass import Dispass, settings
 
 
 class Command(CommandBase):

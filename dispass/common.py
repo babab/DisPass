@@ -37,8 +37,12 @@ class CommandBase(object):
         optionList = {
             'help': ('h', 'show this help information'),
             'dry-run': ('n', 'only print output without actually running'),
+
+            # Append = and : to specify that the option requires an argument
             'file=': ('f:', 'use specified file'),
-            'debug': (None, 'show debug information'),
+
+            # Use an empty string to ommit short option
+            'debug': ('', 'show debug information'),
         }
 
     '''
@@ -48,17 +52,20 @@ class CommandBase(object):
 
     def __init__(self, settings, argv):
         self.error = None
+        self.flags = {}
         self.settings = settings
         self.usage = ''
 
         longopts = []
         shortopts = ''
 
-        # Create usage information
+        # Create usage information and build dict of possible flags
         opthelp = ''
         self.optionList = OrderedDict(sorted(self.optionList.items()))
         for flag, val in self.optionList.iteritems():
             longopts.append(flag)
+            self.flags.update({stripargstring(flag): None})
+
             if val[0]:
                 shortopts += val[0]
                 opthelp += ('-{short}, --{flag:15} {desc}\n'
@@ -78,6 +85,25 @@ class CommandBase(object):
 
         # Parse arguments and options
         try:
-            self.opts, self.args = getopt.getopt(argv, shortopts, longopts)
+            opts, self.args = getopt.getopt(argv, shortopts, longopts)
         except getopt.GetoptError, err:
             self.error = err
+            return  # Stop when an invalid option is parsed
+
+        for opt in opts:
+            # Compare each option with optionList
+            for flag, val in self.optionList.iteritems():
+                if opt[0][1] != '-':
+                    # Short tags
+                    if opt[0][1] == stripargstring(val[0]):
+                        if ':' in val[0]:
+                            self.flags[stripargstring(flag)] = opt[1]
+                        else:
+                            self.flags[stripargstring(flag)] = True
+                else:
+                    # Long tags
+                    if opt[0][2:] == stripargstring(flag):
+                        if '=' in flag:
+                            self.flags[stripargstring(opt[0][2:])] = opt[1]
+                        else:
+                            self.flags[stripargstring(opt[0][2:])] = True

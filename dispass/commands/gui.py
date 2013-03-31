@@ -12,22 +12,23 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-from ..common import CommandBase
-from ..gui import GUI
+from dispass.common import CommandBase
 
 
 class Command(CommandBase):
-    usagestr = 'usage: dispass gui'
+    usagestr = 'usage: dispass gui [-h]'
     description = 'Start the graphical version of DisPass.'
     optionList = {'help': ('h', 'show this help information')}
 
     def run(self):
         '''Entry point and handler of command options and arguments'''
-        for o, a in self.opts:
-            if o in ("-h", "--help"):
-                print self.usage
-                return
+
+        if self.flags['help']:
+            print self.usage
+            return
+
         try:
+            from dispass.gui import GUI
             g = GUI(self.settings)
             g.mainloop()
         except ImportError:
@@ -40,4 +41,3 @@ class Command(CommandBase):
                    'python-tk\n'
                    'OpenBSD        \t\t# pkg_add -i python-tk')
             return 2
-        return
