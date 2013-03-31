@@ -30,20 +30,21 @@ class CommandBase(object):
     '''String. Small description of subcommand'''
 
     optionList = {}
-    '''Dictionary of options
+    '''Dictionary of options (as list of 2-tuples).
+    This will be transformed to an OrderedDict when initializing the object.
 
     Example::
 
-        optionList = {
-            'help': ('h', 'show this help information'),
-            'dry-run': ('n', 'only print output without actually running'),
+        optionList = (
+            ('help', ('h', 'show this help information')),
+            ('dry-run', ('n', 'only print output without actually running')),
 
             # Append = and : to specify that the option requires an argument
-            'file=': ('f:', 'use specified file'),
+            ('file=', ('f:', 'use specified file')),
 
             # Use an empty string to ommit short option
-            'debug': ('', 'show debug information'),
-        }
+            ('debug', ('', 'show debug information')),
+        )
 
     '''
 
@@ -53,6 +54,7 @@ class CommandBase(object):
     def __init__(self, settings, argv):
         self.error = None
         self.flags = {}
+        self.optionList = OrderedDict(self.optionList)
         self.settings = settings
         self.usage = ''
 
@@ -61,7 +63,6 @@ class CommandBase(object):
 
         # Create usage information and build dict of possible flags
         opthelp = ''
-        self.optionList = OrderedDict(sorted(self.optionList.items()))
         for flag, val in self.optionList.iteritems():
             longopts.append(flag)
             self.flags.update({stripargstring(flag): None})

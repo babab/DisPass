@@ -23,12 +23,12 @@ class Command(CommandBase):
         'The labelspec looks like this:\n\n'
         '    label[:size[:algorithm[:sequence_number]]]'
     )
-    optionList = {
-        'help':        ('h', 'show this help information'),
-        'interactive': ('i', 'add a new label interactively'),
-        'dry-run':     ('n', 'do not actually add label to labelfile'),
-        'output':      ('o', 'generate and output passphrase for label'),
-    }
+    optionList = (
+        ('help',        ('h', 'show this help information')),
+        ('interactive', ('i', 'add a new label interactively')),
+        ('dry-run',     ('n', 'do not actually add label to labelfile')),
+        ('output',      ('o', 'generate and output passphrase for label')),
+    )
 
     def run(self):
         if self.flags['help']:
