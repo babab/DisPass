@@ -53,10 +53,10 @@ class DispassCommand(CommandBase):
     usagestr = 'usage: dispass [--file=<labelfile>] <command> [<args>]'
     description = (
         'Commands:\n'
-        '   add          add a new label and generate passphrase\n'
+        '   add          add a new label to labelfile\n'
         '   gui          start the graphical version of DisPass\n'
         '   help         show this help information\n'
-        #'   list         list all labels in labelfile\n'
+        #'   list         print a formatted table of labelfile contents\n'
         #'   settings     show default values for length, algo etc.\n'
         '   version      show full version information'
     )

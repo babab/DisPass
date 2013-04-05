@@ -12,12 +12,14 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+from dispass import algos
 from dispass.common import CommandBase
+from dispass.dispass import settings
+from dispass.filehandler import Filehandler
 
 
 class Command(CommandBase):
-    usagestr = ('usage: dispass add [-no] <labelspec>\n'
-                '       dispass add [-hio]')
+    usagestr = 'usage: dispass add [options] <labelspec>'
     description = (
         'Add a new label to the labelfile and generate passphrase.\n'
         'The labelspec looks like this:\n\n'
@@ -25,21 +27,58 @@ class Command(CommandBase):
     )
     optionList = (
         ('help',        ('h', 'show this help information')),
-        ('interactive', ('i', 'add a new label interactively')),
+        #('interactive', ('i', 'add a new label interactively')),
+        #('generate',    ('g', 'generate and output passphrase for label')),
         ('dry-run',     ('n', 'do not actually add label to labelfile')),
-        ('output',      ('o', 'generate and output passphrase for label')),
+        ('silent',      ('s','do not print success message')),
     )
 
     def run(self):
-        if self.flags['help']:
+        if not self.args or self.flags['help']:
             print self.usage
             return
 
-        if not self.args:
-            if not self.flags['interactive']:
-                print self.usage
-                return
+        if self.parentFlags['file']:
+            lf = Filehandler(settings, file_location=self.parentFlags['file'])
         else:
-            labelspec = self.args[0]
-            print labelspec
-            return
+            lf = Filehandler(settings)
+
+        if not lf.file_found:
+            if not lf.promptForCreation():
+                return 1
+
+        labelspec = self.args[0].split(':')
+        params = len(labelspec)
+
+        length = 0
+        try:
+            length = params >= 2 and int(labelspec[1])
+        except ValueError:
+            pass
+
+        if not length:
+            length = settings.passphrase_length
+
+        algo = params >= 3 and labelspec[2] or settings.algorithm
+        if not algo in algos.algorithms:
+            algo = settings.algorithm
+
+        seqno = 0
+        if algo != 'dispass1':
+            try:
+                seqno = params >= 4 and int(labelspec[3])
+            except ValueError:
+                pass
+
+        if not seqno:
+            seqno = settings.sequence_number
+
+        if lf.add(labelname=labelspec[0], length=length, algo=algo,
+                  seqno=seqno):
+            if not self.flags['dry-run']:
+                lf.save()
+            if not self.flags['silent']:
+                print('Label saved')
+        else:
+            print('Label already exists in labelfile')
+            return 1
