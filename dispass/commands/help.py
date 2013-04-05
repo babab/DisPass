@@ -16,7 +16,7 @@ import exceptions
 import importlib
 
 from dispass.common import CommandBase
-from dispass.dispass import Dispass, settings
+from dispass.dispass import DispassCommand, settings
 
 
 class Command(CommandBase):
@@ -24,10 +24,8 @@ class Command(CommandBase):
     description = 'Show help information'
 
     def run(self):
-        main = Dispass()
-
         if not self.args:
-            main.usage()
+            print(DispassCommand(settings, []).usage)
             return
         else:
             try:
