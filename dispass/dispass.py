@@ -56,7 +56,7 @@ class DispassCommand(CommandBase):
         '   add          add a new label to labelfile\n'
         '   gui          start the graphical version of DisPass\n'
         '   help         show this help information\n'
-        #'   list         print a formatted table of labelfile contents\n'
+        '   list         print a formatted table of labelfile contents\n'
         #'   settings     show default values for length, algo etc.\n'
         '   version      show full version information'
     )
