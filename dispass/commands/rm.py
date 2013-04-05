@@ -18,7 +18,7 @@ from dispass.filehandler import Filehandler
 
 
 class Command(CommandBase):
-    usagestr = 'usage: dispass rm <labelname>'
+    usagestr = 'usage: dispass rm [options] <labelname>'
     description = 'Remove label from labelfile'
     optionList = (
         ('help',        ('h', 'show this help information')),

@@ -18,7 +18,7 @@ from dispass.filehandler import Filehandler
 
 
 class Command(CommandBase):
-    usagestr = 'usage: dispass list'
+    usagestr = 'usage: dispass list [-h] [--script]'
     description = (
         'Print a formatted table of labelfile contents\n\n'
 
