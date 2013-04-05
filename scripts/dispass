@@ -18,11 +18,19 @@
 import sys
 import exceptions
 
-from dispass.dispass import Dispass
+from dispass.dispass import DispassCommand, settings
+
+def run(argv):
+    cmd = DispassCommand(settings=settings, argv=argv)
+    if cmd.error:
+        print('dispass: {error}'.format(error=cmd.error))
+        return 1
+    else:
+        return cmd.run()
 
 if __name__ == '__main__':
     try:
-        sys.exit(Dispass().main(sys.argv))
+        sys.exit(run(sys.argv[1:]))
     except exceptions.KeyboardInterrupt:
         print
         print 'Ok, bye'

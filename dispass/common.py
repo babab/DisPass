@@ -82,7 +82,7 @@ class CommandBase(object):
         if self.optionList:
             self.usage += '\n\nOptions:\n{opts}'.format(opts=opthelp)
         if self.usageTextExtra:
-            self.usage += '\n\n{help}'.format(help=self.usageTextExtra)
+            self.usage += '\n{help}'.format(help=self.usageTextExtra)
 
         # Parse arguments and options
         try:

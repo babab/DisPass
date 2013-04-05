@@ -22,10 +22,11 @@ __version__ = '0.3.0-dev'
 versionStr = 'DisPass ' + __version__
 
 import exceptions
-import getopt
 import importlib
 import os
 import sys
+
+from common import CommandBase
 
 def verboseVersionInfo():
     return('{dispass} {fullversion}\n\n'
@@ -48,62 +49,49 @@ class Settings(object):
 settings = Settings()
 
 
-class Dispass(object):
-    '''Command handler for ``dispass``'''
+class DispassCommand(CommandBase):
+    usagestr = 'usage: dispass [--file=<labelfile>] <command> [<args>]'
+    description = (
+        'Commands:\n'
+        '   add          add a new label and generate passphrase\n'
+        '   gui          start the graphical version of DisPass\n'
+        '   help         show this help information\n'
+        #'   list         list all labels in labelfile\n'
+        #'   settings     show default values for length, algo etc.\n'
+        '   version      show full version information'
+    )
+    optionList = (
+        ('file=',       ('f:', 'override labelfile')),
+        ('help',        ('h', 'show this help information')),
+        ('version',      ('V', 'show full version information')),
+    )
+    usageTextExtra = (
+        "See 'dispass help <command>' for more information on a "
+        "specific command."
+    )
 
-    def usage(self):
-        '''Print help / usage information'''
-        print('usage: dispass [--file=<labelfile>] <command> [<args>]')
-        print
-        print('Commands:')
-        print('   add          add a new label and generate passphrase')
-        print('   gui          start the graphical version of DisPass')
-        print('   help         show this help information')
-        print('   list         list all labels in labelfile')
-        print('   settings     show default values for length, algo etc.')
-        print('   version      show full version information')
-        print
-        print("See 'dispass help <command>' for more information on a "
-              "specific command.")
+    def run(self):
+        if self.flags['help']:
+            print(self.usage)
+            return
+        elif self.flags['version']:
+            print(verboseVersionInfo())
+            return
 
-    def main(self, argv):
-        '''Entry point and handler of command options and arguments
+        if self.flags['file']:
+            print('using labelfile: {0}\n'.format(self.flags['file']))
 
-        :Parameters:
-            - `argv`: List of command arguments
-        '''
-
-        try:
-            opts, arguments = getopt.getopt(argv[1:], "f:hV?",
-                                            ['file', "help", "version"])
-        except getopt.GetoptError, err:
-            print('dispass: {error}' .format(error=str(err)))
-            return 1
-
-        if arguments:
-            args = arguments
-        else:
-            args = False
-
-        for o, a in opts:
-            if o in ("-h", "-?", "--help"):
-                return self.usage()
-            elif o in ("-f", "--file"):
-                pass
-            elif o in ("-V", "--version"):
-                print(verboseVersionInfo())
-                return
-
-        if not args:
-            self.usage()
+        if not self.args:
+            print(self.usage)
             return 2
         else:
             try:
-                mod = importlib.import_module('dispass.commands.' + args[0])
-                cmd = mod.Command(settings=settings, argv=args[1:])
+                mod = importlib.import_module('dispass.commands.'
+                                              + self.args[0])
+                cmd = mod.Command(settings=settings, argv=self.args[1:])
             except ImportError:
                 print('error: command {cmd} does not exist'
-                      .format(cmd=args[0]))
+                      .format(cmd=self.args[0]))
                 return 1
             except exceptions.KeyboardInterrupt:
                 print('\nOk, bye')
@@ -111,7 +99,7 @@ class Dispass(object):
 
             if cmd.error:
                 print('dispass {cmd}: {error}'
-                      .format(cmd=args[0], error=cmd.error))
+                      .format(cmd=self.args[0], error=cmd.error))
                 return 1
             else:
                 return cmd.run()
