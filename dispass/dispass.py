@@ -25,7 +25,13 @@ import exceptions
 import getopt
 import importlib
 import os
+import sys
 
+def verboseVersionInfo():
+    return('{dispass} {fullversion}\n\n'
+           'Python {python}\nPlatform is {os}'
+           .format(dispass=versionStr, fullversion=__version_info__,
+                   python=sys.version.replace('\n', ''), os=os.name))
 
 class Settings(object):
     '''Global settings'''
@@ -60,11 +66,6 @@ class Dispass(object):
         print("See 'dispass help <command>' for more information on a "
               "specific command.")
 
-    def versionString(self):
-        return('{dispass} - {version} running on {os}'
-               .format(dispass=versionStr, version=__version_info__,
-                       os=os.name))
-
     def main(self, argv):
         '''Entry point and handler of command options and arguments
 
@@ -92,7 +93,7 @@ class Dispass(object):
             elif o in ("-f", "--file"):
                 pass
             elif o in ("-V", "--version"):
-                print(self.versionString())
+                print(verboseVersionInfo())
                 return
 
         if not args:
