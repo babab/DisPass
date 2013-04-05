@@ -17,6 +17,14 @@ import getopt
 
 
 def stripargstring(string):
+    '''Strip 'argument specifiers' from a string.
+
+    :Parameters:
+        - `string`: String in- or exluding '=' and/or ':'`
+
+    :Return:
+        - String without '=' and ':' chars
+    '''
     return string.replace(':', '').replace('=', '')
 
 
@@ -52,12 +60,31 @@ class CommandBase(object):
     '''String. Optional extra usage information'''
 
     def __init__(self, settings, argv):
+        '''Initialize (sub)command object
+
+        :Parameters:
+            - `settings`: Instance of `dispass.dispass.Settings`
+            - `argv`: List of arguments. E.g. `sys.argv[1:]`
+        '''
+
+        # Instance vars
         self.error = None
+        '''Thrown by GetoptError when parsing illegal arguments.'''
+
         self.flags = {}
+        '''Dict of parsed options and corresponding arguments, if any.'''
+
+        self.usage = ''
+        '''String with usage information
+
+        The string is compiled using the values found for
+        `usagestr`, `description`, `optionList` and `usageTextExtra`.
+        '''
+
         self.optionList = OrderedDict(self.optionList)
         self.settings = settings
-        self.usage = ''
 
+        # Local vars
         longopts = []
         shortopts = ''
 
