@@ -87,8 +87,6 @@ class Dispass(object):
 
         for o, a in opts:
             if o in ("-h", "-?", "--help"):
-                if args:
-                    return self.usage(args[0])
                 return self.usage()
             elif o in ("-f", "--file"):
                 pass
