@@ -1,4 +1,4 @@
-.TH "DISPASS" "1" "January 29, 2013" "0.1" "DisPass"
+.TH "DISPASS" "1" "April 05, 2013" "0.2" "DisPass"
 .SH NAME
 dispass \- DisPass Documentation
 .
@@ -40,7 +40,7 @@ dispass [\-co] [\-l <length>] [\-a <algo>] [\-n <sequence\-number>] [\-\-script]
 gdispass
 .SS dispass\-label
 .sp
-dispass\-label [\-hlV] [\-f <labelfile>] [\-\-script]
+dispass\-label [\-hlV] [\-f <labelfile>] [\-a|\-\-add <labelspec>] [\-r|\-\-remove <labelname] [\-\-script]
 .SH SUMMARY
 .sp
 DisPass is a passphrase generator for GNU/Linux, *BSD, MacOS X and Windows.
@@ -253,6 +253,14 @@ show full version information and exit
 .TP
 .BI \-f \ <labelfile>, \ \-\-file\fB= <labelfile>
 set location of labelfile
+.TP
+.BI \-a,  \-\-add \ <labelspec>
+add a new label to the labelfile, the
+labelspec looks like this:
+label[:size[:algorithm[:sequence_number]]]
+.TP
+.BI \-r,  \-\-remove \ <labelname>
+remove a label from the labelfile
 .TP
 .B \-\-script
 optimize input/output for \(aqwrapping\(aq

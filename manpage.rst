@@ -16,7 +16,7 @@ gdispass
 dispass-label
 -------------
 
-dispass-label [-hlV] [-f <labelfile>] [--script]
+dispass-label [-hlV] [-f <labelfile>] [-a|--add <labelspec>] [-r|--remove <labelname] [--script]
 
 
 SUMMARY
@@ -163,6 +163,10 @@ dispass-label
                                     labelfile
 -V, --version                       show full version information and exit
 -f <labelfile>, --file=<labelfile>  set location of labelfile
+-a, --add <labelspec>               add a new label to the labelfile, the
+                                    labelspec looks like this:
+                                    label[:size[:algorithm[:sequence_number]]]
+-r, --remove <labelname>            remove a label from the labelfile
 --script                            optimize input/output for 'wrapping'
                                     dispass-label
 
