@@ -59,6 +59,7 @@ class CommandBase(object):
     usageTextExtra = ''
     '''String. Optional extra usage information'''
 
+
     def __init__(self, settings, argv):
         '''Initialize (sub)command object
 
@@ -73,6 +74,9 @@ class CommandBase(object):
 
         self.flags = {}
         '''Dict of parsed options and corresponding arguments, if any.'''
+
+        self.parentFlags = {}
+        '''Dict of registered `flags` of parent Command object.'''
 
         self.usage = ''
         '''String with usage information
@@ -135,3 +139,13 @@ class CommandBase(object):
                             self.flags[stripargstring(opt[0][2:])] = opt[1]
                         else:
                             self.flags[stripargstring(opt[0][2:])] = True
+
+    def registerParentFlag(self, optionName, value):
+        '''Register a flag of a parent command
+
+        :Parameters:
+            - `optionName`: String. Name of option
+            - `value`: Mixed. Value of parsed flag`
+        '''
+        self.parentFlags.update({optionName: value})
+        return self

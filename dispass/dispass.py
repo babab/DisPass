@@ -78,9 +78,6 @@ class DispassCommand(CommandBase):
             print(verboseVersionInfo())
             return
 
-        if self.flags['file']:
-            print('using labelfile: {0}\n'.format(self.flags['file']))
-
         if not self.args:
             print(self.usage)
             return 2
@@ -89,6 +86,7 @@ class DispassCommand(CommandBase):
                 mod = importlib.import_module('dispass.commands.'
                                               + self.args[0])
                 cmd = mod.Command(settings=settings, argv=self.args[1:])
+                cmd.registerParentFlag('file', self.flags['file'])
             except ImportError:
                 print('error: command {cmd} does not exist'
                       .format(cmd=self.args[0]))
