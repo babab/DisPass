@@ -57,6 +57,7 @@ class DispassCommand(CommandBase):
         '   gui          start the graphical version of DisPass\n'
         '   help         show this help information\n'
         '   list         print a formatted table of labelfile contents\n'
+        '   rm           remove label from labelfile\n'
         #'   settings     show default values for length, algo etc.\n'
         '   version      show full version information'
     )
