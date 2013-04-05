@@ -1,7 +1,7 @@
 MAN_PATH	= /usr/share/man/man1
-PYTHON_EXEC	= python
-PIP_EXEC	= pip
-VERSION		= 0.1a8
+PYTHON_EXEC	= python2
+PIP_EXEC	= pip2
+VERSION		= 0.2.0
 
 make:
 	@echo "make install   Build and then install via pip and move manpage"
