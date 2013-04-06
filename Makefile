@@ -11,7 +11,7 @@ make:
 	@echo "make doc       Build html documentation with Sphinx"
 	@echo "make man       Build manpage with Sphinx"
 	@echo "make dist      Build python source archive file"
-	@echo "make clean     Clean program and doc build files"
+	@echo "make clean     Clean program build files"
 
 rm_pyc:
 	find . -name "*.pyc" | xargs /bin/rm -f
@@ -47,8 +47,8 @@ install: dist
 uninstall: clean
 	$(PIP_EXEC) uninstall dispass
 
-clean: doc_clean
+clean:
 	rm -f MANIFEST dispass.1.gz
-	rm -rf dist doc
+	rm -rf dist
 
 # vim: set noet ts=8 sw=8 sts=8:
