@@ -28,11 +28,13 @@ import sys
 
 from common import CommandBase
 
+
 def verboseVersionInfo():
     return('{dispass} {fullversion}\n\n'
            'Python {python}\nPlatform is {os}'
            .format(dispass=versionStr, fullversion=__version_info__,
                    python=sys.version.replace('\n', ''), os=os.name))
+
 
 class Settings(object):
     '''Global settings'''
@@ -64,7 +66,7 @@ class DispassCommand(CommandBase):
     optionList = (
         ('file=',       ('f:', 'override labelfile')),
         ('help',        ('h', 'show this help information')),
-        ('version',      ('V', 'show full version information')),
+        ('version',     ('V', 'show full version information')),
     )
     usageTextExtra = (
         "See 'dispass help <command>' for more information on a "
@@ -72,6 +74,13 @@ class DispassCommand(CommandBase):
     )
 
     def run(self):
+        import commands.add
+        import commands.gui
+        import commands.help
+        import commands.list
+        import commands.rm
+        import commands.version
+
         if self.flags['help']:
             print(self.usage)
             return
@@ -82,12 +91,24 @@ class DispassCommand(CommandBase):
         if not self.args:
             print(self.usage)
             return 2
+        elif self.args[0][0] == 'a':
+            cmd = commands.add.Command(settings=settings, argv=self.args[1:])
+        elif self.args[0][0] == 'g':
+            cmd = commands.gui.Command(settings=settings, argv=self.args[1:])
+        elif self.args[0][0] == 'h':
+            cmd = commands.help.Command(settings=settings, argv=self.args[1:])
+        elif self.args[0][0] == 'l':
+            cmd = commands.list.Command(settings=settings, argv=self.args[1:])
+        elif self.args[0][0] == 'r':
+            cmd = commands.rm.Command(settings=settings, argv=self.args[1:])
+        elif self.args[0][0] == 'v':
+            cmd = commands.version.Command(settings=settings,
+                                           argv=self.args[1:])
         else:
             try:
                 mod = importlib.import_module('dispass.commands.'
                                               + self.args[0])
                 cmd = mod.Command(settings=settings, argv=self.args[1:])
-                cmd.registerParentFlag('file', self.flags['file'])
             except ImportError:
                 print('error: command {cmd} does not exist'
                       .format(cmd=self.args[0]))
@@ -96,9 +117,11 @@ class DispassCommand(CommandBase):
                 print('\nOk, bye')
                 return
 
-            if cmd.error:
-                print('dispass {cmd}: {error}'
-                      .format(cmd=self.args[0], error=cmd.error))
-                return 1
-            else:
-                return cmd.run()
+        cmd.registerParentFlag('file', self.flags['file'])
+
+        if cmd.error:
+            print('dispass {cmd}: {error}'
+                  .format(cmd=self.args[0], error=cmd.error))
+            return 1
+        else:
+            return cmd.run()
