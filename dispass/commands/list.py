@@ -33,8 +33,8 @@ class Command(CommandBase):
         'Column 72-74: sequence number   3 chars wide'
     )
     optionList = (
-        ('help',        ('h', 'show this help information')),
-        ('script',      ('','output in fixed columns')),
+        ('help',        ('h', False, 'show this help information')),
+        ('script',      ('', False, 'output in fixed columns')),
     )
 
     def run(self):

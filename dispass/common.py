@@ -16,18 +16,6 @@ from collections import OrderedDict
 import getopt
 
 
-def stripargstring(string):
-    '''Strip 'argument specifiers' from a string.
-
-    :Parameters:
-        - `string`: String in- or exluding '=' and/or ':'`
-
-    :Return:
-        - String without '=' and ':' chars
-    '''
-    return string.replace(':', '').replace('=', '')
-
-
 class CommandBase(object):
     '''Base class for (sub)commands'''
 
@@ -44,21 +32,22 @@ class CommandBase(object):
     Example::
 
         optionList = (
-            ('help', ('h', 'show this help information')),
-            ('dry-run', ('n', 'only print output without actually running')),
+            ('help', ('h', False, 'show this help information')),
+            ('dry-run', ('n', False,
+                         'only print output without actually running')),
 
-            # Append = and : to specify that the option requires an argument
-            ('file=', ('f:', 'use specified file')),
+            # To specify that an option requires an argument
+            # just add a string that describes it
+            ('file=', ('f:', '<filename>', 'use specified file')),
 
             # Use an empty string to ommit short option
-            ('debug', ('', 'show debug information')),
+            ('debug', ('', False, 'show debug information')),
         )
 
     '''
 
     usageTextExtra = ''
     '''String. Optional extra usage information'''
-
 
     def __init__(self, settings, argv):
         '''Initialize (sub)command object
@@ -95,17 +84,25 @@ class CommandBase(object):
         # Create usage information and build dict of possible flags
         opthelp = ''
         for flag, val in self.optionList.iteritems():
-            longopts.append(flag)
-            self.flags.update({stripargstring(flag): None})
+
+            spec = flag + '=' if val[1] else flag
+            longopts.append(spec)
+            self.flags.update({flag: None})
+
+            if val[1]:
+                flagstring = ('{flag}={argument}'
+                              .format(flag=flag, argument=val[1]))
+            else:
+                flagstring = flag
 
             if val[0]:
-                shortopts += val[0]
-                opthelp += ('-{short}, --{flag:15} {desc}\n'
-                            .format(short=stripargstring(val[0]),
-                                    flag=stripargstring(flag), desc=val[1]))
+                shortopts += val[0] + ':' if val[1] else val[0]
+                opthelp += ('-{short}, --{flag:17} {desc}\n'
+                            .format(short=val[0], flag=flagstring,
+                                    desc=val[2]))
             else:
-                opthelp += ('--{flag:19} {desc}\n'
-                            .format(flag=stripargstring(flag), desc=val[1]))
+                opthelp += ('--{flag:21} {desc}\n'
+                            .format(flag=flag, desc=val[2]))
 
         self.usage = self.usagestr
         if self.description:
@@ -127,18 +124,18 @@ class CommandBase(object):
             for flag, val in self.optionList.iteritems():
                 if opt[0][1] != '-':
                     # Short tags
-                    if opt[0][1] == stripargstring(val[0]):
-                        if ':' in val[0]:
-                            self.flags[stripargstring(flag)] = opt[1]
+                    if opt[0][1] == val[0]:
+                        if val[1]:
+                            self.flags[flag] = opt[1]
                         else:
-                            self.flags[stripargstring(flag)] = True
+                            self.flags[flag] = True
                 else:
                     # Long tags
-                    if opt[0][2:] == stripargstring(flag):
-                        if '=' in flag:
-                            self.flags[stripargstring(opt[0][2:])] = opt[1]
+                    if opt[0][2:] == flag:
+                        if val[1]:
+                            self.flags[flag] = opt[1]
                         else:
-                            self.flags[stripargstring(opt[0][2:])] = True
+                            self.flags[flag] = True
 
     def registerParentFlag(self, optionName, value):
         '''Register a flag of a parent command

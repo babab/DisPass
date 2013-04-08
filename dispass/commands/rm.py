@@ -21,9 +21,10 @@ class Command(CommandBase):
     usagestr = 'usage: dispass rm [options] <labelname>'
     description = 'Remove label from labelfile'
     optionList = (
-        ('help',        ('h', 'show this help information')),
-        ('dry-run',     ('n', 'do not actually remove label from labelfile')),
-        ('silent',      ('s','do not print success message')),
+        ('help',    ('h', False, 'show this help information')),
+        ('dry-run', ('n', False,
+                     'do not actually remove label from labelfile')),
+        ('silent',  ('s', False, 'do not print success message')),
     )
 
     def run(self):

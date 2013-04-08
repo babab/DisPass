@@ -52,7 +52,7 @@ settings = Settings()
 
 
 class DispassCommand(CommandBase):
-    usagestr = 'usage: dispass [--file=<labelfile>] <command> [<args>]'
+    usagestr = 'usage: dispass [options] <command> [<args>]'
     description = (
         'Commands:\n'
         '   add          add a new label to labelfile\n'
@@ -64,9 +64,9 @@ class DispassCommand(CommandBase):
         '   version      show full version information'
     )
     optionList = (
-        ('file=',       ('f:', 'override labelfile')),
-        ('help',        ('h', 'show this help information')),
-        ('version',     ('V', 'show full version information')),
+        ('file',        ('f', '<labelfile>', 'override labelfile')),
+        ('help',        ('h', False, 'show this help information')),
+        ('version',     ('V', False, 'show full version information')),
     )
     usageTextExtra = (
         "See 'dispass help <command>' for more information on a "

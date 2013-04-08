@@ -18,7 +18,7 @@ from dispass.common import CommandBase
 class Command(CommandBase):
     usagestr = 'usage: dispass gui [-h]'
     description = 'Start the graphical version of DisPass.'
-    optionList = (('help', ('h', 'show this help information')),)
+    optionList = (('help', ('h', False, 'show this help information')),)
 
     def run(self):
         '''Entry point and handler of command options and arguments'''

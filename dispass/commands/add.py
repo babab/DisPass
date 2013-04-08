@@ -1,3 +1,5 @@
+'''add a new label to labelfile'''
+
 # Copyright (c) 2011, 2012, 2013  Benjamin Althues <benjamin@babab.nl>
 #
 # Permission to use, copy, modify, and distribute this software for any
@@ -26,11 +28,9 @@ class Command(CommandBase):
         '    label[:size[:algorithm[:sequence_number]]]'
     )
     optionList = (
-        ('help',        ('h', 'show this help information')),
-        #('interactive', ('i', 'add a new label interactively')),
-        #('generate',    ('g', 'generate and output passphrase for label')),
-        ('dry-run',     ('n', 'do not actually add label to labelfile')),
-        ('silent',      ('s','do not print success message')),
+        ('help',    ('h', False, 'show this help information')),
+        ('dry-run', ('n', False, 'do not actually add label to labelfile')),
+        ('silent',  ('s', False, 'do not print success message')),
     )
 
     def run(self):
