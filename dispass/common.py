@@ -38,7 +38,7 @@ class CommandBase(object):
 
             # To specify that an option requires an argument
             # just add a string that describes it
-            ('file=', ('f:', '<filename>', 'use specified file')),
+            ('file', ('f', '<filename>', 'use specified file')),
 
             # Use an empty string to ommit short option
             ('debug', ('', False, 'show debug information')),
@@ -84,7 +84,6 @@ class CommandBase(object):
         # Create usage information and build dict of possible flags
         opthelp = ''
         for flag, val in self.optionList.iteritems():
-
             spec = flag + '=' if val[1] else flag
             longopts.append(spec)
             self.flags.update({flag: None})
