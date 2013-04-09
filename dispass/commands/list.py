@@ -48,7 +48,8 @@ class Command(CommandBase):
             lf = Filehandler(settings)
 
         if not lf.file_found:
-            if not lf.promptForCreation():
-                return 1
+            print('error: could not load labelfile at "{loc}"'
+                  .format(loc=lf.file_location))
+            return 1
 
         lf.printLabels(self.flags['script'])
