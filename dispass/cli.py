@@ -33,18 +33,15 @@ class CLI:
     scriptableIO = False
     '''Boolean. Optimize input/output for wrapping dispass'''
 
-    passphrases = []
-    '''List of 2-tuples of labels and generated passphrases'''
+    passphrases = {}
+    '''Dict of labels and generated passphrases'''
 
-    def __init__(self, settings):
+    def __init__(self, filehandler):
         '''Set `useCurses` to True or False.
 
         Depending on the availability of curses
         '''
-        self.algorithm = settings.algorithm
-        self.passphraseLength = settings.passphrase_length
-        self.seqno = settings.sequence_number
-        self.settings = settings
+        self.filehandler = filehandler
         self.useCurses = hasCurses
 
     def setCurses(self, useCurses):
@@ -84,65 +81,35 @@ class CLI:
 
         return inp
 
-    def interactive(self, labels, filehandler):
-        '''Start interactive prompt, generating and showing the passprase(s)
+    def generate(self, password, (label, length, algo, seqno)):
+        '''Generate passphrase and store result in `passphrases`
 
         :Parameters:
-            - `labels`: List or dict of labels to use for passprase generation
+            - `password`: Password to use for passprase generation
+
+            A tuple with 4 values:
+            - `label`: Label to use for passprase generation
+            - `length`: Length to use for passprase generation
+            - `algo`: Algorithm to use for passprase generation
+            - `seqno`: Sequence number to use for passprase generation
         '''
 
-        password = self.passwordPrompt()
         algo_dispass1 = algos.Dispass1()
         algo_dispass2 = algos.Dispass2()
-        fh = filehandler
-        added = False
-        saved = False
 
-        if isinstance(labels, list):
-            labelmap = []
-            for i in labels:
-                labelmap.append((i, (self.passphraseLength, self.seqno)))
-                if (self.createLabel and
-                    fh.add(labelname=i, length=self.passphraseLength,
-                           algo=self.algorithm, seqno=self.seqno)):
-                    added = True
-            if added and fh.save():
-                saved = True
+        if algo == 'dispass1':
+            self.passphrases.update({label: algo_dispass1.digest(
+                label, password, length, seqno
+            )})
+        elif algo == 'dispass2':
+            self.passphrases.update({label: algo_dispass2.digest(
+                label, password, length, seqno
+            )})
+        print self.passphrases
 
-            if self.algorithm == 'dispass1':
-                self.passphrases = algo_dispass1.digestPasswordDict(
-                    dict(labelmap), password
-                )
-            elif self.algorithm == 'dispass2':
-                self.passphrases = algo_dispass2.digestPasswordDict(
-                    dict(labelmap), password
-                )
-
-            divlen = len(max(labels, key=len)) + 2
-            self.passphrases = dict(self.passphrases)
-
-        elif isinstance(labels, dict):
-            for algo, labels in labels.iteritems():
-                if algo == 'dispass1':
-                    self.passphrases += algo_dispass1.digestPasswordDict(
-                        labels, password
-                    )
-                elif algo == 'dispass2':
-                    self.passphrases += algo_dispass2.digestPasswordDict(
-                        labels, password
-                    )
-
-            label_list = []
-            self.passphrases = dict(self.passphrases)
-            for label, length in self.passphrases.iteritems():
-                label_list.append(label)
-            if label_list:
-                divlen = len(max(label_list, key=len)) + 2
-            else:
-                print('Nothing to generate, you need to add some labels')
-                return
-
-        del password
+    def output(self):
+        '''Output and flush passprase(s)'''
+        divlen = len(max(self.passphrases.keys(), key=len)) + 2
 
         if self.useCurses:
             stdscr = curses.initscr()
@@ -177,10 +144,3 @@ class CLI:
                 else:
                     print "{:{fill}} {}".format(label, passphrase, fill=divlen)
         self.passphrases = {}
-
-        if saved:
-            print('Succesfully added label(s) to {loc}'
-                  .format(loc=fh.file_location))
-        if self.createLabel and not saved:
-            print('error: could not save to "{loc}"\n'
-                  .format(loc=fh.file_location))
