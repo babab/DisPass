@@ -56,6 +56,7 @@ class DispassCommand(CommandBase):
     description = (
         'Commands:\n'
         '   add          add a new label to labelfile\n'
+        '   generate     generate passphrases for one or more labels\n'
         '   gui          start the graphical version of DisPass\n'
         '   help         show this help information\n'
         '   list         print a formatted table of labelfile contents\n'
@@ -75,6 +76,7 @@ class DispassCommand(CommandBase):
 
     def run(self):
         import commands.add
+        import commands.generate
         import commands.gui
         import commands.help
         import commands.list
@@ -94,7 +96,12 @@ class DispassCommand(CommandBase):
         elif self.args[0][0] == 'a':
             cmd = commands.add.Command(settings=settings, argv=self.args[1:])
         elif self.args[0][0] == 'g':
-            cmd = commands.gui.Command(settings=settings, argv=self.args[1:])
+            if self.args[0][1] == 'e':
+                cmd = commands.generate.Command(settings=settings,
+                                                argv=self.args[1:])
+            elif self.args[0][1] == 'u':
+                cmd = commands.gui.Command(settings=settings,
+                                           argv=self.args[1:])
         elif self.args[0][0] == 'h':
             cmd = commands.help.Command(settings=settings, argv=self.args[1:])
         elif self.args[0][0] == 'l':
