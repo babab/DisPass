@@ -287,7 +287,13 @@ class Filehandler:
             print('+-{:{fill}}-+--------+----------+--------+'
                   .format('-' * divlen, fill=divlen))
 
-    def promptForCreation(self):
+    def promptForCreation(self, silent=False):
+        if silent:
+            if self.save():
+                return True
+            else:
+                return False
+
         print('error: could not load labelfile at "{loc}"'
               .format(loc=self.file_location))
         inp = raw_input('Do you want to create it? Y/n ')

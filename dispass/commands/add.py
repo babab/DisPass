@@ -44,7 +44,7 @@ class Command(CommandBase):
             lf = Filehandler(settings)
 
         if not lf.file_found:
-            if not lf.promptForCreation():
+            if not lf.promptForCreation(silent=self.flags['silent']):
                 return 1
 
         labelspec = self.args[0].split(':')
