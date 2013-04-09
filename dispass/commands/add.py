@@ -18,30 +18,37 @@ from dispass import algos
 from dispass.common import CommandBase
 from dispass.dispass import settings
 from dispass.filehandler import Filehandler
+from dispass.interactive_editor import InteractiveEditor
 
 
 class Command(CommandBase):
-    usagestr = 'usage: dispass add [options] <labelspec>'
+    usagestr = ('usage: dispass add [-n] [-s] <labelspec>\n'
+                '       dispass add [-i] [-h]')
     description = (
         'Add a new label to the labelfile and generate passphrase.\n'
         'The labelspec looks like this:\n\n'
         '    label[:size[:algorithm[:sequence_number]]]'
     )
     optionList = (
+        ('interactive', ('i', False, 'add label in an interactive manner')),
         ('help',    ('h', False, 'show this help information')),
         ('dry-run', ('n', False, 'do not actually add label to labelfile')),
         ('silent',  ('s', False, 'do not print success message')),
     )
 
     def run(self):
-        if not self.args or self.flags['help']:
-            print self.usage
-            return
-
         if self.parentFlags['file']:
             lf = Filehandler(settings, file_location=self.parentFlags['file'])
         else:
             lf = Filehandler(settings)
+
+        if self.flags['interactive']:
+            InteractiveEditor(self.settings, lf, interactive=False).add()
+            return 0
+
+        if not self.args or self.flags['help']:
+            print self.usage
+            return
 
         if not lf.file_found:
             if not lf.promptForCreation(silent=self.flags['silent']):

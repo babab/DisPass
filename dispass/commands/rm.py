@@ -15,12 +15,15 @@
 from dispass.common import CommandBase
 from dispass.dispass import settings
 from dispass.filehandler import Filehandler
+from dispass.interactive_editor import InteractiveEditor
 
 
 class Command(CommandBase):
-    usagestr = 'usage: dispass rm [options] <labelname>'
+    usagestr = ('usage: dispass rm [-n] [-s] <labelname>\n'
+                '       dispass rm [-i] [-h]')
     description = 'Remove label from labelfile'
     optionList = (
+        ('interactive', ('i', False, 'add label in an interactive manner')),
         ('help',    ('h', False, 'show this help information')),
         ('dry-run', ('n', False,
                      'do not actually remove label from labelfile')),
@@ -28,18 +31,22 @@ class Command(CommandBase):
     )
 
     def run(self):
-        if not self.args or self.flags['help']:
-            print self.usage
-            return
-
         if self.parentFlags['file']:
             lf = Filehandler(settings, file_location=self.parentFlags['file'])
         else:
             lf = Filehandler(settings)
 
         if not lf.file_found:
-            if not lf.promptForCreation():
+            if not lf.promptForCreation(silent=self.flags['silent']):
                 return 1
+
+        if self.flags['interactive']:
+            InteractiveEditor(self.settings, lf, interactive=False).remove()
+            return 0
+
+        if not self.args or self.flags['help']:
+            print self.usage
+            return 0
 
         if lf.remove(self.args[0]):
             if not self.flags['dry-run']:
