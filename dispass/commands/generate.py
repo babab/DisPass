@@ -58,7 +58,11 @@ class Command(CommandBase):
                 algo = self.flags['algo']
             override = True
         if self.flags['length']:
-            length = self.flags['length']
+            try:
+                length = int(self.flags['length'])
+            except ValueError:
+                print 'Error: length argument must be a number'
+                return 1
             override = True
         if self.flags['seqno']:
             seqno = self.flags['seqno']
