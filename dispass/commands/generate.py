@@ -14,6 +14,7 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+from dispass.algos import algorithms
 from dispass.cli import CLI
 from dispass.common import CommandBase
 from dispass.dispass import settings
@@ -21,11 +22,16 @@ from dispass.filehandler import Filehandler
 
 
 class Command(CommandBase):
-    usagestr = 'usage: dispass generate <label> [<label2>] [<label3>] [...]'
+    usagestr = (
+        'usage: dispass generate [options] <label> [<label2>] [<label3>] [...]'
+    )
     description = 'Generate passphrases for one or more labels'
     optionList = (
+        ('length',  ('l', '<length>', 'Length of passphrase')),
+        ('algo',    ('a', '<algorithm>', 'algorithm to use for generation')),
+        ('seqno',   ('s', '<seqno>', 'sequence number to use for generation')),
         ('help',    ('h', False, 'show this help information')),
-        ('silent',  ('s', False, 'do not show a prompt when errors occur')),
+        ('silent',  ('', False, 'do not show a prompt when errors occur')),
     )
 
     def run(self):
@@ -40,16 +46,36 @@ class Command(CommandBase):
 
         if not self.args or self.flags['help']:
             print self.usage
-            return
+            return 1
 
         algo = self.settings.algorithm
         length = self.settings.passphrase_length
         seqno = self.settings.sequence_number
 
+        override = False
+        if self.flags['algo']:
+            if self.flags['algo'] in algorithms:
+                algo = self.flags['algo']
+            override = True
+        if self.flags['length']:
+            length = self.flags['length']
+            override = True
+        if self.flags['seqno']:
+            seqno = self.flags['seqno']
+            override = True
+
         console = CLI(lf)
         password = console.passwordPrompt()
 
         for arg in self.args:
-            console.generate(password, (arg, length, algo, seqno))
+            labeltup = lf.labeltup(arg)
+            if labeltup and not override:
+                console.generate(password, labeltup)
+            else:
+                console.generate(password, (arg, length, algo, seqno))
         del password
-        console.output()
+        if not console.output():
+            print('Error: could not generate keys')
+            return 1
+        else:
+            return 0
