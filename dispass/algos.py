@@ -16,6 +16,16 @@ import base64
 import hashlib
 
 algorithms = ('dispass1', 'dispass2')
+'''A tuple of registrered algorithms, used for validation of user input'''
+
+
+def algoObject(algoname):
+    if algoname == 'dispass1':
+        return Dispass1()
+    elif algoname == 'dispass2':
+        return Dispass2()
+    else:
+        return False
 
 
 class Dispass1:

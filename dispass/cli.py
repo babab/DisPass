@@ -13,8 +13,8 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 import getpass
-import algos
 
+from algos import algoObject
 from dispass import versionStr
 
 try:
@@ -87,28 +87,24 @@ class CLI:
         :Parameters:
             - `password`: Password to use for passprase generation
 
-            A tuple with 4 values:
+            A tuple `labeltup` with 4 values:
             - `label`: Label to use for passprase generation
             - `length`: Length to use for passprase generation
             - `algo`: Algorithm to use for passprase generation
             - `seqno`: Sequence number to use for passprase generation
         '''
 
-        algo_dispass1 = algos.Dispass1()
-        algo_dispass2 = algos.Dispass2()
-
-        if algo == 'dispass1':
-            self.passphrases.update({label: algo_dispass1.digest(
+        hasher = algoObject(algo)
+        if hasher:
+            self.passphrases.update({label: hasher.digest(
                 label, password, length, seqno
             )})
-        elif algo == 'dispass2':
-            self.passphrases.update({label: algo_dispass2.digest(
-                label, password, length, seqno
-            )})
-        print self.passphrases
 
     def output(self):
         '''Output and flush passprase(s)'''
+        if not self.passphrases:
+            return False
+
         divlen = len(max(self.passphrases.keys(), key=len)) + 2
 
         if self.useCurses:
@@ -144,3 +140,4 @@ class CLI:
                 else:
                     print "{:{fill}} {}".format(label, passphrase, fill=divlen)
         self.passphrases = {}
+        return True
