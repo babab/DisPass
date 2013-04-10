@@ -236,6 +236,27 @@ class Filehandler:
 
         return {found_algo: {found.pop(): (length, seqno)}}
 
+    def labeltup(self, label):
+        '''Get labeltup for `label`
+
+        :Parameters:
+            - `label`: The labelname
+
+        :Returns:
+            A tuple `labeltup` with 4 values ``(label, length, algo, seqno))``:
+
+            - `label`: Label to use for passprase generation
+            - `length`: Length to use for passprase generation
+            - `algo`: Algorithm to use for passprase generation
+            - `seqno`: Sequence number to use for passprase generation
+
+        '''
+
+        for labeltup in self.labelfile:
+            if label == labeltup[0]:
+                return labeltup
+        return False
+
     def getLongestLabel(self):
         '''Return length of longest label name'''
         labelnames = []
