@@ -155,7 +155,7 @@ class Filehandler:
         for label in self.labelfile:
             labelnames.append(label[0])
         if labelnames:
-            self.longest_label = max(labelnames, key=len)
+            self.longest_label = len(max(labelnames, key=len))
 
     def save(self):
         '''Save `labelfile` to file'''
@@ -225,13 +225,15 @@ class Filehandler:
         If fixed columns is false an ascii table is printed with a variable
         width depending on the length of the longest label.
         '''
+
+        self.refresh()
         if fixed_columns:
             for label in self.labelfile:
                 print('{:50} {:3} {:15} {:3}'
                       .format(label[0][:50], str(label[1])[:3],
                               label[2][:15], str(label[3])))
         else:
-            divlen = self.getLongestLabel()
+            divlen = self.longest_label
             if not divlen:
                 return
             print('+-{spacer:{fill}}-+--------+----------+--------+\n'
