@@ -33,14 +33,11 @@ class Filehandler:
     file_location = None
     '''String of labelfile location, set on init'''
 
-    algodict = {}
-    '''Dictionary of {algorithm: (labelname, (length, seqno))}'''
-
     labelfile = []
     '''List of [(labelname, length, algorithm, seqno), ... ]'''
 
-    longest_labelname = None
-    '''String. The longest labelname of `labelfile`. Set on refresh()'''
+    longest_label = None
+    '''Int. Length of the longest labelname of `labelfile`. Set on refresh()'''
 
     def __init__(self, settings, file_location=None):
         '''Open file; if file is found: strip comments and parse()'''
@@ -92,8 +89,6 @@ class Filehandler:
             return
 
         labels = []
-        labels_dispass1 = []
-        labels_dispass2 = []
 
         for i in file_stripped:
             wordlist = []
@@ -120,15 +115,8 @@ class Filehandler:
                 elif 'seqno=' in arg:
                     seqno = arg.strip('seqno=')
 
-            if algo == 'dispass1':
-                labels_dispass1.append((labelname, (length, None)))
-            elif algo == 'dispass2':
-                labels_dispass2.append((labelname, (length, seqno)))
-
             self.labelfile.append((labelname, length, algo, seqno))
 
-        self.algodict = {'dispass1': dict(labels_dispass1),
-                         'dispass2': dict(labels_dispass2)}
         return self
 
     def add(self, labelname, length=None, algo=None, seqno=None):
@@ -167,7 +155,7 @@ class Filehandler:
         for label in self.labelfile:
             labelnames.append(label[0])
         if labelnames:
-            self.longest_labelname = max(labelnames, key=len)
+            self.longest_label = max(labelnames, key=len)
 
     def save(self):
         '''Save `labelfile` to file'''
@@ -187,7 +175,7 @@ class Filehandler:
 
             labelfile += ('{label:{divlen}}  {options}\n'
                           .format(label=label[0], options=options,
-                                  divlen=len(self.longest_labelname)))
+                                  divlen=len(self.longest_label)))
         try:
             self.filehandle = open(self.file_location, 'w')
             self.filehandle.write(labelfile)
@@ -196,45 +184,6 @@ class Filehandler:
             return False
 
         return True
-
-    def search(self, search_string):
-        '''Search for substring in labelfile
-
-        :Parameters:
-            - `search_string`: String to search for
-
-        :Returns: Boolean False, Integer or Dict
-
-        Searches all labels to find ``search_string`` as a substring of each
-        label.
-
-        If no matches are found, return False.
-        If multiple matches are found, return Integer of number of matches
-        If a unique match is found a dict of
-        ``{algo: {label, (passphrase_length, sequence_number)}}`` is returned.
-        '''
-        count = 0
-        found = []
-        found_algo = None
-        length = None
-        seqno = None
-
-        for algo, labels in self.algodict.iteritems():
-            for label, params in labels.iteritems():
-                if search_string in label:
-                    found_algo = algo
-                    length = params[0]
-                    seqno = params[1]
-                    found.append(label)
-                    count += 1
-
-        if not found:
-            return False
-
-        if count > 1:
-            return count
-
-        return {found_algo: {found.pop(): (length, seqno)}}
 
     def labeltup(self, label):
         '''Get labeltup for `label`
@@ -256,17 +205,6 @@ class Filehandler:
             if label == labeltup[0]:
                 return labeltup
         return False
-
-    def getLongestLabel(self):
-        '''Return length of longest label name'''
-        labelnames = []
-        for algo, labels in self.algodict.iteritems():
-            for label, params in labels.iteritems():
-                labelnames.append(label)
-        if labelnames:
-            return len(max(labelnames, key=len))
-        else:
-            return False
 
     def printLabels(self, fixed_columns=False):
         '''Print a formatted table of labelfile contents
