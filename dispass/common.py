@@ -80,6 +80,7 @@ class CommandBase(object):
         # Local vars
         longopts = []
         shortopts = ''
+        padding = 18
 
         # Create usage information and build dict of possible flags
         opthelp = ''
@@ -89,19 +90,31 @@ class CommandBase(object):
             self.flags.update({flag: None})
 
             if val[1]:
-                flagstring = ('{flag}={argument}'
-                              .format(flag=flag, argument=val[1]))
+                flagstring_long = ('{flag}={argument}'
+                                   .format(flag=flag, argument=val[1]))
+                if val[0]:
+                    flagstring_short = ('{flag} {argument}'
+                                        .format(flag=val[0], argument=val[1]))
             else:
-                flagstring = flag
+                flagstring_long = flag
+                flagstring_short = val[0]
 
             if val[0]:
                 shortopts += val[0] + ':' if val[1] else val[0]
-                opthelp += ('-{short}, --{flag:17} {desc}\n'
-                            .format(short=val[0], flag=flagstring,
+                optline = ('-{short}, --{flag}'
+                           .format(short=flagstring_short,
+                                   flag=flagstring_long))
+            else:
+                optline = '--{flag}'.format(flag=flagstring_long)
+
+            if len(optline) > padding:
+                opthelp += ('{options}\n{padding}  {desc}\n'
+                            .format(options=optline, padding=(' ' * padding),
                                     desc=val[2]))
             else:
-                opthelp += ('--{flag:21} {desc}\n'
-                            .format(flag=flag, desc=val[2]))
+                opthelp += ('{options:{padding}}  {desc}\n'
+                            .format(options=optline, padding=padding,
+                                    desc=val[2]))
 
         self.usage = self.usagestr
         if self.description:
