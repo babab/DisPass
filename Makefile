@@ -1,6 +1,9 @@
 MAN_PATH	= /usr/share/man/man1
-PYTHON_EXEC	= python2
-PIP_EXEC	= pip2
+PYTHON_EXEC	= python
+PIP_EXEC	= pip
+
+sinclude config.mk
+
 VERSION		= 0.2.0
 
 make:
