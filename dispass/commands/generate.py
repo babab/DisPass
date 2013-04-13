@@ -27,10 +27,12 @@ class Command(CommandBase):
     )
     description = 'Generate passphrases for one or more labels'
     optionList = (
-        ('length',  ('l', '<length>', 'Length of passphrase')),
+        ('help',    ('h', False, 'show this help information')),
+        ('length',  ('l', '<length>', 'length of passphrase')),
         ('algo',    ('a', '<algorithm>', 'algorithm to use for generation')),
         ('seqno',   ('s', '<seqno>', 'sequence number to use for generation')),
-        ('help',    ('h', False, 'show this help information')),
+        ('password', ('p', '<password>', 'password to use for generation')),
+        ('stdout',  ('o', False, 'output passphrase(s) directly to stdout')),
         ('silent',  ('', False, 'do not show a prompt when errors occur')),
     )
 
@@ -69,7 +71,11 @@ class Command(CommandBase):
             override = True
 
         console = CLI(lf)
-        password = console.passwordPrompt()
+
+        if self.flags['password']:
+            password = self.flags['password']
+        else:
+            password = console.passwordPrompt()
 
         for arg in self.args:
             labeltup = lf.labeltup(arg)
@@ -78,6 +84,11 @@ class Command(CommandBase):
             else:
                 console.generate(password, (arg, length, algo, seqno))
         del password
+
+        if self.flags['stdout']:
+            console.useCurses = False
+            console.scriptableIO = True
+
         if not console.output():
             print('Error: could not generate keys')
             return 1
