@@ -1,4 +1,4 @@
-'''Multi-platform console/gui passphrase generator'''
+'''Password manager for GNU/Linux, *BSD, MacOS X and Windows.'''
 
 # Copyright (c) 2011, 2012, 2013  Benjamin Althues <benjamin@babab.nl>
 #

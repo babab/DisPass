@@ -22,12 +22,14 @@ dispass-label [-hlV] [-f <labelfile>] [-a|--add <labelspec>] [-r|--remove <label
 SUMMARY
 ==============================================================================
 
-DisPass is a passphrase generator for GNU/Linux, \*BSD, MacOS X and Windows.
-It enables you to generate unique passphrases formed from a master password
-and a label, helping you get rid of the bad habit of using a single password
-for multiple websites. When using a different passphrase for every website,
-the chance of abuse of your password on other sites (when a website leaks it)
-is eliminated.
+DisPass is a password manager for GNU/Linux, \*BSD, MacOS X and Windows. It
+can be used as any traditional password manager, but has one key difference.
+DisPass does not store your passwords anywhere, so you can never lose them.
+
+It creates strong and unique passphrases formed from a master password and a
+label (and some optional parameters), helping you get rid of the bad habit of
+using a single password for multiple websites.
+
 Dispass is a console application, but also has a simple graphical interface.
 
 
