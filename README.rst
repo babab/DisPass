@@ -18,7 +18,7 @@ The cheeseshop (PyPI) project page
    http://pypi.python.org/pypi/DisPass/
 
 Github repository and Issue tracker
-   https://github.com/babab/DisPass/
+   https://github.com/dispass/dispass/
 
 Bitbucket repository
    https://bitbucket.org/babab/dispass/
@@ -75,7 +75,7 @@ Latest (development) version
 
 Clone git repo::
 
-   $ git clone git://github.com/babab/DisPass.git
+   $ git clone git://github.com/dispass/dispass.git
    $ cd dispass
 
 Then you can either (in order of my personal preference):
@@ -315,7 +315,7 @@ is added.
 Support / ideas / questions / suggestions
 ==============================================================================
 
-Issue tracker at Github: https://github.com/babab/DisPass/issues
+Issue tracker at Github: https://github.com/dispass/dispass/issues
 
 A mailing list is available: dispass@librelist.com
 

@@ -254,7 +254,7 @@ The cheeseshop (PyPI) project page
    http://pypi.python.org/pypi/DisPass/
 
 Github repository and Issue tracker
-   https://github.com/babab/DisPass/
+   https://github.com/dispass/dispass/
 
 IRC
    #dispass at Freenode (chat.freenode.net)
