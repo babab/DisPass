@@ -46,5 +46,5 @@ setup(
         'Topic :: Security :: Cryptography',
         'Topic :: Utilities',
     ],
-    scripts=['scripts/dispass', 'scripts/gdispass', 'scripts/dispass-label'],
+    scripts=['scripts/dispass', 'scripts/gdispass'],
     )

@@ -4,6 +4,5 @@ include LICENSE
 include Makefile
 include README.rst
 recursive-include scripts dispass
-recursive-include scripts dispass-label
 recursive-include scripts gdispass
 recursive-include skel labelfile
