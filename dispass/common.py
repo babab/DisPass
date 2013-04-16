@@ -79,8 +79,16 @@ class CommandBase(object):
 
         # Local vars
         longopts = []
+        padding = 0
         shortopts = ''
-        padding = 18
+
+        # Calculate padding needed for option arguments in usage info
+        for flag, val in self.optionList.iteritems():
+            optlen = len(flag) + 2
+            optlen += 4 if val[0] else 0
+            optlen += len(val[1]) + 1 if val[0] and val[1] else 0
+            optlen += len(val[1]) + 1 if val[1] else 0
+            padding = optlen if optlen > padding else padding
 
         # Create usage information and build dict of possible flags
         opthelp = ''
@@ -107,14 +115,8 @@ class CommandBase(object):
             else:
                 optline = '--{flag}'.format(flag=flagstring_long)
 
-            if len(optline) > padding:
-                opthelp += ('{options}\n{padding}  {desc}\n'
-                            .format(options=optline, padding=(' ' * padding),
-                                    desc=val[2]))
-            else:
-                opthelp += ('{options:{padding}}  {desc}\n'
-                            .format(options=optline, padding=padding,
-                                    desc=val[2]))
+            opthelp += ('{options:{padding}}  {desc}\n'
+                        .format(options=optline, padding=padding, desc=val[2]))
 
         self.usage = self.usagestr
         if self.description:
