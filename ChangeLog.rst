@@ -1,7 +1,7 @@
 ChangeLog
 ==============================================================================
 
-**Development version** currently in Github / Bitbucket
+**v0.2.0**  released April 16th, 2013
 
 .. warning::
 
