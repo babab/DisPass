@@ -85,18 +85,18 @@ Then you can either (in order of my personal preference):
 1. Install using the Makefile, this will perform all the steps in
    option 2 (below)::
 
-   # make install
+   $ sudo make install
 
 2. Install manually through pip, and install manpage::
 
    $ python setup.py sdist
-   # pip install dist/DisPass-<version>.tar.gz
-   # gzip -c dispass.1 > dispass.1.gz
-   # mv dispass.1.gz /usr/share/man/man1/
+   $ sudo pip install dist/DisPass-<version>.tar.gz
+   $ sudo gzip -c dispass.1 > dispass.1.gz
+   $ sudo mv dispass.1.gz /usr/share/man/man1/
 
 3. Install manually::
 
-   # python setup.py install
+   $ sudo python setup.py install
 
 
 Upgrade or uninstall with pip
@@ -104,12 +104,12 @@ Upgrade or uninstall with pip
 
 You can easily upgrade to newer versions using pip::
 
-   # pip install --upgrade dispass
+   $ sudo pip install --upgrade dispass
 
 If you have installed dispass using pip, you can easily uninstall at
 any moment by running::
 
-   # pip uninstall dispass
+   $ sudo pip uninstall dispass
 
 
 Using the *dispass* command line app
@@ -157,7 +157,7 @@ Using dispass to create one or more passphrases
 
 You can start using dispass for e.g. google.com like this::
 
-   $ dispass google.com
+   $ dispass -c google.com
 
 The passphrases created are 30 characters long by default, but some
 website's may not validate such a long passphrase or you might want to
@@ -176,8 +176,8 @@ passphrase on any computer/device that has DisPass at any given moment.
 You are encouraged to store your labels in a labelfile for convenience
 though.
 
-Labelfile location
-------------------
+Using a labelfile
+-----------------
 
 When dispass is run without arguments it will try to find a labelfile.
 The location of this file varies and depends on the platform type you use,

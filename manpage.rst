@@ -84,8 +84,8 @@ passphrase on any computer/device that has DisPass at any given moment.
 You are encouraged to store your labels in a labelfile for convenience
 though.
 
-Labelfile location
-------------------
+Using a labelfile
+-----------------
 
 When dispass is run without arguments it will try to find a labelfile.
 The location of this file varies and depends on the platform type you use,
