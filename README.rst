@@ -114,117 +114,110 @@ Using the *dispass* command line app
 ==============================================================================
 
 
-dispass (main command)
-----------------------
+dispass (main command)::
 
-usage: dispass [options] <command> [<args>]
+   usage: dispass [options] <command> [<args>]
 
-Commands:
-   add          add a new label to labelfile
-   generate     generate passphrases for one or more labels
-   gui          start the graphical version of DisPass
-   help         show this help information
-   list         print a formatted table of labelfile contents
-   rm           remove label from labelfile
-   version      show full version information
+   Commands:
+      add          add a new label to labelfile
+      generate     generate passphrases for one or more labels
+      gui          start the graphical version of DisPass
+      help         show this help information
+      list         print a formatted table of labelfile contents
+      rm           remove label from labelfile
+      version      show full version information
 
-Options:
--f <labelfile>, --file=<labelfile>  override labelfile
--h, --help                          show this help information
--V, --version                       show full version information
+   Options:
+   -f <labelfile>, --file=<labelfile>  override labelfile
+   -h, --help                          show this help information
+   -V, --version                       show full version information
 
-See 'dispass help <command>' for more information on a specific command.
-
-
-dispass add
------------
-
-usage: dispass add [-n] [-s] <labelspec>
-       dispass add [-i] [-h]
-
-Add a new label to the labelfile and generate passphrase.
-The labelspec looks like this:
-
-    label[:size[:algorithm[:sequence_number]]]
-
-Options:
--i, --interactive  add label in an interactive manner
--h, --help         show this help information
--n, --dry-run      do not actually add label to labelfile
--s, --silent       do not print success message
+   See 'dispass help <command>' for more information on a specific command.
 
 
-dispass generate
-----------------
+dispass add::
 
-usage: dispass generate [options] <label> [<label2>] [<label3>] [...]
+   usage: dispass add [-n] [-s] <labelspec>
+          dispass add [-i] [-h]
 
-Generate passphrases for one or more labels
+   Add a new label to the labelfile and generate passphrase.
+   The labelspec looks like this:
 
-Options:
--h, --help                            show this help information
--l <length>, --length=<length>        length of passphrase
--a <algorithm>, --algo=<algorithm>    algorithm to use for generation
--s <seqno>, --seqno=<seqno>           sequence number to use for generation
--p <password>, --password=<password>  password to use for generation
--o, --stdout                          output passphrase(s) directly to stdout
---silent                              do not show a prompt when errors occur
+       label[:size[:algorithm[:sequence_number]]]
 
-
-dispass gui
------------
-
-usage: dispass gui [-h]
-
-Start the graphical version of DisPass.
-
-Options:
--h, --help  show this help information
+   Options:
+   -i, --interactive  add label in an interactive manner
+   -h, --help         show this help information
+   -n, --dry-run      do not actually add label to labelfile
+   -s, --silent       do not print success message
 
 
-dispass list
-------------
+dispass generate::
 
-usage: dispass list [-h] [--script]
+   usage: dispass generate [options] <label> [<label2>] [<label3>] [...]
 
-Print a formatted table of labelfile contents
+   Generate passphrases for one or more labels
 
-If --script is passed the output will be optimized for easy
-parsing by other programs and scripts by not printing the header
-and always printing one entry on a single line using the
-following positions:
-
-Column  1-50: label            50 chars wide
-Column 52-54: length            3 chars wide
-Column 56-70: hash algo        15 chars wide
-Column 72-74: sequence number   3 chars wide
-
-Options:
--h, --help  show this help information
---script    output in fixed columns
+   Options:
+   -h, --help                            show this help information
+   -l <length>, --length=<length>        length of passphrase
+   -a <algorithm>, --algo=<algorithm>    algorithm to use for generation
+   -s <seqno>, --seqno=<seqno>           sequence number to use for generation
+   -p <password>, --password=<password>  password to use for generation
+   -o, --stdout                          output passphrase(s) directly to stdout
+   --silent                              do not show a prompt when errors occur
 
 
-dispass rm
-----------
+dispass gui::
 
-usage: dispass rm [-n] [-s] <labelname>
-       dispass rm [-i] [-h]
+   usage: dispass gui [-h]
 
-Remove label from labelfile
+   Start the graphical version of DisPass.
 
-Options:
--i, --interactive  add label in an interactive manner
--h, --help         show this help information
--n, --dry-run      do not actually remove label from labelfile
--s, --silent       do not print success message
+   Options:
+   -h, --help  show this help information
 
 
-dispass version
----------------
+dispass list::
 
-usage: dispass version
+   usage: dispass list [-h] [--script]
 
-Show full version information
+   Print a formatted table of labelfile contents
+
+   If --script is passed the output will be optimized for easy
+   parsing by other programs and scripts by not printing the header
+   and always printing one entry on a single line using the
+   following positions:
+
+   Column  1-50: label            50 chars wide
+   Column 52-54: length            3 chars wide
+   Column 56-70: hash algo        15 chars wide
+   Column 72-74: sequence number   3 chars wide
+
+   Options:
+   -h, --help  show this help information
+   --script    output in fixed columns
+
+
+dispass rm::
+
+   usage: dispass rm [-n] [-s] <labelname>
+          dispass rm [-i] [-h]
+
+   Remove label from labelfile
+
+   Options:
+   -i, --interactive  add label in an interactive manner
+   -h, --help         show this help information
+   -n, --dry-run      do not actually remove label from labelfile
+   -s, --silent       do not print success message
+
+
+dispass version::
+
+   usage: dispass version
+
+   Show full version information
 
 
 Using dispass to create one or more passphrases
