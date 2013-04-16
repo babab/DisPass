@@ -262,7 +262,7 @@ IRC
    #dispass at Freenode (chat.freenode.net)
 
 Emacs wrapper
-   http://ryuslash.org/projects/dispass.el/
+   http://ryuslash.org/projects/dispass.el.html
 
 
 .. vim: set et ts=3 sw=3 sts=3 ai:
