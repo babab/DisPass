@@ -1,4 +1,4 @@
-.TH "DISPASS" "1" "April 16, 2013" "0.2" "DisPass"
+.TH "DISPASS" "1" "April 16, 2013" "0.3" "DisPass"
 .SH NAME
 dispass \- DisPass Documentation
 .
@@ -31,16 +31,10 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" Man page generated from reStructuredText.
 .
 .SH SYNOPSIS
-.SS dispass
 .sp
-dispass [\-ghoV?] [\-f <labelfile>] [\-s <string>] [\-\-script]
-.sp
-dispass [\-co] [\-l <length>] [\-a <algo>] [\-n <sequence\-number>] [\-\-script] <label> [<label2>] [label3]  [...]
+dispass [\-f <labelfile>] [\-h] [\-V] <command> [<args>]
 .sp
 gdispass
-.SS dispass\-label
-.sp
-dispass\-label [\-hlV] [\-f <labelfile>] [\-a|\-\-add <labelspec>] [\-r|\-\-remove <labelname] [\-\-script]
 .SH SUMMARY
 .sp
 DisPass is a password manager for GNU/Linux, *BSD, MacOS X and Windows. It
@@ -79,8 +73,7 @@ Generated passphrases are 30 characters long. The length can be optionally
 changed.
 .UNINDENT
 .sp
-When DisPass is executed as \(aqgdispass\(aq or \(aqdispass \-g\(aq,
-the graphical version will be started.
+When DisPass is executed as \(aqgdispass\(aq the graphical version will be started.
 .SS Using dispass to create one or more passphrases
 .sp
 You can start using dispass for e.g. google.com like this:
@@ -158,115 +151,18 @@ locations:
 .UNINDENT
 .sp
 You can edit the labelfile(s) by using the \fBdispass\-label\fP program.
-.SS Creating and searching stored labels
-.sp
-When creating a new label/password combination you can store the label
-and it\(aqs arguments by using the \fB\-c\fP flag, this will ask for your
-password twice so you can be asured to avoid typing errors:
-.INDENT 0.0
-.INDENT 3.5
-.sp
-.nf
-.ft C
-$ dispass \-c \-l 16 hotmail.com
-.ft P
-.fi
-.UNINDENT
-.UNINDENT
-.sp
-Now you will be asked to enter a password twice and after that your
-passphrase will be shown on the screen. It can be re\-created everytime you
-need it by searching for a label using the \fB\-s\fP flag:
-.INDENT 0.0
-.INDENT 3.5
-.sp
-.nf
-.ft C
-$ dispass \-s hotm
-.ft P
-.fi
-.UNINDENT
-.UNINDENT
-.sp
-Only part of the label is needed, as long as the (sub)string is unique.
 .SH OPTIONS
 .SS dispass
-.sp
-Options (general):
 .INDENT 0.0
-.TP
-.B \-c,  \-\-create
-use if this passphrase is new (check input PW)
-.TP
-.B \-g,  \-\-gui
-start guided graphical version of DisPass
-.TP
-.B \-h,  \-\-help
-show this help and exit
-.TP
-.B \-o,  \-\-output
-output passphrases to stdout
-(instead of the more secure way of displaying via curses)
-.TP
-.B \-V,  \-\-version
-show full version information and exit
-.TP
-.B \-\-script
-optimize input/output for \(aqwrapping\(aq dispass
-.UNINDENT
-.sp
-Options (when using labelfile):
-.INDENT 0.0
-.TP
-.BI \-s \ <string>, \ \-\-search\fB= <string>
-dispass label from file that uniquely
-matches <string>
 .TP
 .BI \-f \ <labelfile>, \ \-\-file\fB= <labelfile>
-set location of labelfile
-.UNINDENT
-.sp
-Options (when passing labels as arguments):
-.INDENT 0.0
-.TP
-.BI \-l \ <length>, \ \-\-length\fB= <length>
-set length of passphrase
-(default: 30, max: 171)
-.TP
-.BI \-a \ <algorithm>, \ \-\-algo\fB= <algorithm>
-override algorithm for generating
-passphrase(s)
-.TP
-.BI \-n \ <number>, \ \-\-number\fB= <number>
-override sequence number (default = 1)
-.UNINDENT
-.SS dispass\-label
-.INDENT 0.0
+override labelfile
 .TP
 .B \-h,  \-\-help
-show help and exit
-.TP
-.B \-l,  \-\-list
-print all labels and options found in
-labelfile
+show this help information
 .TP
 .B \-V,  \-\-version
-show full version information and exit
-.TP
-.BI \-f \ <labelfile>, \ \-\-file\fB= <labelfile>
-set location of labelfile
-.TP
-.BI \-a,  \-\-add \ <labelspec>
-add a new label to the labelfile, the
-labelspec looks like this:
-label[:size[:algorithm[:sequence_number]]]
-.TP
-.BI \-r,  \-\-remove \ <labelname>
-remove a label from the labelfile
-.TP
-.B \-\-script
-optimize input/output for \(aqwrapping\(aq
-dispass\-label
+show full version information
 .UNINDENT
 .SH USING THE GRAPHICAL GDISPASS APPLICATION
 .sp
@@ -292,53 +188,6 @@ your copy/paste buffer.
 Resetting all fields when you are done or when you need to quickly cancel the
 generation (because someone is watching over your shoulders) can be done by
 pressing <Escape> or by clicking the appropiate button.
-.SH WRAPPING / SCRIPTING DISPASS
-.sp
-You can use dispass entirely as you wish and create different interfaces
-by using the appropiate libraries as long as it is allowed by the ISC license.
-.sp
-Dispass provides a way to make the behaviour and IO more suitable for
-scripting by passing the \fB\-\-script\fP option.
-.SS dispass
-.sp
-If the \fB\-\-script\fP flag is passed together with \fB\-o\fP or \fB\-\-output\fP
-the output will be optimized for easy parsing by other programs
-and scripts by always printing one entry on a single line using
-the following positions:
-.INDENT 0.0
-.INDENT 3.5
-.sp
-.nf
-.ft C
-Column  1\-50 : label
-.ft P
-.fi
-.UNINDENT
-.UNINDENT
-.SS dispass\-label
-.sp
-If the \fB\-\-script\fP flag is passed together with \fB\-l\fP or \fB\-\-list\fP
-the output will be optimized for easy parsing by other programs
-and scripts by not printing the header and always printing one
-entry on a single line using the following positions:
-.INDENT 0.0
-.INDENT 3.5
-.sp
-.nf
-.ft C
-Column  1\-50: label           (50 chars wide)
-Column 52\-54: length           (3 chars wide)
-Column 56\-70: hash algo       (15 chars wide)
-Column 72\-74: sequence number  (3 chars wide)
-.ft P
-.fi
-.UNINDENT
-.UNINDENT
-.sp
-Otherwise an ascii table is printed with a variable width depending
-on the length of the longest label. The table has a header but does
-not display the hash algo until support for multiple hashing algos
-is added.
 .SH ACKNOWLEDGEMENTS
 .sp
 Many thanks go out to Tom (ryuslash) Willemsen for valuable contributions to

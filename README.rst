@@ -4,11 +4,9 @@ README
 DisPass is a password manager for GNU/Linux, \*BSD, MacOS X and Windows. It
 can be used as any traditional password manager, but has one key difference.
 DisPass does not store your passwords anywhere, so you can never lose them.
-
 It creates strong and unique passphrases formed from a master password and a
 label (and some optional parameters), helping you get rid of the bad habit of
 using a single password for multiple websites.
-
 Dispass is a console application, but also has a simple graphical interface.
 
 DisPass has several homes on the Internet:
@@ -201,44 +199,6 @@ with a different 'master' password for each set.
 
 You can edit the labelfile(s) by using the ``dispass-label`` program.
 
-Creating and searching stored labels
-------------------------------------
-
-When creating a new label/password combination you can store the label
-and it's arguments by using the ``-c`` flag, this will ask for your
-password twice so you can be asured to avoid typing errors::
-
-   $ dispass -c -l 16 hotmail.com
-
-Now you will be asked to enter a password twice and after that your
-passphrase will be shown on the screen. It can be re-created everytime you
-need it by searching for a label using the ``-s`` flag::
-
-   $ dispass -s hotm
-
-Only part of the label is needed, as long as the (sub)string is unique.
-
-
-Using the *dispass-label* command line app
-==============================================================================
-
-:USAGE: dispass-label [-hlV] [-f <labelfile>] [-a|--add <labelspec>]
-        [-r|--remove <labelname] [--script]
-
-Options:
-
--h, --help                          show help and exit
--l, --list                          print all labels and options found in
-                                    labelfile
--V, --version                       show full version information and exit
--f <labelfile>, --file=<labelfile>  set location of labelfile
--a, --add <labelspec>               add a new label to the labelfile, the
-                                    labelspec looks like this:
-                                    label[:size[:algorithm[:sequence_number]]]
--r, --remove <labelname>            remove a label from the labelfile
---script                            optimize input/output for 'wrapping'
-                                    dispass-label
-
 
 Using the graphical *gdispass* application
 ==============================================================================
@@ -274,44 +234,6 @@ If you have Emacs you can use the Emacs wrapper created and maintained by
 Tom Willemsen (ryuslash).
 
 You can find it at: http://ryuslash.org/projects/dispass.el.html
-
-
-Wrapping / scripting dispass
-============================
-
-You can use dispass entirely as you wish and create different interfaces
-by using the appropiate libraries as long as it is allowed by the ISC license.
-
-Dispass provides a way to make the behaviour and IO more suitable for
-scripting by passing the ``--script`` option.
-
-
-dispass
--------
-If the ``--script`` flag is passed together with ``-o`` or ``--output``
-the output will be optimized for easy parsing by other programs
-and scripts by always printing one entry on a single line using
-the following positions::
-
-   Column  1-50 : label
-
-
-dispass-label
--------------
-If the ``--script`` flag is passed together with ``-l`` or ``--list``
-the output will be optimized for easy parsing by other programs
-and scripts by not printing the header and always printing one
-entry on a single line using the following positions::
-
-   Column  1-50: label           (50 chars wide)
-   Column 52-54: length           (3 chars wide)
-   Column 56-70: hash algo       (15 chars wide)
-   Column 72-74: sequence number  (3 chars wide)
-
-Otherwise an ascii table is printed with a variable width depending
-on the length of the longest label. The table has a header but does
-not display the hash algo until support for multiple hashing algos
-is added.
 
 
 Support / ideas / questions / suggestions
