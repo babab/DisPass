@@ -25,9 +25,13 @@ class Command(CommandBase):
     usagestr = (
         'usage: dispass generate [options] <label> [<label2>] [<label3>] [...]'
     )
-    description = 'Generate passphrases for one or more labels'
+    description = (
+        'Generate passphrases for one or more labels\n\n'
+        "Use the '-v' flag to ask for password twice to avoid typing errors"
+    )
     optionList = (
         ('help',    ('h', False, 'show this help information')),
+        ('verify',  ('v', False, 'verify password')),
         ('length',  ('l', '<length>', 'length of passphrase')),
         ('algo',    ('a', '<algorithm>', 'algorithm to use for generation')),
         ('seqno',   ('s', '<seqno>', 'sequence number to use for generation')),
@@ -71,6 +75,7 @@ class Command(CommandBase):
             override = True
 
         console = CLI(lf)
+        console.verifyPassword = self.flags['verify']
 
         if self.flags['password']:
             password = self.flags['password']
