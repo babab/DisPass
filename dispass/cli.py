@@ -27,7 +27,7 @@ except ImportError:
 class CLI:
     '''Command Line Interface handling'''
 
-    createLabel = False
+    verifyPassword = False
     '''Boolean. Prompt for password twice and save label to labelfile'''
 
     scriptableIO = False
@@ -70,7 +70,7 @@ class CLI:
                 print 'Please try again.'
                 continue
 
-            if self.createLabel:
+            if self.verifyPassword:
                 inp2 = getpass.getpass("Password (again): ")
                 if inp == inp2:
                     break
