@@ -175,7 +175,7 @@ class Filehandler:
 
             labelfile += ('{label:{divlen}}  {options}\n'
                           .format(label=label[0], options=options,
-                                  divlen=len(self.longest_label)))
+                                  divlen=self.longest_label))
         try:
             self.filehandle = open(self.file_location, 'w')
             self.filehandle.write(labelfile)
