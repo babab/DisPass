@@ -54,25 +54,21 @@ class Command(CommandBase):
             print self.usage
             return 1
 
-        algo = self.settings.algorithm
-        length = self.settings.passphrase_length
-        seqno = self.settings.sequence_number
+        algo = None
+        length = None
+        seqno = None
 
-        override = False
         if self.flags['algo']:
             if self.flags['algo'] in algorithms:
                 algo = self.flags['algo']
-            override = True
         if self.flags['length']:
             try:
                 length = int(self.flags['length'])
             except ValueError:
                 print 'Error: length argument must be a number'
                 return 1
-            override = True
         if self.flags['seqno']:
             seqno = self.flags['seqno']
-            override = True
 
         console = CLI(lf)
         console.verifyPassword = self.flags['verify']
@@ -84,10 +80,15 @@ class Command(CommandBase):
 
         for arg in self.args:
             labeltup = lf.labeltup(arg)
-            if labeltup and not override:
-                console.generate(password, labeltup)
+            if labeltup:
+                console.generate(password, (arg, length or labeltup[1],
+                                            algo or labeltup[2],
+                                            seqno or labeltup[3]))
             else:
-                console.generate(password, (arg, length, algo, seqno))
+                console.generate(password, (
+                    arg, length or self.settings.passphrase_length,
+                    algo or self.settings.algorithm,
+                    seqno or self.settings.sequence_number))
         del password
 
         if self.flags['stdout']:
