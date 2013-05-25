@@ -1,0 +1,87 @@
+#compdef dispass
+
+local -a _1st_arguments
+_1st_arguments=(
+  'add:add a new label to labelfile'
+  'generate:generate passphrases for one or more labels'
+  'gui:start the graphical version of DisPass'
+  'help:show help information'
+  'list:print a formatted table of labelfile contents'
+  'rm:remove label from labelfile'
+  'version:show full version information'
+)
+
+_arguments \
+  '(-h --help -f --file -V --version)-f+[override labelfile]:path to labelfile:_files' \
+  '(-h --help -f --file -V --version)--file+[override labelfile]:path to labelfile:_files' \
+  '(-h --help -f --file -V --version)-h[show help information]' \
+  '(-h --help -f --file -V --version)--help[show help information]' \
+  '(-h --help -f --file -V --version)-V[show full version information]' \
+  '(-h --help -f --file -V --version)--version[show full version information]' \
+  '*:: :->subcmds' && return 0
+
+if (( CURRENT == 1 )); then
+  _describe -t commands "dispass subcommand" _1st_arguments
+  return
+fi
+
+case "$words[1]" in
+  add)
+    _arguments \
+      '(-i --interactive -h --help -n --dry-run -s --silent)-i[add label in an interactive manner]' \
+      '(-i --interactive -h --help -n --dry-run -s --silent)--interactive[add label in an interactive manner]' \
+      '(-i --interactive -h --help -n --dry-run -s --silent)-h[show help information]' \
+      '(-i --interactive -h --help -n --dry-run -s --silent)--help[show help information]' \
+      '(-i --interactive -h --help -n --dry-run)-n[do not actually add label to labelfile]' \
+      '(-i --interactive -h --help -n --dry-run)--dry-run[do not actually add label to labelfile]' \
+      '(-i --interactive -h --help -s --silent)-s[do not print success message]' \
+      '(-i --interactive -h --help -s --silent)--silent[do not print success message]' \
+      &&  return 0 ;;
+  generate)
+    _arguments \
+      '(-h --help)-h[show help information]' \
+      '(-h --help)--help[show help information]' \
+      '(-h --help -v --verify)-v[verify password]' \
+      '(-h --help -v --verify)--verify[verify password]' \
+      '(-h --help -l --length)-l+[length of passphrase]:passphrase length:' \
+      '(-h --help -l --length)--length+[length of passphrase]:passphrase length:' \
+      '(-h --help -a --algo)-a+[algorithm to use for generation]:algorithm:(dispass1 dispass2)' \
+      '(-h --help -a --algo)--algo+[algorithm to use for generation]:algorithm:(dispass1 dispass2)' \
+      '(-h --help -s --seqno)-s+[sequence number to use for generation]:sequence number:' \
+      '(-h --help -s --seqno)--seqno+[sequence number to use for generation]:sequence number:' \
+      '(-h --help -p --password)-p+[password to use for generation]:password:' \
+      '(-h --help -p --password)--password+[password to use for generation]:password:' \
+      '(-h --help -o --output)-o[output passphrase(s) directly to stdout]' \
+      '(-h --help -o --output)--output[output passphrase(s) directly to stdout]' \
+      '(-h --help --silent)--silent[do not show a prompt when errors occur]' \
+      &&  return 0 ;;
+  gui)
+    _arguments \
+      '(-h --help)-h[show help information]' \
+      '(-h --help)--help[show help information]' \
+      &&  return 0 ;;
+  help)
+    _describe -t commands "dispass subcommands" _1st_arguments
+    return 0 ;;
+  list)
+    _arguments \
+      '(-h --help --script)-h[show help information]' \
+      '(-h --help --script)--help[show help information]' \
+      '(-h --help --script)--script[output in fixed columns]' \
+      &&  return 0 ;;
+  rm)
+    _arguments \
+      '(-i --interactive -h --help -n --dry-run -s --silent)-i[remove label in an interactive manner]' \
+      '(-i --interactive -h --help -n --dry-run -s --silent)--interactive[remove label in an interactive manner]' \
+      '(-i --interactive -h --help -n --dry-run -s --silent)-h[show help information]' \
+      '(-i --interactive -h --help -n --dry-run -s --silent)--help[show help information]' \
+      '(-i --interactive -h --help -n --dry-run)-n[do not actually remove label from labelfile]' \
+      '(-i --interactive -h --help -n --dry-run)--dry-run[do not actually remove label from labelfile]' \
+      '(-i --interactive -h --help -s --silent)-s[do not print success message]' \
+      '(-i --interactive -h --help -s --silent)--silent[do not print success message]' \
+      &&  return 0 ;;
+  version)
+    return 0
+esac
+
+# vim: set ft=zsh et ts=2 sw=2 sts=2:

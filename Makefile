@@ -1,6 +1,7 @@
-MAN_PATH	= /usr/share/man/man1
-PYTHON_EXEC	= python
-PIP_EXEC	= pip
+MAN_PATH		= /usr/share/man/man1
+ZSH_SITE_FUNCS_PATH	= /usr/share/zsh/site-functions
+PYTHON_EXEC		= python
+PIP_EXEC		= pip
 
 sinclude config.mk
 
@@ -44,7 +45,8 @@ dist: rm_pyc
 install: dist
 	$(PIP_EXEC) install --upgrade dist/DisPass-$(VERSION).tar.gz
 	gzip -c dispass.1 > dispass.1.gz
-	mv dispass.1.gz $(MAN_PATH)/
+	mv dispass.1.gz $(MAN_PATH)
+	cp zsh/_dispass $(ZSH_SITE_FUNCS_PATH)
 	make clean
 
 uninstall: clean
