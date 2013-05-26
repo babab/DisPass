@@ -1,7 +1,17 @@
 #compdef dispass
 
-local -a _1st_arguments
-_1st_arguments=(
+local expl
+local -a dispass_labels _dispass_commands
+
+get_labels() {
+  if [[ "$state" == labels ]]; then
+    dispass_labels=(${(f)"$(_call_program dispass_labels \
+        dispass list --script | awk '{ print $1 }' 2>/dev/null)"})
+    _wanted dispass_labels expl 'all labels' compadd -a dispass_labels
+  fi
+}
+
+_dispass_commands=(
   'add:add a new label to labelfile'
   'generate:generate passphrases for one or more labels'
   'gui:start the graphical version of DisPass'
@@ -21,7 +31,7 @@ _arguments \
   '*:: :->subcmds' && return 0
 
 if (( CURRENT == 1 )); then
-  _describe -t commands "dispass subcommand" _1st_arguments
+  _describe -t commands "dispass command" _dispass_commands
   return
 fi
 
@@ -54,14 +64,15 @@ case "$words[1]" in
       '(-h --help -o --output)-o[output passphrase(s) directly to stdout]' \
       '(-h --help -o --output)--output[output passphrase(s) directly to stdout]' \
       '(-h --help --silent)--silent[do not show a prompt when errors occur]' \
-      &&  return 0 ;;
+      '*:: :->labels' && return 0
+    get_labels ;;
   gui)
     _arguments \
       '(-h --help)-h[show help information]' \
       '(-h --help)--help[show help information]' \
       &&  return 0 ;;
   help)
-    _describe -t commands "dispass subcommands" _1st_arguments
+    _describe -t commands "dispass subcommands" _dispass_commands
     return 0 ;;
   list)
     _arguments \
@@ -79,7 +90,8 @@ case "$words[1]" in
       '(-i --interactive -h --help -n --dry-run)--dry-run[do not actually remove label from labelfile]' \
       '(-i --interactive -h --help -s --silent)-s[do not print success message]' \
       '(-i --interactive -h --help -s --silent)--silent[do not print success message]' \
-      &&  return 0 ;;
+      '*:: :->labels' && return 0
+    get_labels ;;
   version)
     return 0
 esac
