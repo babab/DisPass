@@ -21,23 +21,23 @@ rm_pyc:
 	find . -name "*.pyc" | xargs /bin/rm -f
 
 doc_clean: rm_pyc
-	cd sphinx-doc/en/; make clean
-	#cd sphinx-doc/nl/; make clean
+	cd docs/en/; make clean
+	#cd docs/nl/; make clean
 
 doc: doc_clean
-	cd sphinx-doc/en/; make html
-	cd sphinx-doc/nl/; make html
+	cd docs/en/; make html
+	cd docs/nl/; make html
 	rm -rf doc/html/$(VERSION)
 	mkdir -p doc/html/$(VERSION)
-	mv sphinx-doc/en/_build/html doc/html/$(VERSION)/en
-	mv sphinx-doc/nl/_build/html doc/html/$(VERSION)/nl
+	mv docs/en/_build/html doc/html/$(VERSION)/en
+	mv docs/nl/_build/html doc/html/$(VERSION)/nl
 	make doc_clean
 
 man: rm_pyc
-	cd sphinx-doc/man-en/; make clean
-	cd sphinx-doc/man-en/; make man
-	mv sphinx-doc/man-en/_build/man/dispass.1 .
-	cd sphinx-doc/man-en/; make clean
+	cd docs/man-en/; make clean
+	cd docs/man-en/; make man
+	mv docs/man-en/_build/man/dispass.1 .
+	cd docs/man-en/; make clean
 
 dist: rm_pyc
 	$(PYTHON_EXEC) setup.py sdist
