@@ -31,7 +31,7 @@ from dispass import dispass
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.todo', 'sphinx.ext.viewcode']
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.coverage', 'sphinx.ext.pngmath', 'sphinx.ext.mathjax', 'sphinx.ext.viewcode']
 
 # Add any paths that contain templates here, relative to this directory.
 #templates_path = ['_templates']
@@ -176,11 +176,16 @@ htmlhelp_basename = 'DisPassdoc'
 
 # -- Options for LaTeX output --------------------------------------------------
 
-# The paper size ('letter' or 'a4').
-#latex_paper_size = 'letter'
+latex_elements = {
+# The paper size ('letterpaper' or 'a4paper').
+#'papersize': 'letterpaper',
 
 # The font size ('10pt', '11pt' or '12pt').
-#latex_font_size = '10pt'
+#'pointsize': '10pt',
+
+# Additional stuff for the LaTeX preamble.
+#'preamble': '',
+}
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
@@ -203,9 +208,6 @@ latex_documents = [
 # If true, show URL addresses after external links.
 #latex_show_urls = False
 
-# Additional stuff for the LaTeX preamble.
-#latex_preamble = ''
-
 # Documents to append as an appendix to all manuals.
 #latex_appendices = []
 
@@ -221,6 +223,31 @@ man_pages = [
     ('index', 'dispass', u'DisPass Documentation',
      [u'Benjamin Althues'], 1)
 ]
+
+# If true, show URL addresses after external links.
+#man_show_urls = False
+
+
+# -- Options for Texinfo output ------------------------------------------------
+
+# Grouping the document tree into Texinfo files. List of tuples
+# (source start file, target name, title, author,
+#  dir menu entry, description, category)
+texinfo_documents = [
+  ('index', 'DisPass', u'DisPass Documentation',
+   u'Benjamin Althues', 'DisPass',
+   'Password manager for GNU/Linux, *BSD, MacOS X and Windows.',
+   'Miscellaneous'),
+]
+
+# Documents to append as an appendix to all manuals.
+#texinfo_appendices = []
+
+# If false, no module index is generated.
+#texinfo_domain_indices = True
+
+# How to display URL addresses: 'footnote', 'no', or 'inline'.
+#texinfo_show_urls = 'footnote'
 
 
 # -- Options for Epub output ---------------------------------------------------
@@ -244,6 +271,9 @@ epub_copyright = u'2011, 2012, 2013  Benjamin Althues'
 
 # A unique identification for the text.
 #epub_uid = ''
+
+# A tuple containing the cover image and cover page html template filenames.
+#epub_cover = ()
 
 # HTML files that should be inserted before the pages created by sphinx.
 # The format is a list of tuples containing the path and title.
