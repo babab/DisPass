@@ -85,13 +85,13 @@ class CLI:
         '''Generate passphrase and store result in `passphrases`
 
         :Parameters:
-            - `password`: Password to use for passprase generation
+            - `password`: Password to use for passprase generation,
+                          a tuple `labeltup` with 4 values:
+                - `label`: Label to use for passprase generation
+                - `length`: Length to use for passprase generation
+                - `algo`: Algorithm to use for passprase generation
+                - `seqno`: Sequence number to use for passprase generation
 
-            A tuple `labeltup` with 4 values:
-            - `label`: Label to use for passprase generation
-            - `length`: Length to use for passprase generation
-            - `algo`: Algorithm to use for passprase generation
-            - `seqno`: Sequence number to use for passprase generation
         '''
 
         hasher = algoObject(algo)

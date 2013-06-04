@@ -192,12 +192,11 @@ class Filehandler:
             - `label`: The labelname
 
         :Returns:
-            A tuple `labeltup` with 4 values ``(label, length, algo, seqno))``:
-
-            - `label`: Label to use for passprase generation
-            - `length`: Length to use for passprase generation
-            - `algo`: Algorithm to use for passprase generation
-            - `seqno`: Sequence number to use for passprase generation
+            - A tuple with 4 values ``(label, length, algo, seqno))``:
+                - `label`: Label to use for passprase generation
+                - `length`: Length to use for passprase generation
+                - `algo`: Algorithm to use for passprase generation
+                - `seqno`: Sequence number to use for passprase generation
 
         '''
 
