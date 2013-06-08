@@ -40,6 +40,7 @@ class CLI:
         '''Set `useCurses` to True or False.
 
         Depending on the availability of curses
+
         '''
         self.filehandler = filehandler
         self.useCurses = hasCurses
@@ -47,21 +48,29 @@ class CLI:
     def setCurses(self, useCurses):
         '''Optionally override `self.useCurses`
 
+        Instead of setting the instance variable `self.useCurses` directly, a
+        setter is used to ensure it can only be set to `True` if the curses
+        library is supported.
+
         :Parameters:
             - `useCurses`: Boolean
-        '''
 
+        '''
         if useCurses and not hasCurses:
             self.useCurses = False
         else:
             self.useCurses = useCurses
 
     def passwordPrompt(self):
-        '''Prompt for password.
+        '''Prompt for password
+
+        Use the `getpass.getpass` function to ask the user for the password
+        and ensure it is 8 characters. The password will be asked twice if
+        `self.verifyPassword` == `True`.
 
         :Return: Password string.
-        '''
 
+        '''
         while True:
             inp = getpass.getpass()
 
@@ -85,12 +94,12 @@ class CLI:
         '''Generate passphrase and store result in `passphrases`
 
         :Parameters:
-            - `password`: Password to use for passprase generation,
-                          a tuple `labeltup` with 4 values:
-                - `label`: Label to use for passprase generation
-                - `length`: Length to use for passprase generation
-                - `algo`: Algorithm to use for passprase generation
-                - `seqno`: Sequence number to use for passprase generation
+            - `password`: Password to use for passprase generation
+            - `labeltup`: A tuple `labeltup` with 4 values:
+               * `label`: Label to use for passprase generation
+               * `length`: Length to use for passprase generation
+               * `algo`: Algorithm to use for passprase generation
+               * `seqno`: Sequence number to use for passprase generation
 
         '''
 

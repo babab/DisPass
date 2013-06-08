@@ -20,6 +20,15 @@ algorithms = ('dispass1', 'dispass2')
 
 
 def algoObject(algoname):
+    '''Return an algorithm object
+
+    :Parameters:
+        - `algoname`: String. Name of the algorithm
+
+    :Return:
+        - An algorithm object or False
+
+    '''
     if algoname == 'dispass1':
         return Dispass1()
     elif algoname == 'dispass2':

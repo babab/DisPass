@@ -248,6 +248,13 @@ class Filehandler:
                   .format('-' * divlen, fill=divlen))
 
     def promptForCreation(self, silent=False):
+        '''Create the labelfile, optionally warning the user beforehand
+
+        :Parameters:
+            - `silent`: When True, the user will not be warned.
+
+        :Returns: Boolean. Indicating if the labelfile was created succesfully.
+        '''
         if silent:
             if self.save():
                 return True

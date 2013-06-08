@@ -1,4 +1,4 @@
-'''add a new label to labelfile'''
+'''Subcommand module `add`; contains only a single class `Command`'''
 
 # Copyright (c) 2011, 2012, 2013  Benjamin Althues <benjamin@babab.nl>
 #
@@ -22,6 +22,7 @@ from dispass.interactive_editor import InteractiveEditor
 
 
 class Command(CommandBase):
+    '''Add a new label to the labelfile and generate passphrase.'''
     usagestr = ('usage: dispass add [-n] [-s] <labelspec>\n'
                 '       dispass add [-i] [-h]')
     description = (
@@ -37,6 +38,10 @@ class Command(CommandBase):
     )
 
     def run(self):
+        '''Parse labels and add them using `FileHandler.add`.
+
+        When the -i flag is passed, add them using `InteractiveEditor.add```
+        '''
         if self.parentFlags['file']:
             lf = Filehandler(settings, file_location=self.parentFlags['file'])
         else:

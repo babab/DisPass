@@ -1,4 +1,4 @@
-'''generate passphrases for one or more labels'''
+'''Subcommand module `generate`; contains only a single class `Command`'''
 
 # Copyright (c) 2011, 2012, 2013  Benjamin Althues <benjamin@babab.nl>
 #
@@ -22,6 +22,8 @@ from dispass.filehandler import Filehandler
 
 
 class Command(CommandBase):
+    '''Generate passphrases for one or more labels'''
+
     usagestr = (
         'usage: dispass generate [options] <label> [<label2>] [<label3>] [...]'
     )
@@ -41,6 +43,14 @@ class Command(CommandBase):
     )
 
     def run(self):
+        '''Parse the various arguments and output passphrases for each label
+
+        Each positional argument is a label. For each label, it will try to
+        find (via `FileHandler.labletup`) if it is in the labelfile so other
+        settings for the label can be applied. If it is not found, the default
+        settings object defined as `dispass.dispass.settings` will be used. The
+        parameters can be overridden through the various optargs.
+        '''
         if self.parentFlags['file']:
             lf = Filehandler(settings, file_location=self.parentFlags['file'])
         else:

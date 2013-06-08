@@ -1,4 +1,4 @@
-'''Password manager for GNU/Linux, *BSD, MacOS X and Windows.'''
+'''Password manager for GNU/Linux, \*BSD, MacOS X and Windows.'''
 
 # Copyright (c) 2011, 2012, 2013  Benjamin Althues <benjamin@babab.nl>
 #
@@ -30,6 +30,12 @@ from common import CommandBase
 
 
 def verboseVersionInfo():
+    '''Returns a string with verbose version information
+
+    The string shows the version of DisPass and that of Python.
+    It also displays the name of the operating system/platform name.
+
+    '''
     return('{dispass} {fullversion}\n\n'
            'Python {python}\nPlatform is {os}'
            .format(dispass=versionStr, fullversion=__version_info__,
@@ -52,7 +58,10 @@ settings = Settings()
 
 
 class DispassCommand(CommandBase):
+    '''Main shell command object'''
+
     usagestr = 'usage: dispass [options] <command> [<args>]'
+
     description = (
         'Commands:\n'
         '   add          add a new label to labelfile\n'
@@ -64,17 +73,33 @@ class DispassCommand(CommandBase):
         #'   settings     show default values for length, algo etc.\n'
         '   version      show full version information'
     )
+
     optionList = (
         ('file',        ('f', '<labelfile>', 'override labelfile')),
         ('help',        ('h', False, 'show this help information')),
         ('version',     ('V', False, 'show full version information')),
     )
+
     usageTextExtra = (
         "See 'dispass help <command>' for more information on a "
         "specific command."
     )
 
     def run(self):
+        '''The `run` method of the main command
+
+        This is the first point of entry that will parse the command and
+        arguments given in the shell by the user, directing arguments to
+        subcommands if applicable.
+
+        The subcommands are imported in this method, since doing it in the
+        module itself causes circular import problems. There is support for
+        dynamically loading the modules, so you can define custom commands. The
+        (main) subcommands get imported explicitly so that 'freezing' apps like
+        PyInstaller will correctly include the modules.
+
+        '''
+
         import commands.add
         import commands.generate
         import commands.gui
