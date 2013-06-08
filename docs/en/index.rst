@@ -1,98 +1,18 @@
-User documentation
+DisPass
 ******************************************************************************
 
-.. include:: ../../README.rst
+DisPass is a password manager for GNU/Linux, \*BSD, MacOS X and Windows.
+It can be used as any traditional password manager, but has one key
+difference. DisPass does not store your passwords anywhere, so you
+can never lose them. It creates strong and unique passphrases formed
+from a master password and a label (and some optional parameters),
+helping you get rid of the bad habit of using a single password for
+multiple websites. Dispass is a console application, but also has a
+simple graphical interface.
 
-Development documentation
-******************************************************************************
+.. toctree::
+   :numbered:
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
-dispass.algos
-==============================================================================
-
-.. automodule:: dispass.algos
-   :members:
-
-dispass.common
-==============================================================================
-
-.. automodule:: dispass.common
-   :members:
-
-dispass.dispass
-==============================================================================
-
-.. automodule:: dispass.dispass
-   :members:
-
-dispass.cli
-==============================================================================
-
-.. automodule:: dispass.cli
-   :members:
-
-dispass.gui
-==============================================================================
-
-.. automodule:: dispass.gui
-   :members:
-
-dispass.filehandler
-==============================================================================
-
-.. automodule:: dispass.filehandler
-   :members:
-
-dispass.interactive_editor
-==============================================================================
-
-.. automodule:: dispass.interactive_editor
-   :members:
-
-dispass.commands.add
-==============================================================================
-
-.. automodule:: dispass.commands.add
-   :members:
-
-dispass.commands.generate
-==============================================================================
-
-.. automodule:: dispass.commands.generate
-   :members:
-
-dispass.commands.gui
-==============================================================================
-
-.. automodule:: dispass.commands.gui
-   :members:
-
-dispass.commands.help
-==============================================================================
-
-.. automodule:: dispass.commands.help
-   :members:
-
-dispass.commands.list
-==============================================================================
-
-.. automodule:: dispass.commands.list
-   :members:
-
-dispass.commands.rm
-==============================================================================
-
-.. automodule:: dispass.commands.rm
-   :members:
-
-dispass.commands.version
-==============================================================================
-
-.. automodule:: dispass.commands.version
-   :members:
-
-
-.. vim: set et ts=3 sw=3 sts=3 ai:
+   01-quick-start
+   02-user-docs
+   03-development-docs
