@@ -100,7 +100,7 @@ class Command(CommandBase):
 
             newlabel = labelspec[0]
 
-        if newlabel:
+        if self.flags['generate'] and newlabel:
             console = CLI(lf)
             console.verifyPassword = True
             console.generate(console.passwordPrompt(), lf.labeltup(newlabel))
