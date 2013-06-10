@@ -176,8 +176,10 @@ class InteractiveEditor:
             self.filehandler.save()
             print('Label saved')
             self.filehandler.parse()
+            return label
         else:
             print('Label already exists in labelfile')
+            return False
 
     def remove(self):
         label = self.read_label()
