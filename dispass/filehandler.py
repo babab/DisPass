@@ -205,18 +205,21 @@ class Filehandler:
                 return labeltup
         return False
 
-    def printLabels(self, fixed_columns=False):
+    def printLabels(self, fixed_columns=False, labels_only=False):
         '''Print a formatted table of labelfile contents
 
         :Parameters:
             - `fixed_columns`: Boolean.
+            - `labels_only`: Boolean.
 
-        If fixed columns is true the output will be optimized for easy
+        If `labels_only` is True, only the labelnames will be printed.
+
+        If `fixed_columns` is true the output will be optimized for easy
         parsing by other programs and scripts by not printing the header
         and always printing one entry on a single line using the
         following positions:
 
-        * Column 1-50: label (50 chars)
+        * Column 1-50: labelname (50 chars)
         * Column 52-54: length (3 chars wide)
         * Column 56-70: hash algo (15 chars wide)
         * Column 72-74: sequence number (3 chars wide)
@@ -226,6 +229,11 @@ class Filehandler:
         '''
 
         self.refresh()
+        if labels_only:
+            for label in self.labelfile:
+                print(label[0])
+            return
+
         if fixed_columns:
             for label in self.labelfile:
                 print('{:50} {:3} {:15} {:3}'
