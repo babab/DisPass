@@ -19,8 +19,10 @@ from dispass.interactive_editor import InteractiveEditor
 
 
 class Command(CommandBase):
-    usagestr = ('usage: dispass rm [-n] [-s] <labelname>\n'
-                '       dispass rm [-i] [-h]')
+    usagestr = (
+        'usage: dispass rm [-n] [-s] <labelname> [<labelname2>] [...]\n'
+        '       dispass rm [-i] [-h]'
+    )
     description = 'Remove label from labelfile'
     optionList = (
         ('interactive', ('i', False, 'add label in an interactive manner')),
@@ -48,12 +50,14 @@ class Command(CommandBase):
             print self.usage
             return 0
 
-        if lf.remove(self.args[0]):
-            if not self.flags['dry-run']:
-                lf.save()
-            if not self.flags['silent']:
-                print('Label removed')
-            return 0
-        else:
-            print("Label doesn't exist in labelfile")
-            return 1
+        for arg in set(self.args):
+            if lf.remove(arg):
+                if not self.flags['silent']:
+                    print("Label '{name}' removed".format(name=arg))
+            else:
+                if not self.flags['silent']:
+                    print("Label '{name}' doesn't exist in labelfile"
+                          .format(name=arg))
+
+        if not self.flags['dry-run']:
+            lf.save()

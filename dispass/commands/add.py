@@ -24,8 +24,10 @@ from dispass.interactive_editor import InteractiveEditor
 
 class Command(CommandBase):
     '''Add a new label to the labelfile and generate passphrase.'''
-    usagestr = ('usage: dispass add [-g] [-n] [-s] <labelspec>\n'
-                '       dispass add [-i] [-g] [-h]')
+    usagestr = (
+        'usage: dispass add [-g] [-n] [-s] <labelspec> [<labelspec2>] [...]\n'
+        '       dispass add [-i] [-g] [-h]'
+    )
     description = (
         'Add a new label to the labelfile and generate passphrase.\n'
         'The labelspec looks like this:\n\n'
@@ -43,8 +45,12 @@ class Command(CommandBase):
     def run(self):
         '''Parse labels and add them using `FileHandler.add`.
 
-        When the -i flag is passed, add them using `InteractiveEditor.add```
+        When the -i flag is passed, add them using `InteractiveEditor.add`
         '''
+
+        newlabels = []
+        '''A list of labelnames that have been added.'''
+
         if self.parentFlags['file']:
             lf = Filehandler(settings, file_location=self.parentFlags['file'])
         else:
@@ -52,7 +58,7 @@ class Command(CommandBase):
 
         if self.flags['interactive']:
             intedit = InteractiveEditor(self.settings, lf, interactive=False)
-            newlabel = intedit.add()
+            newlabels.append(intedit.add())
         else:
             if not self.args or self.flags['help']:
                 print self.usage
@@ -62,48 +68,55 @@ class Command(CommandBase):
                 if not lf.promptForCreation(silent=self.flags['silent']):
                     return 1
 
-            labelspec = self.args[0].split(':')
-            params = len(labelspec)
+            for arg in set(self.args):
+                labelspec = arg.split(':')
+                params = len(labelspec)
 
-            length = 0
-            try:
-                length = params >= 2 and int(labelspec[1])
-            except ValueError:
-                pass
-
-            if not length:
-                length = settings.passphrase_length
-
-            algo = params >= 3 and labelspec[2] or settings.algorithm
-            if not algo in algos.algorithms:
-                algo = settings.algorithm
-
-            seqno = 0
-            if algo != 'dispass1':
+                length = 0
                 try:
-                    seqno = params >= 4 and int(labelspec[3])
+                    length = params >= 2 and int(labelspec[1])
                 except ValueError:
                     pass
 
-            if not seqno:
-                seqno = settings.sequence_number
+                if not length:
+                    length = settings.passphrase_length
 
-            if lf.add(labelname=labelspec[0], length=length, algo=algo,
-                      seqno=seqno):
-                if not self.flags['dry-run']:
-                    lf.save()
-                if not self.flags['silent']:
-                    print('Label saved')
-            else:
-                print('Label already exists in labelfile')
-                return 1
+                algo = params >= 3 and labelspec[2] or settings.algorithm
+                if not algo in algos.algorithms:
+                    algo = settings.algorithm
 
-            newlabel = labelspec[0]
+                seqno = 0
+                if algo != 'dispass1':
+                    try:
+                        seqno = params >= 4 and int(labelspec[3])
+                    except ValueError:
+                        pass
 
-        if self.flags['generate'] and newlabel:
+                if not seqno:
+                    seqno = settings.sequence_number
+
+                if lf.add(labelname=labelspec[0], length=length, algo=algo,
+                          seqno=seqno):
+                    newlabels.append(labelspec[0])
+                    if not self.flags['silent']:
+                        print("Label '{name}' saved".format(name=labelspec[0]))
+                else:
+                    if not self.flags['silent']:
+                        print("Label '{name}' already exists in labelfile"
+                              .format(name=labelspec[0]))
+
+            if not self.flags['dry-run']:
+                lf.save()
+
+        if self.flags['generate'] and newlabels:
             console = CLI(lf)
             console.verifyPassword = True
-            console.generate(console.passwordPrompt(), lf.labeltup(newlabel))
+            password = console.passwordPrompt()
+
+            for label in newlabels:
+                console.generate(password, lf.labeltup(label))
+            del password
+
             if not console.output():
                 if not self.flags['silent']:
                     print('Error: could not generate passphrase')
