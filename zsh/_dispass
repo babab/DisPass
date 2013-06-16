@@ -36,7 +36,7 @@ if (( CURRENT == 1 )); then
 fi
 
 case "$words[1]" in
-  add)
+  a*)
     _arguments \
       '(-i --interactive -h --help -n --dry-run -s --silent)-i[add label in an interactive manner]' \
       '(-i --interactive -h --help -n --dry-run -s --silent)--interactive[add label in an interactive manner]' \
@@ -49,7 +49,7 @@ case "$words[1]" in
       '(-i --interactive -h --help -s --silent)-s[do not print success message]' \
       '(-i --interactive -h --help -s --silent)--silent[do not print success message]' \
       &&  return 0 ;;
-  generate)
+  ge*)
     _arguments \
       '(-h --help)-h[show help information]' \
       '(-h --help)--help[show help information]' \
@@ -68,15 +68,15 @@ case "$words[1]" in
       '(-h --help --silent)--silent[do not show a prompt when errors occur]' \
       '*:: :->labels' && return 0
     get_labels ;;
-  gui)
+  gu*)
     _arguments \
       '(-h --help)-h[show help information]' \
       '(-h --help)--help[show help information]' \
       &&  return 0 ;;
-  help)
+  h*)
     _describe -t commands "dispass subcommands" _dispass_commands
     return 0 ;;
-  list)
+  l*)
     _arguments \
       '(-h --help -n --names-only --script)-h[show help information]' \
       '(-h --help -n --names-only --script)--help[show help information]' \
@@ -84,7 +84,7 @@ case "$words[1]" in
       '(-h --help -n --names-only --script)--names-only[only print names of the labels]' \
       '(-h --help -n --names-only --script)--script[output in fixed columns]' \
       &&  return 0 ;;
-  rm)
+  r*)
     _arguments \
       '(-i --interactive -h --help -n --dry-run -s --silent)-i[remove label in an interactive manner]' \
       '(-i --interactive -h --help -n --dry-run -s --silent)--interactive[remove label in an interactive manner]' \
@@ -96,7 +96,7 @@ case "$words[1]" in
       '(-i --interactive -h --help -s --silent)--silent[do not print success message]' \
       '*:: :->labels' && return 0
     get_labels ;;
-  version)
+  v*)
     return 0
 esac
 
