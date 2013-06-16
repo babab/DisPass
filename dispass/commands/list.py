@@ -18,7 +18,7 @@ from dispass.filehandler import Filehandler
 
 
 class Command(CommandBase):
-    usagestr = 'usage: dispass list [-h] [--script]'
+    usagestr = 'usage: dispass list [-h] [-n] [--script]'
     description = (
         'Print a formatted table of labelfile contents\n\n'
 
@@ -27,13 +27,14 @@ class Command(CommandBase):
         'and always printing one entry on a single line using the\n'
         'following positions:\n\n'
 
-        'Column  1-50: label            50 chars wide\n'
+        'Column  1-50: labelname        50 chars wide\n'
         'Column 52-54: length            3 chars wide\n'
         'Column 56-70: hash algo        15 chars wide\n'
         'Column 72-74: sequence number   3 chars wide'
     )
     optionList = (
         ('help',        ('h', False, 'show this help information')),
+        ('names-only',  ('n', False, 'only print names of the labels')),
         ('script',      ('', False, 'output in fixed columns')),
     )
 
@@ -52,4 +53,5 @@ class Command(CommandBase):
                   .format(loc=lf.file_location))
             return 1
 
-        lf.printLabels(self.flags['script'])
+        lf.printLabels(fixed_columns=self.flags['script'],
+                       labels_only=self.flags['names-only'])

@@ -78,9 +78,11 @@ case "$words[1]" in
     return 0 ;;
   list)
     _arguments \
-      '(-h --help --script)-h[show help information]' \
-      '(-h --help --script)--help[show help information]' \
-      '(-h --help --script)--script[output in fixed columns]' \
+      '(-h --help -n --names-only --script)-h[show help information]' \
+      '(-h --help -n --names-only --script)--help[show help information]' \
+      '(-h --help -n --names-only --script)-n[only print names of the labels]' \
+      '(-h --help -n --names-only --script)--names-only[only print names of the labels]' \
+      '(-h --help -n --names-only --script)--script[output in fixed columns]' \
       &&  return 0 ;;
   rm)
     _arguments \
