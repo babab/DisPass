@@ -69,7 +69,7 @@ class DispassCommand(CommandBase):
         '   gui          start the graphical version of DisPass\n'
         '   help         show this help information\n'
         '   list         print a formatted table of labelfile contents\n'
-        '   rm           remove label from labelfile\n'
+        '   remove       remove label from labelfile\n'
         #'   settings     show default values for length, algo etc.\n'
         '   version      show full version information'
     )
@@ -105,7 +105,7 @@ class DispassCommand(CommandBase):
         import commands.gui
         import commands.help
         import commands.list
-        import commands.rm
+        import commands.remove
         import commands.version
 
         if self.flags['help']:
@@ -137,7 +137,8 @@ class DispassCommand(CommandBase):
         elif self.args[0][0] == 'l':
             cmd = commands.list.Command(settings=settings, argv=self.args[1:])
         elif self.args[0][0] == 'r':
-            cmd = commands.rm.Command(settings=settings, argv=self.args[1:])
+            cmd = commands.remove.Command(settings=settings,
+                                          argv=self.args[1:])
         elif self.args[0][0] == 'v':
             cmd = commands.version.Command(settings=settings,
                                            argv=self.args[1:])

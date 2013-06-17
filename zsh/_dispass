@@ -17,7 +17,7 @@ _dispass_commands=(
   'gui:start the graphical version of DisPass'
   'help:show help information'
   'list:print a formatted table of labelfile contents'
-  'rm:remove label from labelfile'
+  'remove:remove label from labelfile'
   'version:show full version information'
 )
 

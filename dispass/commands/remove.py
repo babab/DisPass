@@ -20,12 +20,12 @@ from dispass.interactive_editor import InteractiveEditor
 
 class Command(CommandBase):
     usagestr = (
-        'usage: dispass rm [-n] [-s] <labelname> [<labelname2>] [...]\n'
-        '       dispass rm [-i] [-h]'
+        'usage: dispass remove [-n] [-s] <labelname> [<labelname2>] [...]\n'
+        '       dispass remove [-i] [-h]'
     )
     description = 'Remove label from labelfile'
     optionList = (
-        ('interactive', ('i', False, 'add label in an interactive manner')),
+        ('interactive', ('i', False, 'remove label in an interactive manner')),
         ('help',    ('h', False, 'show this help information')),
         ('dry-run', ('n', False,
                      'do not actually remove label from labelfile')),
