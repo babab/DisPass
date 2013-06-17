@@ -165,14 +165,13 @@ class Filehandler:
                      .format(version=__version__,
                              datetime=datetime.datetime.now()))
         for label in self.labelfile:
-            options = ''
-            if label[1] != self.settings.passphrase_length:
-                options += 'length={length}  '.format(length=label[1])
-            if label[2] != self.settings.algorithm:
-                options += 'algo={algo}  '.format(algo=label[2])
-            if label[3] != self.settings.sequence_number:
-                options += 'seqno={seqno}  '.format(seqno=label[3])
-
+            if label[2] == 'dispass1':
+                options = ('length={length}  algo={algo}'
+                           .format(length=label[1], algo=label[2]))
+            else:
+                options = ('length={length}  algo={algo}  seqno={seqno}'
+                           .format(length=label[1], algo=label[2],
+                                   seqno=label[3]))
             labelfile += ('{label:{divlen}}  {options}\n'
                           .format(label=label[0], options=options,
                                   divlen=self.longest_label))
