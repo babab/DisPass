@@ -166,6 +166,16 @@ class GUI(Frame):
         '''Change focus to password field.'''
         self.passwordin1.focus_set()
 
+    def filterLabels(self):
+        '''Filter labels according to what was typed into the entry.'''
+        value = self.label.get()
+
+        if value:
+            self.label.configure(values=[s for s in self.labelspecs.keys()
+                                         if s.startswith(value)])
+        else:
+            self.label.configure(values=self.labelspecs.keys())
+
 # GUI # Create Widgets
     def createWidgets(self):
         '''Create and align widgets'''
@@ -191,7 +201,7 @@ class GUI(Frame):
                              font=self.getFont(2))
         tlength = Label(self, text='Length', font=self.getFont(2))
         self.label = ttk.Combobox(self, width=27, font=self.getFont(),
-                                  values=self.labelspecs.keys())
+                                  postcommand=self.filterLabels)
         self.passwordin1 = Entry(self, width=27, font=self.getFont(), show="*")
         self.passwordin2 = Entry(self, width=27, font=self.getFont(), show="*",
                                  state=DISABLED)
