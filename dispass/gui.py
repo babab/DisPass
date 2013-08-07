@@ -156,9 +156,14 @@ class GUI(Frame):
         self.clearIO()
         self.label.focus_set()
 
-    def labelSelected(self, event):
+    def labelFocusOut(self, event):
         '''Set values of input fields according to the selected label.'''
-        self.lengthVar.set(self.labelspecs[self.label.get()][0])
+        labelspec = self.labelspecs.get(self.label.get())
+        if labelspec:
+            self.lengthVar.set(labelspec[0])
+
+    def labelSelected(self, event):
+        '''Change focus to password field.'''
         self.passwordin1.focus_set()
 
 # GUI # Create Widgets
@@ -208,6 +213,7 @@ class GUI(Frame):
         self.master.bind('<Control-q>', lambda e: self.quit())
         self.master.bind('<Escape>', lambda e: self.reset())
         self.label.bind('<<ComboboxSelected>>', self.labelSelected)
+        self.label.bind('<FocusOut>', self.labelFocusOut)
 
         # Layout widgets in a grid
         ttitle.grid(row=0, column=0, sticky=N + S + E + W, columnspan=4)
