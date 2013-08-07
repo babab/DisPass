@@ -159,6 +159,7 @@ class GUI(Frame):
     def labelSelected(self, event):
         '''Set values of input fields according to the selected label.'''
         self.lengthVar.set(self.labelspecs[self.label.get()][0])
+        self.passwordin1.focus_set()
 
 # GUI # Create Widgets
     def createWidgets(self):
