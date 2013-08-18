@@ -226,19 +226,24 @@ class GUI(Frame):
         self.label.bind('<FocusOut>', self.labelFocusOut)
 
         # Layout widgets in a grid
-        ttitle.grid(row=0, column=0, sticky=N + S + E + W, columnspan=4)
-        wisnew.grid(row=1, column=0, sticky=N + S + E + W, columnspan=4)
-        tlabel.grid(row=2, column=0, sticky=N + S + E + W)
-        tpasswordin1.grid(row=2, column=1, sticky=N + S + E + W)
-        tpasswordin2.grid(row=2, column=2, sticky=N + S + E + W)
-        tlength.grid(row=2, column=3, sticky=N + S + E + W)
-        self.label.grid(row=3, column=0, sticky=N + S + E + W)
+        ttitle.grid(row=0, column=0, sticky=N + S + E + W, columnspan=2)
+        wisnew.grid(row=1, column=0, sticky=N + S + E + W, columnspan=2)
+
+        tlabel.grid(row=2, column=0, sticky=N + S + W)
+        self.label.grid(row=2, column=1, sticky=N + S + E + W)
+
+        tpasswordin1.grid(row=3, column=0, sticky=N + S + W)
         self.passwordin1.grid(row=3, column=1, sticky=N + S + E + W)
-        self.passwordin2.grid(row=3, column=2, sticky=N + S + E + W)
-        length.grid(row=3, column=3, sticky=N + S + E + W)
-        genbutton.grid(row=4, column=0, sticky=N + S + E + W, columnspan=2)
-        clrbutton.grid(row=4, column=2, sticky=N + S + E + W, columnspan=2)
-        self.result.grid(row=5, column=0, sticky=N + S + E + W, columnspan=4)
+
+        tpasswordin2.grid(row=4, column=0, sticky=N + S + W)
+        self.passwordin2.grid(row=4, column=1, sticky=N + S + E + W)
+
+        tlength.grid(row=5, column=0, sticky=N + S + W)
+        length.grid(row=5, column=1, sticky=N + S + E + W)
+
+        clrbutton.grid(row=6, column=0, sticky=N + S + E + W, columnspan=2)
+        genbutton.grid(row=7, column=0, sticky=N + S + E + W, columnspan=2)
+        self.result.grid(row=8, column=0, sticky=N + S + E + W, columnspan=2)
 
         # Initially, set focus on self.label
         self.label.focus_set()
