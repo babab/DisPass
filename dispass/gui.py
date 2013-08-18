@@ -13,6 +13,7 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 from Tkinter import *
+import sys
 import tkMessageBox
 import ttk
 
@@ -46,6 +47,8 @@ class GUI(Frame):
         Frame.__init__(self, Tk(className='dispass'))
         self.lengthVar = IntVar()
         self.lengthVar.set(self.settings.passphrase_length)
+        self.sequenceVar = IntVar()
+        self.sequenceVar.set(self.settings.sequence_number)
         self.master.title(versionStr)
         self.grid()
         self.createWidgets()
@@ -95,6 +98,7 @@ class GUI(Frame):
         passwordin1 = self.passwordin1.get()
         passwordin2 = self.passwordin2.get()
         isnew = self.isnew.get()
+        algorithm = self.algorithm.get()
 
         if len(label) == 0:
             self.warn('No password generated, label field is empty')
@@ -110,10 +114,23 @@ class GUI(Frame):
             self.warn('Passwords are not identical, please try again', 'hard',
                       box_title='Password mismatch')
             return
+        elif algorithm not in algos.algorithms:
+            self.warn('Unknown algorithm: %s' % algorithm,
+                      box_title='Unknown algorithm')
+            return
 
         # All checks passed, create digest
-        h = algos.Dispass1.digest(label, passwordin1,
-                                  length=self.lengthVar.get())
+        if algorithm == 'dispass1':
+            algo = algos.Dispass1
+        elif algorithm == 'dispass2':
+            algo = algos.Dispass2
+        else:
+            self.warn('Algorithm not implemented in GUI: %s' % algorithm,
+                      box_title='Unimplemented algorithm')
+            return
+
+        h = algo.digest(label, passwordin1, length=self.lengthVar.get(),
+                        seqno=self.sequenceVar.get())
         self.result.config(fg="black", readonlybackground="green")
         self.passwordout.set(h)
         self.clearInput()
@@ -135,9 +152,11 @@ class GUI(Frame):
         '''Clear all input fields'''
 
         self.lengthVar.set(self.settings.passphrase_length)
+        self.sequenceVar.set(self.settings.sequence_number)
         self.label.delete(0, END)
         self.passwordin1.delete(0, END)
         self.passwordin2.delete(0, END)
+        self.algorithm.set(self.settings.algorithm)
 
     def clearOutput(self):
         '''Clear all output fields'''
@@ -161,6 +180,8 @@ class GUI(Frame):
         labelspec = self.labelspecs.get(self.label.get())
         if labelspec:
             self.lengthVar.set(labelspec[0])
+            self.algorithm.set(labelspec[1])
+            self.sequenceVar.set(labelspec[2])
 
     def labelSelected(self, event):
         '''Change focus to password field.'''
@@ -200,6 +221,8 @@ class GUI(Frame):
         tpasswordin2 = Label(self, text='Password (again)',
                              font=self.getFont(2))
         tlength = Label(self, text='Length', font=self.getFont(2))
+        talgorithm = Label(self, text='Algorithm', font=self.getFont(2))
+        tsequence = Label(self, text='Sequence #', font=self.getFont(2))
         self.label = ttk.Combobox(self, width=27, font=self.getFont(),
                                   postcommand=self.filterLabels)
         self.passwordin1 = Entry(self, width=27, font=self.getFont(), show="*")
@@ -207,6 +230,10 @@ class GUI(Frame):
                                  state=DISABLED)
         length = Spinbox(self, width=3, font=self.getFont, from_=9,
                          to=171, textvariable=self.lengthVar)
+        self.algorithm = ttk.Combobox(self, width=27, font=self.getFont(),
+                                      values=algos.algorithms)
+        sequence = Spinbox(self, width=3, font=self.getFont, from_=1,
+                           to=sys.maxint, textvariable=self.sequenceVar)
         genbutton = Button(self, text="Generate password",
                            font=self.getFont(), command=self.validateAndShow,
                            default="active")
@@ -220,6 +247,8 @@ class GUI(Frame):
         self.passwordin1.bind('<Return>', lambda e: genbutton.invoke())
         self.passwordin2.bind('<Return>', lambda e: genbutton.invoke())
         length.bind('<Return>', lambda e: genbutton.invoke())
+        self.algorithm.bind('<Return>', lambda e: genbutton.invoke())
+        sequence.bind('<Return>', lambda e: genbutton.invoke())
         self.master.bind('<Control-q>', lambda e: self.quit())
         self.master.bind('<Escape>', lambda e: self.reset())
         self.label.bind('<<ComboboxSelected>>', self.labelSelected)
@@ -241,9 +270,18 @@ class GUI(Frame):
         tlength.grid(row=5, column=0, sticky=N + S + W)
         length.grid(row=5, column=1, sticky=N + S + E + W)
 
-        clrbutton.grid(row=6, column=0, sticky=N + S + E + W, columnspan=2)
-        genbutton.grid(row=7, column=0, sticky=N + S + E + W, columnspan=2)
-        self.result.grid(row=8, column=0, sticky=N + S + E + W, columnspan=2)
+        talgorithm.grid(row=6, column=0, sticky=N + S + W)
+        self.algorithm.grid(row=6, column=1, sticky=N + S + E + W)
+
+        tsequence.grid(row=7, column=0, sticky=N + S + W)
+        sequence.grid(row=7, column=1, sticky=N + S + E + W)
+
+        clrbutton.grid(row=8, column=0, sticky=N + S + E + W, columnspan=2)
+        genbutton.grid(row=9, column=0, sticky=N + S + E + W, columnspan=2)
+        self.result.grid(row=10, column=0, sticky=N + S + E + W, columnspan=2)
+
+        # Initial values
+        self.algorithm.set(self.settings.algorithm)
 
         # Initially, set focus on self.label
         self.label.focus_set()
