@@ -12,7 +12,22 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-from Tkinter import *
+from Tkinter import (
+    Button,
+    Checkbutton,
+    Entry,
+    Frame,
+    IntVar,
+    Label,
+    Spinbox,
+    StringVar,
+    Tk,
+
+    DISABLED,
+    END,
+    NORMAL,
+    N, E, S, W,
+)
 import sys
 import tkMessageBox
 import ttk
