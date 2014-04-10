@@ -71,6 +71,7 @@ class DispassCommand(CommandBase):
         '   list         print a formatted table of labelfile contents\n'
         '   remove       remove label from labelfile\n'
         #'   settings     show default values for length, algo etc.\n'
+        '   update       update length, algo or seqno of a label\n'
         '   version      show full version information'
     )
 
@@ -106,6 +107,7 @@ class DispassCommand(CommandBase):
         import commands.help
         import commands.list
         import commands.remove
+        import commands.update
         import commands.version
 
         if self.flags['help']:
@@ -138,6 +140,9 @@ class DispassCommand(CommandBase):
             cmd = commands.list.Command(settings=settings, argv=self.args[1:])
         elif self.args[0][0] == 'r':
             cmd = commands.remove.Command(settings=settings,
+                                          argv=self.args[1:])
+        elif self.args[0][0] == 'u':
+            cmd = commands.update.Command(settings=settings,
                                           argv=self.args[1:])
         elif self.args[0][0] == 'v':
             cmd = commands.version.Command(settings=settings,

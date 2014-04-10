@@ -119,6 +119,11 @@ class Filehandler:
 
         return self
 
+    def find(self, labelname):
+        for label in self.labelfile:
+            if labelname == label[0]:
+                return label
+
     def add(self, labelname, length=None, algo=None, seqno=None):
         '''Add label to `labelfile`'''
 
@@ -126,12 +131,25 @@ class Filehandler:
         algo = algo if algo else self.settings.algorithm
         seqno = seqno if seqno else self.settings.sequence_number
 
-        for label in self.labelfile:
-            if labelname == label[0]:
-                return False
+        if self.find(labelname):
+            return False
 
         self.labelfile.append((labelname, length, algo, seqno))
         return True
+
+    def update(self, labelname, length=None, algo=None, seqno=None):
+        '''Update label in `labelfile`'''
+
+        label = self.find(labelname)
+
+        if not label:
+            return False
+
+        params = {'length': length if length else label[1],
+                  'algo': algo if algo else label[2],
+                  'seqno': seqno if seqno else label[3]}
+
+        return self.remove(labelname) and self.add(labelname, **params)
 
     def remove(self, labelname):
         '''Remove label from `labelfile`'''

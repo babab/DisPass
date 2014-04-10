@@ -115,6 +115,7 @@ Using the *dispass* command line app
       help         show this help information
       list         print a formatted table of labelfile contents
       rm           remove label from labelfile
+      update       update length, algo or seqno of a label
       version      show full version information
 
    Options:
@@ -216,6 +217,22 @@ dispass rm
    -h, --help         show this help information
    -n, --dry-run      do not actually remove label from labelfile
    -s, --silent       do not print success message
+
+
+dispass update
+------------------------------------------------------------------------------
+
+::
+
+   usage: dispass update [-n] [-s] <label> [<size>]:[<algorithm>]:[<sequence_number>]
+          dispass update [-h]
+
+   Update information for a label
+
+   Options:
+   -h, --help     show this help information
+   -n, --dry-run  do not actually update label in labelfile
+   -s, --silent   do not print success message
 
 
 dispass version
