@@ -151,6 +151,16 @@ class Filehandler:
 
         return self.remove(labelname) and self.add(labelname, **params)
 
+    def increment(self, labelname):
+        '''Increment sequence number of `labelfile`'''
+
+        label = self.find(labelname)
+
+        if not label or label[2] == 'dispass1':
+            return False
+
+        return self.update(labelname, seqno=int(label[3]) + 1)
+
     def remove(self, labelname):
         '''Remove label from `labelfile`'''
 

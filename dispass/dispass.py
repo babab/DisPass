@@ -68,6 +68,7 @@ class DispassCommand(CommandBase):
         '   generate     generate passphrases for one or more labels\n'
         '   gui          start the graphical version of DisPass\n'
         '   help         show this help information\n'
+        '   increment    increment the sequence number of a label\n'
         '   list         print a formatted table of labelfile contents\n'
         '   remove       remove label from labelfile\n'
         #'   settings     show default values for length, algo etc.\n'
@@ -105,6 +106,7 @@ class DispassCommand(CommandBase):
         import commands.generate
         import commands.gui
         import commands.help
+        import commands.increment
         import commands.list
         import commands.remove
         import commands.update
@@ -136,6 +138,9 @@ class DispassCommand(CommandBase):
                                            argv=self.args[1:])
         elif self.args[0][0] == 'h':
             cmd = commands.help.Command(settings=settings, argv=self.args[1:])
+        elif self.args[0][0] == 'i':
+            cmd = commands.increment.Command(settings=settings,
+                                             argv=self.args[1:])
         elif self.args[0][0] == 'l':
             cmd = commands.list.Command(settings=settings, argv=self.args[1:])
         elif self.args[0][0] == 'r':

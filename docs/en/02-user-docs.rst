@@ -113,6 +113,7 @@ Using the *dispass* command line app
       generate     generate passphrases for one or more labels
       gui          start the graphical version of DisPass
       help         show this help information
+      increment    increment the sequence number of a label
       list         print a formatted table of labelfile contents
       rm           remove label from labelfile
       update       update length, algo or seqno of a label
@@ -177,6 +178,21 @@ dispass gui
    Options:
    -h, --help  show this help information
 
+
+dispass increment
+------------------------------------------------------------------------------
+
+::
+
+   usage: dispass increment [-n] [-s] <label>
+          dispass increment [-h]
+
+   Increment the sequence number of a label
+
+   Options:
+   -h, --help     show this help information
+   -n, --dry-run  do not actually update label in labelfile
+   -s, --silent   do not print success message
 
 dispass list
 ------------------------------------------------------------------------------
