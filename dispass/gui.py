@@ -34,7 +34,6 @@ import ttk
 
 import algos
 from dispass import versionStr as dispass_version
-from filehandler import Filehandler
 
 versionStr = 'g%s' % dispass_version
 
@@ -48,7 +47,7 @@ class GUI(Frame):
     fontsize = 10
     '''Default fontsize (10 pt.)'''
 
-    def __init__(self, settings):
+    def __init__(self, settings, filehandler):
         '''Initialize GUI object, create the widgets and start mainloop
 
         Try to import Tkinter and tkMessageBox. If that fails, show a help
@@ -56,8 +55,7 @@ class GUI(Frame):
         '''
 
         self.settings = settings
-        self.labelspecs = {l[0]: l[1:] for l in
-                           Filehandler(self.settings).labelfile}
+        self.labelspecs = {l[0]: l[1:] for l in filehandler.labelfile}
 
         Frame.__init__(self, Tk(className='dispass'))
         self.lengthVar = IntVar()
