@@ -54,6 +54,9 @@ class Settings(object):
     sequence_number = 1
     '''Int. Default sequence number'''
 
+    disabled = False
+    '''Bool. Default disabled state'''
+
 settings = Settings()
 
 

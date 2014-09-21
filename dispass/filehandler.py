@@ -34,7 +34,7 @@ class Filehandler:
     '''String of labelfile location, set on init'''
 
     labelfile = []
-    '''List of [(labelname, length, algorithm, seqno), ... ]'''
+    '''List of [(labelname, length, algorithm, seqno, disabled), ... ]'''
 
     longest_label = None
     '''Int. Length of the longest labelname of `labelfile`. Set on refresh()'''
@@ -66,7 +66,7 @@ class Filehandler:
             return home_file
 
     def parse(self):
-        '''Create dictionary {algorithm: (label, (length, seqno))}'''
+        '''Create dictionary {algorithm: (label, (length, seqno, disabled))}'''
 
         file_stripped = []
         self.labelfile = []
@@ -103,6 +103,7 @@ class Filehandler:
             length = self.settings.passphrase_length
             seqno = self.settings.sequence_number
             algo = self.settings.algorithm
+            disabled = self.settings.disabled
 
             for arg in line:
                 if 'length=' in arg:
@@ -114,8 +115,10 @@ class Filehandler:
                     algo = arg.strip('algo=')
                 elif 'seqno=' in arg:
                     seqno = arg.strip('seqno=')
+                elif 'disabled=' in arg:
+                    disabled = arg.lstrip('disabled=') == 'True'
 
-            self.labelfile.append((labelname, length, algo, seqno))
+            self.labelfile.append((labelname, length, algo, seqno, disabled))
 
         return self
 
@@ -124,20 +127,23 @@ class Filehandler:
             if labelname == label[0]:
                 return label
 
-    def add(self, labelname, length=None, algo=None, seqno=None):
+    def add(self, labelname, length=None, algo=None, seqno=None,
+            disabled=False):
         '''Add label to `labelfile`'''
 
         length = length if length else self.settings.passphrase_length
         algo = algo if algo else self.settings.algorithm
         seqno = seqno if seqno else self.settings.sequence_number
+        disabled = disabled if disabled else self.settings.disabled
 
         if self.find(labelname):
             return False
 
-        self.labelfile.append((labelname, length, algo, seqno))
+        self.labelfile.append((labelname, length, algo, seqno, disabled))
         return True
 
-    def update(self, labelname, length=None, algo=None, seqno=None):
+    def update(self, labelname, length=None, algo=None, seqno=None,
+               disabled=None):
         '''Update label in `labelfile`'''
 
         label = self.find(labelname)
@@ -147,7 +153,8 @@ class Filehandler:
 
         params = {'length': length if length else label[1],
                   'algo': algo if algo else label[2],
-                  'seqno': seqno if seqno else label[3]}
+                  'seqno': seqno if seqno else label[3],
+                  'disabled': disabled if disabled is not None else label[4]}
 
         return self.remove(labelname) and self.add(labelname, **params)
 
@@ -194,12 +201,14 @@ class Filehandler:
                              datetime=datetime.datetime.now()))
         for label in self.labelfile:
             if label[2] == 'dispass1':
-                options = ('length={length}  algo={algo}'
-                           .format(length=label[1], algo=label[2]))
-            else:
-                options = ('length={length}  algo={algo}  seqno={seqno}'
+                options = ('length={length}  algo={algo} disabled={disabled}'
                            .format(length=label[1], algo=label[2],
-                                   seqno=label[3]))
+                                   disabled=label[4]))
+            else:
+                options = (('length={length}  algo={algo}  seqno={seqno} '
+                            'disabled={disabled}')
+                           .format(length=label[1], algo=label[2],
+                                   seqno=label[3], disabled=label[4]))
             labelfile += ('{label:{divlen}}  {options}\n'
                           .format(label=label[0], options=options,
                                   divlen=self.longest_label))
@@ -219,11 +228,12 @@ class Filehandler:
             - `label`: The labelname
 
         :Returns:
-            - A tuple with 4 values ``(label, length, algo, seqno))``:
+            - A tuple with 5 values ``(label, length, algo, seqno, disabled))``:
                 - `label`: Label to use for passprase generation
                 - `length`: Length to use for passprase generation
                 - `algo`: Algorithm to use for passprase generation
                 - `seqno`: Sequence number to use for passprase generation
+                - `disabled`: Whether or not the passphrase is disabled
 
         '''
 
@@ -250,6 +260,7 @@ class Filehandler:
         * Column 52-54: length (3 chars wide)
         * Column 56-70: hash algo (15 chars wide)
         * Column 72-74: sequence number (3 chars wide)
+        * Column 76-77: disabled (1 char wide)
 
         If fixed columns is false an ascii table is printed with a variable
         width depending on the length of the longest label.
@@ -263,23 +274,24 @@ class Filehandler:
 
         if fixed_columns:
             for label in self.labelfile:
-                print('{:50} {:3} {:15} {:3}'
+                print('{:50} {:3} {:15} {:3} {}'
                       .format(label[0][:50], str(label[1])[:3],
-                              label[2][:15], str(label[3])))
+                              label[2][:15], str(label[3]),
+                              'y' if label[4] else 'n'))
         else:
             divlen = self.longest_label
             if not divlen:
                 return
-            print('+-{spacer:{fill}}-+--------+----------+--------+\n'
-                  '| {title:{fill}} | Length | Algo     | Number | \n'
-                  '+-{spacer:{fill}}-+--------+----------+--------+'
+            print('+-{spacer:{fill}}-+--------+----------+--------+---+\n'
+                  '| {title:{fill}} | Length | Algo     | Number | X |\n'
+                  '+-{spacer:{fill}}-+--------+----------+--------+---+'
                   .format(spacer='-' * divlen, title='Label', fill=divlen))
 
             for label in self.labelfile:
-                print('| {:{fill}} |    {:3} | {:8} |      {:3>} |'
+                print('| {:{fill}} |    {:3} | {:8} |      {:3>} | {} |'
                       .format(label[0], label[1], label[2], int(label[3]),
-                              fill=divlen))
-            print('+-{:{fill}}-+--------+----------+--------+'
+                              'y' if label[4] else 'n', fill=divlen))
+            print('+-{:{fill}}-+--------+----------+--------+---+'
                   .format('-' * divlen, fill=divlen))
 
     def promptForCreation(self, silent=False):

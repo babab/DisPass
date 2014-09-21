@@ -30,7 +30,8 @@ class Command(CommandBase):
         'Column  1-50: labelname        50 chars wide\n'
         'Column 52-54: length            3 chars wide\n'
         'Column 56-70: hash algo        15 chars wide\n'
-        'Column 72-74: sequence number   3 chars wide'
+        'Column 72-74: sequence number   3 chars wide\n'
+        'Column 76-77: disabled          1 char wide'
     )
     optionList = (
         ('help',        ('h', False, 'show this help information')),
