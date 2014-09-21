@@ -276,7 +276,7 @@ class Filehandler:
                   .format(spacer='-' * divlen, title='Label', fill=divlen))
 
             for label in self.labelfile:
-                print('| {:{fill}} |    {:3} | {:8} |      {:3>} |'
+                print('| {:{fill}} |    {:3} | {:8} |    {:3} |'
                       .format(label[0], label[1], label[2], int(label[3]),
                               fill=divlen))
             print('+-{:{fill}}-+--------+----------+--------+'
