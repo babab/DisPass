@@ -60,7 +60,7 @@ class Command(CommandBase):
                 print("Label '{name}' incremented".format(name=labelname))
         else:
             if not self.flags['silent']:
-                print("Label '{name}' cound not be incremented"
+                print("Label '{name}' could not be incremented"
                       .format(name=labelname))
 
         if not self.flags['dry-run']:
