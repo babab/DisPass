@@ -38,7 +38,7 @@ class Command(CommandBase):
     )
 
     def run(self):
-        '''Parse the arguments and increment using `FileHandler.update`.'''
+        '''Parse the arguments and increment using `FileHandler.increment`.'''
 
         if self.parentFlags['file']:
             lf = Filehandler(settings, file_location=self.parentFlags['file'])
