@@ -168,6 +168,16 @@ class Filehandler:
 
         return self.update(labelname, seqno=int(label[3]) + 1)
 
+    def disable(self, labelname, disabled=True):
+        '''Disable or enable a label'''
+
+        label = self.find(labelname)
+
+        if not label:
+            return False
+
+        return self.update(labelname, disabled=disabled)
+
     def remove(self, labelname):
         '''Remove label from `labelfile`'''
 
