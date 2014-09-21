@@ -34,6 +34,7 @@ class Command(CommandBase):
         'Column 76-77: disabled          1 char wide'
     )
     optionList = (
+        ('all',         ('a', False, 'include disabled labels')),
         ('help',        ('h', False, 'show this help information')),
         ('names-only',  ('n', False, 'only print names of the labels')),
         ('script',      ('', False, 'output in fixed columns')),
@@ -55,4 +56,5 @@ class Command(CommandBase):
             return 1
 
         lf.printLabels(fixed_columns=self.flags['script'],
-                       labels_only=self.flags['names-only'])
+                       labels_only=self.flags['names-only'],
+                       all_=self.flags['all'])

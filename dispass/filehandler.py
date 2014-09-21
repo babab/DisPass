@@ -242,7 +242,7 @@ class Filehandler:
                 return labeltup
         return False
 
-    def printLabels(self, fixed_columns=False, labels_only=False):
+    def printLabels(self, fixed_columns=False, labels_only=False, all_=False):
         '''Print a formatted table of labelfile contents
 
         :Parameters:
@@ -269,15 +269,17 @@ class Filehandler:
         self.refresh()
         if labels_only:
             for label in self.labelfile:
-                print(label[0])
+                if all_ or not label[4]:
+                    print(label[0])
             return
 
         if fixed_columns:
             for label in self.labelfile:
-                print('{:50} {:3} {:15} {:3} {}'
-                      .format(label[0][:50], str(label[1])[:3],
-                              label[2][:15], str(label[3]),
-                              'y' if label[4] else 'n'))
+                if all_ or not label[4]:
+                    print('{:50} {:3} {:15} {:3} {}'
+                          .format(label[0][:50], str(label[1])[:3],
+                                  label[2][:15], str(label[3]),
+                                  'y' if label[4] else 'n'))
         else:
             divlen = self.longest_label
             if not divlen:
@@ -288,9 +290,10 @@ class Filehandler:
                   .format(spacer='-' * divlen, title='Label', fill=divlen))
 
             for label in self.labelfile:
-                print('| {:{fill}} |    {:3} | {:8} |      {:3>} | {} |'
-                      .format(label[0], label[1], label[2], int(label[3]),
-                              'y' if label[4] else 'n', fill=divlen))
+                if all_ or not label[4]:
+                    print('| {:{fill}} |    {:3} | {:8} |      {:3>} | {} |'
+                          .format(label[0], label[1], label[2], int(label[3]),
+                                  'y' if label[4] else 'n', fill=divlen))
             print('+-{:{fill}}-+--------+----------+--------+---+'
                   .format('-' * divlen, fill=divlen))
 
