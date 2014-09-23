@@ -30,9 +30,11 @@ class Command(CommandBase):
         'Column  1-50: labelname        50 chars wide\n'
         'Column 52-54: length            3 chars wide\n'
         'Column 56-70: hash algo        15 chars wide\n'
-        'Column 72-74: sequence number   3 chars wide'
+        'Column 72-74: sequence number   3 chars wide\n'
+        'Column 76-77: disabled          1 char wide'
     )
     optionList = (
+        ('all',         ('a', False, 'include disabled labels')),
         ('help',        ('h', False, 'show this help information')),
         ('names-only',  ('n', False, 'only print names of the labels')),
         ('script',      ('', False, 'output in fixed columns')),
@@ -54,4 +56,5 @@ class Command(CommandBase):
             return 1
 
         lf.printLabels(fixed_columns=self.flags['script'],
-                       labels_only=self.flags['names-only'])
+                       labels_only=self.flags['names-only'],
+                       all_=self.flags['all'])

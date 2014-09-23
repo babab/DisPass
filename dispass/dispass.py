@@ -54,6 +54,9 @@ class Settings(object):
     sequence_number = 1
     '''Int. Default sequence number'''
 
+    disabled = False
+    '''Bool. Default disabled state'''
+
 settings = Settings()
 
 
@@ -65,6 +68,8 @@ class DispassCommand(CommandBase):
     description = (
         'Commands:\n'
         '   add          add a new label to labelfile\n'
+        '   disable      disable a label without throwing it away\n'
+        '   enable       enable a label'
         '   generate     generate passphrases for one or more labels\n'
         '   gui          start the graphical version of DisPass\n'
         '   help         show this help information\n'

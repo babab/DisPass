@@ -147,6 +147,36 @@ dispass add
    -s, --silent       do not print success message
 
 
+dispass disable
+------------------------------------------------------------------------------
+
+::
+
+   usage: dispass disable [<options>] <label>
+
+   Disable a label without throwing it away.
+
+   Options:
+   -h, --help     show this help information
+   -n, --dry-run  do not actually update label in labelfile
+   -s, --silent   do not print success message
+
+
+dispass enable
+------------------------------------------------------------------------------
+
+::
+
+   usage: dispass enable [<options>] <label>
+
+   Enable a label.
+
+   Options:
+   -h, --help     show this help information
+   -n, --dry-run  do not actually update label in labelfile
+   -s, --silent   do not print success message
+
+
 dispass generate
 ------------------------------------------------------------------------------
 
@@ -212,8 +242,10 @@ dispass list
    Column 52-54: length            3 chars wide
    Column 56-70: hash algo        15 chars wide
    Column 72-74: sequence number   3 chars wide
+   Column 76-77: disabled          1 char wide
 
    Options:
+   -a, --all   include disabled labels
    -h, --help  show this help information
    --script    output in fixed columns
 
