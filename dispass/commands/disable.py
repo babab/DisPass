@@ -23,7 +23,7 @@ from dispass.filehandler import Filehandler
 class Command(CommandBase):
     '''Disable a label without throwing it away'''
 
-    useagestr = (
+    usagestr = (
         'usage: dispass disable <label>'
     )
 
