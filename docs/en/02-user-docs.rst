@@ -405,7 +405,8 @@ you can use DisPass in your favorite editor.
 Software license
 ==============================================================================
 
-Copyright (c) 2011, 2012, 2013  Benjamin Althues <benjamin@babab.nl>
+Copyright (c) 2012-2014  Tom Willemse <tom@ryuslash.org>
+Copyright (c) 2011-2014  Benjamin Althues <benjamin@babab.nl>
 
 Permission to use, copy, modify, and distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
