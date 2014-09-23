@@ -13,9 +13,12 @@ get_labels() {
 
 _dispass_commands=(
   'add:add a new label to labelfile'
+  'disable:disable a label without throwing it away'
+  'enable:enable a label'
   'generate:generate passphrases for one or more labels'
   'gui:start the graphical version of DisPass'
   'help:show help information'
+  'increment:increment the sequence number of a label'
   'list:print a formatted table of labelfile contents'
   'remove:remove label from labelfile'
   'version:show full version information'
@@ -49,6 +52,16 @@ case "$words[1]" in
       '(-i --interactive -h --help -s --silent)-s[do not print success message]' \
       '(-i --interactive -h --help -s --silent)--silent[do not print success message]' \
       &&  return 0 ;;
+  d* | e* | i*)
+    _arguments \
+      '(-n --dry-run -s --silent)-h[show help information]' \
+      '(-n --dry-run -s --silent)--help[show help information]' \
+      '(-h --help -n --dry-run)-n[do not actually update label in labelfile]' \
+      '(-h --help -n --dry-run)--dry-run[do not actually update label in labelfile]' \
+      '(-h --help -s --silent)-s[do not print success message]' \
+      '(-h --help -s --silent)--silent[do not print success message]' \
+      '*:: :->labels' && return 0
+    get_labels ;;
   ge*)
     _arguments \
       '(-h --help)-h[show help information]' \
