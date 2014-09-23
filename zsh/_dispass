@@ -3,10 +3,11 @@
 local expl
 local -a dispass_labels _dispass_commands
 
+# TODO: split get_labels with and without --all switch and use appropriately
 get_labels() {
   if [[ "$state" == labels ]]; then
     dispass_labels=(${(f)"$(_call_program dispass_labels \
-        dispass list --script | awk '{ print $1 }' 2>/dev/null)"})
+        dispass list --all --script | awk '{ print $1 }' 2>/dev/null)"})
     _wanted dispass_labels expl 'all labels' compadd -a dispass_labels
   fi
 }
