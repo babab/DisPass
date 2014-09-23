@@ -13,7 +13,7 @@ simple graphical interface.
 DisPass has several homes on the Internet:
 
 Main website
-   http://dispass.babab.nl
+   http://dispass.org
 
 The cheeseshop (PyPI) project page
    http://pypi.python.org/pypi/DisPass/
@@ -33,7 +33,7 @@ out DisPass.
 
 DisPass uses reStructuredText and Sphinx for building its documentation.
 For full documentation on using *DisPass, the program* or *DisPass, the
-python package*, visit http://dispass.babab.nl
+python package*, visit http://dispass.org
 
 If you are reading this as a README file on Github or Bitbucket you can try
 browsing to `docs/en/02-user-docs.rst`_ to see the rendered user documentation.

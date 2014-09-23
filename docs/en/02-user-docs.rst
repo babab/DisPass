@@ -4,7 +4,7 @@ User documentation
 DisPass has several homes on the Internet:
 
 Main website
-   http://dispass.babab.nl
+   http://dispass.org
 
 The cheeseshop (PyPI) project page
    http://pypi.python.org/pypi/DisPass/

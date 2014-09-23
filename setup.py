@@ -21,7 +21,7 @@ setup(
     description=dispass.dispass.__doc__,
     author=dispass.dispass.__author__,
     author_email='benjamin@babab.nl',
-    url='http://dispass.babab.nl/',
+    url='http://dispass.org/',
     download_url='http://pypi.python.org/pypi/DisPass/',
     packages = ['dispass', 'dispass.commands'],
     license='ISC',
