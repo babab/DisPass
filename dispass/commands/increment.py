@@ -38,7 +38,7 @@ class Command(CommandBase):
     )
 
     def run(self):
-        '''Parse the arguments and increment using `FileHandler.update`.'''
+        '''Parse the arguments and increment using `FileHandler.increment`.'''
 
         if self.parentFlags['file']:
             lf = Filehandler(settings, file_location=self.parentFlags['file'])
@@ -60,7 +60,7 @@ class Command(CommandBase):
                 print("Label '{name}' incremented".format(name=labelname))
         else:
             if not self.flags['silent']:
-                print("Label '{name}' cound not be incremented"
+                print("Label '{name}' could not be incremented"
                       .format(name=labelname))
 
         if not self.flags['dry-run']:
