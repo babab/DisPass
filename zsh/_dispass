@@ -111,19 +111,6 @@ case "$words[1]" in
       '(-i --interactive -h --help -s --silent)--silent[do not print success message]' \
       '*:: :->labels' && return 0
     get_labels ;;
-  u*)
-    _arguments \
-      '(-i --interactive -h --help -n --dry-run -s --silent)-i[add label in an interactive manner]' \
-      '(-i --interactive -h --help -n --dry-run -s --silent)--interactive[add label in an interactive manner]' \
-      '(-g --generate -h --help -n --dry-run -s --silent)-g[immediately generate passphrase after adding it]' \
-      '(-g --generate -h --help -n --dry-run -s --silent)--generate[immediately generate passphrase after adding it]' \
-      '(-i --interactive -g --generate -h --help -n --dry-run -s --silent)-h[show help information]' \
-      '(-i --interactive -g --generate -h --help -n --dry-run -s --silent)--help[show help information]' \
-      '(-i --interactive -g --generate -h --help -n --dry-run)-n[do not actually add label to labelfile]' \
-      '(-i --interactive -g --generate -h --help -n --dry-run)--dry-run[do not actually add label to labelfile]' \
-      '(-i --interactive -h --help -s --silent)-s[do not print success message]' \
-      '(-i --interactive -h --help -s --silent)--silent[do not print success message]' \
-      &&  return 0 ;;
   v*)
     return 0
 esac
