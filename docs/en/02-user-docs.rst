@@ -255,8 +255,8 @@ dispass rm
 
 ::
 
-   usage: dispass rm [-n] [-s] <labelname>
-          dispass rm [-i] [-h]
+   usage: dispass remove [-n] [-s] <labelname>
+          dispass remove [-i] [-h]
 
    Remove label from labelfile
 
@@ -339,8 +339,6 @@ with a different 'master' password for each set.
    * **GNU/Linux and Mac OS X**: ``~/.dispass/labels``
    * **\*BSD and other Unixen**: ``~/.dispass/labels``
    * **Windows**:   ``C:\Users\<username>\dispass\labels``
-
-You can edit the labelfile(s) by using the ``dispass-label`` program.
 
 
 Using the graphical *gdispass* application
