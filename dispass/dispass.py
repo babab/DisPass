@@ -1,7 +1,7 @@
 '''Password manager for GNU/Linux, \*BSD, MacOS X and Windows.'''
 
-# Copyright (c) 2012-2014  Tom Willemse <tom@ryuslash.org>
-# Copyright (c) 2011-2014  Benjamin Althues <benjamin@babab.nl>
+# Copyright (c) 2012-2015  Tom Willemse <tom@ryuslash.org>
+# Copyright (c) 2011-2015  Benjamin Althues <benjamin@babab.nl>
 #
 # Permission to use, copy, modify, and distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -17,7 +17,7 @@
 
 __docformat__ = 'restructuredtext'
 __author__ = "Benjamin Althues"
-__copyright__ = "Copyright (C) 2011-2014  Benjamin Althues & Tom Willemse"
+__copyright__ = "Copyright (C) 2011-2015  Benjamin Althues & Tom Willemse"
 __version_info__ = (0, 3, 0, 'alpha', 0)
 __version__ = '0.3.0-dev'
 versionStr = 'DisPass ' + __version__
