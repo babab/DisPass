@@ -57,6 +57,10 @@ class Command(CommandBase):
         else:
             lf = Filehandler(settings)
 
+        if not lf.file_found:
+            if not lf.promptForCreation(silent=self.flags['silent']):
+                return 1
+
         if self.flags['interactive']:
             intedit = InteractiveEditor(self.settings, lf, interactive=False)
             newlabels.append(intedit.add())
@@ -64,10 +68,6 @@ class Command(CommandBase):
             if not self.args or self.flags['help']:
                 print self.usage
                 return
-
-            if not lf.file_found:
-                if not lf.promptForCreation(silent=self.flags['silent']):
-                    return 1
 
             for arg in set(self.args):
                 labelspec = arg.split(':')
