@@ -1,7 +1,7 @@
 MAN_PATH		= /usr/share/man/man1
 ZSH_SITE_FUNCS_PATH	= /usr/share/zsh/site-functions
-PYTHON_EXEC		= python
-PIP_EXEC		= pip
+PYTHON_EXEC		= python2
+PIP_EXEC		= pip2
 
 sinclude config.mk
 
