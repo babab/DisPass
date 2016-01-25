@@ -1,6 +1,10 @@
 DisPass
 ******************************************************************************
 
+.. image:: https://badge.waffle.io/babab/DisPass.png?label=ready&title=Ready
+ :target: https://waffle.io/babab/DisPass
+ :alt: 'Stories in Ready'
+
 DisPass is a password manager for GNU/Linux, \*BSD, MacOS X and Windows.
 It can be used as any traditional password manager, but has one key
 difference. DisPass does not store your passwords anywhere, so you
