@@ -2,8 +2,8 @@ DisPass
 ******************************************************************************
 
 .. image:: https://badge.waffle.io/babab/DisPass.png?label=ready&title=Ready
- :target: https://waffle.io/babab/DisPass
- :alt: 'Stories in Ready'
+   :target: https://waffle.io/babab/DisPass
+   :alt: 'Stories in Ready'
 
 DisPass is a password manager for GNU/Linux, \*BSD, MacOS X and Windows.
 It can be used as any traditional password manager, but has one key
@@ -27,6 +27,13 @@ Github repository and Issue tracker
 
 Bitbucket repository
    https://bitbucket.org/babab/dispass/
+
+Waffle.io board
+   https://waffle.io/babab/DisPass
+
+.. image:: https://graphs.waffle.io/babab/DisPass/throughput.svg
+   :target: https://waffle.io/babab/DisPass/metrics
+   :alt: 'Throughput Graph'
 
 
 Quick start
