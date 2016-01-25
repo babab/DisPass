@@ -1,6 +1,9 @@
 DisPass
 ******************************************************************************
 
+.. image:: https://gemnasium.com/babab/DisPass.svg
+   :target: https://gemnasium.com/babab/DisPass
+
 .. image:: https://badge.waffle.io/babab/DisPass.png?label=ready&title=Ready
    :target: https://waffle.io/babab/DisPass
    :alt: 'Stories in Ready'
