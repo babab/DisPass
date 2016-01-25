@@ -88,6 +88,12 @@ help
 .. automodule:: dispass.commands.help
    :members:
 
+increment
+---------
+
+.. automodule:: dispass.commands.increment
+   :members:
+
 list
 ----
 
