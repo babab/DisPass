@@ -20,7 +20,7 @@ setup(
     version=dispass.dispass.__version__,
     description=dispass.dispass.__doc__,
     author=dispass.dispass.__author__,
-    author_email='benjamin@babab.nl',
+    author_email='benjamin@althu.es',
     url='http://dispass.org/',
     download_url='http://pypi.python.org/pypi/DisPass/',
     packages = ['dispass', 'dispass.commands'],

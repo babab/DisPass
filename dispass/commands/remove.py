@@ -1,5 +1,5 @@
-# Copyright (c) 2012-2015  Tom Willemse <tom@ryuslash.org>
-# Copyright (c) 2011-2015  Benjamin Althues <benjamin@babab.nl>
+# Copyright (c) 2012-2016  Tom Willemse <tom@ryuslash.org>
+# Copyright (c) 2011-2016  Benjamin Althues <benjamin@althu.es>
 #
 # Permission to use, copy, modify, and distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
