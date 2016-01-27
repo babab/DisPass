@@ -2,3 +2,5 @@ config.mk
 *.pyc
 docs/*/_build/*
 doc/
+
+/DisPass.egg-info/

@@ -19,7 +19,7 @@ __docformat__ = 'restructuredtext'
 __author__ = "Benjamin Althues"
 __copyright__ = "Copyright (C) 2011-2016  Benjamin Althues & Tom Willemse"
 __version_info__ = (0, 3, 0, 'alpha', 0)
-__version__ = '0.3.0-dev'
+__version__ = '0.3.0'
 versionStr = 'DisPass ' + __version__
 
 import exceptions

@@ -1,6 +1,6 @@
 # vim: set et ts=4 sw=4 sts=4 ai:
 
-from distutils.core import setup
+from setuptools import setup
 import dispass.dispass
 
 long_desc = '''DisPass is a password manager for GNU/Linux, \*BSD, MacOS X and
@@ -23,7 +23,7 @@ setup(
     author_email='benjamin@althu.es',
     url='http://dispass.org/',
     download_url='http://pypi.python.org/pypi/DisPass/',
-    packages = ['dispass', 'dispass.commands'],
+    packages=['dispass', 'dispass.commands'],
     license='ISC',
     long_description=long_desc,
     platforms='any',
@@ -45,6 +45,8 @@ setup(
         'Topic :: Office/Business',
         'Topic :: Security :: Cryptography',
         'Topic :: Utilities',
+
+        'BLOCK FOR UPLOAD',
     ],
     scripts=['scripts/dispass', 'scripts/gdispass'],
     )

@@ -5,7 +5,7 @@ PIP_EXEC		= pip2
 
 sinclude config.mk
 
-VERSION		= 0.3.0-dev
+VERSION		= 0.3.0
 
 make:
 	@echo "make install   Build and then install via pip and move manpage"
