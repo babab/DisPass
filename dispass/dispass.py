@@ -162,7 +162,7 @@ class DispassCommand(CommandBase):
             try:
                 mod = importlib.import_module('dispass.commands.'
                                               + self.args[0])
-                cmd = mod.Command(settings=settings, argv=self.args[1:])
+                cmd = mod.Command(argv=self.args[1:])
             except ImportError:
                 print('error: command {cmd} does not exist'
                       .format(cmd=self.args[0]))
