@@ -149,8 +149,7 @@ class DispassCommand(CommandBase):
         elif self.args[0][0] == 'r':
             cmd = commands.remove.Command(argv=self.args[1:])
         elif self.args[0][0] == 'u':
-            cmd = commands.update.Command(settings=settings,
-                                          argv=self.args[1:])
+            cmd = commands.update.Command(argv=self.args[1:])
         elif self.args[0][0] == 'v':
             cmd = commands.version.Command(settings=settings,
                                            argv=self.args[1:])
