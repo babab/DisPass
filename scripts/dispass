@@ -22,7 +22,7 @@ import exceptions
 from dispass.dispass import DispassCommand, settings
 
 def run(argv):
-    cmd = DispassCommand(settings=settings, argv=argv)
+    cmd = DispassCommand(argv=argv)
     if cmd.error:
         print('dispass: {error}'.format(error=cmd.error))
         return 1

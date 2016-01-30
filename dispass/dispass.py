@@ -27,7 +27,7 @@ import importlib
 import os
 import sys
 
-from common import CommandBase
+from pycommand import CommandBase
 
 
 def verboseVersionInfo():

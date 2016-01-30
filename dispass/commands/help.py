@@ -27,7 +27,7 @@ class Command(CommandBase):
 
     def run(self):
         if not self.args:
-            print(DispassCommand(settings, []).usage)
+            print(DispassCommand([]).usage)
             return
         else:
             try:
