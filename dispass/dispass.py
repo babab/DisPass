@@ -147,8 +147,7 @@ class DispassCommand(CommandBase):
         elif self.args[0][0] == 'l':
             cmd = commands.list.Command(argv=self.args[1:])
         elif self.args[0][0] == 'r':
-            cmd = commands.remove.Command(settings=settings,
-                                          argv=self.args[1:])
+            cmd = commands.remove.Command(argv=self.args[1:])
         elif self.args[0][0] == 'u':
             cmd = commands.update.Command(settings=settings,
                                           argv=self.args[1:])

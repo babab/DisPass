@@ -13,7 +13,8 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-from dispass.common import CommandBase
+from pycommand import CommandBase
+
 from dispass.dispass import settings
 from dispass.filehandler import Filehandler
 from dispass.interactive_editor import InteractiveEditor
@@ -44,7 +45,7 @@ class Command(CommandBase):
                 return 1
 
         if self.flags['interactive']:
-            InteractiveEditor(self.settings, lf, interactive=False).remove()
+            InteractiveEditor(settings, lf, interactive=False).remove()
             return 0
 
         if not self.args or self.flags['help']:
