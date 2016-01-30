@@ -143,8 +143,7 @@ class DispassCommand(CommandBase):
         elif self.args[0][0] == 'h':
             cmd = commands.help.Command(argv=self.args[1:])
         elif self.args[0][0] == 'i':
-            cmd = commands.increment.Command(settings=settings,
-                                             argv=self.args[1:])
+            cmd = commands.increment.Command(argv=self.args[1:])
         elif self.args[0][0] == 'l':
             cmd = commands.list.Command(settings=settings, argv=self.args[1:])
         elif self.args[0][0] == 'r':
