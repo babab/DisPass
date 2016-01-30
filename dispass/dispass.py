@@ -151,8 +151,7 @@ class DispassCommand(CommandBase):
         elif self.args[0][0] == 'u':
             cmd = commands.update.Command(argv=self.args[1:])
         elif self.args[0][0] == 'v':
-            cmd = commands.version.Command(settings=settings,
-                                           argv=self.args[1:])
+            cmd = commands.version.Command(argv=self.args[1:])
         else:
             try:
                 mod = importlib.import_module('dispass.commands.'
