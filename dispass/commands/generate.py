@@ -15,9 +15,10 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+from pycommand import CommandBase
+
 from dispass.algos import algorithms
 from dispass.cli import CLI
-from dispass.common import CommandBase
 from dispass.dispass import settings
 from dispass.filehandler import Filehandler
 
@@ -97,9 +98,9 @@ class Command(CommandBase):
                                             seqno or labeltup[3]))
             else:
                 console.generate(password, (
-                    arg, length or self.settings.passphrase_length,
-                    algo or self.settings.algorithm,
-                    seqno or self.settings.sequence_number))
+                    arg, length or settings.passphrase_length,
+                    algo or settings.algorithm,
+                    seqno or settings.sequence_number))
         del password
 
         if self.flags['stdout']:
