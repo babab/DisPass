@@ -13,7 +13,9 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-from dispass.common import CommandBase
+from pycommand import CommandBase
+
+from dispass.dispass import settings
 from dispass.filehandler import Filehandler
 
 
@@ -30,14 +32,14 @@ class Command(CommandBase):
             return
 
         if self.parentFlags['file']:
-            lf = Filehandler(self.settings,
+            lf = Filehandler(settings,
                              file_location=self.parentFlags['file'])
         else:
-            lf = Filehandler(self.settings)
+            lf = Filehandler(settings)
 
         try:
             from dispass.gui import GUI
-            g = GUI(self.settings, lf)
+            g = GUI(settings, lf)
             g.mainloop()
         except ImportError:
             print ('Could not find Tkinter, this is a package needed '

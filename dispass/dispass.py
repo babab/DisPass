@@ -139,8 +139,7 @@ class DispassCommand(CommandBase):
             if self.args[0][1] == 'e':
                 cmd = commands.generate.Command(argv=self.args[1:])
             elif self.args[0][1] == 'u':
-                cmd = commands.gui.Command(settings=settings,
-                                           argv=self.args[1:])
+                cmd = commands.gui.Command(argv=self.args[1:])
         elif self.args[0][0] == 'h':
             cmd = commands.help.Command(settings=settings, argv=self.args[1:])
         elif self.args[0][0] == 'i':
