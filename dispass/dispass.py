@@ -129,7 +129,7 @@ class DispassCommand(CommandBase):
             print(self.usage)
             return 2
         elif self.args[0][0] == 'a':
-            cmd = commands.add.Command(settings=settings, argv=self.args[1:])
+            cmd = commands.add.Command(argv=self.args[1:])
         elif self.args[0][0] == 'g':
             if len(self.args[0]) < 2:
                 print("Ambiguous subcommand, please be more specific:")
