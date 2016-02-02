@@ -27,7 +27,7 @@ import importlib
 import os
 import sys
 
-from pycommand import CommandBase
+import pycommand
 
 
 def verboseVersionInfo():
@@ -61,7 +61,7 @@ class Settings(object):
 settings = Settings()
 
 
-class DispassCommand(CommandBase):
+class DispassCommand(pycommand.CommandBase):
     '''Main shell command object'''
 
     usagestr = 'usage: dispass [options] <command> [<args>]'
@@ -109,6 +109,8 @@ class DispassCommand(CommandBase):
         '''
 
         import commands.add
+        import commands.disable
+        import commands.enable
         import commands.generate
         import commands.gui
         import commands.help
@@ -117,6 +119,20 @@ class DispassCommand(CommandBase):
         import commands.remove
         import commands.update
         import commands.version
+
+        self.commands = {
+            'add': commands.add.Command,
+            'disable': commands.disable.Command,
+            'enable': commands.enable.Command,
+            'generate': commands.generate.Command,
+            'gui': commands.gui.Command,
+            'help': commands.help.Command,
+            'increment': commands.increment.Command,
+            'list': commands.list.Command,
+            'remove': commands.remove.Command,
+            'update': commands.update.Command,
+            'version': commands.version.Command,
+        }
 
         if self.flags['help']:
             print(self.usage)
@@ -128,42 +144,11 @@ class DispassCommand(CommandBase):
         if not self.args:
             print(self.usage)
             return 2
-        elif self.args[0][0] == 'a':
-            cmd = commands.add.Command(argv=self.args[1:])
-        elif self.args[0][0] == 'g':
-            if len(self.args[0]) < 2:
-                print("Ambiguous subcommand, please be more specific:")
-                print("    dispass [ge]nerate")
-                print("    dispass [gu]i")
-                return 1
-            if self.args[0][1] == 'e':
-                cmd = commands.generate.Command(argv=self.args[1:])
-            elif self.args[0][1] == 'u':
-                cmd = commands.gui.Command(argv=self.args[1:])
-        elif self.args[0][0] == 'h':
-            cmd = commands.help.Command(argv=self.args[1:])
-        elif self.args[0][0] == 'i':
-            cmd = commands.increment.Command(argv=self.args[1:])
-        elif self.args[0][0] == 'l':
-            cmd = commands.list.Command(argv=self.args[1:])
-        elif self.args[0][0] == 'r':
-            cmd = commands.remove.Command(argv=self.args[1:])
-        elif self.args[0][0] == 'u':
-            cmd = commands.update.Command(argv=self.args[1:])
-        elif self.args[0][0] == 'v':
-            cmd = commands.version.Command(argv=self.args[1:])
-        else:
-            try:
-                mod = importlib.import_module('dispass.commands.'
-                                              + self.args[0])
-                cmd = mod.Command(argv=self.args[1:])
-            except ImportError:
-                print('error: command {cmd} does not exist'
-                      .format(cmd=self.args[0]))
-                return 1
-            except exceptions.KeyboardInterrupt:
-                print('\nOk, bye')
-                return
+
+        try:
+            cmd = super(DispassCommand, self).run()
+        except pycommand.CommandExit as e:
+            return e.err
 
         cmd.registerParentFlag('file', self.flags['file'])
 
