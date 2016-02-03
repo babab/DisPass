@@ -16,7 +16,8 @@
 import exceptions
 import importlib
 
-from dispass.common import CommandBase
+from pycommand import CommandBase
+
 from dispass.dispass import DispassCommand, settings
 
 
@@ -26,13 +27,13 @@ class Command(CommandBase):
 
     def run(self):
         if not self.args:
-            print(DispassCommand(settings, []).usage)
+            print(DispassCommand([]).usage)
             return
         else:
             try:
                 mod = importlib.import_module('dispass.commands.'
                                               + self.args[0])
-                cmd = mod.Command(settings=settings, argv=self.args[1:])
+                cmd = mod.Command(argv=self.args[1:])
             except ImportError:
                 print('error: command {cmd} does not exist'
                       .format(cmd=self.args[0]))

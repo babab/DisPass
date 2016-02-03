@@ -15,8 +15,9 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+from pycommand import CommandBase
+
 from dispass import algos
-from dispass.common import CommandBase
 from dispass.dispass import settings
 from dispass.filehandler import Filehandler
 

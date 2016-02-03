@@ -15,8 +15,9 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+from pycommand import CommandBase
+
 from dispass import algos
-from dispass.common import CommandBase
 from dispass.dispass import settings
 from dispass.cli import CLI
 from dispass.filehandler import Filehandler
@@ -62,7 +63,7 @@ class Command(CommandBase):
                 return 1
 
         if self.flags['interactive']:
-            intedit = InteractiveEditor(self.settings, lf, interactive=False)
+            intedit = InteractiveEditor(settings, lf, interactive=False)
             newlabels.append(intedit.add())
         else:
             if not self.args or self.flags['help']:
