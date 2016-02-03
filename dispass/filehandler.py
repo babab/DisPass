@@ -293,12 +293,17 @@ class Filehandler:
                                   'y' if label[4] else 'n'))
         else:
             divlen = self.longest_label
+
             if not divlen:
                 return
+
+            divtitle = 'Label'
+            divlen = max(divlen, len(divtitle))
+
             print('+-{spacer:{fill}}-+--------+----------+--------+---+\n'
                   '| {title:{fill}} | Length | Algo     | Number | X |\n'
                   '+-{spacer:{fill}}-+--------+----------+--------+---+'
-                  .format(spacer='-' * divlen, title='Label', fill=divlen))
+                  .format(spacer='-' * divlen, title=divtitle, fill=divlen))
 
             for label in self.labelfile:
                 if all_ or not label[4]:
