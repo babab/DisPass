@@ -91,16 +91,17 @@ class CLI:
 
         return inp
 
-    def generate(self, password, (label, length, algo, seqno)):
+    def generate(self, password, (label, length, algo, seqno, disabled)):
         '''Generate passphrase and store result in `passphrases`
 
         :Parameters:
             - `password`: Password to use for passprase generation
-            - `labeltup`: A tuple `labeltup` with 4 values:
+            - `labeltup`: A tuple `labeltup` with 5 values:
                * `label`: Label to use for passprase generation
                * `length`: Length to use for passprase generation
                * `algo`: Algorithm to use for passprase generation
                * `seqno`: Sequence number to use for passprase generation
+               * `disabled`: Whether or not the label is disabled
 
         '''
 
