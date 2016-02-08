@@ -19,6 +19,8 @@ from dispass.dispass import verboseVersionInfo
 
 
 class Command(CommandBase):
+    '''Show full version information'''
+
     usagestr = 'usage: dispass version'
     description = 'Show full version information'
 

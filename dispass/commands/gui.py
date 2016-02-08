@@ -20,6 +20,8 @@ from dispass.filehandler import Filehandler
 
 
 class Command(CommandBase):
+    '''Start the graphical version of DisPass'''
+
     usagestr = 'usage: dispass gui [-h]'
     description = 'Start the graphical version of DisPass.'
     optionList = (('help', ('h', False, 'show this help information')),)
