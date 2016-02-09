@@ -49,4 +49,5 @@ setup(
         'BLOCK FOR UPLOAD',
     ],
     scripts=['scripts/dispass', 'scripts/gdispass'],
+    install_requires=['pycommand']
     )
