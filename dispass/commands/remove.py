@@ -21,6 +21,8 @@ from dispass.interactive_editor import InteractiveEditor
 
 
 class Command(CommandBase):
+    '''Remove label from labelfile'''
+
     usagestr = (
         'usage: dispass remove [-n] [-s] <labelname> [<labelname2>] [...]\n'
         '       dispass remove [-i] [-h]'

@@ -22,6 +22,8 @@ from dispass.dispass import DispassCommand, settings
 
 
 class Command(CommandBase):
+    '''Show help information'''
+
     usagestr = 'usage: dispass help [<command>]'
     description = 'Show help information'
 
