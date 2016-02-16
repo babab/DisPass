@@ -95,12 +95,14 @@ class Command(CommandBase):
             if labeltup:
                 console.generate(password, (arg, length or labeltup[1],
                                             algo or labeltup[2],
-                                            seqno or labeltup[3]))
+                                            seqno or labeltup[3],
+                                            False))
             else:
                 console.generate(password, (
                     arg, length or settings.passphrase_length,
                     algo or settings.algorithm,
-                    seqno or settings.sequence_number))
+                    seqno or settings.sequence_number,
+                    False))
         del password
 
         if self.flags['stdout']:
