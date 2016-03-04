@@ -10,6 +10,19 @@ helping you get rid of the bad habit of using a single password for
 multiple websites. Dispass is a console application, but also has a
 simple graphical interface.
 
+Resources
+=========
+
+- `Main website <http://dispass.org>`_
+- `Python Package Index (PyPI) page <http://pypi.python.org/pypi/DisPass/>`_
+- `Waffle.io board <https://waffle.io/babab/DisPass>`_
+- `Github repository and Issue tracker <https://github.com/babab/dispass/>`_
+- `Bitbucket repository <https://bitbucket.org/babab/dispass/>`_
+
+
+Index
+=====
+
 .. toctree::
    :numbered:
 

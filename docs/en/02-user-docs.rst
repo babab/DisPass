@@ -1,19 +1,17 @@
 Documentation
 ******************************************************************************
 
-DisPass has several homes on the Internet:
+Resources
+=========
 
-Main website
-   http://dispass.org
+- `Main website <http://dispass.org>`_
+- `Python Package Index (PyPI) page <http://pypi.python.org/pypi/DisPass/>`_
+- `Waffle.io board <https://waffle.io/babab/DisPass>`_
+- `Github repository and Issue tracker <https://github.com/babab/dispass/>`_
+- `Bitbucket repository <https://bitbucket.org/babab/dispass/>`_
 
-The cheeseshop (PyPI) project page
-   http://pypi.python.org/pypi/DisPass/
-
-Github repository and Issue tracker
-   https://github.com/dispass/dispass/
-
-Bitbucket repository
-   https://bitbucket.org/babab/dispass/
+Definitions
+===========
 
 Here are some definitions which may help you understand the rest of the
 documentation better.
