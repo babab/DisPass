@@ -1,4 +1,4 @@
-User documentation
+Documentation
 ******************************************************************************
 
 DisPass has several homes on the Internet:

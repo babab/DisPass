@@ -1,4 +1,4 @@
-Development documentation
+API Reference
 ******************************************************************************
 
 * :ref:`genindex`
