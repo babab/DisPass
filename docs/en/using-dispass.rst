@@ -8,13 +8,13 @@ You can start using dispass for e.g. google.com like this:
    dispass generate google.com
 
 The passphrases created are 30 characters long by default, but some
-website's may not validate such a long passphrase or you might want to
+websites may not validate such a long passphrase or you might want to
 make it even longer. You can easily set a desired passphrase length
 using the ``-l`` flag. Hotmail passwords are limited to 16 characters:
 
 .. code:: console
 
-   dispass generate -l 18 hotmail
+   dispass generate -l 16 hotmail
 
 Generating passphrases for multiple labels is just as easy:
 
@@ -22,11 +22,11 @@ Generating passphrases for multiple labels is just as easy:
 
    dispass generate google hotmail YaHo0 "P0551bly*a81t)H4rd2rmbr"
 
-Labels are case-sensitive and digits and special characters can be used.
-You should try to name labels in a way that you can easily 'dispass' a
-passphrase on any computer/device that has DisPass at any given moment.
-You are encouraged to store your labels in a labelfile for convenience
-though.
+Labels are case-sensitive and digits and special characters can be
+used. You should try to name labels in a way that you can easily
+'dispass generate' a passphrase on any computer/device that has
+DisPass at any given moment. You are encouraged to store your labels
+in a labelfile for convenience though.
 
 dispass
 -------
@@ -237,4 +237,3 @@ dispass version
    usage: dispass version
 
    Show full version information
-

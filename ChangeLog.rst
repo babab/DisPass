@@ -62,7 +62,7 @@ v0.2.0 - released April 16th, 2013
 * Add support for multiple algorithms
 * Add new algorithm Dispass2
 * Add -a, --algo option for specifying algorithm
-* Add -n, --number option for specifying sequence no
+* Add -n, --number option for specifying sequence number
 * Add label length selection in gui
 * Add label/parameters selection in gui
 * Add interactive labelfile editor 'dispass-label'
@@ -78,16 +78,16 @@ v0.2.0 - released April 16th, 2013
 * Add dispass-label for managing labelfiles
 * Use separate text for manpage instead of README
 * Add option to lookup a lable in with '-s' switch
-* Require a min. password length of 8 chars in cli
+* Require a minimum password length of 8 chars in CLI
 * Rename ChangeLog -> ChangeLog.rst
 * Make DisPass run from Python shell without exiting
-* Remove dispass.el emacs wrapper, maintained separately by Tom Willemsen
+* Remove dispass.el emacs wrapper, maintained separately by Tom Willemse
 
 
 v0.1-alpha-8 - released June 21st, 2012
 #######################################
 
-* Add dispass.el emacs wrapper, authored by Tom Willemsen (ryuslash)
+* Add dispass.el emacs wrapper, authored by Tom Willemse (ryuslash)
 * Allow generating a list of passphrases with varying lengths
 * Add labelfile handler and skel/dot.dispass
 * Add -f <labelfile>, --file=<labelfile> option
@@ -114,4 +114,3 @@ v0.1-alpha-6 - released May 24th, 2012
 ######################################
 
 * Initial release of Dispass as single python module
-

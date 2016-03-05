@@ -17,13 +17,13 @@ Here are some definitions which may help you understand the rest of the
 documentation better.
 
 label
-   A label is a string that you use to identify the passphrase.
-   This can be a domainname of the service the passphrase is used for,
+   A label is a string that you use to identify the passphrase. This
+   can be a domain name of the service the passphrase is used for,
    e.g. 'google.com'.
 
 Since this program asks for a password/passphrase to generate another
-password/passphrase, things may get a bit confusing. I've dediced to use the
-words 'password' and 'passphrase' diffently and consistent.
+password/passphrase, things may get a bit confusing. I've decided to use the
+words 'password' and 'passphrase' differently and consistent.
 
 password
    Use of the word 'password' is dedicated to the input password, i.e. the
@@ -67,4 +67,3 @@ password for each set.
    * **GNU/Linux and Mac OS X**: ``~/.dispass/labels``
    * **\*BSD and other Unixen**: ``~/.dispass/labels``
    * **Windows**:   ``C:\Users\<username>\dispass\labels``
-

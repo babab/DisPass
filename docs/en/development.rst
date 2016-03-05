@@ -7,7 +7,7 @@ dispass.el
 Got Emacs? You can use the Emacs wrapper.
 
 If you have Emacs you can use the Emacs wrapper created and maintained by
-Tom Willemsen (ryuslash).
+Tom Willemse (ryuslash).
 
 You can find it at: http://ryuslash.org/projects/dispass.el.html
 
@@ -27,9 +27,10 @@ IRC client.
 Acknowledgements
 ----------------
 
-Many thanks go out to Tom (ryuslash) Willemsen for valuable contributions to
-gdispass and the new algorithm. He also wrote an awesome wrapper for Emacs so
-you can use DisPass in your favorite editor.
+Many thanks go out to Tom (ryuslash) Willemse for valuable
+contributions to gdispass and the new algorithm. He also wrote an
+awesome wrapper for Emacs so you can use DisPass in your favorite
+editor.
 
 
 .. Include ChangeLog section from base path
