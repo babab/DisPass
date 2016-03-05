@@ -143,6 +143,16 @@ dispass gui
    -h, --help  show this help information
 
 
+dispass help
+------------
+
+.. code:: console
+
+   usage: dispass help [<command>]
+
+   Show help information
+
+
 dispass increment
 -----------------
 
