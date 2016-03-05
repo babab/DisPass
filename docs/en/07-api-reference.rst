@@ -8,8 +8,8 @@ API Reference
 Core modules
 ------------
 
-algos
-#####
+dispass.algos
+#############
 
 The algos module is the most important part of DisPass. The algorithms
 DisPass uses to create the passphrases are defined as separate classes
@@ -18,8 +18,8 @@ in the `dispass.algos` module.
 .. automodule:: dispass.algos
    :members:
 
-dispass
-#######
+dispass.dispass
+###############
 
 .. automodule:: dispass.dispass
    :members:
@@ -27,26 +27,26 @@ dispass
 Interface modules
 -----------------
 
-cli
-###
+dispass.cli
+###########
 
 .. automodule:: dispass.cli
    :members:
 
-gui
-###
+dispass.gui
+###########
 
 .. automodule:: dispass.gui
    :members:
 
-filehandler
-###########
+dispass.filehandler
+###################
 
 .. automodule:: dispass.filehandler
    :members:
 
-interactive_editor
-##################
+dispass.interactive_editor
+##########################
 
 .. automodule:: dispass.interactive_editor
    :members:
@@ -58,50 +58,50 @@ Subcommand modules
 Subcommands are defined in the `dispass.commands` package as separate modules
 containing a class derived from `pycommand.CommandBase`.
 
-add
-###
+dispass.commands.add
+####################
 
 .. automodule:: dispass.commands.add
    :members:
 
-generate
-########
+dispass.commands.generate
+#########################
 
 .. automodule:: dispass.commands.generate
    :members:
 
-gui
-###
+dispass.commands.gui
+####################
 
 .. automodule:: dispass.commands.gui
    :members:
 
-help
-####
+dispass.commands.help
+#####################
 
 .. automodule:: dispass.commands.help
    :members:
 
-increment
-#########
+dispass.commands.increment
+##########################
 
 .. automodule:: dispass.commands.increment
    :members:
 
-list
-####
+dispass.commands.list
+#####################
 
 .. automodule:: dispass.commands.list
    :members:
 
-remove
-######
+dispass.commands.remove
+#######################
 
 .. automodule:: dispass.commands.remove
    :members:
 
-version
-#######
+dispass.commands.version
+########################
 
 .. automodule:: dispass.commands.version
    :members:

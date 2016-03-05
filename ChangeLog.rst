@@ -1,11 +1,11 @@
 Change Log
-==========
+----------
 
 v0.3.0 - to be released
------------------------
+#######################
 
 Added
-#####
+*****
 
 * Option for disabling/enabling labels
 * Zsh completion for dispass (sub)command(s)
@@ -14,7 +14,7 @@ Added
 * pycommand dependency for command argument parsing (extracted from DisPass)
 
 Changed
-#######
+*******
 
 * Lookup label parameters from labelfile
 * Use different subcommands for all actions
@@ -44,7 +44,7 @@ Changed
 
 
 v0.2.0 - released April 16th, 2013
-----------------------------------
+##################################
 
 .. warning::
 
@@ -85,7 +85,7 @@ v0.2.0 - released April 16th, 2013
 
 
 v0.1-alpha-8 - released June 21st, 2012
----------------------------------------
+#######################################
 
 * Add dispass.el emacs wrapper, authored by Tom Willemsen (ryuslash)
 * Allow generating a list of passphrases with varying lengths
@@ -102,7 +102,7 @@ v0.1-alpha-8 - released June 21st, 2012
 
 
 v0.1-alpha-7 - released May 28th, 2012
---------------------------------------
+######################################
 
 * Distribute as package instead of a single module
 * Add LICENSE file
@@ -111,7 +111,7 @@ v0.1-alpha-7 - released May 28th, 2012
 
 
 v0.1-alpha-6 - released May 24th, 2012
---------------------------------------
+######################################
 
 * Initial release of Dispass as single python module
 
