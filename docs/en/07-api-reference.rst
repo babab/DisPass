@@ -18,12 +18,6 @@ in the `dispass.algos` module.
 .. automodule:: dispass.algos
    :members:
 
-common
-------
-
-.. automodule:: dispass.common
-   :members:
-
 dispass
 -------
 
@@ -58,11 +52,11 @@ interactive_editor
 .. automodule:: dispass.interactive_editor
    :members:
 
-Subcommands
+Subcommand modules
 ==============================================================================
 
 Subcommands are defined in the `dispass.commands` package as separate modules
-containing a class derived from `dispass.common.BaseCommand`.
+containing a class derived from `pycommand.CommandBase`.
 
 add
 ---
@@ -100,10 +94,10 @@ list
 .. automodule:: dispass.commands.list
    :members:
 
-rm
---
+remove
+------
 
-.. automodule:: dispass.commands.rm
+.. automodule:: dispass.commands.remove
    :members:
 
 version
