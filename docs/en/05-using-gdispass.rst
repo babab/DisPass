@@ -1,5 +1,5 @@
-Using the graphical *gdispass* application
-==============================================================================
+Using gdispass
+==============
 
 You can start using gDisPass by running the ``gdispass`` executable.
 Fill in a name for the label that you can easily remember.

@@ -1,24 +1,24 @@
 Related projects
 ================
 
-Got Emacs? You can use the Emacs wrapper
-----------------------------------------
+dispass.el
+----------
+
+Got Emacs? You can use the Emacs wrapper.
 
 If you have Emacs you can use the Emacs wrapper created and maintained by
 Tom Willemsen (ryuslash).
 
 You can find it at: http://ryuslash.org/projects/dispass.el.html
 
-Development
-==============================================================================
 
+Development
+===========
 
 Support / ideas / questions / suggestions
 -----------------------------------------
 
 Issue tracker at Github: https://github.com/babab/dispass/issues
-
-A mailing list is available: dispass@librelist.com
 
 You can also visit #dispass at Freenode (chat.freenode.net) with your favorite
 IRC client.

@@ -1,5 +1,5 @@
 DisPass
-******************************************************************************
+=======
 
 DisPass is a password manager for GNU/Linux, \*BSD, MacOS X and Windows.
 It can be used as any traditional password manager, but has one key
@@ -11,7 +11,7 @@ multiple websites. Dispass is a console application, but also has a
 simple graphical interface.
 
 Resources
-=========
+---------
 
 - `Main website <http://dispass.org>`_
 - `Python Package Index (PyPI) page <http://pypi.python.org/pypi/DisPass/>`_
@@ -21,7 +21,7 @@ Resources
 
 
 Index
-=====
+-----
 
 .. toctree::
 
@@ -32,5 +32,3 @@ Index
    05-using-gdispass
    06-development
    07-api-reference
-
-.. 99-api-reference
