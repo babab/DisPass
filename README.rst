@@ -35,51 +35,44 @@ Quick start
 ==============================================================================
 
 These are quick instructions for the impatient, just wanting to check
-out DisPass.
-
-DisPass uses reStructuredText and Sphinx for building its documentation.
-For full documentation on using *DisPass, the program* or *DisPass, the
-python package*, visit http://dispass.org
-
-If you are reading this as a README file on Github or Bitbucket you can try
-browsing to `docs/en/02-user-docs.rst`_ to see the rendered user documentation.
-Since the development documentation (the code) is compiled by Sphinx' autodoc
-extension, you can only find that at the website.
-
+out DisPass. For full documentation on using **DisPass**, visit
+http://dispass.org
 
 Download
 --------
 
-Download DisPass from the Python Package Index with pip. As root, do the
-following
+Download DisPass from the Python Package Index with pip. As root (using
+sudo), do the following:
 
 .. code:: console
 
-   # pip install dispass
+   sudo pip install dispass
 
-If you don't have pip installed you can try easy_install:
 
-.. code:: console
-
-   # easy_install dispass
-
-If you are using Archlinux, it is advised to `install dispass with pacman`_.
+If you are using Archlinux, it is advised to install dispass
+`from the AUR <https://aur.archlinux.org/packages.php?K=dispass>`_.
 
 
 Using DisPass for the first time
 --------------------------------
 
-For this example we will set a passphrase to use for a google account.
+For this example we will create a passphrase to use for a google account.
 
-Create and save a label ``google`` to the labelfile::
+Create and save a label ``google`` to the labelfile:
 
-    $ dispass add google
+.. code:: console
+
+    dispass add google
 
 Generate the passphrase for the first time. Since you will need to
-register the password with google we pass the ``-v`` flag to avoid
-typing errors while creating the passphrase for the first time::
+register the passphrase with google we pass the ``--verify`` flag
+or simply ``-v`` to avoid typing errors in the input password while
+creating the resulting passphrase for the first time:
 
-    $ dispass generate -v google
+.. code:: console
+
+    dispass generate --verify google
+
 
 
 Mini screencast
@@ -89,8 +82,6 @@ Checkout the following mini screencast. In this demo the label is added
 interactively.
 
 .. image:: dispass-mini-screencast.gif
-
-.. _install dispass with pacman: https://aur.archlinux.org/packages.php?K=dispass
 
 
 
@@ -118,6 +109,3 @@ that was deemed unnecessary by the Berne convention removed.
    ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
    OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-
-.. _install dispass with pacman: https://aur.archlinux.org/packages.php?K=dispass
-.. _docs/en/02-user-docs.rst: docs/en/02-user-docs.rst
