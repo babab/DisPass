@@ -39,24 +39,24 @@ Then you can either (in order of my personal preference):
 1. Install using the Makefile, this will perform all the steps in
    option 2 (below):
 
-.. code:: console
+   .. code:: console
 
-   sudo make install
+      sudo make install
 
 2. Install manually through pip, and install manpage:
 
-.. code:: console
+   .. code:: console
 
-   python setup.py sdist
-   sudo pip install dist/DisPass-<version>.tar.gz
-   sudo gzip -c dispass.1 > dispass.1.gz
-   sudo mv dispass.1.gz /usr/share/man/man1/
+      python setup.py sdist
+      sudo pip install dist/DisPass-<version>.tar.gz
+      sudo gzip -c dispass.1 > dispass.1.gz
+      sudo mv dispass.1.gz /usr/share/man/man1/
 
 3. Install manually (no manpage):
 
-.. code:: console
+   .. code:: console
 
-   sudo python setup.py install
+      sudo python setup.py install
 
 
 Upgrade or uninstall with pip

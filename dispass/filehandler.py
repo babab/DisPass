@@ -240,10 +240,10 @@ class Filehandler:
 
         :Returns:
             - A tuple with 5 values ``(label, length, algo, seqno, disabled))``
-                - `label`: Label to use for passprase generation
-                - `length`: Length to use for passprase generation
-                - `algo`: Algorithm to use for passprase generation
-                - `seqno`: Sequence number to use for passprase generation
+                - `label`: Label to use for passphrase generation
+                - `length`: Length to use for passphrase generation
+                - `algo`: Algorithm to use for passphrase generation
+                - `seqno`: Sequence number to use for passphrase generation
                 - `disabled`: Whether or not the passphrase is disabled
 
         '''

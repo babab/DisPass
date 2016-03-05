@@ -95,12 +95,12 @@ class CLI:
         '''Generate passphrase and store result in `passphrases`
 
         :Parameters:
-            - `password`: Password to use for passprase generation
+            - `password`: Password to use for passphrase generation
             - `labeltup`: A tuple `labeltup` with 5 values:
-               * `label`: Label to use for passprase generation
-               * `length`: Length to use for passprase generation
-               * `algo`: Algorithm to use for passprase generation
-               * `seqno`: Sequence number to use for passprase generation
+               * `label`: Label to use for passphrase generation
+               * `length`: Length to use for passphrase generation
+               * `algo`: Algorithm to use for passphrase generation
+               * `seqno`: Sequence number to use for passphrase generation
                * `disabled`: Whether or not the label is disabled
 
         '''
@@ -116,7 +116,7 @@ class CLI:
             )})
 
     def output(self):
-        '''Output and flush passprase(s)'''
+        '''Output and flush passphrase(s)'''
         if not self.passphrases:
             return False
 
