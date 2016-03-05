@@ -24,8 +24,13 @@ Index
 =====
 
 .. toctree::
-   :numbered:
 
    01-quick-start
-   02-user-docs
-   03-development-docs
+   02-introduction
+   03-installing
+   04-using-dispass
+   05-using-gdispass
+   06-development
+   07-api-reference
+
+.. 99-api-reference

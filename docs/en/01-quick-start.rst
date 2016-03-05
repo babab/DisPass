@@ -47,4 +47,3 @@ Checkout the following mini screencast. In this demo the label is added
 interactively.
 
 .. image:: ../../dispass-mini-screencast.gif
-
