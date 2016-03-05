@@ -63,7 +63,7 @@ class Command(CommandBase):
                 return 1
 
         if not self.args or self.flags['help']:
-            print self.usage
+            print(self.usage)
             return 1
 
         algo = None
@@ -77,7 +77,7 @@ class Command(CommandBase):
             try:
                 length = int(self.flags['length'])
             except ValueError:
-                print 'Error: length argument must be a number'
+                print('Error: length argument must be a number')
                 return 1
         if self.flags['seqno']:
             seqno = self.flags['seqno']

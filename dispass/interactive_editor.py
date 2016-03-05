@@ -45,7 +45,7 @@ class InteractiveEditor:
         try:
             inp = raw_input('\n> ').split()
             if not inp:
-                print 'No menu option given'
+                print('No menu option given')
                 self.prompt()
 
             command = inp[0].lower()
@@ -81,7 +81,7 @@ class InteractiveEditor:
             try:
                 return raw_input('Label: ').split()[0]
             except IndexError:
-                print 'label cannot be empty - please try again'
+                print('label cannot be empty - please try again')
                 continue
 
     def add(self):
@@ -100,11 +100,11 @@ class InteractiveEditor:
             try:
                 length = int(length)
             except ValueError:
-                print 'length must be a number in range 9 -> 171'
+                print('length must be a number in range 9 -> 171')
                 continue
 
             if length < 9 or length > 171:
-                print 'length must be a number in range 9 -> 171'
+                print('length must be a number in range 9 -> 171')
                 continue
             else:
                 break
@@ -118,7 +118,7 @@ class InteractiveEditor:
                                .format(num=i, algoname=algoname))
                     if algoname == self.settings.algorithm:
                         choices += ' [default]'
-                    print choices
+                    print(choices)
                     i += 1
                 choice = (raw_input('Algorithm [press enter for default]: ')
                           .split()[0])
@@ -142,7 +142,7 @@ class InteractiveEditor:
                 except IndexError:
                     print('Invalid choice')
                     continue
-            print algo
+            print(algo)
             break
 
         if algo != 'dispass1':
@@ -161,11 +161,11 @@ class InteractiveEditor:
                 try:
                     seqno = int(seqno)
                 except ValueError:
-                    print 'Sequence number must be a number > 1'
+                    print('Sequence number must be a number > 1')
                     continue
 
                 if seqno < 1:
-                    print 'Sequence number must be a number > 1'
+                    print('Sequence number must be a number > 1')
                     continue
                 else:
                     break

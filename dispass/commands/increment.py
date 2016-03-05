@@ -48,7 +48,7 @@ class Command(CommandBase):
             lf = Filehandler(settings)
 
         if not len(self.args) == 1 or self.flags['help']:
-            print self.usage
+            print(self.usage)
             return
 
         if not lf.file_found:

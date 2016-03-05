@@ -67,7 +67,7 @@ class Command(CommandBase):
             newlabels.append(intedit.add())
         else:
             if not self.args or self.flags['help']:
-                print self.usage
+                print(self.usage)
                 return
 
             for arg in set(self.args):

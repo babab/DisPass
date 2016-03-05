@@ -1,3 +1,5 @@
+'''Subcommand module `help`; contains only a single class `Command`'''
+
 # Copyright (c) 2012-2016  Tom Willemse <tom@ryuslash.org>
 # Copyright (c) 2011-2016  Benjamin Althues <benjamin@althu.es>
 #
@@ -18,7 +20,7 @@ import importlib
 
 from pycommand import CommandBase
 
-from dispass.dispass import DispassCommand, settings
+from dispass.dispass import DispassCommand
 
 
 class Command(CommandBase):
@@ -33,8 +35,9 @@ class Command(CommandBase):
             return
         else:
             try:
-                mod = importlib.import_module('dispass.commands.'
-                                              + self.args[0])
+                mod = importlib.import_module(
+                    'dispass.commands.' + self.args[0]
+                )
                 cmd = mod.Command(argv=self.args[1:])
             except ImportError:
                 print('error: command {cmd} does not exist'

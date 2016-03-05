@@ -1,3 +1,5 @@
+'''Subcommand module `gui`; contains only a single class `Command`'''
+
 # Copyright (c) 2012-2016  Tom Willemse <tom@ryuslash.org>
 # Copyright (c) 2011-2016  Benjamin Althues <benjamin@althu.es>
 #
@@ -30,7 +32,7 @@ class Command(CommandBase):
         '''Entry point and handler of command options and arguments'''
 
         if self.flags['help']:
-            print self.usage
+            print(self.usage)
             return
 
         if self.parentFlags['file']:
@@ -44,12 +46,12 @@ class Command(CommandBase):
             g = GUI(settings, lf)
             g.mainloop()
         except ImportError:
-            print ('Could not find Tkinter, this is a package needed '
-                   'for using\n' 'the graphical version of dispass.\n'
-                   'To install, search for a python-tk package for'
-                   ' your OS.\n'
-                   'Arch Linux     \t\t# pacman -S python-tk\n'
-                   'Debian / Ubuntu\t\t$ sudo apt-get install '
-                   'python-tk\n'
-                   'OpenBSD        \t\t# pkg_add -i python-tk')
+            print('Could not find Tkinter, this is a package needed '
+                  'for using\n' 'the graphical version of dispass.\n'
+                  'To install, search for a python-tk package for'
+                  ' your OS.\n'
+                  'Arch Linux     \t\t# pacman -S python-tk\n'
+                  'Debian / Ubuntu\t\t$ sudo apt-get install '
+                  'python-tk\n'
+                  'OpenBSD        \t\t# pkg_add -i python-tk')
             return 2

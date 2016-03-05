@@ -1,3 +1,5 @@
+'''Subcommand module `remove`; contains only a single class `Command`'''
+
 # Copyright (c) 2012-2016  Tom Willemse <tom@ryuslash.org>
 # Copyright (c) 2011-2016  Benjamin Althues <benjamin@althu.es>
 #
@@ -51,7 +53,7 @@ class Command(CommandBase):
             return 0
 
         if not self.args or self.flags['help']:
-            print self.usage
+            print(self.usage)
             return 0
 
         for arg in set(self.args):

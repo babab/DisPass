@@ -227,8 +227,8 @@ class GUI(Frame):
 
         ttitle = Label(self, text=versionStr, font=self.getFont(4))
         wisnew = Checkbutton(self, height=2, font=self.getFont(),
-                             text="This is a new password, that I have not "
-                                  + "used before",
+                             text=('This is a new password, that I have not '
+                                   'used before'),
                              variable=self.isnew, command=self.toggleCheck)
         tlabel = Label(self, text='Label', font=self.getFont(2))
         tpasswordin1 = Label(self, text='Password', font=self.getFont(2))

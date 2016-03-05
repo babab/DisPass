@@ -1,3 +1,5 @@
+'''Subcommand module `list`; contains only a single class `Command`'''
+
 # Copyright (c) 2012-2016  Tom Willemse <tom@ryuslash.org>
 # Copyright (c) 2011-2016  Benjamin Althues <benjamin@althu.es>
 #
@@ -46,7 +48,7 @@ class Command(CommandBase):
 
     def run(self):
         if self.flags['help']:
-            print self.usage
+            print(self.usage)
             return
 
         if self.parentFlags['file']:

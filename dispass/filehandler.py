@@ -111,7 +111,7 @@ class Filehandler:
                     try:
                         length = int(arg.strip('length='))
                     except ValueError:
-                        print "Warning: Invalid length in: '%s'" % line
+                        print("Warning: Invalid length in: '{}'".format(line))
                 elif 'algo=' in arg:
                     algo = arg.strip('algo=')
                 elif 'seqno=' in arg:
@@ -239,7 +239,7 @@ class Filehandler:
             - `label`: The labelname
 
         :Returns:
-            - A tuple with 5 values ``(label, length, algo, seqno, disabled))``:
+            - A tuple with 5 values ``(label, length, algo, seqno, disabled))``
                 - `label`: Label to use for passprase generation
                 - `length`: Length to use for passprase generation
                 - `algo`: Algorithm to use for passprase generation

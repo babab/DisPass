@@ -15,19 +15,17 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+import os
+import sys
+
+import pycommand
+
 __docformat__ = 'restructuredtext'
 __author__ = "Benjamin Althues"
 __copyright__ = "Copyright (C) 2011-2016  Benjamin Althues & Tom Willemse"
 __version_info__ = (0, 3, 0, 'alpha', 0)
 __version__ = '0.3.0'
 versionStr = 'DisPass ' + __version__
-
-import exceptions
-import importlib
-import os
-import sys
-
-import pycommand
 
 
 def verboseVersionInfo():
@@ -77,7 +75,6 @@ class DispassCommand(pycommand.CommandBase):
         '   increment    increment the sequence number of a label\n'
         '   list         print a formatted table of labelfile contents\n'
         '   remove       remove label from labelfile\n'
-        #'   settings     show default values for length, algo etc.\n'
         '   update       update length, algo or seqno of a label\n'
         '   version      show full version information'
     )

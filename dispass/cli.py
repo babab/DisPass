@@ -76,8 +76,8 @@ class CLI:
             inp = getpass.getpass()
 
             if len(inp) < 8:
-                print 'Password must contain at least 8 characters.',
-                print 'Please try again.'
+                print('Password must contain at least 8 characters.'
+                      'Please try again.')
                 continue
 
             if self.verifyPassword:
@@ -85,13 +85,13 @@ class CLI:
                 if inp == inp2:
                     break
                 else:
-                    print "Passwords do not match. Please try again."
+                    print('Passwords do not match. Please try again.')
             else:
                 break
 
         return inp
 
-    def generate(self, password, (label, length, algo, seqno, disabled)):
+    def generate(self, password, labeltup):
         '''Generate passphrase and store result in `passphrases`
 
         :Parameters:
@@ -104,6 +104,10 @@ class CLI:
                * `disabled`: Whether or not the label is disabled
 
         '''
+        label = labeltup[0]
+        length = labeltup[1]
+        algo = labeltup[2]
+        seqno = labeltup[3]
 
         hasher = algoObject(algo)
         if hasher:
@@ -147,8 +151,9 @@ class CLI:
         else:
             for label, passphrase in self.passphrases.iteritems():
                 if self.scriptableIO:
-                    print '{:50} {}'.format(label[:50], passphrase)
+                    print('{:50} {}'.format(label[:50], passphrase))
                 else:
-                    print "{:{fill}} {}".format(label, passphrase, fill=divlen)
+                    print('{:{fill}} {}'
+                          .format(label, passphrase, fill=divlen))
         self.passphrases = {}
         return True
