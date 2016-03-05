@@ -25,10 +25,10 @@ Index
 
 .. toctree::
 
-   01-quick-start
-   02-introduction
-   03-installing
-   04-using-dispass
-   05-using-gdispass
-   06-development
-   07-api-reference
+   quick-start
+   introduction
+   installing
+   using-dispass
+   using-gdispass
+   development
+   api-reference
