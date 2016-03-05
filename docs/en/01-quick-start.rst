@@ -46,4 +46,6 @@ Mini screencast
 Checkout the following mini screencast. In this demo the label is added
 interactively.
 
-.. image:: ../../dispass-mini-screencast.gif
+.. raw:: html
+
+   <script type="text/javascript" src="https://asciinema.org/a/38378.js" id="asciicast-38378" async></script>

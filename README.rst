@@ -74,14 +74,16 @@ creating the resulting passphrase for the first time:
     dispass generate --verify google
 
 
-
 Mini screencast
 ---------------
 
 Checkout the following mini screencast. In this demo the label is added
 interactively.
 
-.. image:: dispass-mini-screencast.gif
+.. image:: https://asciinema.org/a/38378.png
+    :target: https://asciinema.org/a/38378
+    :width: 600px
+
 
 
 
