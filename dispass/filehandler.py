@@ -332,6 +332,11 @@ class Filehandler:
         inp = raw_input('Do you want to create it? Y/n ')
 
         if inp == '' or inp[0].lower() == 'y':
+            # create directories for file_location if they don't exist
+            dir = os.path.abspath(os.path.dirname(self.file_location))
+            if not os.path.exists(dir):
+                os.makedirs(dir)
+            # save file
             if not self.save():
                 print('error: could not save to "{loc}"\n'
                       .format(loc=self.file_location))
