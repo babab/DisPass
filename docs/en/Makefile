@@ -43,6 +43,7 @@ clean:
 
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
+	cat ../style.append.css >> _build/html/_static/css/theme.css
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
