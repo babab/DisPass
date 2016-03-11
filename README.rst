@@ -80,11 +80,11 @@ Mini screencast
 Checkout the following mini screencast. In this demo the label is added
 interactively.
 
-.. image:: https://asciinema.org/a/38378.png
-    :target: https://asciinema.org/a/38378
-    :width: 600px
+.. raw:: html
 
-
+   <a href="https://asciinema.org/a/38378" target="_blank">
+      <img src="https://asciinema.org/a/38378.png" width="625">
+   </a>
 
 
 Software license
