@@ -41,7 +41,7 @@ Labels have a specification that consists of the following parameters:
 
 - length (the length of the passphrase)
 - algorithm (the algorithm to use)
-- seqno (sequence number, not used in dispass1 algorithm)
+- sequence number (not used in default algorithm)
 
 The **labelspec** looks like this::
 
@@ -50,12 +50,47 @@ The **labelspec** looks like this::
 Adding a label
 --------------
 
-You can add a new label with a length of 16 and generate the passphrase
-in one go:
+You can save a new ``hotmail`` label with a length of 16 and generate the
+passphrase in one go:
 
 .. code:: console
 
-   dispass add hotmail:16
+   dispass add -g hotmail:16
+
+The next time you generate a passphrase for ``hotmail`` using:
+
+.. code:: console
+
+   dispass generate hotmail
+
+it will return the same passphrase as before (with a length of 16
+characters).
+
+Incrementing sequence numbers
+-----------------------------
+
+You might want to change the passphrase you enter into some system.
+Of course, you can do this simply by using a different label, e.g.:
+``Hotmail`` or ``hotmail-2``. You don't have to though.
+
+DisPass supports dealing with this situation in the *dispass2* algorithm.
+It basically gives you an option of *bumping* a passphrase by simply
+incrementing a **sequence number**.
+
+To use sequence numbers with the hotmail label from before you can
+update it to use the dispass2 algorithm with sequence number 1:
+
+.. code:: console
+
+   dispass update hotmail 16:dispass2:1
+   dispass generate hotmail
+
+The next time you want to use a different passphrase, you can simply use
+
+.. code:: console
+
+   dispass increment hotmail
+   dispass generate hotmail
 
 Subcommands
 -----------
