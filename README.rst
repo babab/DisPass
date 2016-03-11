@@ -20,11 +20,12 @@ simple graphical interface.
 Resources
 =========
 
-- `Main website <http://dispass.org>`_
-- `Python Package Index (PyPI) page <http://pypi.python.org/pypi/DisPass/>`_
-- `Waffle.io board <https://waffle.io/babab/DisPass>`_
-- `Github repository and Issue tracker <https://github.com/babab/dispass/>`_
-- `Bitbucket repository <https://bitbucket.org/babab/dispass/>`_
+- Main website: https://dispass.org/
+- Python Package Index: http://pypi.python.org/pypi/DisPass/
+- Agile project management: https://waffle.io/babab/DisPass
+- Github: https://github.com/babab/dispass/
+- Bitbucket: https://bitbucket.org/babab/dispass/
+
 
 .. image:: https://graphs.waffle.io/babab/DisPass/throughput.svg
    :target: https://waffle.io/babab/DisPass/metrics
