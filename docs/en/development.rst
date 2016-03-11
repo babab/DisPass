@@ -1,37 +1,51 @@
 Related projects
 ================
 
+There are three related projects of DisPass, all are created by Tom
+Willemse (https://ryuslash.org/).
+
 dispass.el
 ----------
 
-Got Emacs? You can use the Emacs wrapper.
+dispass.el is an emacs wrapper around DisPass.
 
-If you have Emacs you can use the Emacs wrapper created and maintained by
-Tom Willemse (ryuslash).
+- Website: http://ryuslash.org/projects/dispass.el.html
+- Github: https://github.com/ryuslash/dispass.el
 
-You can find it at: http://ryuslash.org/projects/dispass.el.html
+cDisPass
+--------
+
+cdispass is a JavaScript-based wrapper around DisPass for the Conkeror
+Web Browser.
+
+- Github: https://github.com/ryuslash/dispass.el
+
+
+libdispass
+----------
+
+C library of DisPass algorithms
+
+- Github: https://github.com/ryuslash/libdispass
 
 
 Development
 ===========
 
-Support / ideas / questions / suggestions
------------------------------------------
+Please use Github and/or the Waffle.io board for bug reports, questions
+or submitting pull-requests. You can also discuss #dispass on IRC.
 
-Issue tracker at Github: https://github.com/babab/dispass/issues
-
-You can also visit #dispass at Freenode (chat.freenode.net) with your favorite
-IRC client.
+- Agile project management: https://waffle.io/babab/DisPass
+- Issue tracker at Github: https://github.com/babab/dispass/issues
+- IRC: #dispass at Freenode and OFTC
 
 
 Acknowledgements
 ----------------
 
-Many thanks go out to Tom (ryuslash) Willemse for valuable
-contributions to gdispass and the new algorithm. He also wrote an
-awesome wrapper for Emacs so you can use DisPass in your favorite
-editor.
-
+Many thanks go out to Tom (ryuslash) Willemse for valuable contributions
+to `gdispass` and the new `dispass2` algorithm. He also wrote
+`dispass.el`, `cDisPass` and `libdispass`.
 
 .. Include ChangeLog section from base path
 .. include:: ../../ChangeLog.rst
