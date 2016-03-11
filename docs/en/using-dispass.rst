@@ -1,6 +1,9 @@
 Using dispass
 =============
 
+Basic usage
+-----------
+
 You can start using dispass for e.g. google.com like this:
 
 .. code:: console
@@ -22,14 +25,44 @@ Generating passphrases for multiple labels is just as easy:
 
    dispass generate google hotmail YaHo0 "P0551bly*a81t)H4rd2rmbr"
 
-Labels are case-sensitive and digits and special characters can be
-used. You should try to name labels in a way that you can easily
-'dispass generate' a passphrase on any computer/device that has
-DisPass at any given moment. You are encouraged to store your labels
-in a labelfile for convenience though.
+Labels are case-sensitive and digits and special characters can be used.
+You should try to name labels in a way that you can easily generate a
+passphrase on any computer/device that has DisPass at any given moment.
 
-dispass
--------
+Label specifications
+--------------------
+
+While the above works fine without storing any information, you are
+encouraged to store your labels in a labelfile for convenience. That
+way, you don't have to use the ``-l 16`` option everytime you create
+your hotmail password.
+
+Labels have a specification that consists of the following parameters:
+
+- length (the length of the passphrase)
+- algorithm (the algorithm to use)
+- seqno (sequence number, not used in dispass1 algorithm)
+
+The **labelspec** looks like this::
+
+   label[:size[:algorithm[:sequence_number]]]
+
+Adding a label
+--------------
+
+You can add a new label with a length of 16 and generate the passphrase
+in one go:
+
+.. code:: console
+
+   dispass add hotmail:16
+
+Subcommands
+-----------
+
+DisPass has many commands around managing the labels. You can see all
+available subcommands and options of dispass by running ``dispass
+--help`` or just running ``dispass`` wihout any arguments.
 
 .. code:: console
 
@@ -57,131 +90,118 @@ dispass
 
 
 dispass add
------------
+###########
 
-.. code:: console
+Add a new label to the labelfile and generate passphrase.
+The labelspec looks like this: ``label[:size[:algorithm[:sequence_number]]]``
+
+::
 
    usage: dispass add [-g] [-n] [-s] <labelspec> [<labelspec2>] [...]
           dispass add [-i] [-g] [-h]
 
-   Add a new label to the labelfile and generate passphrase.
-   The labelspec looks like this:
-
-       label[:size[:algorithm[:sequence_number]]]
-
-   Options:
-   -i, --interactive  add label in an interactive manner
-   -g, --generate     immediately generate passphrase after adding it
-   -h, --help         show this help information
-   -n, --dry-run      do not actually add label to labelfile
-   -s, --silent       do not print success message
-
+-i, --interactive  add label in an interactive manner
+-g, --generate     immediately generate passphrase after adding it
+-h, --help         show this help information
+-n, --dry-run      do not actually add label to labelfile
+-s, --silent       do not print success message
 
 
 dispass disable
----------------
+###############
 
-.. code:: console
+Disable a label without throwing it away
+
+::
 
    usage: dispass disable <label>
 
-   Disable a label without throwing it away
-
-   Options:
-   -h, --help     show this help information
-   -n, --dry-run  do not actually update label in labelfile
-   -s, --silent   do not print success message
+-h, --help     show this help information
+-n, --dry-run  do not actually update label in labelfile
+-s, --silent   do not print success message
 
 
 dispass enable
---------------
+##############
 
-.. code:: console
+Enable a label
+
+::
 
    usage: dispass enable <label>
 
-   Enable a label
-
-   Options:
-   -h, --help     show this help information
-   -n, --dry-run  do not actually update label in labelfile
-   -s, --silent   do not print success message
+-h, --help     show this help information
+-n, --dry-run  do not actually update label in labelfile
+-s, --silent   do not print success message
 
 
 dispass generate
-----------------
+################
 
-.. code:: console
+Generate passphrases for one or more labels
+
+Use the ``-v`` flag to ask for password twice to avoid typing errors
+
+::
 
    usage: dispass generate [options] <label> [<label2>] [<label3>] [...]
 
-   Generate passphrases for one or more labels
-
-   Use the '-v' flag to ask for password twice to avoid typing errors
-
-   Options:
-   -h, --help                            show this help information
-   -v, --verify                          verify password
-   -l <length>, --length=<length>        length of passphrase
-   -a <algorithm>, --algo=<algorithm>    algorithm to use for generation
-   -s <seqno>, --seqno=<seqno>           sequence number to use for generation
-   -p <password>, --password=<password>  password to use for generation
-   -o, --stdout                          output passphrase(s) directly to stdout
-   --silent                              do not show a prompt when errors occur
+-h, --help                            show this help information
+-v, --verify                          verify password
+-l <length>, --length=<length>        length of passphrase
+-a <algorithm>, --algo=<algorithm>    algorithm to use for generation
+-s <seqno>, --seqno=<seqno>           sequence number to use for generation
+-p <password>, --password=<password>  password to use for generation
+-o, --stdout                          output passphrase(s) directly to stdout
+--silent                              do not show a prompt when errors occur
 
 
 dispass gui
------------
+###########
 
-.. code:: console
+Start the graphical version of DisPass.
+
+::
 
    usage: dispass gui [-h]
 
-   Start the graphical version of DisPass.
-
-   Options:
-   -h, --help  show this help information
+-h, --help  show this help information
 
 
 dispass help
-------------
+############
 
-.. code:: console
+Show help information
+
+::
 
    usage: dispass help [<command>]
 
-   Show help information
-
 
 dispass increment
------------------
+#################
 
-.. code:: console
+Increment the sequence number of a label
+
+::
 
    usage: dispass increment [-n] [-s] <label>
           dispass increment [-h]
 
-   Increment the sequence number of a label
-
-   Options:
-   -h, --help     show this help information
-   -n, --dry-run  do not actually update label in labelfile
-   -s, --silent   do not print success message
+-h, --help     show this help information
+-n, --dry-run  do not actually update label in labelfile
+-s, --silent   do not print success message
 
 
 dispass list
-------------
+############
 
-.. code:: console
+Print a formatted table of labelfile contents
 
-   usage: dispass list [-h] [-n] [--script]
-
-   Print a formatted table of labelfile contents
-
-   If --script is passed the output will be optimized for easy
-   parsing by other programs and scripts by not printing the header
-   and always printing one entry on a single line using the
-   following positions:
+If ``--script`` is passed the output will be optimized for easy
+parsing by other programs and scripts by not printing the header
+and always printing one entry on a single line using the
+following positions::
 
    Column  1-50: labelname        50 chars wide
    Column 52-54: length            3 chars wide
@@ -189,51 +209,53 @@ dispass list
    Column 72-74: sequence number   3 chars wide
    Column 76-77: disabled          1 char wide
 
-   Options:
-   -a, --all         include disabled labels
-   -h, --help        show this help information
-   -n, --names-only  only print names of the labels
-   --script          output in fixed columns
+::
+
+   usage: dispass list [-h] [-n] [--script]
+
+-a, --all         include disabled labels
+-h, --help        show this help information
+-n, --names-only  only print names of the labels
+--script          output in fixed columns
 
 
 dispass remove
---------------
+##############
 
-.. code:: console
+Remove label from labelfile
+
+::
 
    usage: dispass remove [-n] [-s] <labelname> [<labelname2>] [...]
           dispass remove [-i] [-h]
 
-   Remove label from labelfile
-
-   Options:
-   -i, --interactive  remove label in an interactive manner
-   -h, --help         show this help information
-   -n, --dry-run      do not actually remove label from labelfile
-   -s, --silent       do not print success message
+-i, --interactive  remove label in an interactive manner
+-h, --help         show this help information
+-n, --dry-run      do not actually remove label from labelfile
+-s, --silent       do not print success message
 
 
 dispass update
---------------
+##############
 
-.. code:: console
+Update information for a label
+
+::
 
    usage: dispass update [-n] [-s] <label> [<size>]:[<algorithm>]:[<sequence_number>]
           dispass update [-h]
 
-   Update information for a label
-
-   Options:
-   -h, --help     show this help information
-   -n, --dry-run  do not actually update label in labelfile
-   -s, --silent   do not print success message
+-h, --help     show this help information
+-n, --dry-run  do not actually update label in labelfile
+-s, --silent   do not print success message
 
 
 dispass version
----------------
+###############
 
-.. code:: console
+Show full version information
+
+::
 
    usage: dispass version
 
-   Show full version information
