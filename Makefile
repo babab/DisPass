@@ -1,3 +1,5 @@
+DESKTOP_PATH    = $(DESTDIR)/usr/share/applications
+ICON_PATH       = $(DESTDIR)/usr/share/icons/hicolor
 MAN_PATH		= $(DESTDIR)/usr/share/man/man1
 ZSH_SITE_FUNCS_PATH	= $(DESTDIR)/usr/share/zsh/site-functions
 PYTHON_EXEC		= python2
@@ -45,8 +47,13 @@ dist: rm_pyc
 install: dist
 	$(PIP_EXEC) install --root $(DESTDIR) --upgrade dist/DisPass-$(VERSION).tar.gz
 	gzip -c dispass.1 > dispass.1.gz
-	mv dispass.1.gz $(MAN_PATH)
-	cp zsh/_dispass $(ZSH_SITE_FUNCS_PATH)
+	install -Dm644 dispass.1.gz $(MAN_PATH)/dispass.1.gz
+	install -Dm644 zsh/_dispass $(ZSH_SITE_FUNCS_PATH)/_dispass
+	install -Dm644 etc/dispass.desktop $(DESKTOP_PATH)/dispass.desktop
+	for size in 24 32 64 128 256 512; do \
+		install -Dm644 "logo/logo$${size}.png" \
+		"$(ICON_PATH)/$${size}x$${size}/apps/dispass.png"; \
+	done
 	make clean
 
 uninstall: clean
