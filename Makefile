@@ -1,5 +1,5 @@
-MAN_PATH		= /usr/share/man/man1
-ZSH_SITE_FUNCS_PATH	= /usr/share/zsh/site-functions
+MAN_PATH		= $(DESTDIR)/usr/share/man/man1
+ZSH_SITE_FUNCS_PATH	= $(DESTDIR)/usr/share/zsh/site-functions
 PYTHON_EXEC		= python2
 PIP_EXEC		= pip2
 
@@ -43,7 +43,7 @@ dist: rm_pyc
 	$(PYTHON_EXEC) setup.py sdist
 
 install: dist
-	$(PIP_EXEC) install --upgrade dist/DisPass-$(VERSION).tar.gz
+	$(PIP_EXEC) install --root $(DESTDIR) --upgrade dist/DisPass-$(VERSION).tar.gz
 	gzip -c dispass.1 > dispass.1.gz
 	mv dispass.1.gz $(MAN_PATH)
 	cp zsh/_dispass $(ZSH_SITE_FUNCS_PATH)
