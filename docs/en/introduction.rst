@@ -4,11 +4,11 @@ Introduction
 Resources
 ---------
 
-- Main website: https://dispass.org/
-- Python Package Index: http://pypi.python.org/pypi/DisPass/
+- Main website: https://dispass.org
+- Python Package Index: http://pypi.python.org/pypi/DisPass
 - Agile project management: https://waffle.io/babab/DisPass
-- Github: https://github.com/babab/dispass/
-- Bitbucket: https://bitbucket.org/babab/dispass/
+- Github: https://github.com/babab/dispass
+- Bitbucket: https://bitbucket.org/babab/dispass
 
 Definitions
 -----------
