@@ -1,5 +1,6 @@
-DESKTOP_PATH    = $(DESTDIR)/usr/share/applications
-ICON_PATH       = $(DESTDIR)/usr/share/icons/hicolor
+DESTDIR			= /
+DESKTOP_PATH		= $(DESTDIR)/usr/share/applications
+ICON_PATH		= $(DESTDIR)/usr/share/icons/hicolor
 MAN_PATH		= $(DESTDIR)/usr/share/man/man1
 ZSH_SITE_FUNCS_PATH	= $(DESTDIR)/usr/share/zsh/site-functions
 PYTHON_EXEC		= python2
@@ -7,13 +8,20 @@ PIP_EXEC		= pip2
 
 sinclude config.mk
 
+.PHONY: make rm_pyc doc_clean doc man dist install install-pip install-src install-metafiles uninstall clean
+
 VERSION		= 0.3.0
 
 make:
-	@echo "make install   Build and then install via pip and move manpage"
-	@echo "make uninstall Clean build files and uninstall via pip"
+	@echo 'Installation targets'
+	@echo 'make install        alias for install-pip'
+	@echo 'make install-pip    install wdocker wheel pkg with pip (default)'
+	@echo 'make install-src    install via setup.py install --root=$$DESTDIR'
 	@echo
-	@echo "Developer commands"
+	@echo 'Note: make install-src does not install requirements.txt and '
+	@echo '      is aimed for usage in creating distribution packages'
+	@echo
+	@echo "Development targets"
 	@echo "make doc       Build html documentation with Sphinx"
 	@echo "make man       Build manpage with Sphinx"
 	@echo "make dist      Build python source archive file"
@@ -42,10 +50,20 @@ man: rm_pyc
 	cd docs/man-en/; make clean
 
 dist: rm_pyc
-	$(PYTHON_EXEC) setup.py sdist
+	$(PYTHON_EXEC) setup.py sdist bdist_wheel
 
-install: dist
-	$(PIP_EXEC) install --root $(DESTDIR) --upgrade dist/DisPass-$(VERSION).tar.gz
+install: install-pip
+
+install-pip: dist install-metafiles
+	$(PIP_EXEC) install -r requirements.txt
+	$(PIP_EXEC) install --upgrade dist/DisPass-$(VERSION)-py2.py3-none-any.whl
+	make clean
+
+install-src: install-metafiles
+	$(PYTHON_EXEC) setup.py install --root='$(DESTDIR)'
+	make clean
+
+install-metafiles:
 	gzip -c dispass.1 > dispass.1.gz
 	install -Dm644 dispass.1.gz $(MAN_PATH)/dispass.1.gz
 	install -Dm644 zsh/_dispass $(ZSH_SITE_FUNCS_PATH)/_dispass
@@ -54,7 +72,6 @@ install: dist
 		install -Dm644 "logo/logo$${size}.png" \
 		"$(ICON_PATH)/$${size}x$${size}/apps/dispass.png"; \
 	done
-	make clean
 
 uninstall: clean
 	$(PIP_EXEC) uninstall dispass
