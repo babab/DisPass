@@ -16,9 +16,14 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+import exceptions
+
 import pycommand
 
 from dispass.dispass import DispassCommand
 
 if __name__ == '__main__':
-    pycommand.run_and_exit(DispassCommand)
+    try:
+        pycommand.run_and_exit(DispassCommand)
+    except exceptions.KeyboardInterrupt:
+        print ('\nOk, bye')
