@@ -48,14 +48,7 @@ class Command(CommandBase):
         except ImportError:
             print('Could not find Tkinter, this is a package needed '
                   'for using\n' 'the graphical version of dispass.\n'
-                  'To install, search for a python-tk package for'
-                  ' your OS.\n'
-                  'Debian / Ubuntu\t\t$ sudo apt-get install '
-                  'python-tk\n'
-                  'OpenBSD        \t\t# pkg_add -i python-tk\n'
                   '\n'
-                  'Archlinux:\n'
-                  '  The Tkinter library is included in the python2\n'
-                  '  package, so just ensure that the tk package is\n'
-                  '  installed: sudo pacman -S tk')
+                  'For installation instructions, please see the\n'
+                  '"Using gdispass" chapter of the documentation.')
             return 2

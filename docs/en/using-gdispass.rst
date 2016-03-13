@@ -1,6 +1,26 @@
 Using gdispass
 ==============
 
+Before you start using ``gDispass``, make sure that the Tkinter
+library is available. Here are some instructions to help you along:
+
+Debian / Ubuntu
+   Make sure the ``python-tk`` package is installed::
+
+      sudo apt-get install python-tk
+
+OpenBSD
+   Make sure the ``python-tk`` package is installed::
+
+      pkg_add -i python-tk
+
+Archlinux
+   The Tkinter Python library is included in the ``python2`` package,
+   to make it work you need to be sure the ``tk`` package is
+   installed::
+
+      sudo pacman -S tk
+
 You can start using gDisPass by running the ``gdispass`` executable.
 Fill in a name for the label that you can easily remember.
 
