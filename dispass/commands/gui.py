@@ -50,8 +50,12 @@ class Command(CommandBase):
                   'for using\n' 'the graphical version of dispass.\n'
                   'To install, search for a python-tk package for'
                   ' your OS.\n'
-                  'Arch Linux     \t\t# pacman -S python-tk\n'
                   'Debian / Ubuntu\t\t$ sudo apt-get install '
                   'python-tk\n'
-                  'OpenBSD        \t\t# pkg_add -i python-tk')
+                  'OpenBSD        \t\t# pkg_add -i python-tk\n'
+                  '\n'
+                  'Archlinux:\n'
+                  '  The Tkinter library is included in the python2\n'
+                  '  package, so just ensure that the tk package is\n'
+                  '  installed: sudo pacman -S tk')
             return 2
