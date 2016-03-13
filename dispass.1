@@ -1,6 +1,6 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "DISPASS" "1" "August 14, 2015" "0.3" "DisPass"
+.TH "DISPASS" "1" "March 13, 2016" "0.3" "DisPass"
 .SH NAME
 dispass \- DisPass Documentation
 .
@@ -37,27 +37,43 @@ dispass [\-f <labelfile>] [\-h] [\-V] <command> [<args>]
 gdispass
 .SH SUMMARY
 .sp
-DisPass is a password manager for GNU/Linux, *BSD, MacOS X and Windows. It
-can be used as any traditional password manager, but has one key difference.
-DisPass does not store your passwords anywhere, so you can never lose them.
-.sp
-It creates strong and unique passphrases formed from a master password and a
-label (and some optional parameters), helping you get rid of the bad habit of
-using a single password for multiple websites.
-.sp
-Dispass is a console application, but also has a simple graphical interface.
+DisPass is a password manager for GNU/Linux, *BSD, MacOS X and Windows.
+It can be used as any traditional password manager, but has one key
+difference. DisPass does not store your passwords anywhere, so you
+can never lose them. It creates strong and unique passphrases formed
+from a master password and a label (and some optional parameters),
+helping you get rid of the bad habit of using a single password for
+multiple websites. Dispass is a console application, but also has a
+simple graphical interface.
 .SH DOCUMENTATION
+.SS Resources
+.INDENT 0.0
+.IP \(bu 2
+Main website: \fI\%https://dispass.org/\fP
+.IP \(bu 2
+Python Package Index: \fI\%http://pypi.python.org/pypi/DisPass/\fP
+.IP \(bu 2
+Agile project management: \fI\%https://waffle.io/babab/DisPass\fP
+.IP \(bu 2
+Github: \fI\%https://github.com/babab/dispass/\fP
+.IP \(bu 2
+Bitbucket: \fI\%https://bitbucket.org/babab/dispass/\fP
+.UNINDENT
+.SS Definitions
+.sp
+Here are some definitions which may help you understand the rest of the
+documentation better.
 .INDENT 0.0
 .TP
 .B label
-A label is a string that you use to identify the passphrase.
-This can be a domainname of the service the passphrase is used for,
+A label is a string that you use to identify the passphrase. This
+can be a domain name of the service the passphrase is used for,
 e.g. \(aqgoogle.com\(aq.
 .UNINDENT
 .sp
 Since this program asks for a password/passphrase to generate another
-password/passphrase, things may get a bit confusing. I\(aqve dediced to use the
-words \(aqpassword\(aq and \(aqpassphrase\(aq diffently and consistent.
+password/passphrase, things may get a bit confusing. I\(aqve decided to use the
+words \(aqpassword\(aq and \(aqpassphrase\(aq differently and consistent.
 .INDENT 0.0
 .TP
 .B password
@@ -72,63 +88,23 @@ that is unique and generated from a label, password and sequence number.
 Generated passphrases are 30 characters long. The length can be optionally
 changed.
 .UNINDENT
+.SS Labelfile
 .sp
-When DisPass is executed as \(aqgdispass\(aq the graphical version will be started.
-.SS Using dispass to create one or more passphrases
-.sp
-You can start using dispass for e.g. google.com like this:
-.INDENT 0.0
-.INDENT 3.5
-.sp
-.nf
-.ft C
-$ dispass google.com
-.ft P
-.fi
-.UNINDENT
-.UNINDENT
-.sp
-The passphrases created are 30 characters long by default, but some
-website\(aqs may not validate such a long passphrase or you might want to
-make it even longer. You can easily set a desired passphrase length
-using the \fB\-l\fP flag. Hotmail passwords are limited to 16 characters:
-.INDENT 0.0
-.INDENT 3.5
-.sp
-.nf
-.ft C
-$ dispass \-l 18 hotmail
-.ft P
-.fi
-.UNINDENT
-.UNINDENT
-.sp
-Generating passphrases for multiple labels is just as easy:
-.INDENT 0.0
-.INDENT 3.5
-.sp
-.nf
-.ft C
-$ dispass google hotmail YaHo0 "P0551bly*a81t)H4rd2rmbr"
-.ft P
-.fi
-.UNINDENT
-.UNINDENT
-.sp
-Labels are case\-sensitive and digits and special characters can be used.
-You should try to name labels in a way that you can easily \(aqdispass\(aq a
-passphrase on any computer/device that has DisPass at any given moment.
-You are encouraged to store your labels in a labelfile for convenience
-though.
-.SS Using a labelfile
+DisPass does not store your passwords or passphrases, but it does store
+labels and their settings (algorithm, length and sequence_number) for
+convenience. However, please keep in mind that you should try to name
+labels in a way that you can easily \(aqdispass generate\(aq a passphrase on
+any computer/device that has DisPass at any given moment without having
+your labelfile at hand.
 .sp
 When dispass is run without arguments it will try to find a labelfile.
 The location of this file varies and depends on the platform type you use,
 the file flag and the environment variables that may be set:
 .sp
-You can override the location of the labelfile using the \fB\-f\fP flag.
-This can be a way for you to use different sets of labels/passphrases
-with a different \(aqmaster\(aq password for each set.
+You can override the location of the labelfile using the
+\fB\-f <labelfile>, \-\-file=<labelfile>\fP flag. This can be a way for you
+to use different sets of labels/passphrases with a different \(aqmaster\(aq
+password for each set.
 .INDENT 0.0
 .IP 1. 3
 If \-f flag is given, that value is used.
@@ -149,8 +125,169 @@ locations:
 \fBWindows\fP:   \fBC:\eUsers\e<username>\edispass\elabels\fP
 .UNINDENT
 .UNINDENT
+.SS Basic usage
 .sp
-You can edit the labelfile(s) by using the \fBdispass\-label\fP program.
+You can start using dispass for e.g. google.com like this:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+dispass generate google.com
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+The passphrases created are 30 characters long by default, but some
+websites may not validate such a long passphrase or you might want to
+make it even longer. You can easily set a desired passphrase length
+using the \fB\-l\fP flag. Hotmail passwords are limited to 16 characters:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+dispass generate \-l 16 hotmail
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Generating passphrases for multiple labels is just as easy:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+dispass generate google hotmail YaHo0 "P0551bly*a81t)H4rd2rmbr"
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Labels are case\-sensitive and digits and special characters can be used.
+You should try to name labels in a way that you can easily generate a
+passphrase on any computer/device that has DisPass at any given moment.
+.SS Label specifications
+.sp
+While the above works fine without storing any information, you are
+encouraged to store your labels in a labelfile for convenience. That
+way, you don\(aqt have to use the \fB\-l 16\fP option everytime you create
+your hotmail password.
+.sp
+Labels have a specification that consists of the following parameters:
+.INDENT 0.0
+.IP \(bu 2
+length (the length of the passphrase)
+.IP \(bu 2
+algorithm (the algorithm to use)
+.IP \(bu 2
+sequence number (not used in default algorithm)
+.UNINDENT
+.sp
+The \fBlabelspec\fP looks like this:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+label[:size[:algorithm[:sequence_number]]]
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SS Adding a label
+.sp
+You can save a new \fBhotmail\fP label with a length of 16 and generate the
+passphrase in one go:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+dispass add \-g hotmail:16
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+The next time you generate a passphrase for \fBhotmail\fP using:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+dispass generate hotmail
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+it will return the same passphrase as before (with a length of 16
+characters).
+.SS Incrementing sequence numbers
+.sp
+You might want to change the passphrase you enter into some system.
+Of course, you can do this simply by using a different label, e.g.:
+\fBHotmail\fP or \fBhotmail\-2\fP\&. You don\(aqt have to though.
+.sp
+DisPass supports dealing with this situation in the \fIdispass2\fP algorithm.
+It basically gives you an option of \fIbumping\fP a passphrase by simply
+incrementing a \fBsequence number\fP\&.
+.sp
+To use sequence numbers with the hotmail label from before you can
+update it to use the dispass2 algorithm with sequence number 1:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+dispass update hotmail 16:dispass2:1
+dispass generate hotmail
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+The next time you want to use a different passphrase, you can simply use
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+dispass increment hotmail
+dispass generate hotmail
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SS Using gdispass
+.sp
+You can start using gDisPass by running the \fBgdispass\fP executable.
+Fill in a name for the label that you can easily remember.
+.sp
+To generate a passphrase for a new label, i.e. a label that you have
+never used before, check the appropriate checkbox. This will allow you
+to enter the (master) password twice. gDisPass will then compare the
+passwords to see if they are the same. This is needed to minimize the
+risk of typos. It is advised that you check the box everytime you
+create a passphrase for a new label.
+.sp
+Subsequential generation of passphrases for the same label most probably do
+not need this check. You will likely be warned when/if you made a typo by
+the system or website you want to authenticate for.
+.sp
+If you correctly entered a label and password, you can generate the
+passphrase by pressing <Return> or by clicking the appropriate button.
+The resulting passphrase will be focused and selected. On platforms
+that support it (e.g. *BSD or GNU/Linux) the passphrase will be
+automatically placed into your copy/paste buffer.
+.sp
+Resetting all fields when you are done or when you need to quickly
+cancel the generation (because someone is watching over your
+shoulders) can be done by pressing <Escape> or by clicking the
+appropriate button.
 .SH OPTIONS
 .SS dispass
 .INDENT 0.0
@@ -164,30 +301,211 @@ show this help information
 .B \-V\fP,\fB  \-\-version
 show full version information
 .UNINDENT
-.SH USING THE GRAPHICAL GDISPASS APPLICATION
+.SS dispass add
 .sp
-You can start using gDisPass by running the \fBgdispass\fP executable.
-Fill in a name for the label that you can easily remember.
+Add a new label to the labelfile and generate passphrase.
+The labelspec looks like this: \fBlabel[:size[:algorithm[:sequence_number]]]\fP
 .sp
-To generate a passphrase for a new label, i.e. a label that you have never
-used before, check the appropiate checkbox. This will allow you to enter the
-(master) password twice. gDisPass will then compare the passwords to see if
-they are the same. This is needed to minimize the risk of typos. It is advised
-that you check the box everytime you create a passphrase for a new label.
+dispass add [\-g] [\-n] [\-s] <labelspec> [<labelspec2>] [...]
 .sp
-Subsequential generation of passphrases for the same label most probably do
-not need this check. You will likely be warned when/if you made a typo by
-the system or website you want to authenticate for.
+dispass add [\-i] [\-g] [\-h]
+.INDENT 0.0
+.TP
+.B \-i\fP,\fB  \-\-interactive
+add label in an interactive manner
+.TP
+.B \-g\fP,\fB  \-\-generate
+immediately generate passphrase after adding it
+.TP
+.B \-h\fP,\fB  \-\-help
+show this help information
+.TP
+.B \-n\fP,\fB  \-\-dry\-run
+do not actually add label to labelfile
+.TP
+.B \-s\fP,\fB  \-\-silent
+do not print success message
+.UNINDENT
+.SS dispass disable
 .sp
-If you correctly entered a label and password, you can generate the passphrase
-by pressing <Return> or by clicking the appropiate button. The resulting
-passphrase will be focused and selected. On platforms that support it
-(e.g. *BSD or GNU/Linux) the passphrase will be automatically placed into
-your copy/paste buffer.
+Disable a label without throwing it away
 .sp
-Resetting all fields when you are done or when you need to quickly cancel the
-generation (because someone is watching over your shoulders) can be done by
-pressing <Escape> or by clicking the appropiate button.
+dispass disable <label>
+.INDENT 0.0
+.TP
+.B \-h\fP,\fB  \-\-help
+show this help information
+.TP
+.B \-n\fP,\fB  \-\-dry\-run
+do not actually update label in labelfile
+.TP
+.B \-s\fP,\fB  \-\-silent
+do not print success message
+.UNINDENT
+.SS dispass enable
+.sp
+Enable a label
+.sp
+dispass enable <label>
+.INDENT 0.0
+.TP
+.B \-h\fP,\fB  \-\-help
+show this help information
+.TP
+.B \-n\fP,\fB  \-\-dry\-run
+do not actually update label in labelfile
+.TP
+.B \-s\fP,\fB  \-\-silent
+do not print success message
+.UNINDENT
+.SS dispass generate
+.sp
+Generate passphrases for one or more labels
+.sp
+Use the \fB\-v\fP flag to ask for password twice to avoid typing errors
+.sp
+dispass generate [options] <label> [<label2>] [<label3>] [...]
+.INDENT 0.0
+.TP
+.B \-h\fP,\fB  \-\-help
+show this help information
+.TP
+.B \-v\fP,\fB  \-\-verify
+verify password
+.TP
+.BI \-l \ <length>\fP,\fB \ \-\-length\fB= <length>
+length of passphrase
+.TP
+.BI \-a \ <algorithm>\fP,\fB \ \-\-algo\fB= <algorithm>
+algorithm to use for generation
+.TP
+.BI \-s \ <seqno>\fP,\fB \ \-\-seqno\fB= <seqno>
+sequence number to use for generation
+.TP
+.BI \-p \ <password>\fP,\fB \ \-\-password\fB= <password>
+password to use for generation
+.TP
+.B \-o\fP,\fB  \-\-stdout
+output passphrase(s) directly to stdout
+.TP
+.B \-\-silent
+do not show a prompt when errors occur
+.UNINDENT
+.SS dispass gui
+.sp
+Start the graphical version of DisPass.
+.sp
+dispass gui [\-h]
+.INDENT 0.0
+.TP
+.B \-h\fP,\fB  \-\-help
+show this help information
+.UNINDENT
+.SS dispass help
+.sp
+Show help information
+.sp
+dispass help [<command>]
+.SS dispass increment
+.sp
+Increment the sequence number of a label
+.sp
+dispass increment [\-n] [\-s] <label>
+.sp
+dispass increment [\-h]
+.INDENT 0.0
+.TP
+.B \-h\fP,\fB  \-\-help
+show this help information
+.TP
+.B \-n\fP,\fB  \-\-dry\-run
+do not actually update label in labelfile
+.TP
+.B \-s\fP,\fB  \-\-silent
+do not print success message
+.UNINDENT
+.SS dispass list
+.sp
+Print a formatted table of labelfile contents
+.sp
+If \fB\-\-script\fP is passed the output will be optimized for easy
+parsing by other programs and scripts by not printing the header
+and always printing one entry on a single line using the
+following positions:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+Column  1\-50: labelname        50 chars wide
+Column 52\-54: length            3 chars wide
+Column 56\-70: hash algo        15 chars wide
+Column 72\-74: sequence number   3 chars wide
+Column 76\-77: disabled          1 char wide
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+dispass list [\-h] [\-n] [\-\-script]
+.INDENT 0.0
+.TP
+.B \-a\fP,\fB  \-\-all
+include disabled labels
+.TP
+.B \-h\fP,\fB  \-\-help
+show this help information
+.TP
+.B \-n\fP,\fB  \-\-names\-only
+only print names of the labels
+.TP
+.B \-\-script
+output in fixed columns
+.UNINDENT
+.SS dispass remove
+.sp
+Remove label from labelfile
+.sp
+dispass remove [\-n] [\-s] <labelname> [<labelname2>] [...]
+.sp
+dispass remove [\-i] [\-h]
+.INDENT 0.0
+.TP
+.B \-i\fP,\fB  \-\-interactive
+remove label in an interactive manner
+.TP
+.B \-h\fP,\fB  \-\-help
+show this help information
+.TP
+.B \-n\fP,\fB  \-\-dry\-run
+do not actually remove label from labelfile
+.TP
+.B \-s\fP,\fB  \-\-silent
+do not print success message
+.UNINDENT
+.SS dispass update
+.sp
+Update information for a label
+.sp
+dispass update [\-n] [\-s] <label> [<size>]:[<algorithm>]:[<sequence_number>]
+.sp
+dispass update [\-h]
+.INDENT 0.0
+.TP
+.B \-h\fP,\fB  \-\-help
+show this help information
+.TP
+.B \-n\fP,\fB  \-\-dry\-run
+do not actually update label in labelfile
+.TP
+.B \-s\fP,\fB  \-\-silent
+do not print success message
+.UNINDENT
+.SS dispass version
+.sp
+Show full version information
+.sp
+dispass version
 .SH ACKNOWLEDGEMENTS
 .sp
 Many thanks go out to Tom (ryuslash) Willemsen for valuable contributions to
