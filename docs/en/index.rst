@@ -1,3 +1,10 @@
+
+.. hint::
+
+   This documentation is for version 0.3.0 of DisPass.
+   For documentation on other versions, please see the
+   `version overview <https://dispass.org/all.html>`_.
+
 DisPass
 =======
 
