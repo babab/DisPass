@@ -33,7 +33,7 @@ if __name__ == '__main__':
                'the graphical version of dispass.\n'
                'To install, search for a python-tk package for your OS.\n'
                'Arch Linux     \t\t# pacman -S python-tk\n'
-               'Debian / Ubuntu\t\t# apt-get install python-tk\n'
+               'Debian / Ubuntu\t\t$ sudo apt-get install python-tk\n'
                'OpenBSD        \t\t# pkg_add -i python-tk')
     except exceptions.KeyboardInterrupt:
         print ('\nOk, bye')
