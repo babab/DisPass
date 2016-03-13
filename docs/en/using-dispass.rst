@@ -122,6 +122,7 @@ available subcommands and options of dispass by running ``dispass
    -V, --version                       show full version information
 
    See 'dispass help <command>' for more information on a specific command.
+   For full documentation, see 'man dispass' or visit https://dispass.org/
 
 
 dispass add

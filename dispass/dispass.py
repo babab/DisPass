@@ -87,7 +87,8 @@ class DispassCommand(pycommand.CommandBase):
 
     usageTextExtra = (
         "See 'dispass help <command>' for more information on a "
-        "specific command."
+        "specific command.\nFor full documentation, see 'man dispass' "
+        "or visit https://dispass.org/"
     )
 
     def run(self):
