@@ -58,22 +58,27 @@ class Command(CommandBase):
                 return 1
 
         labelname = self.args[0]
-        params = self.args[1].split(':')
 
         try:
-            length = int(params[0]) if params[0] else None
+            tmp_length, tmp_algo, tmp_seqno = self.args[1].split(':')
+        except ValueError:
+            print ('Invalid update specification: %s' % self.args[1])
+            return 2
+
+        try:
+            length = int(tmp_length) if tmp_length else None
         except ValueError:
             length = None
 
-        if params[1] and params[1] in algos.algorithms:
-            algo = params[1]
+        if tmp_algo and tmp_algo in algos.algorithms:
+            algo = tmp_algo
         else:
             algo = None
 
         seqno = None
         if algo != 'dispass1':
             try:
-                seqno = params[2] if params[2] else None
+                seqno = tmp_seqno if tmp_seqno else None
             except ValueError:
                 pass
 
