@@ -1,5 +1,6 @@
 include ChangeLog.rst
 include dispass.1
+include dispass.info
 include LICENSE
 include Makefile
 include README.rst
