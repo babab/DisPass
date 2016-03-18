@@ -1,13 +1,6 @@
 DisPass
 ******************************************************************************
 
-.. image:: https://gemnasium.com/babab/DisPass.svg
-   :target: https://gemnasium.com/babab/DisPass
-
-.. image:: https://badge.waffle.io/babab/DisPass.png?label=ready&title=Ready
-   :target: https://waffle.io/babab/DisPass
-   :alt: 'Stories in Ready'
-
 DisPass is a password manager for GNU/Linux, \*BSD, MacOS X and Windows.
 It can be used as any traditional password manager, but has one key
 difference. DisPass does not store your passwords anywhere, so you
@@ -25,11 +18,6 @@ Resources
 - Agile project management: https://waffle.io/babab/DisPass
 - Github: https://github.com/babab/dispass
 - Bitbucket: https://bitbucket.org/babab/dispass
-
-
-.. image:: https://graphs.waffle.io/babab/DisPass/throughput.svg
-   :target: https://waffle.io/babab/DisPass/metrics
-   :alt: 'Throughput Graph'
 
 
 Quick start
@@ -81,7 +69,7 @@ Mini screencast
 Checkout the following mini screencast. In this demo the label is added
 interactively.
 
-.. image:: docs/screencast.png
+.. image:: https://raw.githubusercontent.com/babab/DisPass/master/docs/screencast.png
     :target: https://asciinema.org/a/38378
 
 

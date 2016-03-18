@@ -3,18 +3,6 @@
 from setuptools import setup
 import dispass.dispass
 
-long_desc = '''DisPass is a password manager for GNU/Linux, \*BSD, MacOS X and
-Windows. It can be used as any traditional password manager, but has one key
-difference. DisPass does not store your passwords anywhere, so you can never
-lose them.
-
-It creates strong and unique passphrases formed from a master password and a
-label (and some optional parameters), helping you get rid of the bad habit of
-using a single password for multiple websites.
-
-Dispass is a console application, but also has a simple graphical interface.
-'''
-
 setup(
     name='DisPass',
     version=dispass.dispass.__version__,
@@ -25,7 +13,7 @@ setup(
     download_url='http://pypi.python.org/pypi/DisPass/',
     packages=['dispass', 'dispass.commands'],
     license='ISC',
-    long_description=long_desc,
+    long_description=open('README.rst').read(),
     platforms='any',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
