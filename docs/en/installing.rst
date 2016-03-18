@@ -6,6 +6,10 @@ Python 2.7 is required for running dispass.
 If you are using Archlinux, it is advised to install dispass
 `from the AUR <https://aur.archlinux.org/packages.php?K=dispass>`_.
 
+Installing from the AUR will also install the manpage, info
+documentation, zsh completion, desktop configuration and logo files and
+is therefore recommended on Arch.
+
 
 Using pip to download from the Python Package Index
 ===================================================
@@ -21,7 +25,22 @@ This will install the dispass module in python's dist-packages folder.
 You can now use dispass by executing the ``dispass`` and/or ``gdispass``
 scripts placed under '/usr/local/bin/' or '/usr/bin/'.
 
-The PyPI project page is at http://pypi.python.org/pypi/DisPass/
+It is recommended to also install the manpage, info
+documentation, zsh completion, desktop configuration and
+logo files. You can do so by downloading the tarball from
+https://pypi.python.org/packages/source/D/DisPass/DisPass-0.3.0.tar.gz
+
+.. code:: console
+
+   wget https://pypi.python.org/packages/source/D/DisPass/DisPass-0.3.0.tar.gz
+
+Then unpack it and install via make:
+
+.. code:: console
+
+   tar -xf DisPass-0.3.0.tar.gz
+   cd DisPass-0.3.0
+   sudo make install-metafiles
 
 
 Latest (development) version
@@ -43,14 +62,27 @@ Then you can either (in order of my personal preference):
 
       sudo make install
 
-2. Install manually through pip, and install manpage:
+2. Install manually through pip, and install manpage, info
+   documentation, zsh completion, desktop configuration and logo files:
 
    .. code:: console
 
-      python setup.py sdist
-      sudo pip install dist/DisPass-<version>.tar.gz
-      sudo gzip -c dispass.1 > dispass.1.gz
-      sudo mv dispass.1.gz /usr/share/man/man1/
+      sudo pip2 install -r requirements.txt
+      python2 setup.py bdist_wheel
+      sudo pip2 install dist/DisPass-<version>.tar.gz
+      gzip -c dispass.1 > dispass.1.gz
+      gzip -c dispass.info > dispass.info.gz
+      sudo install -Dm644 dispass.1.gz /usr/share/man/man1/dispass.1.gz
+      sudo install -Dm644 dispass.info.gz /usr/share/info/dispass.info.gz
+      sudo install -Dm644 zsh/_dispass /usr/share/zsh/site-functions/_dispass
+      sudo install -Dm644 etc/dispass.desktop /usr/share/applications/dispass.desktop
+      sudo install -Dm644 logo/logo24.png /usr/share/icons/hicolor/24x24/apps/dispass.png
+      sudo install -Dm644 logo/logo32.png /usr/share/icons/hicolor/32x32/apps/dispass.png
+      sudo install -Dm644 logo/logo64.png /usr/share/icons/hicolor/64x64/apps/dispass.png
+      sudo install -Dm644 logo/logo128.png /usr/share/icons/hicolor/128x128/apps/dispass.png
+      sudo install -Dm644 logo/logo256.png /usr/share/icons/hicolor/256x256/apps/dispass.png
+      sudo install -Dm644 logo/logo512.png /usr/share/icons/hicolor/512x512/apps/dispass.png
+
 
 3. Install manually (no manpage):
 
