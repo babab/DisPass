@@ -85,6 +85,6 @@ uninstall: clean
 
 clean:
 	rm -f MANIFEST dispass.1.gz dispass.info.gz
-	rm -rf dist DisPass.egg-info
+	rm -rf build dist DisPass.egg-info
 
 # vim: set noet ts=8 sw=8 sts=8:
