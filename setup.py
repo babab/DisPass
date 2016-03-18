@@ -33,8 +33,6 @@ setup(
         'Topic :: Office/Business',
         'Topic :: Security :: Cryptography',
         'Topic :: Utilities',
-
-        'BLOCK FOR UPLOAD',
     ],
     scripts=['bin/dispass', 'bin/gdispass'],
     install_requires=['pycommand']

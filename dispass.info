@@ -259,6 +259,10 @@ Python 2.7 is required for running dispass.
 If you are using Archlinux, it is advised to install dispass from the
 AUR(1).
 
+Installing from the AUR will also install the manpage, info
+documentation, zsh completion, desktop configuration and logo files and
+is therefore recommended on Arch.
+
 * Menu:
 
 * Using pip to download from the Python Package Index:: 
@@ -284,7 +288,18 @@ This will install the dispass module in python’s dist-packages folder.
 You can now use dispass by executing the ‘dispass’ and/or ‘gdispass’
 scripts placed under ’/usr/local/bin/’ or ’/usr/bin/’.
 
-The PyPI project page is at ‘http://pypi.python.org/pypi/DisPass/’
+It is recommended to also install the manpage, info documentation, zsh
+completion, desktop configuration and logo files.  You can do so by
+downloading the tarball from
+‘https://pypi.python.org/packages/source/D/DisPass/DisPass-0.3.0.tar.gz’
+
+     wget https://pypi.python.org/packages/source/D/DisPass/DisPass-0.3.0.tar.gz
+
+Then unpack it and install via make:
+
+     tar -xf DisPass-0.3.0.tar.gz
+     cd DisPass-0.3.0
+     sudo make install-metafiles
 
 
 File: DisPass.info,  Node: Latest development version,  Next: Upgrade or uninstall with pip,  Prev: Using pip to download from the Python Package Index,  Up: Downloading/Installing
@@ -304,12 +319,25 @@ Then you can either (in order of my personal preference):
 
           sudo make install
 
-  2. Install manually through pip, and install manpage:
+  2. Install manually through pip, and install manpage, info
+     documentation, zsh completion, desktop configuration and logo
+     files:
 
-          python setup.py sdist
-          sudo pip install dist/DisPass-<version>.tar.gz
-          sudo gzip -c dispass.1 > dispass.1.gz
-          sudo mv dispass.1.gz /usr/share/man/man1/
+          sudo pip2 install -r requirements.txt
+          python2 setup.py bdist_wheel
+          sudo pip2 install dist/DisPass-<version>.tar.gz
+          gzip -c dispass.1 > dispass.1.gz
+          gzip -c dispass.info > dispass.info.gz
+          sudo install -Dm644 dispass.1.gz /usr/share/man/man1/dispass.1.gz
+          sudo install -Dm644 dispass.info.gz /usr/share/info/dispass.info.gz
+          sudo install -Dm644 zsh/_dispass /usr/share/zsh/site-functions/_dispass
+          sudo install -Dm644 etc/dispass.desktop /usr/share/applications/dispass.desktop
+          sudo install -Dm644 logo/logo24.png /usr/share/icons/hicolor/24x24/apps/dispass.png
+          sudo install -Dm644 logo/logo32.png /usr/share/icons/hicolor/32x32/apps/dispass.png
+          sudo install -Dm644 logo/logo64.png /usr/share/icons/hicolor/64x64/apps/dispass.png
+          sudo install -Dm644 logo/logo128.png /usr/share/icons/hicolor/128x128/apps/dispass.png
+          sudo install -Dm644 logo/logo256.png /usr/share/icons/hicolor/256x256/apps/dispass.png
+          sudo install -Dm644 logo/logo512.png /usr/share/icons/hicolor/512x512/apps/dispass.png
 
   3. Install manually (no manpage):
 
@@ -915,17 +943,17 @@ File: DisPass.info,  Node: Change Log,  Prev: Acknowledgements,  Up: Development
 
 * Menu:
 
-* v0.3.0 - to be released: v0 3 0 - to be released. 
+* v0.3.0 - released March 18th, 2016: v0 3 0 - released March 18th 2016. 
 * v0.2.0 - released April 16th, 2013: v0 2 0 - released April 16th 2013. 
 * v0.1-alpha-8 - released June 21st, 2012: v0 1-alpha-8 - released June 21st 2012. 
 * v0.1-alpha-7 - released May 28th, 2012: v0 1-alpha-7 - released May 28th 2012. 
 * v0.1-alpha-6 - released May 24th, 2012: v0 1-alpha-6 - released May 24th 2012. 
 
 
-File: DisPass.info,  Node: v0 3 0 - to be released,  Next: v0 2 0 - released April 16th 2013,  Up: Change Log
+File: DisPass.info,  Node: v0 3 0 - released March 18th 2016,  Next: v0 2 0 - released April 16th 2013,  Up: Change Log
 
-2.7.2.1 v0.3.0 - to be released
-...............................
+2.7.2.1 v0.3.0 - released March 18th, 2016
+..........................................
 
 * Menu:
 
@@ -933,7 +961,7 @@ File: DisPass.info,  Node: v0 3 0 - to be released,  Next: v0 2 0 - released Apr
 * Changed:: 
 
 
-File: DisPass.info,  Node: Added,  Next: Changed,  Up: v0 3 0 - to be released
+File: DisPass.info,  Node: Added,  Next: Changed,  Up: v0 3 0 - released March 18th 2016
 
 2.7.2.2 Added
 .............
@@ -949,8 +977,10 @@ File: DisPass.info,  Node: Added,  Next: Changed,  Up: v0 3 0 - to be released
    * pycommand dependency for command argument parsing (extracted from
      DisPass)
 
+   * Info documentation (different from manpage, same as the website)
+
 
-File: DisPass.info,  Node: Changed,  Prev: Added,  Up: v0 3 0 - to be released
+File: DisPass.info,  Node: Changed,  Prev: Added,  Up: v0 3 0 - released March 18th 2016
 
 2.7.2.3 Changed
 ...............
@@ -1003,7 +1033,7 @@ File: DisPass.info,  Node: Changed,  Prev: Added,  Up: v0 3 0 - to be released
    * The file /skel/labelfile is removed
 
 
-File: DisPass.info,  Node: v0 2 0 - released April 16th 2013,  Next: v0 1-alpha-8 - released June 21st 2012,  Prev: v0 3 0 - to be released,  Up: Change Log
+File: DisPass.info,  Node: v0 2 0 - released April 16th 2013,  Next: v0 1-alpha-8 - released June 21st 2012,  Prev: v0 3 0 - released March 18th 2016,  Up: Change Log
 
 2.7.2.4 v0.2.0 - released April 16th, 2013
 ..........................................
@@ -2053,347 +2083,347 @@ Ref: installing downloading-installing7279
 Ref: 1c7279
 Ref: installing doc7279
 Ref: 1d7279
-Ref: Downloading/Installing-Footnote-17657
-Node: Using pip to download from the Python Package Index7714
-Ref: installing using-pip-to-download-from-the-python-package-index7860
-Ref: 1e7860
-Node: Latest development version8387
-Ref: installing latest-development-version8571
-Ref: 1f8571
-Node: Upgrade or uninstall with pip9232
-Ref: installing upgrade-or-uninstall-with-pip9356
-Ref: 209356
-Node: Using dispass9649
-Ref: using-dispass doc9762
-Ref: 219762
-Ref: using-dispass using-dispass9762
-Ref: 229762
-Node: Basic usage9924
-Ref: using-dispass basic-usage10015
-Ref: 2310015
-Node: Label specifications10813
-Ref: using-dispass label-specifications10927
-Ref: 2410927
-Node: Adding a label11509
-Ref: using-dispass adding-a-label11641
-Ref: 2511641
-Node: Incrementing sequence numbers11992
-Ref: using-dispass incrementing-sequence-numbers12115
-Ref: 2612115
-Node: Subcommands12909
-Ref: using-dispass subcommands13009
-Ref: 2713009
-Node: dispass add14521
-Ref: using-dispass dispass-add14605
-Ref: 2814605
-Node: dispass disable15237
-Ref: using-dispass dispass-disable15344
-Ref: 2915344
-Node: dispass enable15662
-Ref: using-dispass dispass-enable15774
-Ref: 2a15774
-Node: dispass generate16063
-Ref: using-dispass dispass-generate16171
-Ref: 2b16171
-Node: dispass gui16975
-Ref: using-dispass dispass-gui17081
-Ref: 2c17081
-Node: dispass help17249
-Ref: using-dispass dispass-help17356
-Ref: 2d17356
-Node: dispass increment17460
-Ref: using-dispass dispass-increment17568
-Ref: 2e17568
-Node: dispass list17937
-Ref: using-dispass dispass-list18047
-Ref: 2f18047
-Node: dispass remove18864
-Ref: using-dispass dispass-remove18971
-Ref: 3018971
-Node: dispass update19421
-Ref: using-dispass dispass-update19531
-Ref: 3119531
-Node: dispass version19923
-Ref: using-dispass dispass-version20010
-Ref: 3220010
-Node: Using gdispass20121
-Ref: using-gdispass doc20228
-Ref: 3320228
-Ref: using-gdispass using-gdispass20228
-Ref: 3420228
-Node: Related projects22070
-Ref: development related-projects22175
-Ref: 3522175
-Ref: development doc22175
-Ref: 3622175
-Node: dispass el22394
-Ref: development dispass-el22475
-Ref: 3722475
-Node: cDisPass22683
-Ref: development cdispass22783
-Ref: 3822783
-Node: libdispass22958
-Ref: development libdispass23039
-Ref: 3923039
-Node: Development23166
-Ref: development development23273
-Ref: 3a23273
-Node: Acknowledgements23683
-Ref: development acknowledgements23767
-Ref: 3b23767
-Node: Change Log24014
-Ref: development change-log24098
-Ref: 3c24098
-Node: v0 3 0 - to be released24518
-Ref: development v0-3-0-to-be-released24631
-Ref: 3d24631
-Node: Added24730
-Ref: development added24812
-Ref: 3e24812
-Node: Changed25128
-Ref: development changed25210
-Ref: 3f25210
-Node: v0 2 0 - released April 16th 201326122
-Ref: development v0-2-0-released-april-16th-201326282
-Ref: 4026282
-Node: v0 1-alpha-8 - released June 21st 201227859
-Ref: development v0-1-alpha-8-released-june-21st-201228033
-Ref: 4128033
-Node: v0 1-alpha-7 - released May 28th 201228726
-Ref: development v0-1-alpha-7-released-may-28th-201228904
-Ref: 4228904
-Node: v0 1-alpha-6 - released May 24th 201229170
-Ref: development v0-1-alpha-6-released-may-24th-201229301
-Ref: 4329301
-Node: Software license29453
-Ref: development software-license29557
-Ref: 4429557
-Node: API Reference30672
-Ref: api-reference api-reference30756
-Ref: 4530756
-Ref: api-reference doc30756
-Ref: 4630756
-Node: Core modules30911
-Ref: api-reference core-modules31000
-Ref: 4731000
-Node: dispass algos31119
-Ref: api-reference dispass-algos31206
-Ref: 4831206
-Ref: api-reference module-dispass algos31428
-Ref: 031428
-Ref: api-reference dispass algos Dispass131430
-Ref: 4931430
-Ref: api-reference dispass algos Dispass1 digest31751
-Ref: 4a31751
-Ref: api-reference dispass algos Dispass232479
-Ref: 4b32479
-Ref: api-reference dispass algos Dispass2 digest32804
-Ref: 4c32804
-Ref: api-reference dispass algos algoObject33537
-Ref: 4d33537
-Ref: api-reference dispass algos algorithms33753
-Ref: 4e33753
-Node: dispass dispass33896
-Ref: api-reference dispass-dispass33983
-Ref: 4f33983
-Ref: api-reference module-dispass dispass33983
-Ref: a33983
-Ref: api-reference dispass dispass DispassCommand34092
-Ref: 5034092
-Ref: api-reference dispass dispass DispassCommand run34250
-Ref: 5134250
-Ref: api-reference dispass dispass Settings34909
-Ref: 5234909
-Ref: api-reference dispass dispass Settings algorithm34968
-Ref: 5334968
-Ref: api-reference dispass dispass Settings disabled35074
-Ref: 5435074
-Ref: api-reference dispass dispass Settings passphrase_length35153
-Ref: 5535153
-Ref: api-reference dispass dispass Settings sequence_number35240
-Ref: 5635240
-Ref: api-reference dispass dispass verboseVersionInfo35322
-Ref: 5735322
-Node: Interface modules35568
-Ref: api-reference interface-modules35684
-Ref: 5835684
-Node: dispass cli35908
-Ref: api-reference module-dispass cli35997
-Ref: 135997
-Ref: api-reference dispass-cli35997
-Ref: 5935997
-Ref: api-reference dispass cli CLI36038
-Ref: 5a36038
-Ref: api-reference dispass cli CLI generate36118
-Ref: 5b36118
-Ref: api-reference dispass cli CLI output36925
-Ref: 5c36925
-Ref: api-reference dispass cli CLI passphrases36995
-Ref: 5d36995
-Ref: api-reference dispass cli CLI passwordPrompt37085
-Ref: 5e37085
-Ref: api-reference dispass cli CLI scriptableIO37401
-Ref: 5f37401
-Ref: api-reference dispass cli CLI setCurses37507
-Ref: 6037507
-Ref: api-reference dispass cli CLI verifyPassword37863
-Ref: 6137863
-Node: dispass gui<2>37992
-Ref: api-reference module-dispass gui38109
-Ref: c38109
-Ref: api-reference dispass-gui38109
-Ref: 6238109
-Ref: api-reference dispass gui GUI38150
-Ref: 6338150
-Ref: api-reference dispass gui GUI clearIO38256
-Ref: 6438256
-Ref: api-reference dispass gui GUI clearInput38330
-Ref: 6538330
-Ref: api-reference dispass gui GUI clearOutput38396
-Ref: 6638396
-Ref: api-reference dispass gui GUI createWidgets38464
-Ref: 6738464
-Ref: api-reference dispass gui GUI filterLabels38535
-Ref: 6838535
-Ref: api-reference dispass gui GUI font38638
-Ref: 6938638
-Ref: api-reference dispass gui GUI fontsize38710
-Ref: 6a38710
-Ref: api-reference dispass gui GUI getFont38782
-Ref: 6b38782
-Ref: api-reference dispass gui GUI labelFocusOut39165
-Ref: 6c39165
-Ref: api-reference dispass gui GUI labelSelected39276
-Ref: 6d39276
-Ref: api-reference dispass gui GUI reset39359
-Ref: 6e39359
-Ref: api-reference dispass gui GUI toggleCheck39446
-Ref: 6f39446
-Ref: api-reference dispass gui GUI validateAndShow39524
-Ref: 7039524
-Ref: api-reference dispass gui GUI warn39728
-Ref: 7139728
-Node: dispass filehandler40305
-Ref: api-reference dispass-filehandler40437
-Ref: 7240437
-Ref: api-reference module-dispass filehandler40437
-Ref: b40437
-Ref: api-reference dispass filehandler Filehandler40521
-Ref: 7340521
-Ref: api-reference dispass filehandler Filehandler add40660
-Ref: 7440660
-Ref: api-reference dispass filehandler Filehandler disable40801
-Ref: 7540801
-Ref: api-reference dispass filehandler Filehandler file_found40891
-Ref: 7640891
-Ref: api-reference dispass filehandler Filehandler file_location40967
-Ref: 7740967
-Ref: api-reference dispass filehandler Filehandler filehandle41062
-Ref: 7841062
-Ref: api-reference dispass filehandler Filehandler getDefaultFileLocation41159
-Ref: 7941159
-Ref: api-reference dispass filehandler Filehandler increment41243
-Ref: 7a41243
-Ref: api-reference dispass filehandler Filehandler labelfile41339
-Ref: 7b41339
-Ref: api-reference dispass filehandler Filehandler labeltup41460
-Ref: 7c41460
-Ref: api-reference dispass filehandler Filehandler longest_label42234
-Ref: 7d42234
-Ref: api-reference dispass filehandler Filehandler parse42373
-Ref: 7e42373
-Ref: api-reference dispass filehandler Filehandler printLabels42487
-Ref: 7f42487
-Ref: api-reference dispass filehandler Filehandler promptForCreation43500
-Ref: 8043500
-Ref: api-reference dispass filehandler Filehandler refresh43811
-Ref: 8143811
-Ref: api-reference dispass filehandler Filehandler remove43916
-Ref: 8243916
-Ref: api-reference dispass filehandler Filehandler save43998
-Ref: 8343998
-Ref: api-reference dispass filehandler Filehandler update44064
-Ref: 8444064
-Node: dispass interactive_editor44210
-Ref: api-reference dispass-interactive-editor44319
-Ref: 8544319
-Ref: api-reference module-dispass interactive_editor44319
-Ref: d44319
-Ref: api-reference dispass interactive_editor InteractiveEditor44390
-Ref: 8644390
-Ref: api-reference dispass interactive_editor InteractiveEditor filehandler44545
-Ref: 8744545
-Ref: api-reference dispass interactive_editor InteractiveEditor read_label44615
-Ref: 8844615
-Node: Subcommand modules44736
-Ref: api-reference subcommand-modules44831
-Ref: 8944831
-Node: dispass commands add45452
-Ref: api-reference dispass-commands-add45562
-Ref: 8a45562
-Ref: api-reference module-dispass commands add45562
-Ref: 245562
-Ref: api-reference dispass commands add Command45694
-Ref: 8b45694
-Ref: api-reference dispass commands add Command run45882
-Ref: 8c45882
-Node: dispass commands generate46065
-Ref: api-reference module-dispass commands generate46204
-Ref: 346204
-Ref: api-reference dispass-commands-generate46204
-Ref: 8d46204
-Ref: api-reference dispass commands generate Command46351
-Ref: 8e46351
-Ref: api-reference dispass commands generate Command run46530
-Ref: 8f46530
-Node: dispass commands gui47052
-Ref: api-reference module-dispass commands gui47192
-Ref: 447192
-Ref: api-reference dispass-commands-gui47192
-Ref: 9047192
-Ref: api-reference dispass commands gui Command47324
-Ref: 9147324
-Ref: api-reference dispass commands gui Command run47493
-Ref: 9247493
-Node: dispass commands help47586
-Ref: api-reference dispass-commands-help47727
-Ref: 9347727
-Ref: api-reference module-dispass commands help47727
-Ref: 547727
-Ref: api-reference dispass commands help Command47862
-Ref: 9447862
-Node: dispass commands increment48015
-Ref: api-reference dispass-commands-increment48157
-Ref: 9548157
-Ref: api-reference module-dispass commands increment48157
-Ref: 648157
-Ref: api-reference dispass commands increment Command48307
-Ref: 9648307
-Ref: api-reference dispass commands increment Command run48484
-Ref: 9748484
-Node: dispass commands list48599
-Ref: api-reference module-dispass commands list48743
-Ref: 748743
-Ref: api-reference dispass-commands-list48743
-Ref: 9848743
-Ref: api-reference dispass commands list Command48878
-Ref: 9948878
-Node: dispass commands remove49055
-Ref: api-reference module-dispass commands remove49197
-Ref: 849197
-Ref: api-reference dispass-commands-remove49197
-Ref: 9a49197
-Ref: api-reference dispass commands remove Command49338
-Ref: 9b49338
-Node: dispass commands version49499
-Ref: api-reference module-dispass commands version49611
-Ref: 949611
-Ref: api-reference dispass-commands-version49611
-Ref: 9c49611
-Ref: api-reference dispass commands version Command49678
-Ref: 9d49678
-Node: Python Module Index49842
-Node: Index50371
+Ref: Downloading/Installing-Footnote-17824
+Node: Using pip to download from the Python Package Index7881
+Ref: installing using-pip-to-download-from-the-python-package-index8027
+Ref: 1e8027
+Node: Latest development version8938
+Ref: installing latest-development-version9122
+Ref: 1f9122
+Node: Upgrade or uninstall with pip10814
+Ref: installing upgrade-or-uninstall-with-pip10938
+Ref: 2010938
+Node: Using dispass11231
+Ref: using-dispass doc11344
+Ref: 2111344
+Ref: using-dispass using-dispass11344
+Ref: 2211344
+Node: Basic usage11506
+Ref: using-dispass basic-usage11597
+Ref: 2311597
+Node: Label specifications12395
+Ref: using-dispass label-specifications12509
+Ref: 2412509
+Node: Adding a label13091
+Ref: using-dispass adding-a-label13223
+Ref: 2513223
+Node: Incrementing sequence numbers13574
+Ref: using-dispass incrementing-sequence-numbers13697
+Ref: 2613697
+Node: Subcommands14491
+Ref: using-dispass subcommands14591
+Ref: 2714591
+Node: dispass add16103
+Ref: using-dispass dispass-add16187
+Ref: 2816187
+Node: dispass disable16819
+Ref: using-dispass dispass-disable16926
+Ref: 2916926
+Node: dispass enable17244
+Ref: using-dispass dispass-enable17356
+Ref: 2a17356
+Node: dispass generate17645
+Ref: using-dispass dispass-generate17753
+Ref: 2b17753
+Node: dispass gui18557
+Ref: using-dispass dispass-gui18663
+Ref: 2c18663
+Node: dispass help18831
+Ref: using-dispass dispass-help18938
+Ref: 2d18938
+Node: dispass increment19042
+Ref: using-dispass dispass-increment19150
+Ref: 2e19150
+Node: dispass list19519
+Ref: using-dispass dispass-list19629
+Ref: 2f19629
+Node: dispass remove20446
+Ref: using-dispass dispass-remove20553
+Ref: 3020553
+Node: dispass update21003
+Ref: using-dispass dispass-update21113
+Ref: 3121113
+Node: dispass version21505
+Ref: using-dispass dispass-version21592
+Ref: 3221592
+Node: Using gdispass21703
+Ref: using-gdispass doc21810
+Ref: 3321810
+Ref: using-gdispass using-gdispass21810
+Ref: 3421810
+Node: Related projects23652
+Ref: development related-projects23757
+Ref: 3523757
+Ref: development doc23757
+Ref: 3623757
+Node: dispass el23976
+Ref: development dispass-el24057
+Ref: 3724057
+Node: cDisPass24265
+Ref: development cdispass24365
+Ref: 3824365
+Node: libdispass24540
+Ref: development libdispass24621
+Ref: 3924621
+Node: Development24748
+Ref: development development24855
+Ref: 3a24855
+Node: Acknowledgements25265
+Ref: development acknowledgements25349
+Ref: 3b25349
+Node: Change Log25596
+Ref: development change-log25680
+Ref: 3c25680
+Node: v0 3 0 - released March 18th 201626121
+Ref: development v0-3-0-released-march-18th-201626244
+Ref: 3d26244
+Node: Added26365
+Ref: development added26457
+Ref: 3e26457
+Node: Changed26844
+Ref: development changed26936
+Ref: 3f26936
+Node: v0 2 0 - released April 16th 201327848
+Ref: development v0-2-0-released-april-16th-201328018
+Ref: 4028018
+Node: v0 1-alpha-8 - released June 21st 201229595
+Ref: development v0-1-alpha-8-released-june-21st-201229769
+Ref: 4129769
+Node: v0 1-alpha-7 - released May 28th 201230462
+Ref: development v0-1-alpha-7-released-may-28th-201230640
+Ref: 4230640
+Node: v0 1-alpha-6 - released May 24th 201230906
+Ref: development v0-1-alpha-6-released-may-24th-201231037
+Ref: 4331037
+Node: Software license31189
+Ref: development software-license31293
+Ref: 4431293
+Node: API Reference32408
+Ref: api-reference api-reference32492
+Ref: 4532492
+Ref: api-reference doc32492
+Ref: 4632492
+Node: Core modules32647
+Ref: api-reference core-modules32736
+Ref: 4732736
+Node: dispass algos32855
+Ref: api-reference dispass-algos32942
+Ref: 4832942
+Ref: api-reference module-dispass algos33164
+Ref: 033164
+Ref: api-reference dispass algos Dispass133166
+Ref: 4933166
+Ref: api-reference dispass algos Dispass1 digest33487
+Ref: 4a33487
+Ref: api-reference dispass algos Dispass234215
+Ref: 4b34215
+Ref: api-reference dispass algos Dispass2 digest34540
+Ref: 4c34540
+Ref: api-reference dispass algos algoObject35273
+Ref: 4d35273
+Ref: api-reference dispass algos algorithms35489
+Ref: 4e35489
+Node: dispass dispass35632
+Ref: api-reference dispass-dispass35719
+Ref: 4f35719
+Ref: api-reference module-dispass dispass35719
+Ref: a35719
+Ref: api-reference dispass dispass DispassCommand35828
+Ref: 5035828
+Ref: api-reference dispass dispass DispassCommand run35986
+Ref: 5135986
+Ref: api-reference dispass dispass Settings36645
+Ref: 5236645
+Ref: api-reference dispass dispass Settings algorithm36704
+Ref: 5336704
+Ref: api-reference dispass dispass Settings disabled36810
+Ref: 5436810
+Ref: api-reference dispass dispass Settings passphrase_length36889
+Ref: 5536889
+Ref: api-reference dispass dispass Settings sequence_number36976
+Ref: 5636976
+Ref: api-reference dispass dispass verboseVersionInfo37058
+Ref: 5737058
+Node: Interface modules37304
+Ref: api-reference interface-modules37420
+Ref: 5837420
+Node: dispass cli37644
+Ref: api-reference module-dispass cli37733
+Ref: 137733
+Ref: api-reference dispass-cli37733
+Ref: 5937733
+Ref: api-reference dispass cli CLI37774
+Ref: 5a37774
+Ref: api-reference dispass cli CLI generate37854
+Ref: 5b37854
+Ref: api-reference dispass cli CLI output38661
+Ref: 5c38661
+Ref: api-reference dispass cli CLI passphrases38731
+Ref: 5d38731
+Ref: api-reference dispass cli CLI passwordPrompt38821
+Ref: 5e38821
+Ref: api-reference dispass cli CLI scriptableIO39137
+Ref: 5f39137
+Ref: api-reference dispass cli CLI setCurses39243
+Ref: 6039243
+Ref: api-reference dispass cli CLI verifyPassword39599
+Ref: 6139599
+Node: dispass gui<2>39728
+Ref: api-reference module-dispass gui39845
+Ref: c39845
+Ref: api-reference dispass-gui39845
+Ref: 6239845
+Ref: api-reference dispass gui GUI39886
+Ref: 6339886
+Ref: api-reference dispass gui GUI clearIO39992
+Ref: 6439992
+Ref: api-reference dispass gui GUI clearInput40066
+Ref: 6540066
+Ref: api-reference dispass gui GUI clearOutput40132
+Ref: 6640132
+Ref: api-reference dispass gui GUI createWidgets40200
+Ref: 6740200
+Ref: api-reference dispass gui GUI filterLabels40271
+Ref: 6840271
+Ref: api-reference dispass gui GUI font40374
+Ref: 6940374
+Ref: api-reference dispass gui GUI fontsize40446
+Ref: 6a40446
+Ref: api-reference dispass gui GUI getFont40518
+Ref: 6b40518
+Ref: api-reference dispass gui GUI labelFocusOut40901
+Ref: 6c40901
+Ref: api-reference dispass gui GUI labelSelected41012
+Ref: 6d41012
+Ref: api-reference dispass gui GUI reset41095
+Ref: 6e41095
+Ref: api-reference dispass gui GUI toggleCheck41182
+Ref: 6f41182
+Ref: api-reference dispass gui GUI validateAndShow41260
+Ref: 7041260
+Ref: api-reference dispass gui GUI warn41464
+Ref: 7141464
+Node: dispass filehandler42041
+Ref: api-reference dispass-filehandler42173
+Ref: 7242173
+Ref: api-reference module-dispass filehandler42173
+Ref: b42173
+Ref: api-reference dispass filehandler Filehandler42257
+Ref: 7342257
+Ref: api-reference dispass filehandler Filehandler add42396
+Ref: 7442396
+Ref: api-reference dispass filehandler Filehandler disable42537
+Ref: 7542537
+Ref: api-reference dispass filehandler Filehandler file_found42627
+Ref: 7642627
+Ref: api-reference dispass filehandler Filehandler file_location42703
+Ref: 7742703
+Ref: api-reference dispass filehandler Filehandler filehandle42798
+Ref: 7842798
+Ref: api-reference dispass filehandler Filehandler getDefaultFileLocation42895
+Ref: 7942895
+Ref: api-reference dispass filehandler Filehandler increment42979
+Ref: 7a42979
+Ref: api-reference dispass filehandler Filehandler labelfile43075
+Ref: 7b43075
+Ref: api-reference dispass filehandler Filehandler labeltup43196
+Ref: 7c43196
+Ref: api-reference dispass filehandler Filehandler longest_label43970
+Ref: 7d43970
+Ref: api-reference dispass filehandler Filehandler parse44109
+Ref: 7e44109
+Ref: api-reference dispass filehandler Filehandler printLabels44223
+Ref: 7f44223
+Ref: api-reference dispass filehandler Filehandler promptForCreation45236
+Ref: 8045236
+Ref: api-reference dispass filehandler Filehandler refresh45547
+Ref: 8145547
+Ref: api-reference dispass filehandler Filehandler remove45652
+Ref: 8245652
+Ref: api-reference dispass filehandler Filehandler save45734
+Ref: 8345734
+Ref: api-reference dispass filehandler Filehandler update45800
+Ref: 8445800
+Node: dispass interactive_editor45946
+Ref: api-reference dispass-interactive-editor46055
+Ref: 8546055
+Ref: api-reference module-dispass interactive_editor46055
+Ref: d46055
+Ref: api-reference dispass interactive_editor InteractiveEditor46126
+Ref: 8646126
+Ref: api-reference dispass interactive_editor InteractiveEditor filehandler46281
+Ref: 8746281
+Ref: api-reference dispass interactive_editor InteractiveEditor read_label46351
+Ref: 8846351
+Node: Subcommand modules46472
+Ref: api-reference subcommand-modules46567
+Ref: 8946567
+Node: dispass commands add47188
+Ref: api-reference dispass-commands-add47298
+Ref: 8a47298
+Ref: api-reference module-dispass commands add47298
+Ref: 247298
+Ref: api-reference dispass commands add Command47430
+Ref: 8b47430
+Ref: api-reference dispass commands add Command run47618
+Ref: 8c47618
+Node: dispass commands generate47801
+Ref: api-reference module-dispass commands generate47940
+Ref: 347940
+Ref: api-reference dispass-commands-generate47940
+Ref: 8d47940
+Ref: api-reference dispass commands generate Command48087
+Ref: 8e48087
+Ref: api-reference dispass commands generate Command run48266
+Ref: 8f48266
+Node: dispass commands gui48788
+Ref: api-reference module-dispass commands gui48928
+Ref: 448928
+Ref: api-reference dispass-commands-gui48928
+Ref: 9048928
+Ref: api-reference dispass commands gui Command49060
+Ref: 9149060
+Ref: api-reference dispass commands gui Command run49229
+Ref: 9249229
+Node: dispass commands help49322
+Ref: api-reference dispass-commands-help49463
+Ref: 9349463
+Ref: api-reference module-dispass commands help49463
+Ref: 549463
+Ref: api-reference dispass commands help Command49598
+Ref: 9449598
+Node: dispass commands increment49751
+Ref: api-reference dispass-commands-increment49893
+Ref: 9549893
+Ref: api-reference module-dispass commands increment49893
+Ref: 649893
+Ref: api-reference dispass commands increment Command50043
+Ref: 9650043
+Ref: api-reference dispass commands increment Command run50220
+Ref: 9750220
+Node: dispass commands list50335
+Ref: api-reference module-dispass commands list50479
+Ref: 750479
+Ref: api-reference dispass-commands-list50479
+Ref: 9850479
+Ref: api-reference dispass commands list Command50614
+Ref: 9950614
+Node: dispass commands remove50791
+Ref: api-reference module-dispass commands remove50933
+Ref: 850933
+Ref: api-reference dispass-commands-remove50933
+Ref: 9a50933
+Ref: api-reference dispass commands remove Command51074
+Ref: 9b51074
+Node: dispass commands version51235
+Ref: api-reference module-dispass commands version51347
+Ref: 951347
+Ref: api-reference dispass-commands-version51347
+Ref: 9c51347
+Ref: api-reference dispass commands version Command51414
+Ref: 9d51414
+Node: Python Module Index51578
+Node: Index52107
 
 End Tag Table
 
