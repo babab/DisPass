@@ -41,6 +41,7 @@ Changed
 * Use a vertical layout instead of a horizontal one (GUI)
 * Make the gui *command* listen to the -f switch (GUI)
 * Use a more flexible approach for algorithm handling
+* The file /skel/labelfile is removed
 
 
 v0.2.0 - released April 16th, 2013
