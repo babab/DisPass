@@ -54,12 +54,12 @@ man: rm_pyc
 	make doc_clean
 
 dist: rm_pyc
+	$(PIP_EXEC) install -r requirements.txt
 	$(PYTHON_EXEC) setup.py sdist bdist_wheel
 
 install: install-pip
 
 install-pip: dist install-metafiles
-	$(PIP_EXEC) install -r requirements.txt
 	$(PIP_EXEC) install --upgrade dist/DisPass-$(VERSION)-py2.py3-none-any.whl
 	install-info dispass.info $(INFO_PATH)/dir
 	make clean
