@@ -4,6 +4,6 @@ include dispass.info
 include LICENSE
 include Makefile
 include README.rst
-recursive-include scripts dispass
-recursive-include scripts gdispass
+recursive-include bin dispass
+recursive-include bin gdispass
 recursive-include zsh _dispass
