@@ -12,6 +12,7 @@ Added
 * Interactive modes for ``add`` and ``rm`` commands
 * Algorithm and sequence number fields (GUI)
 * pycommand dependency for command argument parsing (extracted from DisPass)
+* Info documentation (different from manpage, same as the website)
 
 Changed
 *******
