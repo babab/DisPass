@@ -6,4 +6,11 @@ include Makefile
 include README.rst
 recursive-include bin dispass
 recursive-include bin gdispass
+recursive-include etc dispass.desktop
+recursive-include logo logo24.png
+recursive-include logo logo32.png
+recursive-include logo logo64.png
+recursive-include logo logo128.png
+recursive-include logo logo256.png
+recursive-include logo logo512.png
 recursive-include zsh _dispass
