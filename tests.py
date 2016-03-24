@@ -38,12 +38,12 @@ def test_algos_Dispass2_default():
 
 
 def test_algos_Dispass2_length50():
-    '''algos: Dispass1 digest returns the passphrase with a length of 50'''
+    '''algos: Dispass2 digest returns the passphrase with a length of 50'''
     passphrase = dispass.algos.Dispass2.digest('test2', 'qqqqqqqq', 50, 1)
     eq_(passphrase, 'YjFjMzlhZDA3ZmFhNjg4MThlNDFmM2IxYTk0NWJiMjEyYzdlMT')
 
 
 def test_algos_Dispass2_seqno10():
-    '''algos: Dispass1 digest returns the passphrase with a seqno of 10'''
+    '''algos: Dispass2 digest returns the passphrase with a seqno of 10'''
     passphrase = dispass.algos.Dispass2.digest('test2', 'qqqqqqqq', 50, 10)
     eq_(passphrase, 'NGEwNjMxMzZiMzljODVmODk4OWQ1ZmE4YTRlY2E4ODZkZjZlZW')
