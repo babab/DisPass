@@ -1,6 +1,9 @@
 DisPass
 ******************************************************************************
 
+.. image:: https://travis-ci.org/babab/DisPass.svg?branch=master
+   :target: https://travis-ci.org/babab/DisPass
+
 DisPass is a password manager for GNU/Linux, \*BSD, MacOS X and Windows.
 It can be used as any traditional password manager, but has one key
 difference. DisPass does not store your passwords anywhere, so you
