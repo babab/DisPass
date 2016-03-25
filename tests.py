@@ -23,27 +23,37 @@ def test_algos_Dispass1_default():
     '''algos: Dispass1 digest returns the correct passphrase'''
     passphrase = dispass.algos.Dispass1.digest('test', 'qqqqqqqq')
     eq_(passphrase, 'Y2Y4Y2Y0Yzg5Nzc1Yzc2MmI4OTU0ND')
+    passphrase = dispass.algos.Dispass1.digest('test', 'abc#@123ZXY')
+    eq_(passphrase, 'OGY5NjgxZGI4Yjk2ZDlhNTk1ZDU3Nz')
 
 
 def test_algos_Dispass1_length50():
     '''algos: Dispass1 digest returns the passphrase with a length of 50'''
     passphrase = dispass.algos.Dispass1.digest('test2', 'qqqqqqqq', 50)
     eq_(passphrase, 'NmQzNjUzZTlhNTc4NWFlNTU5ZTVkZGQ5ZTc2NzliZjgzZDQ1Zj')
+    passphrase = dispass.algos.Dispass1.digest('test2', 'abc#@123ZXY', 50)
+    eq_(passphrase, 'ZmVjMjgwYjdjZmY2ZWJkMTYwZDM2OGQyZTFiOWIzMThjNzhjOD')
 
 
 def test_algos_Dispass2_default():
     '''algos: Dispass2 digest returns the correct passphrase'''
     passphrase = dispass.algos.Dispass2.digest('test', 'qqqqqqqq')
     eq_(passphrase, 'ZTdiNGNkYmQ2ZjFmNzc3NGFjZWEwMz')
+    passphrase = dispass.algos.Dispass2.digest('test', 'abc#@123ZXY')
+    eq_(passphrase, 'ZjdiODhhOWQyZTc3MzM4ZGFjNmM5OW')
 
 
 def test_algos_Dispass2_length50():
     '''algos: Dispass2 digest returns the passphrase with a length of 50'''
     passphrase = dispass.algos.Dispass2.digest('test2', 'qqqqqqqq', 50, 1)
     eq_(passphrase, 'YjFjMzlhZDA3ZmFhNjg4MThlNDFmM2IxYTk0NWJiMjEyYzdlMT')
+    passphrase = dispass.algos.Dispass2.digest('test', 'abc#@123ZXY', 50, 1)
+    eq_(passphrase, 'ZjdiODhhOWQyZTc3MzM4ZGFjNmM5OWQwMjJlMzZiZWI5ODRhNG')
 
 
 def test_algos_Dispass2_seqno10():
     '''algos: Dispass2 digest returns the passphrase with a seqno of 10'''
     passphrase = dispass.algos.Dispass2.digest('test2', 'qqqqqqqq', 50, 10)
     eq_(passphrase, 'NGEwNjMxMzZiMzljODVmODk4OWQ1ZmE4YTRlY2E4ODZkZjZlZW')
+    passphrase = dispass.algos.Dispass2.digest('test', 'abc#@123ZXY', 50, 10)
+    eq_(passphrase, 'ODNmNmE5MjE4OGYzM2I1YmExNzI1M2E1Zjc2ZGFjN2I0ZDc5N2')
