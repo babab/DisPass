@@ -57,3 +57,15 @@ def test_algos_Dispass2_seqno10():
     eq_(passphrase, 'NGEwNjMxMzZiMzljODVmODk4OWQ1ZmE4YTRlY2E4ODZkZjZlZW')
     passphrase = dispass.algos.Dispass2.digest('test', 'abc#@123ZXY', 50, 10)
     eq_(passphrase, 'ODNmNmE5MjE4OGYzM2I1YmExNzI1M2E1Zjc2ZGFjN2I0ZDc5N2')
+
+
+def test_algos_algoObject_dispass1():
+    '''algos: algoObject can return a valid Dispass1 digest staticmethod'''
+    a = dispass.algos.algoObject('dispass1')
+    assert hasattr(a, 'digest')
+
+
+def test_algos_algoObject_dispass2():
+    '''algos: algoObject can return a valid Dispass2 digest staticmethod'''
+    a = dispass.algos.algoObject('dispass2')
+    assert hasattr(a, 'digest')
