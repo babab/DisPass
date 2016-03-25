@@ -3,11 +3,17 @@
 local expl
 local -a dispass_labels _dispass_commands
 
-# TODO: split get_labels with and without --all switch and use appropriately
-get_labels() {
+get_labels_all() {
   if [[ "$state" == labels ]]; then
     dispass_labels=(${(f)"$(_call_program dispass_labels \
         dispass list --all --script | awk '{ print $1 }' 2>/dev/null)"})
+    _wanted dispass_labels expl 'all labels' compadd -a dispass_labels
+  fi
+}
+get_labels_enabled() {
+  if [[ "$state" == labels ]]; then
+    dispass_labels=(${(f)"$(_call_program dispass_labels \
+        dispass list --script | awk '{ print $1 }' 2>/dev/null)"})
     _wanted dispass_labels expl 'all labels' compadd -a dispass_labels
   fi
 }
@@ -54,7 +60,7 @@ case "$words[1]" in
       '(-i --interactive -h --help -s --silent)-s[do not print success message]' \
       '(-i --interactive -h --help -s --silent)--silent[do not print success message]' \
       &&  return 0 ;;
-  d* | e* | i* | u*)
+  d* | i* | u*)
     _arguments \
       '(-n --dry-run -s --silent)-h[show help information]' \
       '(-n --dry-run -s --silent)--help[show help information]' \
@@ -63,7 +69,17 @@ case "$words[1]" in
       '(-h --help -s --silent)-s[do not print success message]' \
       '(-h --help -s --silent)--silent[do not print success message]' \
       '*:: :->labels' && return 0
-    get_labels ;;
+    get_labels_enabled ;;
+  e*)
+    _arguments \
+      '(-n --dry-run -s --silent)-h[show help information]' \
+      '(-n --dry-run -s --silent)--help[show help information]' \
+      '(-h --help -n --dry-run)-n[do not actually update label in labelfile]' \
+      '(-h --help -n --dry-run)--dry-run[do not actually update label in labelfile]' \
+      '(-h --help -s --silent)-s[do not print success message]' \
+      '(-h --help -s --silent)--silent[do not print success message]' \
+      '*:: :->labels' && return 0
+    get_labels_all ;;
   ge*)
     _arguments \
       '(-h --help)-h[show help information]' \
@@ -82,7 +98,7 @@ case "$words[1]" in
       '(-h --help -o --output)--output[output passphrase(s) directly to stdout]' \
       '(-h --help --silent)--silent[do not show a prompt when errors occur]' \
       '*:: :->labels' && return 0
-    get_labels ;;
+    get_labels_enabled ;;
   gu*)
     _arguments \
       '(-h --help)-h[show help information]' \
@@ -110,7 +126,7 @@ case "$words[1]" in
       '(-i --interactive -h --help -s --silent)-s[do not print success message]' \
       '(-i --interactive -h --help -s --silent)--silent[do not print success message]' \
       '*:: :->labels' && return 0
-    get_labels ;;
+    get_labels_all ;;
   v*)
     return 0
 esac

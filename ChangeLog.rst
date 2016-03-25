@@ -1,6 +1,19 @@
 Change Log
 ----------
 
+Development version (git/master) - to released
+##############################################
+
+Added
+*****
+
+* Automatic testing setup with Travis CI
+
+Changed
+*******
+
+* In Zsh autocompletion, do not autocomplete for disabled labels
+
 v0.3.0 - released March 18th, 2016
 ##################################
 
