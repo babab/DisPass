@@ -30,6 +30,11 @@ def _run_with_labelfile(func):
             if not lf.promptForCreation(silent=inst.flags['silent']):
                 return 1
 
+        if not lf.is_writeable():
+            print('error: can\'t save to "{loc}", not writeable'
+                  .format(loc=lf.file_location))
+            return 1
+
         func(inst, lf, *args, **kwargs)
 
         if not inst.flags['dry-run']:

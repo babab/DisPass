@@ -344,3 +344,6 @@ class Filehandler:
         else:
             return False
         return True
+
+    def is_writeable(self):
+        return os.access(self.file_location, os.W_OK)
