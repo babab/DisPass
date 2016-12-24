@@ -19,8 +19,10 @@ from pycommand import CommandBase
 
 from dispass.dispass import settings
 from dispass.filehandler import Filehandler
+from dispass.commands.decorators import read_labels
 
 
+@read_labels()
 class Command(CommandBase):
     '''Print a formatted table of labelfile contents'''
 
@@ -46,20 +48,10 @@ class Command(CommandBase):
         ('script',      ('', False, 'output in fixed columns')),
     )
 
-    def run(self):
+    def run(self, lf):
         if self.flags['help']:
             print(self.usage)
             return
-
-        if self.parentFlags['file']:
-            lf = Filehandler(settings, file_location=self.parentFlags['file'])
-        else:
-            lf = Filehandler(settings)
-
-        if not lf.file_found:
-            print('error: could not load labelfile at "{loc}"'
-                  .format(loc=lf.file_location))
-            return 1
 
         lf.printLabels(fixed_columns=self.flags['script'],
                        labels_only=self.flags['names-only'],

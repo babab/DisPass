@@ -20,9 +20,10 @@ from pycommand import CommandBase
 from dispass.algos import algorithms
 from dispass.cli import CLI
 from dispass.dispass import settings
-from dispass.filehandler import Filehandler
+from dispass.commands.decorators import read_labels
 
 
+@read_labels(optional=True)
 class Command(CommandBase):
     '''Generate passphrases for one or more labels'''
 
@@ -44,7 +45,7 @@ class Command(CommandBase):
         ('silent',  ('', False, 'do not show a prompt when errors occur')),
     )
 
-    def run(self):
+    def run(self, lf):
         '''Parse the various arguments and output passphrases for each label
 
         Each positional argument is a label. For each label, it will try to
@@ -53,15 +54,6 @@ class Command(CommandBase):
         settings object defined as `dispass.dispass.settings` will be used. The
         parameters can be overridden through the various optargs.
         '''
-        if self.parentFlags['file']:
-            lf = Filehandler(settings, file_location=self.parentFlags['file'])
-        else:
-            lf = Filehandler(settings)
-
-        if not lf.file_found:
-            if not lf.promptForCreation(silent=self.flags['silent']):
-                return 1
-
         if not self.args or self.flags['help']:
             print(self.usage)
             return 1

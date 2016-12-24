@@ -18,10 +18,10 @@
 from pycommand import CommandBase
 
 from dispass import algos
-from dispass.dispass import settings
-from dispass.filehandler import Filehandler
+from dispass.commands.decorators import write_labels
 
 
+@write_labels
 class Command(CommandBase):
     '''Update the information relating to a label'''
 
@@ -37,25 +37,15 @@ class Command(CommandBase):
 
     optionList = (
         ('help',    ('h', False, 'show this help information')),
-        ('dry-run', ('n', False, 'do not actually update label in labelfile')),
         ('silent',  ('s', False, 'do not print success message')),
     )
 
-    def run(self):
+    def run(self, lf):
         '''Parse the arguments and update them using `FileHandler.update`.'''
-
-        if self.parentFlags['file']:
-            lf = Filehandler(settings, file_location=self.parentFlags['file'])
-        else:
-            lf = Filehandler(settings)
 
         if not len(self.args) == 2 or self.flags['help']:
             print self.usage
             return
-
-        if not lf.file_found:
-            if not lf.promptForCreation(silent=self.flags['silent']):
-                return 1
 
         labelname = self.args[0]
 
@@ -89,6 +79,3 @@ class Command(CommandBase):
             if not self.flags['silent']:
                 print("Label '{name}' could not be updated"
                       .format(name=labelname))
-
-        if not self.flags['dry-run']:
-            lf.save()

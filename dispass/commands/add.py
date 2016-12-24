@@ -20,10 +20,11 @@ from pycommand import CommandBase
 from dispass import algos
 from dispass.dispass import settings
 from dispass.cli import CLI
-from dispass.filehandler import Filehandler
 from dispass.interactive_editor import InteractiveEditor
+from dispass.commands.decorators import write_labels
 
 
+@write_labels
 class Command(CommandBase):
     '''Add a new label to the labelfile and generate passphrase.'''
     usagestr = (
@@ -40,11 +41,10 @@ class Command(CommandBase):
         ('generate', ('g', False,
                       'immediately generate passphrase after adding it')),
         ('help',    ('h', False, 'show this help information')),
-        ('dry-run', ('n', False, 'do not actually add label to labelfile')),
         ('silent',  ('s', False, 'do not print success message')),
     )
 
-    def run(self):
+    def run(self, lf):
         '''Parse labels and add them using `FileHandler.add`.
 
         When the -i flag is passed, add them using `InteractiveEditor.add`
@@ -52,15 +52,6 @@ class Command(CommandBase):
 
         newlabels = []
         '''A list of labelnames that have been added.'''
-
-        if self.parentFlags['file']:
-            lf = Filehandler(settings, file_location=self.parentFlags['file'])
-        else:
-            lf = Filehandler(settings)
-
-        if not lf.file_found:
-            if not lf.promptForCreation(silent=self.flags['silent']):
-                return 1
 
         if self.flags['interactive']:
             intedit = InteractiveEditor(settings, lf, interactive=False)
@@ -106,9 +97,6 @@ class Command(CommandBase):
                     if not self.flags['silent']:
                         print("Label '{name}' already exists in labelfile"
                               .format(name=labelspec[0]))
-
-            if not self.flags['dry-run']:
-                lf.save()
 
         if self.flags['generate'] and newlabels:
             console = CLI(lf)

@@ -18,9 +18,10 @@
 from pycommand import CommandBase
 
 from dispass.dispass import settings
-from dispass.filehandler import Filehandler
+from dispass.commands.decorators import read_labels
 
 
+@read_labels(optional=True)
 class Command(CommandBase):
     '''Start the graphical version of DisPass'''
 
@@ -28,18 +29,12 @@ class Command(CommandBase):
     description = 'Start the graphical version of DisPass.'
     optionList = (('help', ('h', False, 'show this help information')),)
 
-    def run(self):
+    def run(self, lf):
         '''Entry point and handler of command options and arguments'''
 
         if self.flags['help']:
             print(self.usage)
             return
-
-        if self.parentFlags['file']:
-            lf = Filehandler(settings,
-                             file_location=self.parentFlags['file'])
-        else:
-            lf = Filehandler(settings)
 
         try:
             from dispass.gui import GUI

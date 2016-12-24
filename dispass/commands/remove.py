@@ -18,10 +18,11 @@
 from pycommand import CommandBase
 
 from dispass.dispass import settings
-from dispass.filehandler import Filehandler
 from dispass.interactive_editor import InteractiveEditor
+from dispass.commands.decorators import write_labels
 
 
+@write_labels
 class Command(CommandBase):
     '''Remove label from labelfile'''
 
@@ -33,21 +34,10 @@ class Command(CommandBase):
     optionList = (
         ('interactive', ('i', False, 'remove label in an interactive manner')),
         ('help',    ('h', False, 'show this help information')),
-        ('dry-run', ('n', False,
-                     'do not actually remove label from labelfile')),
         ('silent',  ('s', False, 'do not print success message')),
     )
 
-    def run(self):
-        if self.parentFlags['file']:
-            lf = Filehandler(settings, file_location=self.parentFlags['file'])
-        else:
-            lf = Filehandler(settings)
-
-        if not lf.file_found:
-            if not lf.promptForCreation(silent=self.flags['silent']):
-                return 1
-
+    def run(self, lf):
         if self.flags['interactive']:
             InteractiveEditor(settings, lf, interactive=False).remove()
             return 0
@@ -64,6 +54,3 @@ class Command(CommandBase):
                 if not self.flags['silent']:
                     print("Label '{name}' doesn't exist in labelfile"
                           .format(name=arg))
-
-        if not self.flags['dry-run']:
-            lf.save()
