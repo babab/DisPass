@@ -11,7 +11,7 @@ setup(
     author_email='benjamin@althu.es',
     url='http://dispass.org/',
     download_url='http://pypi.python.org/pypi/DisPass/',
-    packages=['dispass', 'dispass.commands'],
+    packages=['dispass', 'dispass.commands', 'dispass.commands.decorators'],
     license='ISC',
     long_description=open('README.rst').read(),
     platforms='any',
