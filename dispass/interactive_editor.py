@@ -15,7 +15,7 @@
 
 import sys
 
-import algos
+import dispass.algos as algos
 
 
 class InteractiveEditor:

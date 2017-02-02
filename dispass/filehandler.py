@@ -19,7 +19,7 @@ import datetime
 import os
 from os.path import expanduser, exists
 
-from dispass import __version__
+from dispass.dispass import __version__
 
 
 class Filehandler:

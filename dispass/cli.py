@@ -15,8 +15,8 @@
 
 import getpass
 
-from algos import algoObject
-from dispass import versionStr
+from dispass.algos import algoObject
+from dispass.dispass import versionStr
 
 try:
     import curses

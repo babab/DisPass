@@ -106,30 +106,30 @@ class DispassCommand(pycommand.CommandBase):
 
         '''
 
-        import commands.add
-        import commands.disable
-        import commands.enable
-        import commands.generate
-        import commands.gui
-        import commands.help
-        import commands.increment
-        import commands.list
-        import commands.remove
-        import commands.update
-        import commands.version
+        import dispass.commands.add
+        import dispass.commands.disable
+        import dispass.commands.enable
+        import dispass.commands.generate
+        import dispass.commands.gui
+        import dispass.commands.help
+        import dispass.commands.increment
+        import dispass.commands.list
+        import dispass.commands.remove
+        import dispass.commands.update
+        import dispass.commands.version
 
         self.commands = {
-            'add': commands.add.Command,
-            'disable': commands.disable.Command,
-            'enable': commands.enable.Command,
-            'generate': commands.generate.Command,
-            'gui': commands.gui.Command,
-            'help': commands.help.Command,
-            'increment': commands.increment.Command,
-            'list': commands.list.Command,
-            'remove': commands.remove.Command,
-            'update': commands.update.Command,
-            'version': commands.version.Command,
+            'add': dispass.commands.add.Command,
+            'disable': dispass.commands.disable.Command,
+            'enable': dispass.commands.enable.Command,
+            'generate': dispass.commands.generate.Command,
+            'gui': dispass.commands.gui.Command,
+            'help': dispass.commands.help.Command,
+            'increment': dispass.commands.increment.Command,
+            'list': dispass.commands.list.Command,
+            'remove': dispass.commands.remove.Command,
+            'update': dispass.commands.update.Command,
+            'version': dispass.commands.version.Command,
         }
 
         if self.flags['help']:

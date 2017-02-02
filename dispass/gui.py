@@ -33,8 +33,8 @@ import sys
 import tkMessageBox
 import ttk
 
-import algos
-from dispass import versionStr as dispass_version
+import dispass.algos as algos
+from dispass.dispass import versionStr as dispass_version
 
 versionStr = 'g%s' % dispass_version
 
