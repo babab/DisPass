@@ -41,7 +41,7 @@ class Command(CommandBase):
         '''Parse the arguments and enable using `Filehandler.disable`.'''
 
         if not len(self.args) == 1 or self.flags['help']:
-            print self.usage
+            print(self.usage)
             return
 
         labelname = self.args[0]

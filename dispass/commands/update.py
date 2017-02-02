@@ -44,7 +44,7 @@ class Command(CommandBase):
         '''Parse the arguments and update them using `FileHandler.update`.'''
 
         if not len(self.args) == 2 or self.flags['help']:
-            print self.usage
+            print(self.usage)
             return
 
         labelname = self.args[0]
