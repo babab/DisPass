@@ -16,8 +16,6 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-import exceptions
-
 from dispass.dispass import Settings
 from dispass.filehandler import Filehandler
 
@@ -34,5 +32,5 @@ if __name__ == '__main__':
                '\n'
                'For installation instructions, please see the\n'
                '"Using gdispass" chapter of the documentation.')
-    except exceptions.KeyboardInterrupt:
+    except KeyboardInterrupt:
         print ('\nOk, bye')

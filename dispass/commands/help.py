@@ -15,7 +15,6 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-import exceptions
 import importlib
 
 from pycommand import CommandBase
@@ -43,7 +42,7 @@ class Command(CommandBase):
                 print('error: command {cmd} does not exist'
                       .format(cmd=self.args[0]))
                 return 1
-            except exceptions.KeyboardInterrupt:
+            except KeyboardInterrupt:
                 print('\nOk, bye')
                 return 1
 
