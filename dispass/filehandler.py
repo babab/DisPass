@@ -329,7 +329,7 @@ class Filehandler:
 
         print('error: could not load labelfile at "{loc}"'
               .format(loc=self.file_location))
-        inp = raw_input('Do you want to create it? Y/n ')
+        inp = input('Do you want to create it? Y/n ')
 
         if inp == '' or inp[0].lower() == 'y':
             # create directories for file_location if they don't exist

@@ -43,7 +43,7 @@ class InteractiveEditor:
 
     def prompt(self):
         try:
-            inp = raw_input('\n> ').split()
+            inp = input('\n> ').split()
             if not inp:
                 print('No menu option given')
                 self.prompt()
@@ -79,7 +79,7 @@ class InteractiveEditor:
         '''
         while True:
             try:
-                return raw_input('Label: ').split()[0]
+                return input('Label: ').split()[0]
             except IndexError:
                 print('label cannot be empty - please try again')
                 continue
@@ -90,7 +90,7 @@ class InteractiveEditor:
         while True:
             try:
                 length = (
-                    raw_input('Length [press enter for default "{len}"]: '
+                    input('Length [press enter for default "{len}"]: '
                               .format(len=self.settings.passphrase_length))
                     .split()[0])
             except IndexError:
@@ -120,7 +120,7 @@ class InteractiveEditor:
                         choices += ' [default]'
                     print(choices)
                     i += 1
-                choice = (raw_input('Algorithm [press enter for default]: ')
+                choice = (input('Algorithm [press enter for default]: ')
                           .split()[0])
             except IndexError:
                 algo = self.settings.algorithm
@@ -150,7 +150,7 @@ class InteractiveEditor:
             while True:
                 try:
                     seqno = (
-                        raw_input(
+                        input(
                             'Sequence number [press enter for default'
                             ' "{seqno}"]: '.format(seqno=default_seqno))
                         .split()[0])
