@@ -13,7 +13,7 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-from Tkinter import (
+from tkinter import (
     Button,
     Checkbutton,
     Entry,
@@ -30,8 +30,8 @@ from Tkinter import (
     N, E, S, W,
 )
 import sys
-import tkMessageBox
-import ttk
+import tkinter.messagebox as tkMessageBox
+import tkinter.ttk as ttk
 
 import dispass.algos as algos
 from dispass.dispass import versionStr as dispass_version
