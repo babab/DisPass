@@ -4,8 +4,8 @@ ICON_PATH		= $(DESTDIR)/usr/share/icons/hicolor
 MAN_PATH		= $(DESTDIR)/usr/share/man/man1
 INFO_PATH		= $(DESTDIR)/usr/share/info
 ZSH_SITE_FUNCS_PATH	= $(DESTDIR)/usr/share/zsh/site-functions
-PYTHON_EXEC		= python2
-PIP_EXEC		= pip2
+PYTHON_EXEC		= python
+PIP_EXEC		= pip
 
 sinclude config.mk
 
