@@ -247,7 +247,7 @@ class GUI(Frame):
         self.algorithm = ttk.Combobox(self, width=27, font=self.getFont(),
                                       values=algos.algorithms)
         sequence = Spinbox(self, width=3, font=self.getFont, from_=1,
-                           to=sys.maxint, textvariable=self.sequenceVar)
+                           to=sys.maxsize, textvariable=self.sequenceVar)
         genbutton = Button(self, text="Generate password",
                            font=self.getFont(), command=self.validateAndShow,
                            default="active")
