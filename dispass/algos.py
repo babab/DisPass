@@ -70,10 +70,11 @@ class Dispass1:
         '''
 
         sha = hashlib.sha512()
-        sha.update(str(label) + str(password))
-        r = base64.b64encode(sha.hexdigest(), '49').replace('=', '')
+        sha.update(label.encode('utf-8') + password.encode('utf-8'))
+        r = base64.b64encode(sha.hexdigest().encode('utf-8'), b'49') \
+                  .replace(b'=', b'')
 
-        return str(r[:length])
+        return r[:length].decode()
 
 
 class Dispass2:
@@ -108,10 +109,13 @@ class Dispass2:
         '''
 
         sha = hashlib.sha512()
-        sha.update(str(label) + str(seqno) + str(password))
-        r = base64.b64encode(sha.hexdigest(), '49').replace('=', '')
+        sha.update(label.encode('utf-8') +
+                   str(seqno).encode('utf-8') +
+                   password.encode('utf-8'))
+        r = base64.b64encode(sha.hexdigest().encode('utf-8'), b'49') \
+                  .replace(b'=', b'')
 
-        return str(r[:length])
+        return r[:length].decode()
 
 
 if __name__ == '__main__':
