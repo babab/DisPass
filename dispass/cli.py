@@ -132,7 +132,7 @@ class CLI:
             stdscr.addstr(1, 0, "Your passphrase(s)", curses.A_BOLD)
 
             j = 3
-            for label, passphrase in self.passphrases.iteritems():
+            for label, passphrase in self.passphrases.items():
                 stdscr.addstr(j,  0, label, curses.A_BOLD)
                 stdscr.addstr(j, divlen, passphrase)
                 j += 1
@@ -149,7 +149,7 @@ class CLI:
             curses.echo()
             curses.endwin()
         else:
-            for label, passphrase in self.passphrases.iteritems():
+            for label, passphrase in self.passphrases.items():
                 if self.scriptableIO:
                     print('{:50} {}'.format(label[:50], passphrase))
                 else:
