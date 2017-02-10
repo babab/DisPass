@@ -36,7 +36,7 @@ import tkinter.ttk as ttk
 import dispass.algos as algos
 from dispass.dispass import versionStr as dispass_version
 
-versionStr = 'g%s' % dispass_version
+versionStr = 'g{}'.format(dispass_version)
 
 
 class GUI(Frame):
@@ -129,7 +129,7 @@ class GUI(Frame):
                       box_title='Password mismatch')
             return
         elif algorithm not in algos.algorithms:
-            self.warn('Unknown algorithm: %s' % algorithm,
+            self.warn('Unknown algorithm: {}'.format(algorithm),
                       box_title='Unknown algorithm')
             return
 
@@ -139,7 +139,7 @@ class GUI(Frame):
         elif algorithm == 'dispass2':
             algo = algos.Dispass2
         else:
-            self.warn('Algorithm not implemented in GUI: %s' % algorithm,
+            self.warn('Algorithm not implemented in GUI: {}'.format(algorithm),
                       box_title='Unimplemented algorithm')
             return
 

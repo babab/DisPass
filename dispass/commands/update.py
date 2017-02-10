@@ -52,7 +52,7 @@ class Command(CommandBase):
         try:
             tmp_length, tmp_algo, tmp_seqno = self.args[1].split(':')
         except ValueError:
-            print ('Invalid update specification: %s' % self.args[1])
+            print('Invalid update specification: {}'.format(self.args[1]))
             return 2
 
         try:
