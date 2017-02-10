@@ -12,6 +12,7 @@ Added
 Changed
 *******
 
+* Use python 3.4 or higher (python 2 is no longer supported)
 * In Zsh autocompletion, do not autocomplete for disabled labels
 
 v0.3.0 - released March 18th, 2016
