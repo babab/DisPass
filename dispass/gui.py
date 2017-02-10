@@ -204,12 +204,12 @@ class GUI(Frame):
     def filterLabels(self):
         '''Filter labels according to what was typed into the entry.'''
         value = self.label.get()
+        names = list(self.labelspecs.copy().keys())
+        self.label.configure(values=names)
 
         if value:
-            self.label.configure(values=[s for s in self.labelspecs.keys()
+            self.label.configure(values=[s for s in names
                                          if s.startswith(value)])
-        else:
-            self.label.configure(values=self.labelspecs.keys())
 
 # GUI # Create Widgets
     def createWidgets(self):
