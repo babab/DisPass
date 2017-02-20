@@ -139,15 +139,16 @@ class CLI:
             stdscr.refresh()
             curses.curs_set(0)
 
-            while True:
-                c = stdscr.getch()
-                if c == ord('q'):
-                    stdscr.erase()
-                    break
-
-            curses.nocbreak()
-            curses.echo()
-            curses.endwin()
+            try:
+                while True:
+                    c = stdscr.getch()
+                    if c == ord('q'):
+                        break
+            finally:
+                stdscr.erase()
+                curses.nocbreak()
+                curses.echo()
+                curses.endwin()
         else:
             for label, passphrase in self.passphrases.items():
                 if self.scriptableIO:
