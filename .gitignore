@@ -1,8 +1,10 @@
 *.pyc
 
 config.mk
+.coverage
 
 /build/
 /DisPass.egg-info/
 /doc/
 /docs/*/_build/
+/htmlcov/

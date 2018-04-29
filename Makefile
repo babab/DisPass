@@ -9,7 +9,7 @@ PIP_EXEC		= pip
 
 sinclude config.mk
 
-.PHONY: make rm_pyc doc_clean doc man dist install install-pip install-src install-metafiles uninstall clean
+.PHONY: make rm_pyc doc_clean doc man coverage dist install install-pip install-src install-metafiles uninstall clean
 
 VERSION		= 0.3.0
 
@@ -27,6 +27,7 @@ make:
 	@echo "make man       Build manpage and info documentation with Sphinx"
 	@echo "make dist      Build python source archive file"
 	@echo "make clean     Clean program build files"
+	@echo "make coverage  Run coverage with nosetests (experimental)"
 
 rm_pyc:
 	find . -name "*.pyc" | xargs /bin/rm -f
@@ -52,6 +53,15 @@ man: rm_pyc
 	cd docs/en/; make info
 	mv docs/en/_build/texinfo/DisPass.info ./dispass.info
 	make doc_clean
+
+coverage:
+	coverage erase
+	coverage run .virtualenv/bin/nosetests -v
+	coverage run -a bin/dispass help
+	coverage run -a bin/gdispass
+	coverage report
+	rm -rf htmlcov
+	coverage html
 
 dist: rm_pyc
 	$(PIP_EXEC) install -r requirements.txt
