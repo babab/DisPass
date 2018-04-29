@@ -124,13 +124,10 @@ def test_help_for_command_main():
     assert output_startswith(cmd, usage_string)
 
     cmd = DispassCommand(['-h'])
-    assert cmd.usage.startswith(usage_string)
     assert output_startswith(cmd, usage_string)
 
     cmd = DispassCommand(['--help'])
-    assert cmd.usage.startswith(usage_string)
     assert output_startswith(cmd, usage_string)
 
     cmd = DispassCommand(['help'])
-    assert cmd.usage.startswith(usage_string)
     assert output_startswith(cmd, usage_string)
