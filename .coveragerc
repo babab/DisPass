@@ -1,3 +1,5 @@
 [run]
-omit =
-    */.virtualenv/*
+source =
+    dispass
+
+# vim: set ft=sh:
