@@ -26,10 +26,11 @@ def _run_with_labelfile(func, optional):
         else:
             lf = Filehandler(settings)
 
-        if not lf.file_found and not optional:
-            print('error: could not load labelfile at "{loc}"'
-                  .format(loc=lf.file_location))
-            return 1
+        if not inst.flags['help']:
+            if not lf.file_found and not optional:
+                print('error: could not load labelfile at "{loc}"'
+                      .format(loc=lf.file_location))
+                return 1
 
         func(inst, lf, *args, **kwargs)
 
