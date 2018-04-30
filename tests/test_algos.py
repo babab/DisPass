@@ -1,3 +1,5 @@
+'''Tests for algorithms'''
+
 # Copyright (c) 2012-2016  Tom Willemse <tom@ryuslash.org>
 # Copyright (c) 2011-2016  Benjamin Althues <benjamin@althu.es>
 #
@@ -13,35 +15,9 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-import sys
-from contextlib import contextmanager
-from io import StringIO
-
 import dispass.algos
-from dispass.dispass import DispassCommand
 
 
-# helpers
-@contextmanager
-def captured_output():
-    new_out, new_err = StringIO(), StringIO()
-    old_out, old_err = sys.stdout, sys.stderr
-    try:
-        sys.stdout, sys.stderr = new_out, new_err
-        yield sys.stdout, sys.stderr
-    finally:
-        sys.stdout, sys.stderr = old_out, old_err
-
-
-def output_startswith(cmd, string):
-    '''call the run() method of cmd and check if output startswith string'''
-    with captured_output() as (out, err):
-        cmd.run()
-        output = out.getvalue().strip()
-        return output.startswith(string)
-
-
-# tests
 def test_algos_Dispass1_default():
     '''algos: Dispass1 digest returns the correct passphrase'''
     passphrase = dispass.algos.Dispass1.digest('test', 'qqqqqqqq')
@@ -92,40 +68,3 @@ def test_algos_algoObject_dispass2():
     '''algos: algoObject can return a valid Dispass2 digest staticmethod'''
     a = dispass.algos.algoObject('dispass2')
     assert hasattr(a, 'digest')
-
-
-def test_main_command_no_arguments():
-    '''commands: without arguments returns exit status 2'''
-    cmd = DispassCommand([])
-    assert cmd.run() == 2
-
-
-def test_main_command_version_info():
-    '''commands: get version info via all possible combinations'''
-    usage_string = "DisPass 0.3.0 (0, 3, 0, 'final', 0)"
-
-    cmd = DispassCommand(['-V'])
-    assert output_startswith(cmd, usage_string)
-
-    cmd = DispassCommand(['--version'])
-    assert output_startswith(cmd, usage_string)
-
-    cmd = DispassCommand(['version'])
-    assert output_startswith(cmd, usage_string)
-
-
-def test_help_for_command_main():
-    '''commands: get help for main command via all possible combinations'''
-    usage_string = 'usage: dispass [options] <command> [<args>]'
-    cmd = DispassCommand([])
-    assert cmd.usage.startswith(usage_string)
-    assert output_startswith(cmd, usage_string)
-
-    cmd = DispassCommand(['-h'])
-    assert output_startswith(cmd, usage_string)
-
-    cmd = DispassCommand(['--help'])
-    assert output_startswith(cmd, usage_string)
-
-    cmd = DispassCommand(['help'])
-    assert output_startswith(cmd, usage_string)
