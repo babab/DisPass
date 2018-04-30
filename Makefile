@@ -58,7 +58,6 @@ coverage:
 	coverage erase
 	coverage run .virtualenv/bin/pytest -v
 	coverage report
-	rm -rf htmlcov
 	coverage html
 
 dist: rm_pyc
