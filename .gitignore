@@ -8,3 +8,4 @@ config.mk
 /doc/
 /docs/*/_build/
 /htmlcov/
+/.pytest_cache/

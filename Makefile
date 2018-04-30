@@ -56,7 +56,7 @@ man: rm_pyc
 
 coverage:
 	coverage erase
-	coverage run .virtualenv/bin/nosetests -v
+	coverage run .virtualenv/bin/pytest -v
 	coverage report
 	rm -rf htmlcov
 	coverage html
