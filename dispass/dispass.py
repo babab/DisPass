@@ -23,7 +23,6 @@ import pycommand
 __docformat__ = 'restructuredtext'
 __author__ = "Benjamin Althues"
 __copyright__ = "Copyright (C) 2011-2018  Benjamin Althues & Tom Willemse"
-__version_info__ = (0, 3, 0, 'final', 0)
 __version__ = '0.3.0'
 versionStr = 'DisPass ' + __version__
 
@@ -35,10 +34,11 @@ def verboseVersionInfo():
     It also displays the name of the operating system/platform name.
 
     '''
-    return('{dispass} {fullversion}\n\n'
-           'Python {python}\nPlatform is {os}'
-           .format(dispass=versionStr, fullversion=__version_info__,
-                   python=sys.version.replace('\n', ''), os=os.name))
+    return('{dispass}\n\nPython {python}\nPlatform is {os}'.format(
+        dispass=versionStr,
+        python=sys.version.replace('\n', ''),
+        os=os.name
+    ))
 
 
 class Settings(object):

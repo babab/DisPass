@@ -28,16 +28,14 @@ def test_main_command_no_arguments():
 
 def test_main_command_version_info():
     '''commands: get version info via all possible combinations'''
-    usage_string = "DisPass 0.3.0 (0, 3, 0, 'final', 0)"
-
     cmd = DispassCommand(['-V'])
-    assert cmd_output_startswith(cmd, usage_string)
+    assert cmd_output_startswith(cmd, 'DisPass ')
 
     cmd = DispassCommand(['--version'])
-    assert cmd_output_startswith(cmd, usage_string)
+    assert cmd_output_startswith(cmd, 'DisPass ')
 
     cmd = DispassCommand(['version'])
-    assert cmd_output_startswith(cmd, usage_string)
+    assert cmd_output_startswith(cmd, 'DisPass ')
 
 
 def test_help_for_command_main():
