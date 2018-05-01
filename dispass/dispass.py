@@ -34,10 +34,11 @@ def verboseVersionInfo():
     It also displays the name of the operating system/platform name.
 
     '''
-    return('{dispass}\n\nPython {python}\nPlatform is {os}'.format(
-        dispass=versionStr,
-        python=sys.version.replace('\n', ''),
-        os=os.name
+    return('{}\n\nPython {}\nInterpreter is at {}\nPlatform is {}'.format(
+        versionStr,
+        sys.version.replace('\n', ''),
+        sys.executable or 'unknown',
+        os.name,
     ))
 
 
