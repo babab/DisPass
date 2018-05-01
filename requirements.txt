@@ -1,2 +1,2 @@
-pycommand==0.3.0
+pycommand>=0.4.0,<0.5
 wheel
