@@ -8,7 +8,7 @@ setup(
     version=dispass.dispass.__version__,
     description=dispass.dispass.__doc__,
     author=dispass.dispass.__author__,
-    author_email='benjamin@althu.es',
+    author_email='benjamin@babab.nl',
     url='http://dispass.org/',
     download_url='http://pypi.python.org/pypi/DisPass/',
     packages=['dispass', 'dispass.commands', 'dispass.commands.decorators'],

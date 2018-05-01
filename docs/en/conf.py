@@ -50,7 +50,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'DisPass'
-copyright = u'2011-2016  Benjamin Althues & Tom Willemse'
+copyright = u'2011-2018  Benjamin Althues & Tom Willemse'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -264,7 +264,7 @@ texinfo_documents = [
 epub_title = u'DisPass'
 epub_author = u'Benjamin Althues'
 epub_publisher = u'Benjamin Althues'
-epub_copyright = u'2011, 2012, 2013  Benjamin Althues'
+epub_copyright = u'2011-2018  Benjamin Althues & Tom Willemse'
 
 # The language of the text. It defaults to the language option
 # or en if the language is not set.

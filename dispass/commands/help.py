@@ -1,7 +1,7 @@
 '''Subcommand module `help`; contains only a single class `Command`'''
 
 # Copyright (c) 2012-2016  Tom Willemse <tom@ryuslash.org>
-# Copyright (c) 2011-2016  Benjamin Althues <benjamin@althu.es>
+# Copyright (c) 2011-2018  Benjamin Althues <benjamin@babab.nl>
 #
 # Permission to use, copy, modify, and distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
