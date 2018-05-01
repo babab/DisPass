@@ -23,7 +23,7 @@ import pycommand
 __docformat__ = 'restructuredtext'
 __author__ = "Benjamin Althues"
 __copyright__ = "Copyright (C) 2011-2018  Benjamin Althues & Tom Willemse"
-__version__ = '0.3.0'
+__version__ = '0.4.0.dev0'
 versionStr = 'DisPass ' + __version__
 
 

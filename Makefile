@@ -11,7 +11,7 @@ sinclude config.mk
 
 .PHONY: make rm_pyc doc_clean doc man coverage dist install install-pip install-src install-metafiles uninstall clean
 
-VERSION		= 0.3.0
+VERSION		= 0.4.0.dev0
 
 make:
 	@echo 'Installation targets'
