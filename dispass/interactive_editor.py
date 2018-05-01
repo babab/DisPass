@@ -89,10 +89,11 @@ class InteractiveEditor:
 
         while True:
             try:
-                length = (
-                    input('Length [press enter for default "{len}"]: '
-                              .format(len=self.settings.passphrase_length))
-                    .split()[0])
+                length = input(
+                    'Length [press enter for default "{len}"]: '.format(
+                        len=self.settings.passphrase_length
+                    )
+                ).split()[0]
             except IndexError:
                 length = self.settings.passphrase_length
                 break

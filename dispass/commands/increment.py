@@ -17,8 +17,6 @@
 
 from pycommand import CommandBase
 
-from dispass.dispass import settings
-from dispass.filehandler import Filehandler
 from dispass.commands.decorators import write_labels
 
 

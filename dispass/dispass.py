@@ -1,4 +1,4 @@
-'''Password manager for GNU/Linux, \*BSD, MacOS X and Windows.'''
+'''Password manager for GNU/Linux, BSD, MacOS X and Windows.'''
 
 # Copyright (c) 2012-2016  Tom Willemse <tom@ryuslash.org>
 # Copyright (c) 2011-2018  Benjamin Althues <benjamin@babab.nl>
@@ -56,6 +56,7 @@ class Settings(object):
 
     disabled = False
     '''Bool. Default disabled state'''
+
 
 settings = Settings()
 

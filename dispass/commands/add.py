@@ -75,7 +75,7 @@ class Command(CommandBase):
                     length = settings.passphrase_length
 
                 algo = params >= 3 and labelspec[2] or settings.algorithm
-                if not algo in algos.algorithms:
+                if algo not in algos.algorithms:
                     algo = settings.algorithm
 
                 seqno = 0
