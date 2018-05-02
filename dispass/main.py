@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# vim: set et ts=4 sw=4 sts=4:
+'''Main functions / setup.py script entry points for console and GUI.'''
 
 # Copyright (c) 2012-2016  Tom Willemse <tom@ryuslash.org>
 # Copyright (c) 2011-2018  Benjamin Althues <benjamin@babab.nl>
@@ -16,21 +15,42 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-from dispass.dispass import Settings
+import sys
+
+from dispass.dispass import (
+    DispassCommand,
+    settings,
+)
 from dispass.filehandler import Filehandler
 
-if __name__ == '__main__':
+
+def console():
+    try:
+        cmd = DispassCommand(sys.argv[1:])
+        if cmd.error:
+            print('error: {0}'.format(cmd.error))
+            return 1
+        else:
+            return cmd.run()
+    except KeyboardInterrupt:
+        print('\nOk, bye')
+        return 0
+
+
+def gui():
     try:
         from dispass.gui import GUI
 
-        settings = Settings()
         gui = GUI(settings, Filehandler(settings))
         gui.mainloop()
     except ImportError:
-        print ('Could not find Tkinter, this is a package needed for using\n'
-               'the graphical version of dispass.\n'
-               '\n'
-               'For installation instructions, please see the\n'
-               '"Using gdispass" chapter of the documentation.')
+        print(
+            'Could not find Tkinter, this is a package needed for using\n'
+            'the graphical version of dispass.\n\n'
+            'For installation instructions, please see the\n'
+            '"Using gdispass" chapter of the documentation.'
+        )
+        return 1
     except KeyboardInterrupt:
-        print ('\nOk, bye')
+        print('\nOk, bye')
+        return 0

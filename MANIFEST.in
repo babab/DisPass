@@ -4,8 +4,6 @@ include dispass.info
 include LICENSE
 include Makefile
 include README.rst
-recursive-include bin dispass
-recursive-include bin gdispass
 recursive-include etc dispass.desktop
 recursive-include logo logo24.png
 recursive-include logo logo32.png

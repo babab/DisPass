@@ -34,6 +34,13 @@ setup(
         'Topic :: Security :: Cryptography',
         'Topic :: Utilities',
     ],
-    scripts=['bin/dispass', 'bin/gdispass'],
+    entry_points={
+        'console_scripts': [
+            'dispass = dispass.main:console',
+        ],
+        'gui_scripts': [
+            'gdispass = dispass.main:gui',
+        ]
+    },
     install_requires=['pycommand']
     )

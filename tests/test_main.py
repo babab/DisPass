@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# vim: set et ts=4 sw=4 sts=4:
+'''Test main functions / entry points for script generation'''
 
 # Copyright (c) 2012-2016  Tom Willemse <tom@ryuslash.org>
 # Copyright (c) 2011-2018  Benjamin Althues <benjamin@babab.nl>
@@ -16,12 +15,20 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-import pycommand
+import sys
 
-from dispass.dispass import DispassCommand
+import dispass.main
 
-if __name__ == '__main__':
-    try:
-        pycommand.run_and_exit(DispassCommand)
-    except KeyboardInterrupt:
-        print ('\nOk, bye')
+
+def test_console():
+    '''main: console returns error 2 when called with no arguments'''
+    argv_original = sys.argv
+    sys.argv = [sys.argv[0]]
+    exit_status = dispass.main.console()
+    sys.argv = argv_original
+    assert exit_status == 2
+
+
+def test_gui():
+    '''main: gui script entry point is callable'''
+    assert callable(dispass.main.gui)
