@@ -1,19 +1,37 @@
 Change Log
 ----------
 
-Development version (git/master) - to released
+v0.4.0 - to be released
 ##############################################
 
 Added
 *****
 
 * Automatic testing setup with Travis CI
+* Show python interpreter path in version information
+* Check to see if the labelfile can be written to
+* More unit tests
 
 Changed
 *******
 
 * Use python 3.4 or higher (python 2 is no longer supported)
+
+  - Fix import statements for Python 3, using absolute paths
+  - Fix algorithms for Python 3 unicode
+
+* Use automatic script creation instead of scripts
+* Put labelfile handling for commands in decorators
 * In Zsh autocompletion, do not autocomplete for disabled labels
+* Clean up ncurses after an exception occurs
+* Split tests into multiple modules in a new tests directory
+* Upgrade pycommand dependency to pycommand version 0.4.0
+
+Removed
+*******
+
+* ``__version_info__`` from `dispass.dispass`, ``__version__`` is still
+  available.
 
 v0.3.0 - released March 18th, 2016
 ##################################
