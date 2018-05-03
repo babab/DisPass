@@ -1,84 +1,82 @@
 Change Log
-----------
+==========
 
 v0.4.0 - to be released
-##############################################
+-----------------------
 
-Added
-*****
+- Added
 
-* Automatic testing setup with Travis CI
-* Show python interpreter path in version information
-* Check to see if the labelfile can be written to
-* More unit tests
+  * Automatic testing setup with Travis CI
+  * Show python interpreter path in version information
+  * Check to see if the labelfile can be written to
+  * More unit tests
 
-Changed
-*******
+- Changed
 
-* Use python 3.4 or higher (python 2 is no longer supported)
+  * Use python 3.4 or higher (python 2 is no longer supported)
 
-  - Fix import statements for Python 3, using absolute paths
-  - Fix algorithms for Python 3 unicode
+    - Fix import statements for Python 3, using absolute paths
+    - Fix algorithms for Python 3 unicode
 
-* Use automatic script creation instead of scripts
-* Put labelfile handling for commands in decorators
-* In Zsh autocompletion, do not autocomplete for disabled labels
-* Clean up ncurses after an exception occurs
-* Split tests into multiple modules in a new tests directory
-* Upgrade pycommand dependency to pycommand version 0.4.0
+  * Use automatic script creation instead of scripts
+  * Put labelfile handling for commands in decorators
+  * In Zsh autocompletion, do not autocomplete for disabled labels
+  * Clean up ncurses after an exception occurs
+  * Split tests into multiple modules in a new tests directory
+  * Upgrade pycommand dependency to pycommand version 0.4.0
 
-Removed
-*******
+- Removed
 
-* ``__version_info__`` from `dispass.dispass`, ``__version__`` is still
-  available.
+  * ``__version_info__`` from `dispass.dispass`, ``__version__`` is still
+    available.
 
 v0.3.0 - released March 18th, 2016
-##################################
+----------------------------------
 
-Added
-*****
+- Added
 
-* Option for disabling/enabling labels
-* Zsh completion for dispass (sub)command(s)
-* Interactive modes for ``add`` and ``rm`` commands
-* Algorithm and sequence number fields (GUI)
-* pycommand dependency for command argument parsing (extracted from DisPass)
-* Info documentation (different from manpage, same as the website)
+  * Option for disabling/enabling labels
+  * Zsh completion for dispass (sub)command(s)
+  * Interactive modes for ``add`` and ``rm`` commands
+  * Algorithm and sequence number fields (GUI)
+  * pycommand dependency for command argument parsing (extracted from DisPass)
+  * Info documentation (different from manpage, same as the website)
 
-Changed
-*******
+- Changed
 
-* Lookup label parameters from labelfile
-* Use different subcommands for all actions
+  * Lookup label parameters from labelfile
+  * Use different subcommands for all actions
 
-  - add
-  - disable
-  - enable
-  - generate
-  - gui
-  - help
-  - increment
-  - list
-  - remove
-  - update
-  - version
+    - add
+    - disable
+    - enable
+    - generate
+    - gui
+    - help
+    - increment
+    - list
+    - remove
+    - update
+    - version
 
-* Include Python version in version information
-* Drop support for arguments for ``-h, --help``, you can use the new
-  help command for that.
-* Always save full label specifications in labelfile
-* Focus password field after selecting a label (GUI)
-* Select label options after FocusOut  (GUI)
-* Filter labels in combobox by given value (GUI)
-* Use a vertical layout instead of a horizontal one (GUI)
-* Make the gui *command* listen to the -f switch (GUI)
-* Use a more flexible approach for algorithm handling
-* The file /skel/labelfile is removed
+  * Include Python version in version information
+  * Drop support for arguments for ``-h, --help``, you can use the new
+    help command for that.
+  * Always save full label specifications in labelfile
+  * Focus password field after selecting a label (GUI)
+  * Select label options after FocusOut  (GUI)
+  * Filter labels in combobox by given value (GUI)
+  * Use a vertical layout instead of a horizontal one (GUI)
+  * Make the gui *command* listen to the -f switch (GUI)
+  * Use a more flexible approach for algorithm handling
+
+- Removed
+
+  * The file /skel/labelfile is removed
 
 
 v0.2.0 - released April 16th, 2013
-##################################
+----------------------------------
 
 .. warning::
 
@@ -119,7 +117,7 @@ v0.2.0 - released April 16th, 2013
 
 
 v0.1-alpha-8 - released June 21st, 2012
-#######################################
+---------------------------------------
 
 * Add dispass.el emacs wrapper, authored by Tom Willemse (ryuslash)
 * Allow generating a list of passphrases with varying lengths
@@ -136,7 +134,7 @@ v0.1-alpha-8 - released June 21st, 2012
 
 
 v0.1-alpha-7 - released May 28th, 2012
-######################################
+--------------------------------------
 
 * Distribute as package instead of a single module
 * Add LICENSE file
@@ -145,6 +143,6 @@ v0.1-alpha-7 - released May 28th, 2012
 
 
 v0.1-alpha-6 - released May 24th, 2012
-######################################
+--------------------------------------
 
 * Initial release of Dispass as single python module
