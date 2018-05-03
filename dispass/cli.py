@@ -1,3 +1,5 @@
+'''Handling of password input and printing passphrases (using ncurses)'''
+
 # Copyright (c) 2012-2016  Tom Willemse <tom@ryuslash.org>
 # Copyright (c) 2011-2018  Benjamin Althues <benjamin@babab.nl>
 #

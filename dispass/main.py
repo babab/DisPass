@@ -25,6 +25,7 @@ from dispass.filehandler import Filehandler
 
 
 def console():
+    '''Main function for dispass (command line)'''
     try:
         cmd = DispassCommand(sys.argv[1:])
         if cmd.error:
@@ -38,6 +39,7 @@ def console():
 
 
 def gui():
+    '''Main function for gdispass (GUI)'''
     try:
         from dispass.gui import GUI
 

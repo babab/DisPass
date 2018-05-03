@@ -1,4 +1,4 @@
-'''Password manager for GNU/Linux, BSD, MacOS X and Windows.'''
+'''Contains settings object/instance, DisPassCommand object and version info'''
 
 # Copyright (c) 2012-2016  Tom Willemse <tom@ryuslash.org>
 # Copyright (c) 2011-2018  Benjamin Althues <benjamin@babab.nl>

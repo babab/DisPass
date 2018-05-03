@@ -1,3 +1,5 @@
+'''User interface module for altering labelfiles'''
+
 # Copyright (c) 2012-2016  Tom Willemse <tom@ryuslash.org>
 # Copyright (c) 2011-2018  Benjamin Althues <benjamin@babab.nl>
 #
@@ -19,7 +21,7 @@ import dispass.algos as algos
 
 
 class InteractiveEditor:
-    '''User interface for altering labelfiles'''
+    '''User interface object for altering labelfiles'''
 
     filehandler = None
     '''Filehandler object'''

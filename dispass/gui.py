@@ -1,3 +1,5 @@
+'''Module that houses all GUI related objects and interactions'''
+
 # Copyright (c) 2012-2016  Tom Willemse <tom@ryuslash.org>
 # Copyright (c) 2011-2018  Benjamin Althues <benjamin@babab.nl>
 #
@@ -40,7 +42,7 @@ versionStr = 'g{}'.format(dispass_version)
 
 
 class GUI(Frame):
-    '''Houses all GUI related objects and interactions'''
+    '''GUI object with tkinter mainloop'''
 
     font = "Verdana"
     '''Default font (Verdana)'''

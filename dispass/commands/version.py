@@ -1,3 +1,5 @@
+'''Subcommand module `version`; contains only a single class `Command`'''
+
 # Copyright (c) 2012-2016  Tom Willemse <tom@ryuslash.org>
 # Copyright (c) 2011-2018  Benjamin Althues <benjamin@babab.nl>
 #

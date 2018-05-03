@@ -1,3 +1,10 @@
+'''Passphrase algorithms
+
+The algos module is the most important part of DisPass. The algorithms
+DisPass uses to create the passphrases are defined as separate classes
+in this module.
+'''
+
 # Copyright (c) 2012-2016  Tom Willemse <tom@ryuslash.org>
 # Copyright (c) 2011-2018  Benjamin Althues <benjamin@babab.nl>
 #

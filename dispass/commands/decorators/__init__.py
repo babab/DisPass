@@ -1,3 +1,5 @@
+'''Decorators for commands'''
+
 from .read_labels import read_labels
 from .write_labels import write_labels
 
