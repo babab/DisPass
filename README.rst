@@ -1,9 +1,6 @@
 DisPass
 ******************************************************************************
 
-.. image:: https://travis-ci.org/babab/DisPass.svg?branch=master
-   :target: https://travis-ci.org/babab/DisPass
-
 DisPass is a password manager for GNU/Linux, \*BSD, MacOS X and Windows.
 It can be used as any traditional password manager, but has one key
 difference. DisPass does not store your passwords anywhere, so you
@@ -16,11 +13,10 @@ simple graphical interface.
 Resources
 =========
 
-- Main website: https://dispass.org
+- **Main website**: https://dispass.org
 - Python Package Index: http://pypi.python.org/pypi/DisPass
-- Agile project management: https://waffle.io/babab/DisPass
 - Github: https://github.com/babab/dispass
-- Bitbucket: https://bitbucket.org/babab/dispass
+- Gitter.im: https://gitter.im/babab/DisPass
 
 
 Quick start

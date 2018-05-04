@@ -6,9 +6,8 @@ Resources
 
 - Main website: https://dispass.org
 - Python Package Index: http://pypi.python.org/pypi/DisPass
-- Agile project management: https://waffle.io/babab/DisPass
 - Github: https://github.com/babab/dispass
-- Bitbucket: https://bitbucket.org/babab/dispass
+- Gitter.im: https://gitter.im/babab/DisPass
 
 Definitions
 -----------

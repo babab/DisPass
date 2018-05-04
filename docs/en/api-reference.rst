@@ -11,10 +11,6 @@ Core modules
 dispass.algos
 #############
 
-The algos module is the most important part of DisPass. The algorithms
-DisPass uses to create the passphrases are defined as separate classes
-in the `dispass.algos` module.
-
 .. automodule:: dispass.algos
    :members:
 
@@ -22,6 +18,12 @@ dispass.dispass
 ###############
 
 .. automodule:: dispass.dispass
+   :members:
+
+dispass.main
+############
+
+.. automodule:: dispass.main
    :members:
 
 Interface modules

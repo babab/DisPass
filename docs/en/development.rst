@@ -32,12 +32,12 @@ C library of DisPass algorithms
 Development
 ===========
 
-Please use Github and/or the Waffle.io board for bug reports, questions
-or submitting pull-requests. You can also discuss #dispass on IRC.
+Please use Github for bug reports, questions or submitting
+pull-requests. You can also discuss dispass on the Gitter.im channel
+babab/DisPass.
 
-- Agile project management: https://waffle.io/babab/DisPass
 - Issue tracker at Github: https://github.com/babab/dispass/issues
-- IRC: #dispass at Freenode and OFTC
+- Gitter.im: https://gitter.im/babab/DisPass
 
 
 Acknowledgements

@@ -1,14 +1,7 @@
 Downloading/Installing
 **********************
 
-Python 2.7 is required for running dispass.
-
-If you are using Archlinux, it is advised to install dispass
-`from the AUR <https://aur.archlinux.org/packages.php?K=dispass>`_.
-
-Installing from the AUR will also install the manpage, info
-documentation, zsh completion, desktop configuration and logo files and
-is therefore recommended on Arch.
+Python 3.4 or higher is required for running DisPass.
 
 
 Using pip to download from the Python Package Index
@@ -19,27 +12,27 @@ repository using pip:
 
 .. code:: console
 
-   sudo pip install dispass
+   sudo pip install -U dispass
 
-This will install the dispass module in python's dist-packages folder.
-You can now use dispass by executing the ``dispass`` and/or ``gdispass``
-scripts placed under '/usr/local/bin/' or '/usr/bin/'.
+This will install the dispass package in python's dist-packages folder.
+You can now use dispass by running the ``dispass`` and/or ``gdispass``
+executables.
 
-It is recommended to also install the manpage, info
-documentation, zsh completion, desktop configuration and
-logo files. You can do so by downloading the tarball from
-https://pypi.python.org/packages/source/D/DisPass/DisPass-0.3.0.tar.gz
+It is recommended to also install the manpage, info documentation, zsh
+completion, desktop configuration and logo files. You can do so by
+downloading the tarball from
+https://pypi.python.org/packages/source/D/DisPass/DisPass-0.4.0.tar.gz
 
 .. code:: console
 
-   wget https://pypi.python.org/packages/source/D/DisPass/DisPass-0.3.0.tar.gz
+   wget https://pypi.python.org/packages/source/D/DisPass/DisPass-0.4.0.tar.gz
 
 Then unpack it and install via make:
 
 .. code:: console
 
-   tar -xf DisPass-0.3.0.tar.gz
-   cd DisPass-0.3.0
+   tar -xf DisPass-0.4.0.tar.gz
+   cd DisPass-0.4.0
    sudo make install-metafiles
 
 
@@ -67,9 +60,8 @@ Then you can either (in order of my personal preference):
 
    .. code:: console
 
-      sudo pip2 install -r requirements.txt
-      python2 setup.py bdist_wheel
-      sudo pip2 install dist/DisPass-<version>.tar.gz
+      sudo pip install -r requirements.txt
+      sudo pip install .
       gzip -c dispass.1 > dispass.1.gz
       gzip -c dispass.info > dispass.info.gz
       sudo install -Dm644 dispass.1.gz /usr/share/man/man1/dispass.1.gz
@@ -98,7 +90,7 @@ You can easily upgrade to newer versions using pip:
 
 .. code:: console
 
-   sudo pip install --upgrade dispass
+   sudo pip install -U dispass
 
 If you have installed dispass using pip, you can easily uninstall at
 any moment by running:

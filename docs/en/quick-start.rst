@@ -12,11 +12,7 @@ sudo), do the following:
 
 .. code:: console
 
-   sudo pip install dispass
-
-
-If you are using Archlinux, it is advised to install dispass
-`from the AUR <https://aur.archlinux.org/packages.php?K=dispass>`_.
+   sudo pip install -U dispass
 
 
 Using DisPass for the first time

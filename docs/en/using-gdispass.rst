@@ -15,7 +15,7 @@ OpenBSD
       pkg_add -i python-tk
 
 Archlinux
-   The Tkinter Python library is included in the ``python2`` package,
+   The tkinter Python library is included in the ``python`` package,
    to make it work you need to be sure the ``tk`` package is
    installed::
 

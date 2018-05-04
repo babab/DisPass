@@ -29,9 +29,7 @@ Resources
 
 - Main website: https://dispass.org/
 - Python Package Index: http://pypi.python.org/pypi/DisPass/
-- Agile project management: https://waffle.io/babab/DisPass
 - Github: https://github.com/babab/dispass/
-- Bitbucket: https://bitbucket.org/babab/dispass/
 
 Definitions
 -----------
@@ -393,9 +391,6 @@ The cheeseshop (PyPI) project page
 
 Github repository and Issue tracker
    https://github.com/dispass/dispass/
-
-IRC
-   #dispass at Freenode (chat.freenode.net)
 
 Emacs wrapper
    http://ryuslash.org/projects/dispass.el.html

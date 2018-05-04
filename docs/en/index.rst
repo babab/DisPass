@@ -1,7 +1,7 @@
 
 .. hint::
 
-   This documentation is for version 0.3.0 of DisPass.
+   This documentation is for version 0.4.0 of DisPass.
    For documentation on other versions, please see the
    `version overview <https://dispass.org/all.html>`_.
 
@@ -16,15 +16,6 @@ from a master password and a label (and some optional parameters),
 helping you get rid of the bad habit of using a single password for
 multiple websites. Dispass is a console application, but also has a
 simple graphical interface.
-
-Resources
----------
-
-- Main website: https://dispass.org
-- Python Package Index: http://pypi.python.org/pypi/DisPass
-- Agile project management: https://waffle.io/babab/DisPass
-- Github: https://github.com/babab/dispass
-- Bitbucket: https://bitbucket.org/babab/dispass
 
 
 Index
