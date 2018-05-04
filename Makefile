@@ -9,20 +9,36 @@ PIP_EXEC		= pip
 
 sinclude config.mk
 
-.PHONY: make rm_pyc doc_clean doc man coverage dist install install-pip install-src install-metafiles uninstall clean
+.PHONY: make show-all rm_pyc doc_clean doc man coverage dist \
+	install install-pip  install-src install-metafiles \
+	uninstall-metafiles uninstall clean
 
 VERSION		= 0.4.0.dev0
 
 make:
-	@echo 'Installation targets'
-	@echo 'make install        alias for install-pip'
+	@echo 'make install'
+	@echo 'make uninstall'
+	@echo '  Install python package, scripts and metafiles'
+	@echo
+	@echo 'make install-metafiles'
+	@echo 'make uninstall-metafiles'
+	@echo '  Install or remove Zsh completion manpage, info document and logos '
+	@echo '  (does not install python package and scripts)'
+	@echo
+	@echo 'make show-all'
+	@echo '  Show development/packaging targets'
+
+show-all: make
+	@echo
+	@echo
+	@echo 'TARGETS FOR DISTRIBUTION PACKAGE(R)S'
 	@echo 'make install-pip    install wdocker wheel pkg with pip (default)'
 	@echo 'make install-src    install via setup.py install --root=$$DESTDIR'
 	@echo
 	@echo 'Note: make install-src does not install requirements.txt and '
 	@echo '      is aimed for usage in creating distribution packages'
 	@echo
-	@echo "Development targets"
+	@echo "DEVELOPMENT TARGETS"
 	@echo "make doc       Build html documentation with Sphinx"
 	@echo "make man       Build manpage and info documentation with Sphinx"
 	@echo "make dist      Build python source archive file"
@@ -85,7 +101,16 @@ install-metafiles:
 		"$(ICON_PATH)/$${size}x$${size}/apps/dispass.png"; \
 	done
 
-uninstall: clean
+uninstall-metafiles:
+	rm -f $(MAN_PATH)/dispass.1.gz
+	rm -f $(INFO_PATH)/dispass.info.gz
+	rm -f $(ZSH_SITE_FUNCS_PATH)/_dispass
+	rm -f $(DESKTOP_PATH)/dispass.desktop
+	for size in 24 32 64 128 256 512; do \
+		rm -f "$(ICON_PATH)/$${size}x$${size}/apps/dispass.png"; \
+	done
+
+uninstall: clean uninstall-metafiles
 	$(PIP_EXEC) uninstall dispass
 
 clean:
