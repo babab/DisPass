@@ -9,7 +9,7 @@ PIP_EXEC		= pip
 
 sinclude config.mk
 
-.PHONY: make show-all rm_pyc doc_clean doc man coverage dist \
+.PHONY: make show-all rm_pyc doc_clean doc man coverage test dist \
 	install install-pip  install-src install-metafiles \
 	uninstall-metafiles uninstall clean
 
@@ -39,6 +39,7 @@ show-all: make
 	@echo '      is aimed for usage in creating distribution packages'
 	@echo
 	@echo "DEVELOPMENT TARGETS"
+	@echo "make test      Run unittests, check-manifest and flake8"
 	@echo "make doc       Build html documentation with Sphinx"
 	@echo "make man       Build manpage and info documentation with Sphinx"
 	@echo "make dist      Build python source archive file"
@@ -73,6 +74,16 @@ coverage:
 	coverage run .virtualenv/bin/pytest -v
 	coverage report
 	coverage html
+
+test:
+	pytest -v
+	@echo 'DONE... All tests have passed'
+	@echo
+	check-manifest --ignore 'docs*'
+	@echo 'DONE... Everything seems to be in the MANIFEST file'
+	@echo
+	flake8 dispass tests
+	@echo 'DONE... All code is PEP-8 compliant'
 
 dist: rm_pyc
 	$(PIP_EXEC) install -r requirements.txt
