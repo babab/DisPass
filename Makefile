@@ -34,15 +34,12 @@ rm_pyc:
 
 doc_clean: rm_pyc
 	cd docs/en/; make clean
-	#cd docs/nl/; make clean
 
 doc: doc_clean
 	cd docs/en/; make html
-	cd docs/nl/; make html
 	rm -rf doc/html/$(VERSION)
 	mkdir -p doc/html/$(VERSION)
 	mv docs/en/_build/html doc/html/$(VERSION)/en
-	mv docs/nl/_build/html doc/html/$(VERSION)/nl
 	make doc_clean
 	cd doc/html/$(VERSION)/en; $(PYTHON_EXEC) -m http.server --bind 127.0.0.1
 
