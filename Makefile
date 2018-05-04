@@ -1,3 +1,22 @@
+# Copyright (c) 2012-2016  Tom Willemse <tom@ryuslash.org>
+# Copyright (c) 2011-2018  Benjamin Althues <benjamin@babab.nl>
+#
+# Permission to use, copy, modify, and distribute this software for any
+# purpose with or without fee is hereby granted, provided that the above
+# copyright notice and this permission notice appear in all copies.
+#
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+# WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+# ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+# WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+# ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+# OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+.PHONY: make show-all rm_pyc doc_clean doc man coverage test dist \
+	install install-pip  install-src install-metafiles \
+	uninstall-metafiles uninstall clean
+
 DESTDIR			= /
 DESKTOP_PATH		= $(DESTDIR)/usr/share/applications
 ICON_PATH		= $(DESTDIR)/usr/share/icons/hicolor
@@ -7,13 +26,10 @@ ZSH_SITE_FUNCS_PATH	= $(DESTDIR)/usr/share/zsh/site-functions
 PYTHON_EXEC		= python
 PIP_EXEC		= pip
 
-sinclude config.mk
-
-.PHONY: make show-all rm_pyc doc_clean doc man coverage test dist \
-	install install-pip  install-src install-metafiles \
-	uninstall-metafiles uninstall clean
-
 VERSION		= 0.4.0.dev0
+
+# Include any local configuration overrides
+sinclude config.mk
 
 make:
 	@echo 'make install'
