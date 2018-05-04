@@ -44,6 +44,7 @@ doc: doc_clean
 	mv docs/en/_build/html doc/html/$(VERSION)/en
 	mv docs/nl/_build/html doc/html/$(VERSION)/nl
 	make doc_clean
+	cd doc/html/$(VERSION)/en; $(PYTHON_EXEC) -m http.server --bind 127.0.0.1
 
 man: rm_pyc
 	cd docs/man-en/; make clean
