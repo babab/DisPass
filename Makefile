@@ -24,7 +24,7 @@ ZSH_SITE_FUNCS_PATH	= $(DESTDIR)/usr/share/zsh/site-functions
 PYTHON_EXEC		= python
 PIP_EXEC		= pip
 
-VERSION		= 0.4.0.dev0
+VERSION_CURRENT		= 0.4.0.dev0
 
 # Deprecated, only used to remove previous installations
 MAN_PATH		= $(DESTDIR)/usr/share/man/man1
@@ -71,11 +71,11 @@ doc_clean: rm_pyc
 
 doc: doc_clean
 	cd docs/en/; make html
-	rm -rf doc/html/$(VERSION)
-	mkdir -p doc/html/$(VERSION)
-	mv docs/en/_build/html doc/html/$(VERSION)/en
+	rm -rf doc/html/$(VERSION_CURRENT)
+	mkdir -p doc/html/$(VERSION_CURRENT)
+	mv docs/en/_build/html doc/html/$(VERSION_CURRENT)/en
 	make doc_clean
-	cd doc/html/$(VERSION)/en; $(PYTHON_EXEC) -m http.server --bind 127.0.0.1
+	cd doc/html/$(VERSION_CURRENT)/en; $(PYTHON_EXEC) -m http.server --bind 127.0.0.1
 
 coverage:
 	coverage erase
@@ -100,7 +100,7 @@ dist: rm_pyc
 install: install-pip
 
 install-pip: dist install-metafiles
-	$(PIP_EXEC) install --upgrade dist/DisPass-$(VERSION)-py2.py3-none-any.whl
+	$(PIP_EXEC) install --upgrade dist/DisPass-$(VERSION_CURRENT)-py2.py3-none-any.whl
 	install-info dispass.info $(INFO_PATH)/dir
 	make clean
 
