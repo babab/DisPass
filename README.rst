@@ -34,11 +34,7 @@ sudo), do the following:
 
 .. code:: console
 
-   sudo pip install dispass
-
-
-If you are using Archlinux, it is advised to install dispass
-`from the AUR <https://aur.archlinux.org/packages.php?K=dispass>`_.
+   sudo pip install -U dispass
 
 
 Using DisPass for the first time
@@ -46,20 +42,21 @@ Using DisPass for the first time
 
 For this example we will create a passphrase to use for a google account.
 
-Create and save a label ``google`` to the labelfile:
+1. Create and save a label ``google`` to the labelfile:
 
-.. code:: console
+   .. code:: console
 
-    dispass add google
+       dispass add google
 
-Generate the passphrase for the first time. Since you will need to
-register the passphrase with google we pass the ``--verify`` flag
-or simply ``-v`` to avoid typing errors in the input password while
-creating the resulting passphrase for the first time:
+2. Generate the passphrase for the first time. Since you will need to
+   register the passphrase with google we pass the ``--verify`` flag
+   or simply ``-v`` so DisPass asks us to verify the password and we
+   can avoid typing errors in the input password while creating the
+   resulting passphrase for the first time:
 
-.. code:: console
+   .. code:: console
 
-    dispass generate --verify google
+       dispass generate --verify google
 
 
 Mini screencast
