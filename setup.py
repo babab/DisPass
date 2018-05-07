@@ -12,6 +12,7 @@ setup(
     url='http://dispass.org/',
     download_url='http://pypi.python.org/pypi/DisPass/',
     packages=['dispass', 'dispass.commands', 'dispass.commands.decorators'],
+    python_requires='>=3.4',
     license='ISC',
     long_description=open('README.rst').read(),
     platforms='any',
@@ -22,15 +23,13 @@ setup(
         'Environment :: MacOS X',
         'Environment :: Win32 (MS Windows)',
         'Environment :: X11 Applications',
-        'Intended Audience :: Developers',
-        'Intended Audience :: End Users/Desktop',
         'License :: OSI Approved :: ISC License (ISCL)',
         'Natural Language :: English',
         'Operating System :: OS Independent',
-        'Programming Language :: Python :: 2.7',
-        'Topic :: Communications',
-        'Topic :: Internet',
-        'Topic :: Office/Business',
+        'Programming Language :: Python :: 3 :: Only'
+        'Programming Language :: Python :: 3.4'
+        'Programming Language :: Python :: 3.5'
+        'Programming Language :: Python :: 3.6'
         'Topic :: Security :: Cryptography',
         'Topic :: Utilities',
     ],
