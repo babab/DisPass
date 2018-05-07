@@ -1,13 +1,12 @@
 # vim: set et ts=4 sw=4 sts=4 ai:
 
 from setuptools import setup
-import dispass.dispass
 
 setup(
     name='DisPass',
-    version=dispass.dispass.__version__,
-    description=dispass.dispass.__doc__,
-    author=dispass.dispass.__author__,
+    version='0.4.0.dev0',
+    description='Multi-platform console/gui passphrase generator',
+    author='Benjamin Althues',
     author_email='benjamin@babab.nl',
     url='http://dispass.org/',
     download_url='http://pypi.python.org/pypi/DisPass/',
