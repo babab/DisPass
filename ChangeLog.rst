@@ -29,6 +29,7 @@ v0.4.0 - to be released
 
   * ``__version_info__`` from `dispass.dispass`, ``__version__`` is still
     available.
+  * Manpage and GNU info docs
 
 v0.3.0 - released March 18th, 2016
 ----------------------------------

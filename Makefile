@@ -20,13 +20,15 @@
 DESTDIR			= /
 DESKTOP_PATH		= $(DESTDIR)/usr/share/applications
 ICON_PATH		= $(DESTDIR)/usr/share/icons/hicolor
-MAN_PATH		= $(DESTDIR)/usr/share/man/man1
-INFO_PATH		= $(DESTDIR)/usr/share/info
 ZSH_SITE_FUNCS_PATH	= $(DESTDIR)/usr/share/zsh/site-functions
 PYTHON_EXEC		= python
 PIP_EXEC		= pip
 
 VERSION		= 0.4.0.dev0
+
+# Deprecated, only used to remove previous installations
+MAN_PATH		= $(DESTDIR)/usr/share/man/man1
+INFO_PATH		= $(DESTDIR)/usr/share/info
 
 # Include any local configuration overrides
 sinclude config.mk
@@ -38,8 +40,8 @@ make:
 	@echo
 	@echo 'make install-metafiles'
 	@echo 'make uninstall-metafiles'
-	@echo '  Install or remove Zsh completion manpage, info document and logos '
-	@echo '  (does not install python package and scripts)'
+	@echo '  Install or remove Zsh completion, opendesktop spec and logos '
+	@echo '  (does not install or remove python package and scripts)'
 	@echo
 	@echo 'make show-all'
 	@echo '  Show development/packaging targets'
@@ -57,7 +59,6 @@ show-all: make
 	@echo "DEVELOPMENT TARGETS"
 	@echo "make test      Run unittests, check-manifest and flake8"
 	@echo "make doc       Build html documentation with Sphinx"
-	@echo "make man       Build manpage and info documentation with Sphinx"
 	@echo "make dist      Build python source archive file"
 	@echo "make clean     Clean program build files"
 	@echo "make coverage  Run coverage with nosetests (experimental)"
@@ -75,15 +76,6 @@ doc: doc_clean
 	mv docs/en/_build/html doc/html/$(VERSION)/en
 	make doc_clean
 	cd doc/html/$(VERSION)/en; $(PYTHON_EXEC) -m http.server --bind 127.0.0.1
-
-man: rm_pyc
-	cd docs/man-en/; make clean
-	cd docs/man-en/; make man
-	mv docs/man-en/_build/man/dispass.1 .
-	cd docs/man-en/; make clean
-	cd docs/en/; make info
-	mv docs/en/_build/texinfo/DisPass.info ./dispass.info
-	make doc_clean
 
 coverage:
 	coverage erase
@@ -117,10 +109,6 @@ install-src: install-metafiles
 	make clean
 
 install-metafiles:
-	gzip -c dispass.1 > dispass.1.gz
-	gzip -c dispass.info > dispass.info.gz
-	install -Dm644 dispass.1.gz $(MAN_PATH)/dispass.1.gz
-	install -Dm644 dispass.info.gz $(INFO_PATH)/dispass.info.gz
 	install -Dm644 zsh/_dispass $(ZSH_SITE_FUNCS_PATH)/_dispass
 	install -Dm644 etc/dispass.desktop $(DESKTOP_PATH)/dispass.desktop
 	for size in 24 32 64 128 256 512; do \
@@ -129,13 +117,14 @@ install-metafiles:
 	done
 
 uninstall-metafiles:
-	rm -f $(MAN_PATH)/dispass.1.gz
-	rm -f $(INFO_PATH)/dispass.info.gz
 	rm -f $(ZSH_SITE_FUNCS_PATH)/_dispass
 	rm -f $(DESKTOP_PATH)/dispass.desktop
 	for size in 24 32 64 128 256 512; do \
 		rm -f "$(ICON_PATH)/$${size}x$${size}/apps/dispass.png"; \
 	done
+	# Remove manpage and info document if installed in a previous version
+	rm -f $(MAN_PATH)/dispass.1.gz
+	rm -f $(INFO_PATH)/dispass.info.gz
 
 uninstall: clean uninstall-metafiles
 	$(PIP_EXEC) uninstall dispass
