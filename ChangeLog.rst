@@ -9,6 +9,7 @@ v0.4.0 - to be released
   * Automatic testing setup with Travis CI
   * Show python interpreter path in version information
   * Check to see if the labelfile can be written to
+  * Support for running dispass using python -m dispass
   * More unit tests
 
 - Changed
