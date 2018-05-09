@@ -112,7 +112,6 @@ install: install-pip
 
 install-pip: dist install-metafiles
 	$(PIP_EXEC) install --upgrade dist/DisPass-$(VERSION_CURRENT)-py2.py3-none-any.whl
-	install-info dispass.info $(INFO_PATH)/dir
 	make clean
 
 install-src: install-metafiles
