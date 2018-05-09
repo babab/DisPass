@@ -13,7 +13,7 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-.PHONY: make show-all rm_pyc doc_clean doc man coverage test dist \
+.PHONY: make show-all version rm_pyc doc_clean doc coverage test dist \
 	install install-pip  install-src install-metafiles \
 	uninstall-metafiles uninstall clean
 
@@ -25,6 +25,7 @@ PYTHON_EXEC		= python
 PIP_EXEC		= pip
 
 VERSION_CURRENT		= 0.4.0.dev0
+VERSION_PREVIOUS	= 0.3.0
 
 # Deprecated, only used to remove previous installations
 MAN_PATH		= $(DESTDIR)/usr/share/man/man1
@@ -32,6 +33,8 @@ INFO_PATH		= $(DESTDIR)/usr/share/info
 
 # Include any local configuration overrides
 sinclude config.mk
+
+_files_to_bump = setup.py dispass/dispass.py docs/en/{index,installing}.rst
 
 make:
 	@echo 'make install'
@@ -57,11 +60,19 @@ show-all: make
 	@echo '      is aimed for usage in creating distribution packages'
 	@echo
 	@echo "DEVELOPMENT TARGETS"
+	@echo "make version   Update version strings"
 	@echo "make test      Run unittests, check-manifest and flake8"
 	@echo "make doc       Build html documentation with Sphinx"
 	@echo "make dist      Build python source archive file"
 	@echo "make clean     Clean program build files"
 	@echo "make coverage  Run coverage with nosetests (experimental)"
+
+version:
+	sed -i 's/$(VERSION_PREVIOUS)/$(VERSION_CURRENT)/' $(_files_to_bump)
+	@echo
+	@echo DONE. Do not forget to update ChangeLog.rst. To view changes, run:
+	@echo
+	@echo '  git diff $(_files_to_bump)'
 
 rm_pyc:
 	find . -name "*.pyc" | xargs /bin/rm -f
