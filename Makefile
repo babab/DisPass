@@ -22,7 +22,7 @@ DESKTOP_PATH		= $(DESTDIR)/usr/share/applications
 ICON_PATH		= $(DESTDIR)/usr/share/icons/hicolor
 ZSH_SITE_FUNCS_PATH	= $(DESTDIR)/usr/share/zsh/site-functions
 PYTHON_EXEC		= python
-PIP_EXEC		= pip
+PIP_EXEC		= $(PYTHON_EXEC) -m pip
 
 VERSION_CURRENT		= 0.4.0.dev0
 VERSION_PREVIOUS	= 0.3.0
