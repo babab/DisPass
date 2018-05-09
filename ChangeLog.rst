@@ -10,7 +10,9 @@ v0.4.0 - to be released
   * Show python interpreter path in version information
   * Check to see if the labelfile can be written to
   * Support for running dispass using python -m dispass
+  * tox.ini file for running tests with tox
   * More unit tests
+
 
 - Changed
 

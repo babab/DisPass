@@ -9,3 +9,4 @@ config.mk
 /docs/*/_build/
 /htmlcov/
 /.pytest_cache/
+/.tox/

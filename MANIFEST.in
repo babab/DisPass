@@ -5,6 +5,7 @@ include README.rst
 include requirements-dev.txt
 include requirements.txt
 include .coveragerc
+include tox.ini
 recursive-include etc dispass.desktop
 recursive-include logo logo24.png
 recursive-include logo logo32.png
