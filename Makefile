@@ -15,7 +15,7 @@
 
 .PHONY: make show-all version rm_pyc doc_clean doc coverage test dist \
 	install install-pip  install-src install-metafiles \
-	uninstall-metafiles uninstall clean
+	uninstall-metafiles uninstall clean py-info
 
 DESTDIR			= /
 DESKTOP_PATH		= $(DESTDIR)/usr/share/applications
@@ -40,6 +40,7 @@ make:
 	@echo 'make install'
 	@echo 'make uninstall'
 	@echo '  Install python package, scripts and metafiles'
+	@echo '  (install wheel pkg with pip and run install-metafiles)'
 	@echo
 	@echo 'make install-metafiles'
 	@echo 'make uninstall-metafiles'
@@ -53,7 +54,6 @@ show-all: make
 	@echo
 	@echo
 	@echo 'TARGETS FOR DISTRIBUTION PACKAGE(R)S'
-	@echo 'make install-pip    install wdocker wheel pkg with pip (default)'
 	@echo 'make install-src    install via setup.py install --root=$$DESTDIR'
 	@echo
 	@echo 'Note: make install-src does not install requirements.txt and '
@@ -61,6 +61,7 @@ show-all: make
 	@echo
 	@echo "DEVELOPMENT TARGETS"
 	@echo "make version   Update version strings"
+	@echo "make py-info   Print version and path of Python the Makefile uses"
 	@echo "make test      Run unittests, check-manifest and flake8"
 	@echo "make doc       Build html documentation with Sphinx"
 	@echo "make dist      Build python source archive file"
@@ -104,17 +105,15 @@ test:
 	flake8 dispass tests
 	@echo 'DONE... All code is PEP-8 compliant'
 
-dist: rm_pyc
+dist: py-info rm_pyc
 	$(PIP_EXEC) install -r requirements.txt
 	$(PYTHON_EXEC) setup.py sdist bdist_wheel
 
-install: install-pip
-
-install-pip: dist install-metafiles
+install: dist install-metafiles
 	$(PIP_EXEC) install --upgrade dist/DisPass-$(VERSION_CURRENT)-py2.py3-none-any.whl
 	make clean
 
-install-src: install-metafiles
+install-src: py-info install-metafiles
 	$(PYTHON_EXEC) setup.py install --root='$(DESTDIR)'
 	make clean
 
@@ -136,11 +135,16 @@ uninstall-metafiles:
 	rm -f $(MAN_PATH)/dispass.1.gz
 	rm -f $(INFO_PATH)/dispass.info.gz
 
-uninstall: clean uninstall-metafiles
+uninstall: py-info clean uninstall-metafiles
 	$(PIP_EXEC) uninstall dispass
 
 clean:
 	rm -f MANIFEST dispass.1.gz dispass.info.gz
 	rm -rf build dist DisPass.egg-info
+
+py-info:
+	@echo Python environment information
+	$(PYTHON_EXEC) -V
+	$(PYTHON_EXEC) -c "import sys; print(sys.executable)"
 
 # vim: set noet ts=8 sw=8 sts=8:
