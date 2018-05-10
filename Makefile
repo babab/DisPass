@@ -105,7 +105,7 @@ test:
 	flake8 dispass tests
 	@echo 'DONE... All code is PEP-8 compliant'
 
-dist: py-info rm_pyc
+dist: check-if-root py-info rm_pyc
 	$(PIP_EXEC) install -r requirements.txt
 	$(PYTHON_EXEC) setup.py sdist bdist_wheel
 
@@ -146,5 +146,9 @@ py-info:
 	@echo Python environment information
 	$(PYTHON_EXEC) -V
 	$(PYTHON_EXEC) -c "import sys; print(sys.executable)"
+
+check-if-root:
+	# make 'dist' or 'install' should not be run as root
+	test $$(whoami) != root || false
 
 # vim: set noet ts=8 sw=8 sts=8:
