@@ -104,13 +104,12 @@ dist: check-if-root py-info rm_pyc
 	$(PIP_EXEC) install -r requirements.txt
 	$(PYTHON_EXEC) setup.py sdist bdist_wheel
 
-install: dist install-metafiles
-	$(PIP_EXEC) install --upgrade dist/DisPass-$(VERSION_CURRENT)-py2.py3-none-any.whl
-	make clean
+install:
+	$(PIP_EXEC) install --user -r requirements.txt
+	$(PIP_EXEC) install --user .
 
-install-src: py-info install-metafiles
-	$(PYTHON_EXEC) setup.py install --root='$(DESTDIR)'
-	make clean
+uninstall: py-info clean
+	$(PIP_EXEC) uninstall dispass
 
 install-metafiles:
 	install -Dm644 zsh/_dispass $(ZSH_SITE_FUNCS_PATH)/_dispass
@@ -130,8 +129,9 @@ uninstall-metafiles:
 	rm -f $(MAN_PATH)/dispass.1.gz
 	rm -f $(INFO_PATH)/dispass.info.gz
 
-uninstall: py-info clean uninstall-metafiles
-	$(PIP_EXEC) uninstall dispass
+install-src: py-info install-metafiles
+	$(PYTHON_EXEC) setup.py install --root='$(DESTDIR)'
+	make clean
 
 clean:
 	rm -f MANIFEST dispass.1.gz dispass.info.gz
