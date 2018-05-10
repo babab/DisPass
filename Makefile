@@ -67,10 +67,10 @@ show-all: make
 
 version:
 	sed -i 's/$(VERSION_PREVIOUS)/$(VERSION_CURRENT)/' $(_files_to_bump)
-	@echo
-	@echo DONE. Do not forget to update ChangeLog.rst. To view changes, run:
-	@echo
-	@echo '  git diff $(_files_to_bump)'
+	### DONE. Do not forget to update ChangeLog.rst. To view changes, run:
+	###
+	###    git diff $(_files_to_bump)'
+	###
 
 rm_pyc:
 	find . -name "*.pyc" | xargs /bin/rm -f
@@ -94,13 +94,11 @@ coverage:
 
 test:
 	pytest -v
-	@echo 'DONE... All tests have passed'
-	@echo
+	### 'DONE... All tests have passed'
 	check-manifest --ignore 'docs*'
-	@echo 'DONE... Everything seems to be in the MANIFEST file'
-	@echo
+	### 'DONE... Everything seems to be in the MANIFEST file'
 	flake8 dispass tests
-	@echo 'DONE... All code is PEP-8 compliant'
+	### 'DONE... All code is PEP-8 compliant'
 
 dist: check-if-root py-info rm_pyc
 	$(PIP_EXEC) install -r requirements.txt
@@ -140,9 +138,10 @@ clean:
 	rm -rf build dist DisPass.egg-info
 
 py-info:
-	@echo Python environment information
+	### Start of Python environment information
 	$(PYTHON_EXEC) -V
 	$(PYTHON_EXEC) -c "import sys; print(sys.executable)"
+	### End of Python environment information
 
 check-if-root:
 	# make 'dist' or 'install' should not be run as root
