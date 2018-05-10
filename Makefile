@@ -13,7 +13,7 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-.PHONY: make show-all version rm_pyc doc_clean doc coverage test dist \
+.PHONY: help show-all version rm_pyc doc_clean doc coverage test dist \
 	install install-pip  install-src install-metafiles \
 	uninstall-metafiles uninstall clean py-info
 
@@ -36,28 +36,19 @@ sinclude config.mk
 
 _files_to_bump = setup.py dispass/dispass.py docs/en/{index,installing}.rst
 
-make:
-	@echo 'make install'
-	@echo 'make uninstall'
-	@echo '  Install python package, scripts and metafiles'
-	@echo '  (install wheel pkg with pip and run install-metafiles)'
+help:
+	@echo "USAGE INFORMATION"
+	@echo 'make install      alias for: $(PIP_EXEC) install --user .'
+	@echo 'make uninstall    alias for: $(PIP_EXEC) uninstall dispass'
 	@echo
 	@echo 'make install-metafiles'
 	@echo 'make uninstall-metafiles'
 	@echo '  Install or remove Zsh completion, opendesktop spec and logos '
 	@echo '  (does not install or remove python package and scripts)'
 	@echo
-	@echo 'make show-all'
-	@echo '  Show development/packaging targets'
+	@echo 'make show-all     Show development/packaging targets'
 
 show-all: make
-	@echo
-	@echo
-	@echo 'TARGETS FOR DISTRIBUTION PACKAGE(R)S'
-	@echo 'make install-src    install via setup.py install --root=$$DESTDIR'
-	@echo
-	@echo 'Note: make install-src does not install requirements.txt and '
-	@echo '      is aimed for usage in creating distribution packages'
 	@echo
 	@echo "DEVELOPMENT TARGETS"
 	@echo "make version   Update version strings"
@@ -67,6 +58,12 @@ show-all: make
 	@echo "make dist      Build python source archive file"
 	@echo "make clean     Clean program build files"
 	@echo "make coverage  Run coverage with nosetests (experimental)"
+	@echo
+	@echo "PACKAGING TARGETS"
+	@echo 'make install-src    install via setup.py install --root=$$DESTDIR'
+	@echo
+	@echo 'Note: make install-src does not install requirements.txt and '
+	@echo '      is aimed for usage in creating distribution packages'
 
 version:
 	sed -i 's/$(VERSION_PREVIOUS)/$(VERSION_CURRENT)/' $(_files_to_bump)
