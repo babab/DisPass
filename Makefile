@@ -26,8 +26,8 @@ ZSH_SITE_FUNCS_PATH	= $(DESTDIR)/usr/share/zsh/site-functions
 PYTHON_EXEC		= python
 PIP_EXEC		= $(PYTHON_EXEC) -m pip
 
-VERSION_CURRENT		= 0.4.0.dev0
-VERSION_PREVIOUS	= 0.3.0
+VERSION_CURRENT		= 0.4.0
+VERSION_PREVIOUS	= 0.4.0.dev0
 
 # Deprecated, only used to remove previous installations
 MAN_PATH		= $(DESTDIR)/usr/share/man/man1
