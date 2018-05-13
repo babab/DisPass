@@ -95,9 +95,9 @@ coverage:
 test:
 	pytest -v
 	### 'DONE... All tests have passed'
-	check-manifest --ignore 'docs*'
+	check-manifest -v --ignore 'docs*'
 	### 'DONE... Everything seems to be in the MANIFEST file'
-	flake8 dispass tests
+	flake8 -v dispass tests setup.py
 	### 'DONE... All code is PEP-8 compliant'
 
 dist: check-if-root py-info rm_pyc
