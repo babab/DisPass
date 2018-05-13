@@ -1,81 +1,23 @@
 Downloading/Installing
 **********************
 
-Python 3.4 or higher is required for running DisPass.
+Python 3.4 or higher is required for running DisPass. The last version
+that supports Python 2.7 is DisPass 0.3.0
 
 
 Using pip to download from the Python Package Index
 ===================================================
 
-The recommended way is to download and install directly from the PyPI
-repository using pip:
+The recommended way is to download and install the latest stable version
+directly from the PyPI repository using pip:
 
 .. code:: console
 
-   sudo pip install -U dispass
+   pip install --user dispass
 
-This will install the dispass package in python's dist-packages folder.
+This will install the dispass package in $HOME/.local.
 You can now use dispass by running the ``dispass`` and/or ``gdispass``
 executables.
-
-It is recommended to also install the zsh completion, desktop configuration
-and logo files. You can do so by downloading the tarball from
-https://pypi.python.org/packages/source/D/DisPass/DisPass-0.4.0.tar.gz
-
-.. code:: console
-
-   wget https://pypi.python.org/packages/source/D/DisPass/DisPass-0.4.0.tar.gz
-
-Then unpack it and install via make:
-
-.. code:: console
-
-   tar -xf DisPass-0.4.0.tar.gz
-   cd DisPass-0.4.0
-   sudo make install-metafiles
-
-
-Latest (development) version
-============================
-
-Clone git repo:
-
-.. code:: console
-
-   git clone git://github.com/dispass/dispass.git
-   cd dispass
-
-Then you can either (in order of my personal preference):
-
-1. Install using the Makefile, this will perform all the steps in
-   option 2 (below):
-
-   .. code:: console
-
-      sudo make install
-
-2. Install manually through pip, and install zsh completion, opendesktop
-   configuration and logo files:
-
-   .. code:: console
-
-      sudo pip install -r requirements.txt
-      sudo pip install .
-      sudo install -Dm644 zsh/_dispass /usr/share/zsh/site-functions/_dispass
-      sudo install -Dm644 etc/dispass.desktop /usr/share/applications/dispass.desktop
-      sudo install -Dm644 logo/logo24.png /usr/share/icons/hicolor/24x24/apps/dispass.png
-      sudo install -Dm644 logo/logo32.png /usr/share/icons/hicolor/32x32/apps/dispass.png
-      sudo install -Dm644 logo/logo64.png /usr/share/icons/hicolor/64x64/apps/dispass.png
-      sudo install -Dm644 logo/logo128.png /usr/share/icons/hicolor/128x128/apps/dispass.png
-      sudo install -Dm644 logo/logo256.png /usr/share/icons/hicolor/256x256/apps/dispass.png
-      sudo install -Dm644 logo/logo512.png /usr/share/icons/hicolor/512x512/apps/dispass.png
-
-
-3. Install manually (without shell completion, opendesktop conf and logo files):
-
-   .. code:: console
-
-      sudo python setup.py install
 
 
 Upgrade or uninstall with pip
@@ -85,11 +27,36 @@ You can easily upgrade to newer versions using pip:
 
 .. code:: console
 
-   sudo pip install -U dispass
+   pip install --user -U dispass
 
 If you have installed dispass using pip, you can easily uninstall at
 any moment by running:
 
 .. code:: console
 
-   sudo pip uninstall dispass
+   pip uninstall dispass
+
+Zsh completion, freedesktop configuration and logo's
+====================================================
+
+It is recommended to also install the zsh completion, desktop
+configuration and logo files. These files are not directly supported in
+a Windows environment, but can be used under Cygwin.
+
+You can downloading an archive from
+`PyPI <https://pypi.org/project/DisPass/#files>`_ or
+`Github <https://github.com/babab/DisPass/releases>`_.
+
+Extract the archive and change directory.
+
+.. hint::
+
+   Depending on the type of system, you may have to change some path
+   locations. See the top of the Makefile. You can override them by
+   creating a ``config.mk`` file.
+
+Then unpack it and install (as root):
+
+.. code:: console
+
+   sudo make install-metafiles

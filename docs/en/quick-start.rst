@@ -7,12 +7,11 @@ out DisPass. For full user documentation browse to the next sections.
 Download
 --------
 
-Download DisPass from the Python Package Index with pip. As root (using
-sudo), do the following:
+Download DisPass from the Python Package Index with pip:
 
 .. code:: console
 
-   sudo pip install -U dispass
+   pip install --user dispass
 
 
 Using DisPass for the first time

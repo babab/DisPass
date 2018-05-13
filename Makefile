@@ -17,6 +17,8 @@
 	install install-pip  install-src install-metafiles \
 	uninstall-metafiles uninstall clean py-info
 
+### Settings #################################################################
+
 DESTDIR			= /
 DESKTOP_PATH		= $(DESTDIR)/usr/share/applications
 ICON_PATH		= $(DESTDIR)/usr/share/icons/hicolor
@@ -33,6 +35,8 @@ INFO_PATH		= $(DESTDIR)/usr/share/info
 
 # Include any local configuration overrides
 sinclude config.mk
+
+### End of settings ##########################################################
 
 _files_to_bump = setup.py dispass/dispass.py docs/en/{index,installing}.rst
 

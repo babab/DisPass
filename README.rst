@@ -29,12 +29,11 @@ http://dispass.org
 Download
 --------
 
-Download DisPass from the Python Package Index with pip. As root (using
-sudo), do the following:
+Download and install DisPass from the Python Package Index with pip:
 
 .. code:: console
 
-   sudo pip install -U dispass
+   pip install --user dispass
 
 
 Using DisPass for the first time
