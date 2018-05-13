@@ -5,7 +5,9 @@ from setuptools import setup
 setup(
     name='DisPass',
     version='0.4.0.dev0',
-    description='Multi-platform console/gui passphrase generator',
+    description=(
+        'Disperse and dispell passwords with a free alternative manager.'
+    ),
     author='Benjamin Althues',
     author_email='benjamin@babab.nl',
     url='http://dispass.org/',

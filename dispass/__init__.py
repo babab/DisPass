@@ -1,4 +1,4 @@
-'''Multi-platform console/gui passphrase generator'''
+'''Disperse and dispell passwords with a free alternative manager.'''
 
 from dispass.dispass import (  # noqa: F401
     __author__,
