@@ -43,20 +43,20 @@ It is recommended to also install the zsh completion, desktop
 configuration and logo files. These files are not directly supported in
 a Windows environment, but can be used under Cygwin.
 
-You can downloading an archive from
-`PyPI <https://pypi.org/project/DisPass/#files>`_ or
-`Github <https://github.com/babab/DisPass/releases>`_.
+1. You can downloading an archive from `PyPI
+   <https://pypi.org/project/DisPass/#files>`_ or `Github
+   <https://github.com/babab/DisPass/releases>`_.
 
-Extract the archive and change directory.
+2. Extract the archive and change directory.
 
-.. hint::
+3. Then unpack it and install (as root):
 
-   Depending on the type of system, you may have to change some path
-   locations. See the top of the Makefile. You can override them by
-   creating a ``config.mk`` file.
+   .. code:: console
 
-Then unpack it and install (as root):
+      sudo make install-metafiles
 
-.. code:: console
+   .. hint::
 
-   sudo make install-metafiles
+      Depending on the type of system, you may have to change some path
+      locations. See the top of the Makefile. You can override them by
+      creating a ``config.mk`` file.

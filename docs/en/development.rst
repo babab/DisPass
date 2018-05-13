@@ -1,5 +1,3 @@
-
-
 Related projects
 ================
 
@@ -49,23 +47,19 @@ Clone git repo:
    git clone git://github.com/dispass/dispass.git
    cd dispass
 
-
 Create and activate virtualenv:
 
-   .. code:: console
+.. code:: console
 
-      python -m venv .virtualenv
-      source .virtualenv/bin/activate
+   python -m venv .virtualenv
+   source .virtualenv/bin/activate
 
 Install development requirements and install with --editable flag.
 
-   .. code:: console
+.. code:: console
 
-      pip install -r requirements-dev.txt
-      pip install --user .
-
-Optionally install `Zsh completion, freedesktop configuration and
-logo's`_ files as root using the default installing instructions.
+   pip install -r requirements-dev.txt
+   pip install --user .
 
 Please use Github for bug reports, questions or submitting
 pull-requests. You can also discuss dispass on the Gitter.im channel
