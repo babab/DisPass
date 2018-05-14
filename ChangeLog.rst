@@ -1,15 +1,15 @@
 Change Log
 ==========
 
-v0.4.0 - to be released
------------------------
+v0.4.0 - released May 14th, 2018
+--------------------------------
 
 - Added
 
   * Automatic testing setup with Travis CI
   * Show python interpreter path in version information
   * Check to see if the labelfile can be written to
-  * Support for running dispass using python -m dispass
+  * Support for running dispass using ``python -m dispass``
   * tox.ini file for running tests with tox
   * More unit tests
 
@@ -27,6 +27,7 @@ v0.4.0 - to be released
   * Clean up ncurses after an exception occurs
   * Split tests into multiple modules in a new tests directory
   * Upgrade pycommand dependency to pycommand version 0.4.0
+  * Install instructions, to use ``--user`` with pip install
 
 - Removed
 
