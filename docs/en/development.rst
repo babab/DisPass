@@ -54,12 +54,12 @@ Create and activate virtualenv:
    python -m venv .virtualenv
    source .virtualenv/bin/activate
 
-Install development requirements and install with --editable flag.
+Install development requirements and install with the editable flag.
 
 .. code:: console
 
    pip install -r requirements-dev.txt
-   pip install --user .
+   pip install -e .
 
 Please use Github for bug reports, questions or submitting
 pull-requests. You can also discuss dispass on the Gitter.im channel
