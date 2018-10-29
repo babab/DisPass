@@ -1,0 +1,8 @@
+# Specify requirement files by hand, default is empty
+# default: empty
+# allowed: list
+requirements:
+  - requirements.txt:
+      update: all
+  - requirements-dev.txt:
+      update: False
