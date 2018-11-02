@@ -6,3 +6,4 @@ requirements:
       update: all
   - requirements-dev.txt:
       update: False
+      pin: False
